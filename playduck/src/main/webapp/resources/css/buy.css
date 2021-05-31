@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+    body{
+        overflow: scroll;
+    background-color: white;  
+    }
+    div, td, hr, a{
+    color: var(--black-color)}
+
+    /* 제목 */
+    .buylist_title{
+        text-align: center;
+        font-size: 27px;
+        font-weight: 700;
+        margin-top: 150px;
+        margin-bottom: 100px;
+    }
+
+    /* 리스트 목록 */
+   .S_list {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .Sale_list{
+        margin-top: 50px ;
+        margin-bottom:30px ;
+        position: relative;
+
+    }
+
+    #Sale_img{
+        margin-left: 10px;
+        position:absolute;
+    }
+
+    #Sale_title{
+      margin-left: 230px;
+      padding-top: 10px;
+    }
+
+    .Sale_title_th1{
+        padding-bottom: 30px;
+        padding-top: 10px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .Sale_title_td1{
+        font-size: 17px;
+        font-weight: 700;
+        text-align: left;
+
+    }
+
+    .Sale_title_td2{
+        font-size: 17px;
+        font-weight: 300;
+        padding: 0px 50px 20px 100px;
+        text-align: right;
+            
+    }
+    .Sale_price_td1{
+        text-decoration: line-through;
+        color: #ff6801;
+        font-size: 27px;
+        font-weight: 700;
+        text-align: right;  
+       
+    }
+
+    .Sale_price_td2{
+        color: #ff6801;
+        font-size:27px;
+        font-weight: 700;
+        text-align: right;
+        padding-bottom: 10px;
+    }
+
+    .Sale_price_td3{
+        position:absolute;
+        color: #ff6801;
+        font-size: 27px;
+        font-weight: 700;
+        padding-left: 90px;
+        text-align: right;
+    }
+
+
+        #Sale_price{
+            position:absolute;
+            padding-top: 20px;
+            padding-left: 250px;
+            color: #ff6801;
+            font-size: x-large;
+            font-weight: bolder;
+        }
+
+        #Sale_price_tr1{
+            text-decoration: line-through;
+            color: #ff6801;
+            font-size: 27px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        #Sale_price_tr2{
+            padding-top: 100px;
+            color: #ff6801;
+            font: 27px;
+            font-weight: 700;
+        }
+
+        /* 전체가격 */
+        #Sale_AllPrice{
+            background-color: silver;
+            color: white;
+            font-size: 27px;
+            font-weight: 700;
+            margin-top: 50px;
+            text-align: center;
+            padding-top: 32px;
+            width: 670px;
+            height: 80px;
+            border-radius: 50px;
+        }
+    
+        /* 배송지 입력 */
+        .Sale_deliver{
+            margin-top: 60px;
+        }
+
+        .Sale_deliver_td1{
+            font-size: 17px;
+            font-weight: 700;
+            padding-right:40px ;
+            
+        }
+
+        .Sale_deliver_text{
+            border: 1px solid silver;
+            width: 480px;
+            height: 28px;
+            margin: 5px;
+            
+        }
+
+        .Sale_deliver_text1{
+            border: 1px solid silver;
+            width: 200px;
+            height: 28px;
+            margin: 5px;
+        }
+
+        .Sale_addres{
+            background-color: grey;
+            color: white;
+            padding: 5px 7px 5px 7px ;
+        }
+        
+        .Sale_addres:hover{
+            cursor: pointer;
+
+        }
+
+        /* 구매하기 버튼  */
+        .Sale_buybox{
+            margin-left: 250px;
+            margin-top: 50px;
+           
+        }
+
+        .Sale_buybtn{
+           
+            width: 540px;
+            height: 65px;
+            background-color: #ff6801;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .Sale_buytext{
+            font-size: 17px;
+            font-weight: 700;
+
+            margin-top: -8px;
+            text-align: center
+        }
+
+        .Sale_buyimg{
+            position:absolute;
+            margin-left: -70px;
+            margin-top: -15px;
+
+        }
+
+        button :hover{
+            cursor: pointer;
+        }
+        
+                #Sale_check{
+            position:absolute;
+            margin-top:90px;
+        }
+        
+.Sale_returnBtn, .Sale_canclenBtn {
+	width: 72px;
+	height: 28px;
+	font-size: 14px;
+	font-weight: 300;
+	text-align: center;
+	background: grey;
+	border-radius: 5px;
+	font-family: 'NanumBarunGothic';
+	cursor: pointer;
+	float: right;
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+#info_load{
+	color: var(--black-color)
+}
+
+.loadArea{
+	padding-bottom: 20px;
+	text-align: center
+}
