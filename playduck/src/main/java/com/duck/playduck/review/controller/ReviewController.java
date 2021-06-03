@@ -12,7 +12,7 @@ public class ReviewController {
 	
 	@RequestMapping("/reviewWrite.do")
 	public void ReviewForm() {
-		
+		 
 	}
 
 }
