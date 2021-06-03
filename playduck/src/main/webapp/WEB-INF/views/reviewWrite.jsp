@@ -17,8 +17,9 @@
 </head>
 
 <body>
+     <%@ include file="common/header.jsp"%>
     <section>
-        <%@ include file="common/header.jsp"%>
+   
 
         <h3 class="rw_title">레미제라블</h3>
         <div class="rw_posterArea">
@@ -79,7 +80,12 @@
         <div class="rw_reviewArea">
         <textarea class="rw_review" cols="70" rows="2"
               style="resize:none;"></textarea></div>
-              <button class="rw_writeBtn">리뷰 작성하기</button>
+              <button class="rw_writeBtn" onclick = "fn_goReviewWrite()">리뷰 작성하기</button>
+              <script>
+				function fn_goReviewWrite(){
+					location.href = "${pageContext.request.contextPath}/review/reviewWrite.do"
+				}
+				</script>
     </section>
     <br /><br /><br /><br /><br />
     <%@ include file="common/footer.jsp"%>

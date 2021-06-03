@@ -148,10 +148,10 @@
 			<div class="detail_review">
 			
 				<h3 class="detail_reviewTitle">DUCK's 리뷰</h3>
-				<button class="detail_reviewWrite" onclick = "fn_goReviewForm()'">리뷰 작성하기</button>
+				<button class="detail_reviewWrite" onclick = "fn_goReviewForm()">리뷰 작성하기</button>
 				<script>
 				function fn_goReviewForm(){
-					location.href = "{pageContext.request.contextPath}/reviewWrite.do"
+					location.href = "${pageContext.request.contextPath}/review/reviewForm.do"
 				}
 				</script>
 				<div class="detail_reviewTab">
@@ -463,7 +463,7 @@
 
 	</section>
 
-	<%@ include file="common/footer.jsp"%>
+	  <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 
 </html>
