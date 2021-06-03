@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<div class="headerArea">
+	
 <h1 class="hidden">playduck</h1>
 <header>
 	<div class="header_searchArea">
-		<img class="header_search" src="../resources/images/main_search.png"
+		<img class="header_search" src="${pageContext.request.contextPath}/resources/images/main_search.png"
 			alt="">
-		<a class="all_content" href="../views/list.jsp">전체작품</a> | <a class="all_md" href="../views/MD_main.jsp">전체MD</a>
+		<a class="all_content" href="${pageContext.request.contextPath}/reviewWrite.do">전체작품</a> | <a class="all_md" href="../views/MD_main.jsp">전체MD</a>
 	</div>
 	
-	<a href="../views/index.jsp"><img class="header_logo" src="../resources/images/logo.png" alt=""></a>
+	<a href="../views/index.jsp"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""></a>
 	<div class="header_login">
 		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
 		
@@ -211,9 +212,9 @@
                         <button type="submit" class="login_box login orange">로그인</button>
                         <button type="button" class="login_box join orange" id="login_joinBtn">회원가입</button>
                         <div class="iconArea">
-                            <img class="icon" src="../resources/images/instar.png" alt="인스타 아이콘">
-                            <img class="icon" src="../resources/images/facefook.png" alt="페이스북 아이콘">
-                            <img class="icon" src="../resources/images/twitter.png" alt="트위터 아이콘">
+                            <img class="icon" src="resources/images/instar.png" alt="인스타 아이콘">
+                            <img class="icon" src="resources/images/facefook.png" alt="페이스북 아이콘">
+                            <img class="icon" src="resources/images/twitter.png" alt="트위터 아이콘">
                         </div>
                         <div class="icon_content">SNS 계정으로 로그인하기</div>
                     </form>

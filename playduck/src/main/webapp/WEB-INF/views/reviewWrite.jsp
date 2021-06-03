@@ -7,13 +7,13 @@
     <title>playduck - 리뷰 작성하기</title>
     <link rel="stylesheet" href="../resources/css/common.css">
     <link rel="stylesheet" href="../resources/css/headerfooter.css">
-    	<link rel="stylesheet" href="../resources/css/join.css">
+    <link rel="stylesheet" href="../resources/css/join.css">
 	<link rel="stylesheet" href="../resources/css/login.css">
 	<link rel="stylesheet" href="../resources/css/findIdPw.css">
     <link rel="stylesheet" href="../resources/css/reviewWrite.css">
-   <script src="../resources/js/jquery-3.6.0.min.js"></script>
-<script src="../resources/js/modal.js"></script>
-<script src="../resources/js/topBtn.js"></script>
+   	<script src="../resources/js/jquery-3.6.0.min.js"></script>
+	<script src="../resources/js/modal.js"></script>
+	<script src="../resources/js/topBtn.js"></script>
 </head>
 
 <body>
