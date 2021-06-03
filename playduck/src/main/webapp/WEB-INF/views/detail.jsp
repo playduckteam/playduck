@@ -148,7 +148,12 @@
 			<div class="detail_review">
 			
 				<h3 class="detail_reviewTitle">DUCK's 리뷰</h3>
-				<button class="detail_reviewWrite" onclick = "location.href = 'reviewWrite.jsp'">리뷰 작성하기</button>
+				<button class="detail_reviewWrite" onclick = "fn_goReviewForm()'">리뷰 작성하기</button>
+				<script>
+				function fn_goReviewForm(){
+					location.href = "{pageContext.request.contextPath}/reviewWrite.do"
+				}
+				</script>
 				<div class="detail_reviewTab">
 					<img class="good" src="../resources/images/review_good_current.png"
 						alt=""> <img class="good_gray" data-tab="good_gray"
