@@ -12,6 +12,7 @@ public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
 	
+
 	@RequestMapping("/review/reviewForm.do")
 	public String ReviewForm() {
 		return "reviewWrite";

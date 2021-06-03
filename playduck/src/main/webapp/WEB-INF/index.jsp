@@ -670,4 +670,17 @@
   <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 
+<script>
+ $(function(){
+	 $.ajax({
+		 url : "${pageContext.request.contextPath}/main/mainTop10.do",
+		 type : 'get',
+		success : function(data) {
+			console.log(data);
+		}
+		 
+	 })
+ })
+</script>
+
 </html>
