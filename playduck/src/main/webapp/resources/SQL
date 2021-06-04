@@ -15,7 +15,7 @@ DROP TABLE "PLAYDUCK"."STOCK";
 --------------------------------------------------------
 --  DDL for Table BASKET
 --------------------------------------------------------
-
+dd
   CREATE TABLE "PLAYDUCK"."BASKET" 
    (	"M_NO" NUMBER, 
 	"D_NO" NUMBER, 
