@@ -25,6 +25,4 @@ public class Member {
 	private String m_pic;
 	
 	
-	
-	
 }

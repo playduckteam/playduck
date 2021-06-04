@@ -12,7 +12,7 @@
 	
 	<a href="../views/index.jsp"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""></a>
 	<div class="header_login">
-		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
+		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a> | <a href="${pageContext.request.contextPath}/mypage/mypage.do">마이페이지</a>
 		
 		<div class="modal_search">
             <div class="modal_searchDiv" title="검색">
