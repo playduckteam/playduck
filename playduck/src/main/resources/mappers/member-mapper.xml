@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER VALUES (
+			SEQ_M_NO.NEXTVAL, #{m_name}, #{m_id},
+			#{m_pwd}, #{m_gender}, #{m_date}, #{m_phone},
+			#{m_email}, #{m_address}, #{m_detailadd},
+			#{m_status}, SYSDATE, #{m_pic}, #{ m_genre, typeHandler=MyTypeHandler }
+		)
+	</insert>
+	
+	<update id="signUpConfirm" parameterType="map">
+		UPDATE MEMBER SET M_STATUS = 1
+		WHERE M_EMAIL = #{m_email}
+		AND M_STATUS = #{m_status}
+	</update>
+	
+</mapper>

@@ -1,5 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<head>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    $(function(){
+    	$('.join_addrBtn').on('click',function(){
+    		new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                       extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraRoadAddr !== ''){
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    $('#m_address0').val(data.zonecode);
+                    $('#m_address1').val(roadAddr);
+                }
+            }).open();
+    	});
+    });
+
+    
+</script>
+</head>
+
 	<div class="headerArea">
 	
 <h1 class="hidden">playduck</h1>
@@ -31,7 +72,7 @@
         <div class="modal_joinDiv" title="회원가입">
             <span class="modal_content_close">X</span>
             <div class="modal_content joinArea">
-                <form action="" method="POST">
+                <form action="${pageContext.request.contextPath}/member/memberInsert.do" method="POST">
                     <h2 class=join_title>회원가입</h2>
                     <div id="join_container">
 
@@ -94,11 +135,13 @@
                                     <h4 class="join_subTitle">생년월일</h4>
                                 </td>
                                 <td class="join_birth">
-                                    <input type="text" class="j_birth" name="m_birth" id="join_birth" maxlength="4"
+                                	<input type="hidden" name="m_pic" value="nopic.jpg"/>
+                                	<input type="date" name="m_date" value="2021-06-23" style="display:none;"/>
+                                    <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="4"
                                         placeholder="2021">
-                                    <input type="text" class="j_birth" name="m_birth" id="join_birth" maxlength="2"
+                                    <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
                                         placeholder="월">
-                                    <input type="text" class="j_birth" name="m_birth" id="join_birth" maxlength="2"
+                                    <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
                                         placeholder="일">
                                 </td>
                             </tr>
@@ -128,8 +171,12 @@
                                             050
                                         </option>
                                     </select>
+                                    <span style="color:black">-</span>
                                     <input type="text" name="m_phone" id="m_phone" maxlength="10"
-                                        style="width: 240px;" placeholder="'-'를 제외하고 작성해 주세요">
+                                        style="width: 100px;" >
+                                    <span style="color:black">-</span>
+                                    <input type="text" name="m_phone" id="m_phone" maxlength="10"
+                                        style="width: 100px;" >    
 
                                 </td>
                             </tr>
@@ -147,18 +194,28 @@
 
                             <tr>
                                 <td class="join_title">
-                                    <h4 class="join_subTitle">주소</h4>
+                                    <h4 class="join_subTitle">우편번호</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address1" size="40" maxlength="40">
+                                    <input type="text" name="m_addrcode" id="m_address0" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);"readonly>
+                                    <button class="join_addrBtn" style="width:50px; height:26px; background:var(--main-color); text-align:center;" type="button">검색</button>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td class="join_title">
+                                    <h4 class="join_subTitle">도로명 주소</h4>
+                                </td>
+                                <td>
+                                    <input type="text" name="m_address" id="m_address1" size="40" maxlength="40" style="background:rgb(233, 227, 227);"readonly>
+                                </td>
+                                
                             </tr>
                             <tr>
                                 <td class="join_title">
                                     <h4 class="join_subTitle">상세주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address2" size="40" maxlength="40">
+                                    <input type="text" name="m_detailadd" id="m_address2" size="40" maxlength="40">
                                 </td>
                             </tr>
                         </table>
@@ -171,22 +228,22 @@
                     <table class="check_table">
                         <tr>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box1"
-                                    name="keyword_id" value="1"><label for="check-box1">연극</label></td>
+                                    name="m_genre" value="연극"><label for="check-box1">연극</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box2"
-                                    name="keyword_id" value="2"><label for="check-box2">뮤지컬</label></td>
+                                    name="m_genre" value="뮤지컬"><label for="check-box2">뮤지컬</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box4"
-                                    name="keyword_id" value="4"><label for="check-box4">무용</label></td>
+                                    name="m_genre" value="무용"><label for="check-box4">무용</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box3"
-                                    name="keyword_id" value="3"><label for="check-box3">클래식/오페라</label></td>
+                                    name="m_genre" value="클래식/오페라"><label for="check-box3">클래식/오페라</label></td>
 
                         </tr>
                         <tr>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box5"
-                                    name="keyword_id" value="5"><label for="check-box5">국악</label></td>
+                                    name="m_genre" value="국악"><label for="check-box5">국악</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box6"
-                                    name="keyword_id" value="6"><label for="check-box6">아동</label></td>
+                                    name="m_genre" value="아동"><label for="check-box6">아동</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box7"
-                                    name="keyword_id" value="7"><label for="check-box7">오픈런</label></td>
+                                    name="m_genre" value="오픈런"><label for="check-box7">오픈런</label></td>
                             <td class="join_checkArea"></td>
                         </tr>
 
