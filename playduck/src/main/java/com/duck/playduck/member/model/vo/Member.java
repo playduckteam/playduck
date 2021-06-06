@@ -19,9 +19,7 @@ public class Member {
 	private Date m_date;
 	private String m_phone;
 	private String m_email;
-	private String m_addrcode;
 	private String m_address;
-	private String m_detailadd;
 	private String m_status;
 	private Date m_enrolldate;
 	private String m_pic;

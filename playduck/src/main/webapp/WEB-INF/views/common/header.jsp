@@ -197,7 +197,7 @@
                                     <h4 class="join_subTitle">우편번호</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_addrcode" id="m_address0" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);"readonly>
+                                    <input type="text" name="m_address" id="m_address0" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);"readonly>
                                     <button class="join_addrBtn" style="width:50px; height:26px; background:var(--main-color); text-align:center;" type="button">검색</button>
                                 </td>
                             </tr>
@@ -215,7 +215,7 @@
                                     <h4 class="join_subTitle">상세주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_detailadd" id="m_address2" size="40" maxlength="40">
+                                    <input type="text" name="m_address" id="m_address2" size="40" maxlength="40">
                                 </td>
                             </tr>
                         </table>

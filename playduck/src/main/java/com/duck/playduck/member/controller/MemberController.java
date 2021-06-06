@@ -41,9 +41,12 @@ public class MemberController {
 		// 이메일 join
 		String newEmail = String.join("@", m.getM_email().split(","));
 		m.setM_email(newEmail);
-		
+		// phone join
 		String newPhone = String.join("-", m.getM_phone().split(","));
 		m.setM_phone(newPhone);
+		// address join
+		String address = String.join("-", m.getM_address().split(","));
+		m.setM_address(address);
 		
 		String[] dateArr = m_date1.split(",");
 		m_date1 = String.join("-", dateArr);
