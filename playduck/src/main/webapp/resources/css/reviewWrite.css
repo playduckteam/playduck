@@ -106,4 +106,5 @@ input[type=range]:focus {
     font-weight: 700;
     text-align: center;
     line-height: 65px;
+    color: white;
 }

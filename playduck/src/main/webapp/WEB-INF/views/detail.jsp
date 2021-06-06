@@ -6,18 +6,18 @@
 <meta charset="UTF-8">
 <title>playduck - 상세보기</title>
 
-<link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/headerfooter.css">
-<link rel="stylesheet" href="../resources/css/join.css">
-<link rel="stylesheet" href="../resources/css/login.css">
-<link rel="stylesheet" href="../resources/css/findIdPw.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/headerfooter.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/findIdPw.css">
 
-<link rel="stylesheet" href="../resources/css/detail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css">
 
 
-<script src="../resources/js/jquery-3.6.0.min.js"></script>
-<script src="../resources/js/modal.js"></script>
-<script src="../resources/js/topBtn.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/topBtn.js"></script>
 <script src="https://kit.fontawesome.com/2004329f9f.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -25,10 +25,10 @@
 	<%@ include file="common/header.jsp"%>
 	<section>
 
-		<a href="MD_play.jsp"><img class="detail_mdLink" src="../resources/images/md_link.png"></a>
+		<a href="MD_play.jsp"><img class="detail_mdLink" src="${pageContext.request.contextPath}/resources/images/md_link.png"></a>
 		<div class="detail_main">
 			<div class="detail_poster">
-				<img class="detail_poster" src="../resources/images/poster.jpg"
+				<img class="detail_poster" src="${pageContext.request.contextPath}/resources/images/poster.jpg"
 					alt="">
 				<i class="far fa-star" id="star" style="color: yellow;"></i>	
 			</div>
@@ -47,12 +47,12 @@
 				<tr>
 					<td class="detail_title">레미제라블</td>
 					<td class="detail_rating">95 <img
-						src="../resources/images/rating.png"></td>
+						src="${pageContext.request.contextPath}/resources/images/rating.png"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<div class="detail_ReservationLink">
-							<img src="../resources/images/detail_card.png">
+							<img src="${pageContext.request.contextPath}/resources/images/detail_card.png">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예매처 바로가기
 						</div>
 					</td>
@@ -155,12 +155,12 @@
 				}
 				</script>
 				<div class="detail_reviewTab">
-					<img class="good" src="../resources/images/review_good_current.png"
+					<img class="good" src="${pageContext.request.contextPath}/resources/images/review_good_current.png"
 						alt=""> <img class="good_gray" data-tab="good_gray"
-						src="../resources/images/review_good.png" alt=""> <img
-						class="bad" src="../resources/images/review_bad_current.png"
+						src="${pageContext.request.contextPath}/resources/images/review_good.png" alt=""> <img
+						class="bad" src="${pageContext.request.contextPath}/resources/images/review_bad_current.png"
 						alt=""> <img class="bad_gray" data-tab="bad_gray"
-						src="../resources/images/review_bad.png" alt="">
+						src="${pageContext.request.contextPath}/resources/images/review_bad.png" alt="">
 				</div>
 				<script>
                     $(document).ready(function () {
