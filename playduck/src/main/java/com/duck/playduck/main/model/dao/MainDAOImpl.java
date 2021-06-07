@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.duck.playduck.main.model.vo.Main;
+import com.duck.playduck.play.model.vo.Play;
+import com.duck.playduck.review.model.vo.Review;
 
 @Repository
 public class MainDAOImpl implements MainDAO {
@@ -20,5 +22,31 @@ public class MainDAOImpl implements MainDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.selectMainTopList");
 	}
+
+
+	@Override
+	public List<Review> ReviewTop10() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("main-mapper.reviewTop10");
+	}
+
+
+	@Override
+	public List<Play> playgb() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("main-mapper.playgb");
+	}
+
+
+	@Override
+	public List<Review> HotReview() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("main-mapper.hotReview");
+	}
+
+
+	
+
+
 
 }

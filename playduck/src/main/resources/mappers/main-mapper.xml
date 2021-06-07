@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main-mapper">
+
+	<resultMap type="Play" id="resultPlay">
+		<result property="p_no" column="p_no" />
+		<result property="p_good" column="p_good" />
+		<result property="p_bad" column="max(p_bad)" />
+	</resultMap>
+
+<select id="selectMainTopList" resultType="main">
+	select * from play
+</select>
+
+<select id="reviewTop10" resultType="review">
+SELECT *
+FROM (SELECT COUNT(P_NO),P_NO
+	FROM REVIEW
+	GROUP BY P_NO
+	ORDER BY COUNT(P_NO) DESC, P_NO DESC)
+WHERE ROWNUM &lt;= 10
+
+</select>
+
+<select id="playgb" resultType="play" resultMap="resultPlay">
+SELECT *
+FROM (SELECT COUNT(P_NO),P_NO
+	FROM REVIEW
+	GROUP BY P_NO
+	ORDER BY COUNT(P_NO) DESC, P_NO DESC) Q
+JOIN (SELECT P.P_NO, FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) / DECODE(MAX(P_GOOD), 0, NULL, MAX(P_GOOD)), 0)*100)"p_good" 
+	FROM PLAY P
+	JOIN REVIEW R ON (P.P_NO = R.P_NO)
+	GROUP BY P.P_NO,P_GOOD,P_BAD
+	ORDER BY COUNT(P.P_NO) DESC, P.P_NO DESC)  S ON(S.P_NO =Q.P_NO )      
+WHERE ROWNUM &lt; =10  
+
+</select>
+
+<select id="hotReview" resultType="review">
+	SELECT *
+	FROM (SELECT *
+	FROM REVIEW
+	ORDER BY R_GOOD+R_BAD  DESC)
+	WHERE ROWNUM &lt;=3
+</select>
+
+
+</mapper>

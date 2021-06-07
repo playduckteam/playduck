@@ -87,210 +87,19 @@
     <article class="main_top10">
       <div> <span class="main_fontw">TOP 10</span> <span class="main_fonto">작품 리뷰</span></div>
       <div class="main_topwindow">
-        <div class="button-container">
+        <div class="button-container" >
           <button class="prev"><i class="arrow left"></i></button>
         </div>
-        <ul class="main_topcontainer">
-          <li class="cell">
-            <img src="resources/images/agatha.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell">
-            <img src="resources/images/aida.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/cats.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/grease.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/ludwig.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/matilda.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/midnight.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/mozart.png">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/phantom.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell"><img src="resources/images/Rebecca.jpg">
-            <div class="main_topinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_topcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-              <div class="main_topicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
+        <ul class="main_topcontainer" id="review_top10">
+          
         </ul>
         <div class="button-container">
           <button class="next"><i class="arrow right"></i></button>
         </div>
       </div>
       <script>
-        const container = document.querySelector(".main_topcontainer");
-        const prevBtn = document.querySelector(".prev");
-        const nextBtn = document.querySelector(".next");
-
-        (function addEvent() {
-          prevBtn.addEventListener('click', translateContainer.bind(this, 1));
-          nextBtn.addEventListener('click', translateContainer.bind(this, -1));
-        })();
-
-        function translateContainer(direction) {
-          const selectedBtn = (direction === 1) ? 'prev' : 'next';
-          container.style.transitionDuration = '500ms';
-          container.style.transform = `translateX(${direction * ( 4.7 )}%)`;
-          container.ontransitionend = () => reorganizeEl(selectedBtn);
-        }
-
-        function reorganizeEl(selectedBtn) {
-          container.removeAttribute('style');
-          (selectedBtn === 'prev') ? container.insertBefore(container.lastElementChild, container.firstElementChild):
-            container.appendChild(container.firstElementChild);
-        }
-        $(function () {
-          $(".main_topicon").click(function () {
-            $("#star").removeClass("far");
-            $("#star").addClass("fas");
-          })
-        });
-        $('.cell').on('mouseenter', function () {
-          $(this).children('.main_topinfo').show();
-        }).on('mouseleave', function () {
-          $(this).children('.main_topinfo').hide();
-        });
+     
+    
       </script>
     </article>
 
@@ -420,32 +229,9 @@
     </article>
     <!--핫리뷰-->
     <article class="main_hotreview">
-      <div> <span class="main_fonto">HOT</span> <span class="main_fontw">리뷰</span></div>
+      <div id="Hotreview3"> <span class="main_fonto">HOT</span> <span class="main_fontw">리뷰</span></div>
 
-      <table class="main_hotreviewTable">
-        <tr>
-          <td class="main_hotreviewprofile"></td>
-          <td class="main_hotreviewcontent">리뷰 글자수는 몇자를 노출되게 하는게 좋을까요
-            아니면 제목만 노출되게 하는게 좋을까요</td>
-          <td class="main_hotreviewimg"></td>
-        </tr>
-      </table>
-      <table class="main_hotreviewTable">
-        <tr>
-          <td class="main_hotreviewprofile"></td>
-          <td class="main_hotreviewcontent">리뷰 글자수는 몇자를 노출되게 하는게 좋을까요
-            아니면 제목만 노출되게 하는게 좋을까요</td>
-          <td class="main_hotreviewimg"></td>
-        </tr>
-      </table>
-      <table class="main_hotreviewTable">
-        <tr>
-          <td class="main_hotreviewprofile"></td>
-          <td class="main_hotreviewcontent">리뷰 글자수는 몇자를 노출되게 하는게 좋을까요
-            아니면 제목만 노출되게 하는게 좋을까요</td>
-          <td class="main_hotreviewimg"></td>
-        </tr>
-      </table>
+    
 
     </article>
     <!--추천 슬라이드-->
@@ -671,16 +457,118 @@
 </body>
 
 <script>
- $(function(){
-	 $.ajax({
-		 url : "${pageContext.request.contextPath}/main/mainTop10.do",
-		 type : 'get',
-		success : function(data) {
-			console.log(data);
-		}
-		 
-	 })
- })
+	// Top 10 작품리뷰
+	 $(function(){
+		 $.ajax({
+			 url : "${pageContext.request.contextPath}/main/mainReviewTop10.do",
+			 type : 'get',
+			 success : function(data) {
+				console.log(data)
+				for(var i in data.title){
+							
+					var innerHtml = ""
+					
+					innerHtml =	  '<li class="cell">'
+					innerHtml +='<img src='+data.poster[i] +'>'
+					innerHtml +='<div class="main_topinfo" style="display:none;">'
+					innerHtml +=  '<button class="main_toprevieww"'
+					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
+					innerHtml +=  '<hr>'
+					innerHtml += ' <button class="main_topreviewr"'
+					innerHtml +=   ' style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'
+					innerHtml +='</div>'
+					innerHtml += '<div class="main_topcontent">'
+					innerHtml +=   '<h3 style="color: #fff;" class="titleremove'+i+'">'+data.title[i]+'</h3>'
+					innerHtml +=   '<span class="main_toprate">'+data.grade[i]+'%</span>'
+					innerHtml +=  '<div class="main_topicon">'
+					innerHtml +=    '<i class="far fa-star" id="star" style="color: yellow;"></i>'
+					innerHtml += ' </div>'
+					innerHtml += '</div>'
+					innerHtml +='</li>'
+								
+					$("#review_top10").append(innerHtml);
+				
+					// 글자 수 제한
+					var length = 10;
+					
+					$('.titleremove'+i).each(function(){
+						if($('.titleremove'+i).text().length >= length){
+							$('.titleremove'+i).text($('.titleremove'+i).text().substr(0,length)+'...');
+						}
+					});
+					
+					
+					   const container = document.querySelector(".main_topcontainer");
+				        const prevBtn = document.querySelector(".prev");
+				        const nextBtn = document.querySelector(".next");
+
+				        (function addEvent() {
+				          prevBtn.addEventListener('click', translateContainer.bind(this, 1));
+				          nextBtn.addEventListener('click', translateContainer.bind(this, -1));
+				        })();
+
+				        function translateContainer(direction) {
+				          const selectedBtn = (direction === 1) ? 'prev' : 'next';
+				          container.style.transitionDuration = '500ms';
+				          container.style.transform = `translateX(${direction * ( 4.7 )}%)`;
+				          container.ontransitionend = () => reorganizeEl(selectedBtn);
+				        }
+
+				        function reorganizeEl(selectedBtn) {
+				          container.removeAttribute('style');
+				          (selectedBtn === 'prev') ? container.insertBefore(container.lastElementChild, container.firstElementChild):
+				            container.appendChild(container.firstElementChild);
+				        }
+				};
+			
+			// 찜 클릭 시
+		    $(function () {
+		    	$(".main_topicon").on("click",function () {
+		            $("#star").removeClass("far");
+		            $("#star").addClass("fas");
+		          })
+		        });
+		    
+			// 포스터에 hover 시 리뷰보기 / 작성하기
+		    $('.cell').on('mouseenter', function () {
+		         	 $(this).children('.main_topinfo').show();
+		    	 }).on('mouseleave', function () {
+		        	 $(this).children('.main_topinfo').hide();
+		     	 });		
+			
+		}	 
+	 });
+ });
+ 
+ 
+ 	// Hot 리뷰 Top3
+ 	$(function(){
+		 $.ajax({
+			 url : "${pageContext.request.contextPath}/main/mainHotReview.do",
+			 type : 'get',
+			 success : function(data){
+	
+				 for(var i in data.poster){
+				 
+					 var innerHtml = "";
+					 
+					 innerHtml = '<table class="main_hotreviewTable">'
+					 innerHtml +=  '<tr>'
+					 innerHtml += ' <td class="main_hotreviewprofile"></td>'
+					 innerHtml +='<td class="main_hotreviewcontent">'+data.content[i]+'</td>'
+					 innerHtml +=  ' <td class="main_hotreviewimg"><img src='+data.poster[i] +'></td>'
+					 innerHtml += '</tr>'
+					 innerHtml += ' </table>'
+				 
+					 $("#Hotreview3").append(innerHtml);
+				 
+				 }
+			 }
+		 });	
+	 
+ 	});
+ 
+
 </script>
 
 </html>
