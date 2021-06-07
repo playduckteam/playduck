@@ -45,7 +45,7 @@ public class MemberController {
 		String newPhone = String.join("-", m.getM_phone().split(","));
 		m.setM_phone(newPhone);
 		// address join
-		String address = String.join("-", m.getM_address().split(","));
+		String address = String.join("/", m.getM_address().split(","));
 		m.setM_address(address);
 		
 		String[] dateArr = m_date1.split(",");
