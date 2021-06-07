@@ -18,5 +18,6 @@ public class Review implements Serializable{
 	private String r_content;
 	private int r_good;
 	private int r_bad;
+	private String r_status;
 	
 }

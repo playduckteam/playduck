@@ -9,6 +9,8 @@
 
 	<typeAliases>
 		<typeAlias type="com.duck.playduck.main.model.vo.Main" alias="main" />
+		<typeAlias type="com.duck.playduck.review.model.vo.Review" alias="review" />
+		<typeAlias type="com.duck.playduck.play.model.vo.Play" alias="play" />
 	</typeAliases>
 	
 
