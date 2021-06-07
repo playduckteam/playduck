@@ -27,6 +27,8 @@
         </div>
         <form name="reviewForm" action="${pageContext.request.contextPath}/review/reviewWrite.do" method="post" onsubmit="return validate();">
         <div class="rw_reviewTab">
+        	<input type="text" class="hidden" name="m_no" value="${member.m_no}">
+        	<input type="text" class="hidden" name="p_no" value="${play.p_no}">
             <img class="good" src="../resources/images/review_good_current.png" alt="">
             <img class="good_gray" data-tab="good_gray" src="../resources/images/review_good.png" alt="">
             <img class="bad" src="../resources/images/review_bad_current.png" alt="">
@@ -40,7 +42,7 @@
                 $(".bad_gray").show();
                 $(".good_gray").hide();
                 $(".bad").hide();
-                $(".rw_reviewTab").append('<input type="text" class="hidden" id="rw_good" name="rw_good" value="1" />')
+                $(".rw_reviewTab").append('<input type="text" class="hidden" id="r_status" name="r_status" value="1" />')
 
                 /*bad_gray 클릭했을 때 bad를 보여줌*/
                 $(".bad_gray").click(function () {
@@ -49,7 +51,7 @@
                     $(".good_gray").show();
                     $(".bad").show();
                     $("#rw_good").remove();
-                    $(".rw_reviewTab").append('<input type="text" class="hidden" id="rw_bad" name="rw_bad" value="2" />')
+                    $(".rw_reviewTab").append('<input type="text" class="hidden" id="r_status" name="r_status" value="2" />')
                 });
 
                 /*good_gray를 클릭했을 때 good을 보여줌*/
@@ -85,7 +87,7 @@
         </table>
         <h4 class="rw_contentTitle">한줄평</h4>
         <div class="rw_reviewArea">
-        <textarea class="rw_review" cols="70" rows="2"
+        <textarea class="rw_review" name="r_content" cols="70" rows="2"
               style="resize:none;"></textarea></div>
               
               <input type="submit" class="rw_writeBtn" value="리뷰 작성하기" >

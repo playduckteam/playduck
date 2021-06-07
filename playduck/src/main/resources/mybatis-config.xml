@@ -12,6 +12,7 @@
 		<typeAlias type="com.duck.playduck.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.duck.playduck.member.model.vo.MyTypeHandler" alias="MyTypeHandler" />
 		<typeAlias type="com.duck.playduck.review.model.vo.Review" alias="review" />
+		<typeAlias type="com.duck.playduck.review.model.vo.PlayDetail" alias="playDetail" />
 		<typeAlias type="com.duck.playduck.play.model.vo.Play" alias="play" />
 	</typeAliases>
 	
