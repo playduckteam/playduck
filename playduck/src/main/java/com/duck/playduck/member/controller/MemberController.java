@@ -107,12 +107,14 @@ public class MemberController {
 		
 		if(result!=null) {
 			if( bcryptPasswordEncoder.matches(m_pwd, result.getM_pwd())) {
-				// 로그인 성공 (1)
+				// 로그인 성공 (1:일반회원 2:리워드)
 				if(result.getM_status().trim().equals("1") || result.getM_status().trim().equals("2")) {
 					msg="로그인 성공!";
 					model.addAttribute("member",result);
+				// (3: 탈퇴된 계정)
 				} else if(result.getM_status().trim().equals("3")) {
 					msg="탈퇴된 계정입니다. 관리자에게 문의하세요!";
+				// (6글자 : 이메일인증전)
 				} else {
 					msg="이메일 인증을 해주세요!";
 				}
