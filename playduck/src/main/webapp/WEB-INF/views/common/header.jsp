@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 	
 <head>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -53,8 +56,12 @@
 	
 	<a href="../views/index.jsp"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""></a>
 	<div class="header_login">
-		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a> | <a href="${pageContext.request.contextPath}/mypage/mypage.do">마이페이지</a>
-		
+		<c:if test="${empty member}">
+		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
+		</c:if>
+		<c:if test="${!empty member}">
+		<a href="${pageContext.request.contextPath}/mypage/mypage.do">마이페이지</a>
+		</c:if>
 		<div class="modal_search">
             <div class="modal_searchDiv" title="검색">
                 <span class="modal_content_close">X</span>
@@ -256,6 +263,7 @@
         </div>
     </div>
     <div class="modal_login">
+    	<form action="${pageContext.request.contextPath}/member/memberLogin.do" method="POST"">
             <div class="modal_loginDiv" title="로그인">
                 <span class="modal_content_close">X</span>
                 <div class="modal_content loginArea">
@@ -277,6 +285,7 @@
                     </form>
                 </div>
             </div>
+		</form>
     </div>
     
     <div class="modal_find">

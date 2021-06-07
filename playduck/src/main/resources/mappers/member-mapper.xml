@@ -18,4 +18,9 @@
 		AND M_STATUS = #{m_status}
 	</update>
 	
+	<select id="selectOneMember" parameterType="string" resultType="Member">
+		SELECT * FROM MEMBER
+		WHERE M_ID = #{m_id}
+	</select>
+	
 </mapper>

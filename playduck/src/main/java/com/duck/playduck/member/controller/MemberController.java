@@ -9,13 +9,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.duck.playduck.member.model.service.MemberService;
 import com.duck.playduck.member.model.vo.Member;
-
+@SessionAttributes({"member"})
 @Controller
 public class MemberController {
 
@@ -31,7 +32,7 @@ public class MemberController {
 
 	
 	@RequestMapping("/member/memberInsert.do")
-	public String memberInsert(Member m, @RequestParam String m_date1) {
+	public String memberInsert(Member m, @RequestParam String m_date1, Model model) {
 		
 		String pass1 = m.getM_pwd(); 					// 원래 비밀번호
 		String pass2 = bcryptPasswordEncoder.encode(pass1);		// 암호화 처리
@@ -70,16 +71,62 @@ public class MemberController {
         map.put("m_status", m.getM_status());
         
         
-        memberService.insertMember(m);
-		
-		return "";
+        int result = memberService.insertMember(m);
+        
+        if(result!=0) {
+        	String msg= "회원가입이 완료되었습니다. 이메일 인증후 사용해주세요!";
+    		String loc= "/";
+    	    model.addAttribute("msg",msg);
+    	    model.addAttribute("loc",loc);
+        }
+        
+	    return "common/msg";
 	}
 	
 	@RequestMapping("/member/signUpConfirm.do")
-	 public String signUpConfirm(@RequestParam Map<String, String> map){
+	 public String signUpConfirm(@RequestParam Map<String, String> map, Model model){
 	    //email, authKey 가 일치할경우 authStatus 업데이트
-	    memberService.signUpConfirm(map);
-	    return "";
+	    int result= memberService.signUpConfirm(map);
+	    if(result!=0) {
+	    	String msg= "이메일 인증이 완료되었습니다. 로그인 후 사용해주세요!";
+			String loc= "/";
+		    model.addAttribute("msg",msg);
+		    model.addAttribute("loc",loc);
+	    }	    
+	    return "common/msg";
+	}
+	
+	@RequestMapping("/member/memberLogin.do")
+	public String memberLogin(@RequestParam String m_id,@RequestParam String m_pwd, Model model) {
+		
+		Member result = memberService.selectOneMember(m_id);
+		System.out.println(result.getM_status());
+		
+		String msg= "";
+		String loc= "/";
+		
+		if(result!=null) {
+			if( bcryptPasswordEncoder.matches(m_pwd, result.getM_pwd())) {
+				// 로그인 성공 (1)
+				if(result.getM_status().trim().equals("1") || result.getM_status().trim().equals("2")) {
+					msg="로그인 성공!";
+					model.addAttribute("member",result);
+				} else if(result.getM_status().trim().equals("3")) {
+					msg="탈퇴된 계정입니다. 관리자에게 문의하세요!";
+				} else {
+					msg="이메일 인증을 해주세요!";
+				}
+			} else {
+				msg="비밀번호가 틀립니다!";
+			}
+		} else {
+			msg="존재하지 않는 아이디입니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
 	}
 	
 }

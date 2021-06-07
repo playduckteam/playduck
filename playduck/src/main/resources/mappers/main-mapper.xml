@@ -9,10 +9,6 @@
 		<result property="p_bad" column="max(p_bad)" />
 	</resultMap>
 
-<select id="selectMainTopList" resultType="main">
-	select * from play
-</select>
-
 <select id="reviewTop10" resultType="review">
 SELECT *
 FROM (SELECT COUNT(P_NO),P_NO
@@ -20,7 +16,6 @@ FROM (SELECT COUNT(P_NO),P_NO
 	GROUP BY P_NO
 	ORDER BY COUNT(P_NO) DESC, P_NO DESC)
 WHERE ROWNUM &lt;= 10
-
 </select>
 
 <select id="playgb" resultType="play" resultMap="resultPlay">

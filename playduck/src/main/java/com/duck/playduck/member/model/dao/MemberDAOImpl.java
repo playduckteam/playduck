@@ -24,4 +24,9 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.update("member.signUpConfirm", map);
 	}
 
+	@Override
+	public Member selectOneMember(String m_id) {
+		return sqlSession.selectOne("member.selectOneMember", m_id);
+	}
+
 }

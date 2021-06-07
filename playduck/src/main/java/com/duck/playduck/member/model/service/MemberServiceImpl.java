@@ -24,4 +24,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.signUpConfirm(map);
 	}
 
+	@Override
+	public Member selectOneMember(String m_id) {
+		return memberDAO.selectOneMember(m_id);
+	}
+
 }

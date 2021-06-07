@@ -10,4 +10,6 @@ public interface MemberDAO {
 
 	int signUpConfirm(Map<String, String> map);
 
+	Member selectOneMember(String m_id);
+
 }
