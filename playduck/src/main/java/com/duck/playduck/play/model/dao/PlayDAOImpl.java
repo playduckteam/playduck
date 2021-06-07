@@ -9,5 +9,11 @@ public class PlayDAOImpl implements PlayDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
+
+	@Override
+	public int selectPlayList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("");
+	}
 	
 }

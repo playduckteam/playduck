@@ -8,10 +8,16 @@ import com.duck.playduck.play.model.dao.PlayDAO;
 
 
 @Service
-public class PlayServiceImpl implements PlayServcie {
+public class PlayServiceImpl implements PlayService {
 
 	@Autowired
 	PlayDAO playDAO;
+
+	@Override
+	public int selectPlayList() {
+		
+		return playDAO.selectPlayList();
+	}
 	
 	
 	
