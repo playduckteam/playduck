@@ -16,7 +16,7 @@ public class PlayDetail implements Serializable{
 	private String p_no;
 	private int pd_theater;
 	private int pd_story;
-	private int pd_proucing;
-	private int pd_cating;
+	private int pd_producing;
+	private int pd_casting;
 	
 }
