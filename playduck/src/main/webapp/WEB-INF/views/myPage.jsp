@@ -416,6 +416,8 @@
 
         </div>
     </div>
+    
+    
     <section>
         <!-- 회원 사진 -->
         <div class="profile">
