@@ -18,9 +18,9 @@ public class MypageServiceImpl implements MypageService {
 	MypageDAO mypageDAO;
 
 	@Override
-	public int insertPfImg(List<Member> attach) {
+	public int insertPfImg(Member m) {
 		
-		return mypageDAO.insertPfImg(attach);
+		return mypageDAO.insertPfImg(m);
 	}
 	
 

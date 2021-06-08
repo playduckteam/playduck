@@ -15,9 +15,9 @@ public class MypageDAOImpl implements MypageDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public int insertPfImg(List<Member> attach) {
+	public int insertPfImg(Member m) {
 		
-		return sqlSession.insert("member.insertPfImg", attach);
+		return sqlSession.insert("member.insertPfImg", m);
 	}
 
 

@@ -8,7 +8,7 @@ import com.duck.playduck.member.model.vo.Member;
 
 public interface MypageService {
 
-	int insertPfImg(List<Member> attach);
+	int insertPfImg(Member m);
 
 
 
