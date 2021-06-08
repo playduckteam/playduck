@@ -41,6 +41,12 @@ public class MainServiceImpl implements MainService {
 		return mainDAO.HotReview();
 	}
 
+	@Override
+	public List<Play> allPlaySelect() {
+		// TODO Auto-generated method stub
+		return mainDAO.allPlaySelect();
+	}
+
 
 
 

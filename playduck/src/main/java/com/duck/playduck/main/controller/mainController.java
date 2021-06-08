@@ -20,6 +20,7 @@ import org.w3c.dom.NodeList;
 
 import com.duck.playduck.main.model.service.MainService;
 import com.duck.playduck.main.model.vo.Main;
+import com.duck.playduck.member.model.service.MemberService;
 import com.duck.playduck.play.model.vo.Play;
 import com.duck.playduck.review.model.vo.Review;
 
@@ -175,7 +176,7 @@ public class mainController {
 	@ResponseBody
 	public Map<String, List> mainHotReview() {
 		
-		List<Review> list = new ArrayList();
+		List<Review> list = new ArrayList<Review>();
 		
 		list = mainservice.HotReview();
 		
@@ -228,5 +229,69 @@ public class mainController {
 		return map;
 	}
 	
+	@RequestMapping("/main/mainGenreM.do")
+	@ResponseBody
+	public Map<String, List> genreM() {
 	
+		List<Play> list = new ArrayList<Play>();
+		
+		list = mainservice.allPlaySelect();
+		
+		List tlist = new ArrayList();
+		List glist = new ArrayList();
+		List ilist = new ArrayList();
+		
+		List<String> genrenm = new ArrayList<String>();
+		
+		Map<String, List> map = new HashMap<String, List>();
+		for(Play p : list) {
+		try {
+
+			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+p.getP_no()+"?service=f6ad9fc845404d7db3617fe6ebac38a7";
+			
+			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder =dbFactoty.newDocumentBuilder();
+			Document doc =dBuilder.parse(url);
+			
+			doc.getDocumentElement().normalize();
+			
+			
+			NodeList nList =doc.getElementsByTagName("db");
+			
+			
+			
+			for(int temp=0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+					
+					Element eElement = (Element) nNode;
+					
+					
+					if (  "국악".equals(getTagValue("genrenm", eElement)) ) {
+						tlist.add(getTagValue("prfnm", eElement));
+						glist.add(p.getP_good());
+						ilist.add(getTagValue("poster", eElement));
+						
+					
+		
+					
+					}			
+				}	
+			}
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}		
+		
+	}
+	
+
+		
+		map.put("title", tlist);
+		map.put("grade", glist);
+		map.put("poster", ilist);
+		
+	
+		return map;
+	}
 }

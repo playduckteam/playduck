@@ -245,206 +245,15 @@
         <div class="button-container">
           <button class="prev3"><i class="arrow left3"></i></button>
         </div>
-        <ul class="main_reccontainer">
-          <li class="cell3">
-            <img src="resources/images/agatha.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/aida.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/cats.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recprate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/grease.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/ludwig.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/matilda.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/midnight.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/mozart.png">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/phantom.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell3"><img src="resources/images/Rebecca.jpg">
-            <div class="main_recinfo" style="display:none;">
-              <button class="main_toprevieww"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
-              <hr>
-              <button class="main_topreviewr"
-                style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
-            </div>
-            <div class="main_reccontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_recrate">95%</span>
-              <div class="main_recicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
+        <ul class="main_reccontainer" id="member_Genre1">
+        
         </ul>
         <div class="button-container">
           <button class="next3"><i class="arrow right3"></i></button>
         </div>
       </div>
       <script>
-        const container3 = document.querySelector(".main_reccontainer");
-        const prevBtn3 = document.querySelector(".prev3");
-        const nextBtn3 = document.querySelector(".next3");
-
-        (function addEvent() {
-          prevBtn3.addEventListener('click', translateContainer3.bind(this, 1));
-          nextBtn3.addEventListener('click', translateContainer3.bind(this, -1));
-        })();
-
-        function translateContainer3(direction) {
-          const selectedBtn3 = (direction === 1) ? 'prev3' : 'next3';
-          container3.style.transitionDuration = '500ms';
-          container3.style.transform = `translateX(${direction * ( 4.7 )}%)`;
-          container3.ontransitionend = () => reorganizeEl3(selectedBtn3);
-        }
-
-        function reorganizeEl3(selectedBtn3) {
-          container3.removeAttribute('style');
-          (selectedBtn3 === 'prev3') ? container3.insertBefore(container3.lastElementChild, container3
-            .firstElementChild): container3.appendChild(container3.firstElementChild);
-        }
-        $(function () {
-          $(".main_topicon").click(function () {
-            $("#star").removeClass("far");
-            $("#star").addClass("fas");
-          })
-        });
-        $('.cell3').on('mouseenter', function () {
-          $(this).children('.main_recinfo').show();
-        }).on('mouseleave', function () {
-          $(this).children('.main_recinfo').hide();
-        });
+      
       </script>
 
     </article>
@@ -493,7 +302,7 @@
 					$("#review_top10").append(innerHtml);
 				
 					// 글자 수 제한
-					var length = 10;
+					var length = 8;
 					
 					$('.titleremove'+i).each(function(){
 						if($('.titleremove'+i).text().length >= length){
@@ -560,7 +369,7 @@
 					 innerHtml +=  '<tr>'
 					 innerHtml += ' <td class="main_hotreviewprofile"></td>'
 					 innerHtml +='<td class="main_hotreviewcontent">'+data.content[i]+'</td>'
-					 innerHtml +=  ' <td class="main_hotreviewimg"><img src='+data.poster[i] +'></td>'
+					 innerHtml +=  ' <td class="main_hotreviewimg"><img src='+data.poster[i] +' width="280" height="120"></td>'
 					 innerHtml += '</tr>'
 					 innerHtml += ' </table>'
 				 
@@ -571,6 +380,114 @@
 		 });	
 	 
  	});
+ 	
+ 	$(function() {
+ 		$.ajax({
+ 			url : "${pageContext.request.contextPath}/main/mainGenreM.do",
+ 			type : 'get',
+ 			success : function(data){
+ 			
+ 				var len = data.title.length;
+ 		
+ 				
+ 				var arr = [];
+ 				var temp;
+ 				var rnum;
+ 				
+ 				for(var i=0; i<len ; i++){
+ 					arr.push(i);
+ 				}
+ 				
+ 				// [0, 1, 2 . . . 62, 63]
+ 		
+ 				
+ 				for(var i =0; i<len; i++) { // 0 ~ 0.9999 * 64 -> 0 ~ 63.9999
+ 					rnum = Math.floor(Math.random()*len); 
+ 					temp = arr[i];                    
+ 					arr[i] = arr[rnum]    // 10            
+ 					arr[rnum] = temp;				
+ 				}
+ 		
+ 			
+ 				console.log(arr);
+ 				
+ 				 for(var i = 0; i < 10 ; ++i){
+ 					 
+ 					 var innerHtml = "";
+ 					 
+ 					innerHtml = '<li class="cell3">'
+ 					innerHtml += '<img src="'+data.poster[arr[i]]+'">'
+ 					innerHtml += '<div class="main_recinfo" style="display:none;">'
+ 					innerHtml += '<button class="main_toprevieww"'
+ 					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
+ 					innerHtml += '<hr>'
+ 					innerHtml +=  '<button class="main_topreviewr"'
+ 					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'
+ 					innerHtml += '</div>'
+ 					innerHtml += '<div class="main_reccontent">'
+ 					innerHtml +=  '<h3 style="color: #fff;" class="membergood1'+i+'">'+data.title[arr[i]]+'</h3>'
+ 					innerHtml += '<span class="main_recrate">'+data.grade[arr[i]]+'%</span>'
+ 					innerHtml +=  '<div class="main_recicon">'
+ 					innerHtml +=   '<i class="far fa-star" id="star" style="color: yellow;"></i>'
+ 					innerHtml += '</div>'
+ 					innerHtml += '</div>'
+ 					innerHtml += '</li>'
+ 					
+ 						$("#member_Genre1").append(innerHtml);
+ 					
+ 					// 글자 수 제한
+					var length = 8;
+					
+					$('.membergood1'+i).each(function(){
+						if($('.membergood1'+i).text().length >= length){
+							$('.membergood1'+i).text($('.membergood1'+i).text().substr(0,length)+'...');
+						}
+					});
+ 				 }
+ 				 
+ 				  const container3 = document.querySelector(".main_reccontainer");
+ 			        const prevBtn3 = document.querySelector(".prev3");
+ 			        const nextBtn3 = document.querySelector(".next3");
+
+ 			        (function addEvent() {
+ 			          prevBtn3.addEventListener('click', translateContainer3.bind(this, 1));
+ 			          nextBtn3.addEventListener('click', translateContainer3.bind(this, -1));
+ 			        })();
+
+ 			        function translateContainer3(direction) {
+ 			          const selectedBtn3 = (direction === 1) ? 'prev3' : 'next3';
+ 			          container3.style.transitionDuration = '500ms';
+ 			          container3.style.transform = `translateX(${direction * ( 4.7 )}%)`;
+ 			          container3.ontransitionend = () => reorganizeEl3(selectedBtn3);
+ 			        }
+
+ 			        function reorganizeEl3(selectedBtn3) {
+ 			          container3.removeAttribute('style');
+ 			          (selectedBtn3 === 'prev3') ? container3.insertBefore(container3.lastElementChild, container3
+ 			            .firstElementChild): container3.appendChild(container3.firstElementChild);
+ 			        }
+ 			        
+ 			       $(function () {
+ 				    	$(".main_topicon").on("click",function () {
+ 				            $("#star").removeClass("far");
+ 				            $("#star").addClass("fas");
+ 				          })
+ 				        });
+ 			      
+ 			          
+ 			        $('.cell3').on('mouseenter', function () {
+ 			          $(this).children('.main_recinfo').show();
+ 			        }).on('mouseleave', function () {
+ 			          $(this).children('.main_recinfo').hide();
+ 			        });
+ 				 
+ 				 }
+ 			
+ 		 
+		     
+			 
+ 		})
+ 	})
  
 
 </script>
