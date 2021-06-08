@@ -24,9 +24,9 @@
     <section>
    
 
-        <h3 class="rw_title">레미제라블</h3>
+        <h3 class="rw_title">${rwlist[0]}</h3>
         <div class="rw_posterArea">
-            <img class="rw_poster" src="../resources/images/poster.jpg" alt="">
+            <img class="rw_poster" src="${rwlist[1]}" alt="">
         </div>
         <form name="reviewForm" action="${pageContext.request.contextPath}/review/reviewWrite.do" method="post" onsubmit="return validate();">
         <div class="rw_reviewTab">
