@@ -241,16 +241,16 @@
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box4"
                                     name="m_genre" value="무용"><label for="check-box4">무용</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box3"
-                                    name="m_genre" value="클래식/오페라"><label for="check-box3">클래식/오페라</label></td>
+                                    name="m_genre" value="클래식"><label for="check-box3">클래식</label></td>
 
                         </tr>
                         <tr>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box5"
-                                    name="m_genre" value="국악"><label for="check-box5">국악</label></td>
+                                    name="m_genre" value="오페라"><label for="check-box5">오페라</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box6"
-                                    name="m_genre" value="아동"><label for="check-box6">아동</label></td>
+                                    name="m_genre" value="국악"><label for="check-box6">국악</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box7"
-                                    name="m_genre" value="오픈런"><label for="check-box7">오픈런</label></td>
+                                    name="m_genre" value="복합"><label for="check-box7">복합</label></td>
                             <td class="join_checkArea"></td>
                         </tr>
 
