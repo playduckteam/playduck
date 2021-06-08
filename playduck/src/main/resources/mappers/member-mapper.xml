@@ -27,9 +27,9 @@
 		WHERE M_ID = #{m_id}
 	</select>
 	
-	<insert id="insertPfImg" parameterType="Member">
-		INSERT INTO MEMBER(M_PIC, M_PICRENAMED)
-		VALUES(#{ m_pic }, #{ m_picRenamed })
-	</insert>
+	
+	<update id="insertPfImg" parameterType="Member">
+		UPDATE MEMBER SET M_PIC = #{ m_pic }, M_PICRENAMED = #{ m_picRenamed }
+	</update>
 	
 </mapper>

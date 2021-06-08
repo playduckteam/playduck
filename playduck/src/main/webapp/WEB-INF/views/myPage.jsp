@@ -424,47 +424,27 @@
     <section>
         <!-- 회원 사진 -->
         <div class="profile">
-        	<form name="mypageImg" action="${pageContext.request.contextPath}/board/profileImg.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+        	<form id="FILE_FORM" name="mypageImg" action="${pageContext.request.contextPath}/mypage/profileImg.do" method="post" enctype="multipart/form-data">
 	            <div>
 	            <c:if test="${empty member.m_pic}" >
 	                <img class="Mypage_img" id="profileImg" src="/playduck/resources/profileImg/nopic.jsp" alt="프로필 사진">
 	            </c:if>
 	            <c:if test="${!empty member.m_pic}">
-	                <img class="Mypage_img" id="profileImg" src="/playduck/resources/profileImg/${img.m_pic}" alt="프로필 사진">
+	                <img class="Mypage_img" id="profileImg" name="profileImg" src="/playduck/resources/profileImg/${member.m_picRenamed}" alt="프로필 사진">
 	            </c:if>
-	             
+
 	            </div>
-	            <input type="file" class="hidden" accept="image/*" name="profileImg" id="profileImg1" onchange="readURL(input)" />
+	            <input type="file" class="hidden" accept="image/*" name="profileImg" id="profileImg1" />
 	            <script>
 		        	$('.Mypage_img').on('click', function(){
 		        		$('#profileImg1').click();
 		        	})
 		        	
 		         // 사진 미리보기 구현
-		        	 function readURL(input) {
-	      				  if (input.files && input.files[0]) {
-	         				  var reader = new FileReader();
-	          				  reader.onload = function(e) {
-	        	     		   $('#profileImg').attr('src', e.target.result);
-	          			  }
-	         		   reader.readAsDataURL(input.files[0]);
-	      			  }
-	   					 }
-	
-	    				$("#profileImg1").change(function() {
-	       				 readURL(this);
-	   				 });
-		
-	    		// 공백이 입력된 경우 대비 유효성검사를 실시
-	    			function validate(){
-	    				var content = $("[name=boardContent]").val();
-	    				if(content.trim().length==0){
-	    					alert("내용을 입력하세요");
-	    					return false;
-	    				}
-	    				return true;
-	    			}
-	    		
+	    			$("#profileImg1").change(function() {
+	       				 $('#FILE_FORM').submit();
+	   				});
+			
 		       </script>
             </form>
             
@@ -479,19 +459,19 @@
                     </tr>
                     <tr>
                         <td class="Mypage_guide">이름</td>
-                        <td>김오리</td>
+                        <td>${member.m_name}</td>
                     </tr>
                     <tr>
                         <td class="Mypage_guide">전화번호</td>
-                        <td>010-1234-1234</td>
+                        <td>${member.m_phone}</td>
                     </tr>
                     <tr>
                         <td class="Mypage_guide">생년월일</td>
-                        <td>1995년 2월 19일</td>
+                        <td>${member.m_date}</td>
                     </tr>
                     <tr>
                         <td class="Mypage_guide">주소</td>
-                        <td>서울시 강남구</td>
+                        <td>${member.m_address}</td>
                     </tr>
                     <tr>
                         <td colspan="3">
@@ -529,7 +509,7 @@
         <hr class="Mypage_line1">
         <!--작성한 리뷰-->
         <article class="mypage_myReview">
-            <div> <span class="main_fonto">김오리 님</span> <span class="main_fontw">이 작성한 리뷰</span></div>
+            <div> <span class="main_fonto">${member.m_name}</span> <span class="main_fontw">이 작성한 리뷰</span></div>
             <div class="main_topwindow">
                 <div class="button-container">
                     <button class="prev"><i class="arrow left"></i></button>
@@ -539,7 +519,7 @@
                         <img src="../resources/images/agatha.jpg">
                         <div class="main_topinfo" style="display:none;">
                             <button class="main_toprevieww"
-                                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
+                                style="border: none; background-color: var(--black-color);color: #fff;" onclick="goReview();">리뷰보기</button>
                             <hr>
                             <button class="main_topreviewr"
                                 style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
