@@ -45,6 +45,13 @@ public class MainDAOImpl implements MainDAO {
 	}
 
 
+	@Override
+	public List<Play> allPlaySelect() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("main-mapper.allPlaySelect");
+	}
+
+
 	
 
 

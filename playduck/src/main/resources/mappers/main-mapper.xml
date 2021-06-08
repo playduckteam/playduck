@@ -9,9 +9,7 @@
 		<result property="p_bad" column="max(p_bad)" />
 	</resultMap>
 
-<select id="selectMainTopList" resultType="main">
-	select * from play
-</select>
+
 
 <select id="reviewTop10" resultType="review">
 SELECT *
@@ -45,6 +43,12 @@ WHERE ROWNUM &lt; =10
 	ORDER BY R_GOOD+R_BAD  DESC)
 	WHERE ROWNUM &lt;=3
 </select>
+
+	<select  id="allPlaySelect" resultType="play" resultMap="resultPlay">
+		 SELECT P_NO,FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) / DECODE(MAX(P_GOOD), 0, NULL, MAX(P_GOOD)), 0)*100)"p_good" 
+  	 	 FROM PLAY
+   		 GROUP BY P_NO
+	</select>
 
 
 </mapper>

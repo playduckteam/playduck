@@ -17,6 +17,8 @@ public interface MainService {
 
 	List<Review> HotReview();
 
+	List<Play> allPlaySelect();
+
 	
 
 	

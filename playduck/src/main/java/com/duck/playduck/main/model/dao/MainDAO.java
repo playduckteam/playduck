@@ -17,6 +17,8 @@ public interface MainDAO {
 
 	List<Review> HotReview();
 
+	List<Play> allPlaySelect();
+
 	
 
 
