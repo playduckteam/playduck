@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,146 +48,18 @@ body, html, section{
 	
 
 	<div class="list_container">
+		<c:forEach items="${plist2}" var="pi" begin="0" varStatus="status">
 		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
+			<img src="${pi}">
 			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
+				 <h3 style="color: #fff;">${plist.get(status.index)}</h3>
               <span class="main_toprate">95%</span>
 				<div class="list_icon">
 					<i class="far fa-star" id="star" style="color: yellow;"></i>
 				</div>
 			</div>
 		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
-		<div class="listArea">
-			<img src="../resources/images/agatha.jpg">
-			<div class="list_content">
-				 <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-					<i class="far fa-star" id="star" style="color: yellow;"></i>
-				</div>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
 	</section>
 <br /><br /><br /><br /><br /><br /><br /><br />

@@ -43,7 +43,7 @@
                     <tr>
                         <td class="Sale_title_td1" style="padding-bottom: 0px;">송장번호</td>
                         <td class="Sale_title_td2" style="padding-bottom: 0px;">12345678</td>
-                        <td colspan="2" style="padding-bottom: 0px;"><a href="">>>송장번호 조회하러가기</a></td>
+                        <td colspan="2" style="padding-bottom: 0px;"><a href="https://tracker.delivery/#/kr.epost/1111111111110" target="_blank">배송조회</a></td>
                         <td><p class="Sale_price_td2">합계</p></td>
                         <td><p class="Sale_price_td3">62,340원</p></td>
                     </tr>

@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  파일이 생성됨 - 일요일-6월-06-2021   
+--  파일이 생성됨 - 화요일-6월-08-2021   
 --------------------------------------------------------
 DROP TABLE "PLAYDUCK"."BASKET";
 DROP TABLE "PLAYDUCK"."BOOKMARK";
@@ -15,7 +15,7 @@ DROP TABLE "PLAYDUCK"."STOCK";
 --------------------------------------------------------
 --  DDL for Table BASKET
 --------------------------------------------------------
-dd
+
   CREATE TABLE "PLAYDUCK"."BASKET" 
    (	"M_NO" NUMBER, 
 	"D_NO" NUMBER, 
@@ -56,7 +56,8 @@ dd
 	"C_TITLE" VARCHAR2(200 BYTE), 
 	"C_CONTENT" VARCHAR2(4000 BYTE), 
 	"C_DATE" DATE DEFAULT SYSDATE, 
-	"C_PIC" VARCHAR2(100 BYTE)
+	"C_PIC" VARCHAR2(100 BYTE), 
+	"C_PICRENAMED" VARCHAR2(100 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -70,6 +71,7 @@ dd
    COMMENT ON COLUMN "PLAYDUCK"."CURATION"."C_CONTENT" IS '내용';
    COMMENT ON COLUMN "PLAYDUCK"."CURATION"."C_DATE" IS '작성날짜';
    COMMENT ON COLUMN "PLAYDUCK"."CURATION"."C_PIC" IS '사진';
+   COMMENT ON COLUMN "PLAYDUCK"."CURATION"."C_PICRENAMED" IS '사진리네임';
 --------------------------------------------------------
 --  DDL for Table MD
 --------------------------------------------------------
@@ -110,7 +112,8 @@ dd
 	"M_STATUS" CHAR(6 BYTE), 
 	"M_ENROLLDATE" DATE DEFAULT SYSDATE, 
 	"M_PIC" VARCHAR2(100 BYTE), 
-	"M_GENRE" VARCHAR2(500 BYTE)
+	"M_GENRE" VARCHAR2(500 BYTE), 
+	"M_PICRENAMED" VARCHAR2(100 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -130,6 +133,7 @@ dd
    COMMENT ON COLUMN "PLAYDUCK"."MEMBER"."M_ENROLLDATE" IS '등록일';
    COMMENT ON COLUMN "PLAYDUCK"."MEMBER"."M_PIC" IS '프로필사진';
    COMMENT ON COLUMN "PLAYDUCK"."MEMBER"."M_GENRE" IS '장르';
+   COMMENT ON COLUMN "PLAYDUCK"."MEMBER"."M_PICRENAMED" IS '사진리네임';
 --------------------------------------------------------
 --  DDL for Table ORDERS
 --------------------------------------------------------
