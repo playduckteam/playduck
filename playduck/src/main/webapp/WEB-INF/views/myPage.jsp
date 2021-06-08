@@ -263,7 +263,7 @@
                                     <h4 class="pm_subTitle" >아이디</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_id" id="pm_id" placeholder="영문, 숫자 허용" value="${member.m_Id}" readonly required>
+                                    <input type="text" name="m_id" id="pm_id" placeholder="영문, 숫자 허용" value="${member.m_id}" readonly required>
 
                                 </td>
 

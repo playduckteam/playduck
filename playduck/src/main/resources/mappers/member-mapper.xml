@@ -12,7 +12,7 @@
 			SEQ_M_NO.NEXTVAL, #{m_name}, #{m_id},
 			#{m_pwd}, #{m_gender}, #{m_date}, #{m_phone},
 			#{m_email}, #{m_address},
-			#{m_status}, SYSDATE, #{m_pic}, #{ m_genre, typeHandler=MyTypeHandler }, 'null'
+			#{m_status}, SYSDATE, #{m_pic}, #{ m_genre, typeHandler=MyTypeHandler }, DEFAULT
 		)
 	</insert>
 	
