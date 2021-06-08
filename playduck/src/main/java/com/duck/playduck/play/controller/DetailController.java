@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -36,7 +37,8 @@ public class DetailController {
 	
 
 	@RequestMapping("/detail/detail.do")
-	public String selectDetailOne(Model model) {
+	public String selectDetailOne(Model model,
+			@RequestParam String p_no) {
 		
 		List<Main> list = new ArrayList();
 		
@@ -47,7 +49,7 @@ public class DetailController {
 		
 			try {
 
-				String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/PF132236?service=a9cdb9930f1b43a38943f5f4168c74c0";
+				String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/" + p_no + "?service=a9cdb9930f1b43a38943f5f4168c74c0";
 				
 				DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder =dbFactoty.newDocumentBuilder();
