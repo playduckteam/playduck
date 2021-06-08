@@ -47,10 +47,13 @@ section{
     font-weight: 700;
     text-align: center;
     line-height: 65px;
+    color: white;
+    cursor: pointer;
 }
 
 .curation_title{
 	text-align: center;
+	margin-top: 50px;
 }
 
 .curation_content{

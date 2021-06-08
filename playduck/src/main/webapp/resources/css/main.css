@@ -361,3 +361,12 @@
       top: 60px;
       left: 50px;
     }
+    
+    .curation_write{
+    width: 150px;
+    height: 34px;
+    text-align: center;
+    background-color: var(--main-color);
+    float: right;
+    border-radius: 5px;
+    }

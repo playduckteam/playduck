@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 public class Curation {
 
 	private int c_no;
-	private String p_no;
 	private int m_no;
 	private String c_title;
 	private String c_content;
 	private Date c_date;
 	private String c_pic;
+	private String c_picrename;
 	
 }
