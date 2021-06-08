@@ -1,8 +1,12 @@
 package com.duck.playduck.play.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.duck.playduck.play.model.vo.Play;
 
 @Repository
 public class PlayDAOImpl implements PlayDAO {
@@ -11,9 +15,9 @@ public class PlayDAOImpl implements PlayDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public int selectPlayList() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("");
+	public List<Play> selectPlayList() {
+		
+		return sqlSession.selectList("play-mapper.selectPlayList");
 	}
 	
 }
