@@ -23,6 +23,7 @@ public class Member {
 	private String m_status;
 	private Date m_enrolldate;
 	private String m_pic;
+	private String m_picRenamed;
 	private String[] m_genre;
 	
 	
