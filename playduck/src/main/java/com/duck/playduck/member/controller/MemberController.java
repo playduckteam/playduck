@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.duck.playduck.member.model.service.MemberService;
 import com.duck.playduck.member.model.vo.Member;
@@ -32,7 +33,7 @@ public class MemberController {
 
 	
 	@RequestMapping("/member/memberInsert.do")
-	public String memberInsert(Member m, @RequestParam String m_date1, Model model) {
+	public String memberInsert(SessionStatus status, Member m, @RequestParam String m_date1, Model model) {
 		
 		String pass1 = m.getM_pwd(); 					// 원래 비밀번호
 		String pass2 = bcryptPasswordEncoder.encode(pass1);		// 암호화 처리
@@ -79,6 +80,7 @@ public class MemberController {
     	    model.addAttribute("msg",msg);
     	    model.addAttribute("loc",loc);
         }
+        status.setComplete();
         
 	    return "common/msg";
 	}
