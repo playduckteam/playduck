@@ -109,7 +109,12 @@
 
     <!--큐레이션 슬라이드-->
     <article class="main_curation">
-      <div> <span class="main_fontw">큐레이션</span> <span class="main_fonto">for DUCKs</span></div>
+      <div> <span class="main_fontw">큐레이션</span> <span class="main_fonto">for DUCKs</span> <button class="curation_write" onclick = "fn_goCurationForm()">큐레이션 작성하기</button></div>
+     <script>
+				function fn_goCurationForm(){
+					location.href = "${pageContext.request.contextPath}/curation/curationForm.do"
+				}
+				</script>
       <div class="main_curwindow">
         <div class="button-container">
           <button class="prev2"><i class="arrow left2"></i></button>

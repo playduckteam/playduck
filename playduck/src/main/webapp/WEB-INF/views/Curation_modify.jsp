@@ -42,45 +42,16 @@ body, html, section{
 	<%@ include file="common/header.jsp"%>
 	<section>
 		<div class="curation_container">
-		<form name="curationFrm" action="${pageContext.request.contextPath}/curation/curationWrite.do" method="post" enctype="multipart/form-data">
-			<img src="../resources/images/noimage_cu.png" id="curationImg" alt="" />
-			<input type="file" class="hidden" accept="image/*" name="c_pic_file" id="curationImg1" onchange="readURL(input)" />
-			
-			<script>
-	        	$('#curationImg').on('click', function(){
-	        		$('#curationImg1').click();
-	        	})
-	        	
-	         // 사진 미리보기 구현
-	        	 function readURL(input) {
-      				  if (input.files && input.files[0]) {
-         				  var reader = new FileReader();
-          				  reader.onload = function(e) {
-        	     		   $('#curationImg').attr('src', e.target.result);
-          			  }
-         		   reader.readAsDataURL(input.files[0]);
-      			  }
-   					 }
-
-    				$("#curationImg1").change(function() {
-       				 readURL(this);
-   				 });
-
-	        </script>
-			
-			<div class="curation_title" >
-		<span>제목</span> <input type="text" id="curation_titleArea" name="c_title"/>
-		   </div>
-		<textarea id="summernote" name="c_content"></textarea>
-		
+			<img src="../resources/images/tower1.PNG" alt="" />
+		<span class="curation_title">제목</span> <input type="text" id="curation_titleArea"/>
+		   
+		<textarea id="summernote"></textarea>
 
     <script>
         $('#summernote').summernote();
     </script>
-		
-		<input type="submit" class="curation_writeBtn" value="리뷰 작성하기"></input>
-		</form>
 		</div>
+		<button class="curation_writeBtn">리뷰 작성하기</button>
 	</section>
 <br /><br /><br /><br /><br /><br /><br /><br />
 	<%@ include file="common/footer.jsp"%>
