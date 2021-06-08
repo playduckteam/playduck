@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -35,8 +36,18 @@ private static String getTagValue (String tag, Element eElement) {
 		}
 	
 	@RequestMapping("/list/playlist.do")
-	public String selectPlayList(Model model){
-		List<Play>list = playService.selectPlayList();
+	public String selectPlayList(Model model, @RequestParam(value="cPage",required=false,defaultValue="1")int cPage){
+		
+		//한 페이지당 페이지수
+		int numPerPage =8;
+		
+		
+		int totalContents = playService.selectTotalContents();
+		
+		//페이지 처리 html 생성하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/list/playlist.do");
+		
+		List<Play>list = playService.selectPlayList(cPage,numPerPage);
 		ArrayList plist = new ArrayList();
 		ArrayList plist2 = new ArrayList();
 //		System.out.println(list.get(0).getP_no());
@@ -78,6 +89,9 @@ private static String getTagValue (String tag, Element eElement) {
 		
 		model.addAttribute("plist", plist);
 		model.addAttribute("plist2", plist2);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
 		
 		return"list";
 	}
