@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -250,17 +253,17 @@
 <p class="modal_content_close ">X</p>
             <div class="modal_content loginArea">
                 <form action="" method="POST">
-                    <h2 class=pm_title>회원가입</h2>
+                    <h2 class=pm_title>회원정보 수정</h2>
                     <div id="pm_container">
 
                         <table class="pm_table">
                             <!-- ID -->
                             <tr>
                                 <td class="pm_title">
-                                    <h4 class="pm_subTitle">아이디</h4>
+                                    <h4 class="pm_subTitle" >아이디</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_id" id="pm_id" placeholder="영문, 숫자 허용">
+                                    <input type="text" name="m_id" id="pm_id" placeholder="영문, 숫자 허용" value="${member.m_Id}" readonly required>
 
                                 </td>
 
@@ -291,7 +294,7 @@
                                     <h4 class="pm_subTitle">이름</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_name" id="m_name">
+                                    <input type="text" name="m_name" id="m_name" value="${member.m_name}" required>
                                 </td>
                             </tr>
                             <!-- GENDER -->
@@ -411,7 +414,7 @@
                     </table>
             </div>
 
-            <button class="pm_submitBtn" type="submit">회원가입</button>
+            <button class="pm_submitBtn" type="submit">회원정보 수정</button>
             </form>
 
         </div>
@@ -421,9 +424,54 @@
     <section>
         <!-- 회원 사진 -->
         <div class="profile">
-            <div>
-                <img class="Mypage_img" src="../resources/images/1Z7ZAQ1IWV_1.jpg" alt="펭수 프로필">
-            </div>
+        	<form name="mypageImg" action="${pageContext.request.contextPath}/board/profileImg.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+	            <div>
+	            <c:if test="${empty member.m_pic}" >
+	                <img class="Mypage_img" id="profileImg" src="/playduck/resources/profileImg/nopic.jsp" alt="프로필 사진">
+	            </c:if>
+	            <c:if test="${!empty member.m_pic}">
+	                <img class="Mypage_img" id="profileImg" src="/playduck/resources/profileImg/${img.m_pic}" alt="프로필 사진">
+	            </c:if>
+	             
+	            </div>
+	            <input type="file" class="hidden" accept="image/*" name="profileImg" id="profileImg1" onchange="readURL(input)" />
+	            <script>
+		        	$('.Mypage_img').on('click', function(){
+		        		$('#profileImg1').click();
+		        	})
+		        	
+		         // 사진 미리보기 구현
+		        	 function readURL(input) {
+	      				  if (input.files && input.files[0]) {
+	         				  var reader = new FileReader();
+	          				  reader.onload = function(e) {
+	        	     		   $('#profileImg').attr('src', e.target.result);
+	          			  }
+	         		   reader.readAsDataURL(input.files[0]);
+	      			  }
+	   					 }
+	
+	    				$("#profileImg1").change(function() {
+	       				 readURL(this);
+	   				 });
+		
+	    		// 공백이 입력된 경우 대비 유효성검사를 실시
+	    			function validate(){
+	    				var content = $("[name=boardContent]").val();
+	    				if(content.trim().length==0){
+	    					alert("내용을 입력하세요");
+	    					return false;
+	    				}
+	    				return true;
+	    			}
+	    		
+		       </script>
+            </form>
+            
+            
+            
+            
+            
             <div class="Mypage_content">
                 <table class="Mypage_table">
                     <tr>

@@ -18,4 +18,10 @@
 		AND M_STATUS = #{m_status}
 	</update>
 	
+	
+	<insert id="insertPfImg" parameterType="Member">
+		INSERT INTO MEMBER(M_PIC, M_PICRENAMED)
+		VALUES(#{ m_pic }, #{ m_picRenamed })
+	</insert>
+	
 </mapper>
