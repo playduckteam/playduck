@@ -539,7 +539,7 @@
                         <img src="../resources/images/agatha.jpg">
                         <div class="main_topinfo" style="display:none;">
                             <button class="main_toprevieww"
-                                style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
+                                style="border: none; background-color: var(--black-color);color: #fff;" onclick="goReview();">리뷰보기</button>
                             <hr>
                             <button class="main_topreviewr"
                                 style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
