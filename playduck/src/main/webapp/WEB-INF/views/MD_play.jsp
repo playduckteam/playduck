@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -18,9 +21,10 @@
 <body>
         <%@ include file="common/header.jsp"%>
     <section>
-        <div class="MD_play_playtitle">Sleep no more</div>
-        <div class="MD_play_playimage"><img src="../resources/images/sleepnomore.jpg" alt=""></div>
+        <div class="MD_play_playtitle">${play.get("title")}</div>
+        <div class="MD_play_playimage"><img src="${play.get("poster")}" alt="포스터 사진"></div>
         <div class="MD_play_playcontainer">
+           
             <div class="MD_play_item">
                 <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
                 <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
