@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 
 <head>
@@ -27,8 +30,7 @@
         </div>
         <form name="reviewForm" action="${pageContext.request.contextPath}/review/reviewWrite.do" method="post" onsubmit="return validate();">
         <div class="rw_reviewTab">
-        	<input type="text" class="hidden" name="m_no" value="${member.m_no}">
-        	<input type="text" class="hidden" name="p_no" value="${play.p_no}">
+        	<input type="text" class="hidden" name="p_no" value="${p_no}">
             <img class="good" src="../resources/images/review_good_current.png" alt="">
             <img class="good_gray" data-tab="good_gray" src="../resources/images/review_good.png" alt="">
             <img class="bad" src="../resources/images/review_bad_current.png" alt="">
