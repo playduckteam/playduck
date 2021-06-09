@@ -435,6 +435,8 @@
 
 	            </div>
 	            <input type="file" class="hidden" accept="image/*" name="profileImg" id="profileImg1" />
+	            
+	            <!-- 프로필 사진 클릭 시 프로필 사진 변경 기능 -->
 	            <script>
 		        	$('.Mypage_img').on('click', function(){
 		        		$('#profileImg1').click();
@@ -499,8 +501,8 @@
                     <td>PLAYDUCK</td>
                 </tr>
                 <tr>
-                    <td style="color : #ff6801;">58개</td>
-                    <td style="color : #ff6801;">160점</td>
+                    <td style="color : #ff6801;">${review}개</td>
+                    <td style="color : #ff6801;">${reward}점</td>
                     <td style="color : #ff6801;">파트너 큐레이터</td>
                 </tr>
             </table>

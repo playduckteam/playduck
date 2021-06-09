@@ -11,4 +11,10 @@
 		insert into playdetail values(seq_pd_no.nextval, 'PF175502', #{pd_theater}, #{pd_story}, #{pd_producing}, #{pd_casting})
 	</insert>
 	
+	<select id="selectCount" resultType="_int" parameterType="Member">
+		SELECT COUNT(R_NO)
+		FROM REVIEW
+		WHERE M_NO = #{ m_no }
+	</select>
+	
 </mapper>

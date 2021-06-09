@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import com.duck.playduck.exception.BoardException;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.mypage.model.dao.MypageDAO;
+import com.duck.playduck.review.model.vo.Review;
 
 
 @Service
@@ -22,7 +23,23 @@ public class MypageServiceImpl implements MypageService {
 		
 		return mypageDAO.insertPfImg(m);
 	}
-	
+
+	@Override
+	public int selectCount(Member m) {
+		// TODO Auto-generated method stub
+		return mypageDAO.selectCount(m);
+	}
+
+	@Override
+	public int selectReward(Member m) {
+
+		return mypageDAO.selectReward(m);
+	}
+
+
+
+
+
 
 
 
