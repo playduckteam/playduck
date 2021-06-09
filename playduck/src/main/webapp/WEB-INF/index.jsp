@@ -244,8 +244,14 @@
 
     </article>
     <!--추천 슬라이드-->
+ 
     <article class="main_recommend">
-      <div><span class="main_fontw">[김오리]님, 이 작품은 어떠세요?</span></div>
+       <c:if test="${member != null}">
+      <div><span class="main_fontw">${member.m_name}님, 이 작품은 어떠세요?</span></div> 
+     </c:if>
+      <c:if test="${member == null}">
+       <div><span class="main_fontw">방문자님, 이 작품은 어떠세요?</span></div> 
+    </c:if>
       <div class="main_recwindow">
         <div class="button-container">
           <button class="prev3"><i class="arrow left3"></i></button>
@@ -257,6 +263,7 @@
           <button class="next3"><i class="arrow right3"></i></button>
         </div>
       </div>
+     
       <script>
       
       </script>
@@ -281,7 +288,7 @@
 			 url : "${pageContext.request.contextPath}/main/mainReviewTop10.do",
 			 type : 'get',
 			 success : function(data) {
-				console.log(data)
+	
 				for(var i in data.title){
 							
 					var innerHtml = ""
@@ -292,7 +299,7 @@
 					innerHtml +=  '<button class="main_toprevieww"'
 					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
 					innerHtml +=  '<hr>'
-					innerHtml += ' <button class="main_topreviewr"'
+					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[i]+"'\""
 					innerHtml +=   ' style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'
 					innerHtml +='</div>'
 					innerHtml += '<div class="main_topcontent">'
@@ -387,11 +394,24 @@
  	});
  	
  	$(function() {
+ 		
+ 		var a = "";
+ 		
+ 	<c:if test="${ member != null}">
+ 		a = ${member.m_no}
+ 	</c:if>
+ 	<c:if test="${ member == null}">
+		a = 0;
+	</c:if>
+		
+
+ 		
  		$.ajax({
  			url : "${pageContext.request.contextPath}/main/mainGenreM.do",
  			type : 'get',
+ 			data : {m_no : a},
  			success : function(data){
- 			
+ 		
  				var len = data.title.length;
  		
  				
@@ -412,10 +432,7 @@
  					arr[i] = arr[rnum]    // 10            
  					arr[rnum] = temp;				
  				}
- 		
- 			
- 				console.log(arr);
- 				
+		
  				 for(var i = 0; i < 10 ; ++i){
  					 
  					 var innerHtml = "";
@@ -426,7 +443,7 @@
  					innerHtml += '<button class="main_toprevieww"'
  					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
  					innerHtml += '<hr>'
- 					innerHtml +=  '<button class="main_topreviewr"'
+ 					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[i]+"'\""
  					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'
  					innerHtml += '</div>'
  					innerHtml += '<div class="main_reccontent">'
@@ -448,29 +465,31 @@
 							$('.membergood1'+i).text($('.membergood1'+i).text().substr(0,length)+'...');
 						}
 					});
+					
+					 const container3 = document.querySelector(".main_reccontainer");
+	 			        const prevBtn3 = document.querySelector(".prev3");
+	 			        const nextBtn3 = document.querySelector(".next3");
+
+	 			        (function addEvent() {
+	 			          prevBtn3.addEventListener('click', translateContainer3.bind(this, 1));
+	 			          nextBtn3.addEventListener('click', translateContainer3.bind(this, -1));
+	 			        })();
+
+	 			        function translateContainer3(direction) {
+	 			          const selectedBtn3 = (direction === 1) ? 'prev3' : 'next3';
+	 			          container3.style.transitionDuration = '500ms';
+	 			          container3.style.transform = `translateX(${direction * ( 4.7 )}%)`;
+	 			          container3.ontransitionend = () => reorganizeEl3(selectedBtn3);
+	 			        }
+
+	 			        function reorganizeEl3(selectedBtn3) {
+	 			          container3.removeAttribute('style');
+	 			          (selectedBtn3 === 'prev3') ? container3.insertBefore(container3.lastElementChild, container3
+	 			            .firstElementChild): container3.appendChild(container3.firstElementChild);
+	 			        }
  				 }
  				 
- 				  const container3 = document.querySelector(".main_reccontainer");
- 			        const prevBtn3 = document.querySelector(".prev3");
- 			        const nextBtn3 = document.querySelector(".next3");
-
- 			        (function addEvent() {
- 			          prevBtn3.addEventListener('click', translateContainer3.bind(this, 1));
- 			          nextBtn3.addEventListener('click', translateContainer3.bind(this, -1));
- 			        })();
-
- 			        function translateContainer3(direction) {
- 			          const selectedBtn3 = (direction === 1) ? 'prev3' : 'next3';
- 			          container3.style.transitionDuration = '500ms';
- 			          container3.style.transform = `translateX(${direction * ( 4.7 )}%)`;
- 			          container3.ontransitionend = () => reorganizeEl3(selectedBtn3);
- 			        }
-
- 			        function reorganizeEl3(selectedBtn3) {
- 			          container3.removeAttribute('style');
- 			          (selectedBtn3 === 'prev3') ? container3.insertBefore(container3.lastElementChild, container3
- 			            .firstElementChild): container3.appendChild(container3.firstElementChild);
- 			        }
+ 				 
  			        
  			       $(function () {
  				    	$(".main_topicon").on("click",function () {

@@ -8,6 +8,10 @@
 		<result property="p_good" column="p_good" />
 		<result property="p_bad" column="max(p_bad)" />
 	</resultMap>
+	
+	<resultMap type="Member" id="resultMember">
+		<result property="m_genre" column="m_genre" typeHandler="MyTypeHandler" />
+	</resultMap>
 
 <select id="reviewTop10" resultType="review">
 SELECT *
@@ -45,6 +49,12 @@ WHERE ROWNUM &lt; =10
 		 SELECT P_NO,FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) / DECODE(MAX(P_GOOD), 0, NULL, MAX(P_GOOD)), 0)*100)"p_good" 
   	 	 FROM PLAY
    		 GROUP BY P_NO
+	</select>
+	
+	<select id="memberGenrenmG"  parameterType="_int" resultMap="resultMember">
+		SELECT *
+		FROM MEMBER
+		WHERE M_NO = #{ m_no }
 	</select>
 
 
