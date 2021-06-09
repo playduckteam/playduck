@@ -15,10 +15,18 @@ public class MdServiceImpl implements MdService {
 	@Autowired
 	MdDAO mdDAO;
 
+	//연극별 MD 리스트
 	@Override
 	public List<Md> mdPlayList() {
 		
-		return null;
+		return mdDAO.mdPlayList();
+	}
+
+	// Md 한개 정보 가져오기
+	@Override
+	public Md selectOneMd(int dno) {
+		
+		return mdDAO.selectOneMd(dno);
 	}
 
 

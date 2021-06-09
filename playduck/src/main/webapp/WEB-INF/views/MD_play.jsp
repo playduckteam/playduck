@@ -19,55 +19,34 @@
     <title>playduck - MD_play 페이지</title>
 </head>
 <body>
-        <%@ include file="common/header.jsp"%>
+        <c:import url="common/header.jsp"/>
     <section>
         <div class="MD_play_playtitle">${play.get("title")}</div>
         <div class="MD_play_playimage"><img src="${play.get("poster")}" alt="포스터 사진"></div>
         <div class="MD_play_playcontainer">
            
+           <c:forEach items="${mdPlayList}"  var="List">
             <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
+                <div class="MD_play_mdimage" id="${List.d_no }"><img src="${List.d_pic }" alt=""></div>
+                <div class="MD_play_mdtitle">${List.d_title}</div>
+                <div class="MD_play_mdprice">${List.d_price }</div>
             </div>
-            <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
-            </div>
-            <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
-            </div>
-            <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
-            </div>
-            <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
-            </div>
-            <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
-            </div>
-            <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
-            </div>
-            <div class="MD_play_item">
-                <div class="MD_play_mdimage"><img src="../resources/images/md.PNG" alt=""></div>
-                <div class="MD_play_mdtitle">[EMK] 레베카 프로그램북 세트</div>
-                <div class="MD_play_mdprice">60,000 원</div>
-            </div>
+            </c:forEach>
+            
         </div>
     </section>
     <br /><br /><br /><br /><br />
     <%@ include file="common/footer.jsp"%>
+  
+  <script>
+  <!--MD 상세보기페이지 -->  
+  	$(function(){
+  		$("div[id]").on("click",function(){
+  			var dno = $(this).attr("id");
+  			console.log("dno="+dno);
+  			location.href = "${pageContext.request.contextPath}/MD/MD_order.do?dno="+dno;
+  		});
+  	});
+  </script>
 </body>
 </html>

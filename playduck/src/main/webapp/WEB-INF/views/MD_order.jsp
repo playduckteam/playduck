@@ -20,11 +20,11 @@
     <form action="">
         <section>
             <div class="MD_order_container">
-                <div class="MD_order_mainpic"><img src="../resources/images/sleepnomore.jpg" alt=""></div>
+                <div class="MD_order_mainpic"><img src="${md.d_pic }" alt=""></div>
                 <table class="MD_order_maintbl">
                     <tr class="MD_order_title">
-                        <td>[EMK} 레베카 프로그램북 세트</td>
-                        <td>60,000 원</td>
+                        <td>${md.d_title }</td>
+                        <td>${md.d_price }원</td>
                     </tr>
                     <tr class="MD_order_text">
                         <td>배송비</td>
@@ -66,7 +66,7 @@
                 </table>
             </div>
             <div class="MD_order_imgarea">
-                <img src="../resources/images/K_head.jpg" alt="">
+                <img src="${md.d_detail}" alt="">
             </div>
         </section>
     </form>

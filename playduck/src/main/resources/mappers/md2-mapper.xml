@@ -3,7 +3,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="md2-mapper">
 	
-	<select id="playinfo" resultType="play">
-		SELECT * FROM PLAY  WHERE P_NO ='PF174958'
+	<select id="mdPlayList" resultType="md">
+		SELECT D_NO, D_TITLE, D_PRICE, D_PIC 
+		FROM MD  
+		WHERE P_NO ='PF174958'
 	</select>
+	
+	<!-- Md 한 개 정보 가져오기 -->
+	<select id="selectOneMd"  parameterType="_int"  resultType="md">
+	SELECT  D_TITLE, D_PRICE, D_PIC, D_DETAIL 
+	FROM MD
+	WHERE D_NO = #{dno}
+	</select>
+		
 	</mapper>

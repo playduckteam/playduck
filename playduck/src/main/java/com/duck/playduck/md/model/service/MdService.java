@@ -7,8 +7,8 @@ import com.duck.playduck.play.model.vo.Play;
 
 public interface MdService {
 
-
-
 	List<Md> mdPlayList();
+
+	Md selectOneMd(int dno);
 
 }
