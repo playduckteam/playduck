@@ -36,15 +36,15 @@ public class MypageController {
 		
 		Member m = (Member)req.getSession().getAttribute("member");
 		
-	// 작성한 리뷰 개수 받아오기
+		// 작성한 리뷰 개수 받아오기
 		
 		int review = mypageService.selectCount(m);
 			
 		// System.out.println("review결과 : " + review);
-			
 		model.addAttribute("review", review);
+		
 					
-	// 내 리워드 받아오기
+		// 내 리워드 받아오기
 		
 		int reward = mypageService.selectReward(m);
 		System.out.println("reward 결과 : " + reward);
