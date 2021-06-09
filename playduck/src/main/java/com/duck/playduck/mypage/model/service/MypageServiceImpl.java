@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.exception.BoardException;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.mypage.model.dao.MypageDAO;
+import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.review.model.vo.Review;
 
 
@@ -47,6 +49,27 @@ public class MypageServiceImpl implements MypageService {
 		
 		return mypageDAO.countReward(m);
 	}
+
+	@Override
+	public List<Review> myReview(int mm) {
+		
+		return mypageDAO.myReview(mm);
+	}
+
+	@Override
+	public List<Bookmark> bookmarkPlay(int mm) {
+		
+		return mypageDAO.bookmarkPlay(mm);
+	}
+
+	@Override
+	public List<Curation> bookmarkCuration(int mm) {
+		
+		return mypageDAO.bookmarkCuration(mm);
+	}
+
+
+
 
 
 

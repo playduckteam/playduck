@@ -17,4 +17,10 @@
 		WHERE M_NO = #{ m_no }
 	</select>
 	
+	<select id="myReview" resultType="Review" parameterType="_int">
+		SELECT P_NO
+		FROM REVIEW
+		WHERE M_NO = #{ m_no }
+	</select>
+	
 </mapper>

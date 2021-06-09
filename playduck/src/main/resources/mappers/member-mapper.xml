@@ -51,4 +51,16 @@
 		WHERE M_NO = #{m_no}
 	</select>
 	
+	<select id="bookmarkPlay" resultType="Bookmark" parameterType="_int">
+		SELECT P_LIST, C_LIST
+		FROM BOOKMARK
+		JOIN MEMBER USING(M_NO)
+	</select>
+	
+	<select id="bookmarkCuration" resultType="Curation" parameterType="_int">
+		SELECT C_TITLE, C_PIC
+		FROM CURATION
+		WHERE M_NO = #{m_no}
+	</select>
+	
 </mapper>

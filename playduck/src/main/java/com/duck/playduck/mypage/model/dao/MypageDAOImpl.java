@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.member.model.vo.Member;
+import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.review.model.vo.Review;
 
 @Repository
@@ -44,6 +46,25 @@ public class MypageDAOImpl implements MypageDAO {
 
 		return sqlSession.selectOne("member.countReward", m);
 	}
+
+	@Override
+	public List<Review> myReview(int mm) {
+		
+		return sqlSession.selectList("review-mapper.myReview", mm);
+	}
+
+	@Override
+	public List<Bookmark> bookmarkPlay(int mm) {
+
+		return sqlSession.selectList("member.bookmarkPlay", mm);
+	}
+
+	@Override
+	public List<Curation> bookmarkCuration(int mm) {
+		
+		return sqlSession.selectList("member.bookmarkCuration", mm);
+	}
+
 
 	
 

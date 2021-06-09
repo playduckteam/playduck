@@ -2,7 +2,9 @@ package com.duck.playduck.mypage.model.dao;
 
 import java.util.List;
 
+import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.member.model.vo.Member;
+import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.review.model.vo.Review;
 
 public interface MypageDAO {
@@ -16,6 +18,12 @@ public interface MypageDAO {
 	int selectRank(Member m);
 
 	int countReward(Member m);
+
+	List<Review> myReview(int mm);
+
+	List<Bookmark> bookmarkPlay(int mm);
+
+	List<Curation> bookmarkCuration(int mm);
 
 
 

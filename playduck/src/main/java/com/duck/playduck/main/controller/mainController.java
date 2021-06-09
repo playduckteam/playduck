@@ -98,7 +98,7 @@ public class mainController {
 
 	@RequestMapping("/main/mainReviewTop10.do")
 	@ResponseBody
-	public Map<String, List<String>> ReviewTop10() {
+	public Map<String, List> ReviewTop10() {
 		List<Review> list = new ArrayList<Review>();
 		
 		list = mainservice.ReviewTop10();
@@ -127,7 +127,7 @@ public class mainController {
 		List<String> list1 = new ArrayList<String>();
 		List<String> list2 = new ArrayList<String>();
 		List<String> list3 = new ArrayList<String>();
-		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		Map<String, List> map = new HashMap<String, List>();
 			
 
 		for(Review i : list ) {
