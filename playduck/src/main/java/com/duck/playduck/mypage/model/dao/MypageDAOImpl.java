@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.duck.playduck.member.model.vo.Member;
+import com.duck.playduck.review.model.vo.Review;
 
 @Repository
 public class MypageDAOImpl implements MypageDAO {
@@ -19,6 +20,20 @@ public class MypageDAOImpl implements MypageDAO {
 		
 		return sqlSession.insert("member.insertPfImg", m);
 	}
+
+	@Override
+	public int selectCount(Member m) {
+		
+		return sqlSession.selectOne("review-mapper.selectCount", m);
+	}
+
+	@Override
+	public int selectReward(Member m) {
+		
+		return sqlSession.selectOne("member.selectReward", m);
+	}
+
+
 
 
 

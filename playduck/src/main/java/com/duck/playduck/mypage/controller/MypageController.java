@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.mypage.model.service.MypageService;
+import com.duck.playduck.review.model.vo.Review;
 
 
 
@@ -29,11 +30,26 @@ public class MypageController {
 	@Autowired
 	MypageService mypageService;
 	
-	// 마이페이지 불러오기
+
 	@RequestMapping("/mypage/mypage.do")
-	public String mypage(Model model) {
+	public String mypage(HttpServletRequest req, Model model) {
 		
+		Member m = (Member)req.getSession().getAttribute("member");
 		
+	// 작성한 리뷰 개수 받아오기
+		
+		int review = mypageService.selectCount(m);
+			
+		// System.out.println("review결과 : " + review);
+			
+		model.addAttribute("review", review);
+					
+	// 내 리워드 받아오기
+		
+		int reward = mypageService.selectReward(m);
+		System.out.println("reward 결과 : " + reward);
+		
+		model.addAttribute("reward", reward);
 		
 		return "myPage";
 	}
@@ -69,7 +85,7 @@ public class MypageController {
 							e.printStackTrace();
 					}
 									
-				// 4. list에 담기
+				// 4. Member 에 담기
 					
 					m.setM_pic(originName);
 					m.setM_picRenamed(changeName);	
@@ -82,6 +98,9 @@ public class MypageController {
 			int result = mypageService.insertPfImg(m);	// int로 결과 출력
 			
 			model.addAttribute("member", m);
+			
+			/******************************************/
+			
 			
 			
 			return "myPage";
@@ -98,5 +117,5 @@ public class MypageController {
 			
 		}
 
-
+	
 }
