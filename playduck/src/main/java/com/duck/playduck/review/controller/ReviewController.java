@@ -38,7 +38,7 @@ public class ReviewController {
 	public String ReviewForm(Model model,
 			@RequestParam String p_no) {
 		
-		
+	
 		
 		
 		return "reviewWrite";
