@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +54,11 @@ body, html, section{
 		
 		<p class="curation_writer">작성자 : 김오리</p>
 		</div>
+		
+		<c:if test="${member.m_no eq curation.m_no}">
+		    &nbsp;
+			<button class="cu_modifyBtn" type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardUpdateView.do?boardNo=${curation.c_no}'">수정</button>
+			</c:if>
 	</section>
 <br /><br /><br /><br /><br /><br /><br /><br />
 	<%@ include file="common/footer.jsp"%>
