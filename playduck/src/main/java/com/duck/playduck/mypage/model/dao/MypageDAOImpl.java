@@ -33,6 +33,20 @@ public class MypageDAOImpl implements MypageDAO {
 		return sqlSession.selectOne("member.selectReward", m);
 	}
 
+	@Override
+	public int selectRank(Member m) {
+		
+		return sqlSession.selectOne("member.selectRank", m);
+	}
+
+	@Override
+	public int countReward(Member m) {
+
+		return sqlSession.selectOne("member.countReward", m);
+	}
+
+	
+
 
 
 

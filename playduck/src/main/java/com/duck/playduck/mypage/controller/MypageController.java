@@ -45,11 +45,37 @@ public class MypageController {
 		model.addAttribute("review", review);
 					
 	// 내 리워드 받아오기
+		int result = mypageService.countReward(m);
+		int reward = 0;
+		int rank = 0;
 		
-		int reward = mypageService.selectReward(m);
+		if(result > 0) {
+			reward = mypageService.selectReward(m);
+			rank = mypageService.selectRank(m);
+		}
+		
+		System.out.println("result 결과 : " + result);
 		System.out.println("reward 결과 : " + reward);
 		
 		model.addAttribute("reward", reward);
+		
+	// 회원 등급 받아오기
+		
+		if(rank >5000) {
+			model.addAttribute("rank", "파트너 큐레이터");
+		} else {
+			model.addAttribute("rank", "일반회원");
+		}
+		
+	/*
+	 * int rank = mypageService.selectRank(m);
+	 * 
+	 * if(result > 0) { reward = mypageService.selectReward(m); }
+	 * 
+	 * System.out.println("rank : " + rank);
+	 * 
+	 * model.addAttribute("rank", rank);
+	 */
 		
 		return "myPage";
 	}

@@ -36,6 +36,18 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.selectReward(m);
 	}
 
+	@Override
+	public int selectRank(Member m) {
+		
+		return mypageDAO.selectRank(m);
+	}
+
+	@Override
+	public int countReward(Member m) {
+		
+		return mypageDAO.countReward(m);
+	}
+
 
 
 

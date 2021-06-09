@@ -32,8 +32,21 @@
 		UPDATE MEMBER SET M_PIC = #{ m_pic }, M_PICRENAMED = #{ m_picRenamed }
 	</update>
 	
+	<select id="countReward" resultType="_int" parameterType="Member">
+		SELECT COUNT(*)
+		FROM REWARD
+		WHERE M_NO = #{m_no}
+	
+	</select>
+	
 	<select id="selectReward" resultType="_int" parameterType="Member">
 		SELECT SUM(W_UP)-SUM(W_DOWN)
+		FROM REWARD
+		WHERE M_NO = #{m_no}
+	</select>
+
+	<select id="selectRank" resultType="_int" parameterType="Member">
+		SELECT SUM(W_UP)
 		FROM REWARD
 		WHERE M_NO = #{m_no}
 	</select>

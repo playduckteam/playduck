@@ -13,6 +13,10 @@ public interface MypageDAO {
 
 	int selectReward(Member m);
 
+	int selectRank(Member m);
+
+	int countReward(Member m);
+
 
 
 

@@ -503,7 +503,7 @@
                 <tr>
                     <td style="color : #ff6801;">${review}개</td>
                     <td style="color : #ff6801;">${reward}점</td>
-                    <td style="color : #ff6801;">파트너 큐레이터</td>
+                    <td style="color : #ff6801;">${rank}</td>
                 </tr>
             </table>
         </div>
