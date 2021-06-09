@@ -41,7 +41,9 @@ public class DetailController {
 			@RequestParam String p_no
 			) {
 		
-			 
+			 System.out.println(p_no);
+
+		
 		 ArrayList dlist = new ArrayList();
 		 
 		 
@@ -95,6 +97,8 @@ public class DetailController {
 			
 				
 				model.addAttribute("dlist", dlist);
+				model.addAttribute("playDetail", playDetail);
+				model.addAttribute("play", play);
 
 		return "detail";
 	}

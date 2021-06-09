@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +49,7 @@
 			<table class="detail_content">
 				<tr>
 					<td class="detail_title">${dlist[0]}</td>
-					<td class="detail_rating">95 <img
+					<td class="detail_rating">${ play.p_rating } <img
 						src="${pageContext.request.contextPath}/resources/images/rating.png"></td>
 				</tr>
 				<tr>
@@ -90,39 +93,39 @@
 						<table class="detail_ratingArea">
 							<tr>
 								<td>공연장</td>
-								<td>
+								<td class="progressArea">
 									<div class="progress">
-										<div class="progress-bar" style="width: 90%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_theater}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">90%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_theater}</td>
 							</tr>
 							<tr>
 								<td>스토리</td>
-								<td>
+								<td class="progressArea">
 									<div class="progress">
-										<div class="progress-bar" style="width: 70%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_story}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">70%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_story}</td>
 							</tr>
 							<tr>
 								<td>연출</td>
-								<td>
+								<td class="progressArea">
 									<div class="progress">
-										<div class="progress-bar" style="width: 60%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_producing}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">60%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_producing}</td>
 							</tr>
 							<tr>
-								<td>캐스팅</td>
+								<td class="progressArea">캐스팅</td>
 								<td>
 									<div class="progress">
-										<div class="progress-bar" style="width: 90%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_casting}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">90%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_casting}</td>
 							</tr>
 						</table>
 					</td>

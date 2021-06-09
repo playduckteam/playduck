@@ -87,6 +87,8 @@
     width: 400px;
     height: 18px;
     border-radius: 9px;
+    
+   
   }
   
 .progress-bar { float: left; }
@@ -105,6 +107,7 @@
     height: 40px;
     font-size: 17px;
     font-weight: 700;
+    vertical-align: top;
 }  
   
 .detail_sub_title{
