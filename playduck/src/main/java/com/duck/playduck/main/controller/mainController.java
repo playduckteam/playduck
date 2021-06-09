@@ -19,6 +19,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.service.MainService;
 import com.duck.playduck.main.model.vo.Main;
 import com.duck.playduck.member.model.vo.Member;
@@ -53,7 +54,7 @@ public class mainController {
 		
 		 list = mainservice.selectMainTopList();
 		 
-		 System.out.println(list.get(0).getP_no());
+		
 		
 		 
 		
@@ -98,7 +99,7 @@ public class mainController {
 
 	@RequestMapping("/main/mainReviewTop10.do")
 	@ResponseBody
-	public Map<String, List<String>> ReviewTop10() {
+	public Map<String, List> ReviewTop10() {
 		List<Review> list = new ArrayList<Review>();
 		
 		list = mainservice.ReviewTop10();
@@ -127,7 +128,7 @@ public class mainController {
 		List<String> list1 = new ArrayList<String>();
 		List<String> list2 = new ArrayList<String>();
 		List<String> list3 = new ArrayList<String>();
-		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		Map<String, List> map = new HashMap<String, List>();
 			
 
 		for(Review i : list ) {
@@ -176,6 +177,37 @@ public class mainController {
 		return map;	
 	}
 	
+	
+	@RequestMapping("/main/curationforDuck.do")
+	@ResponseBody
+	public Map<String, List> curationforDuck() {
+		
+		List<Curation> list = new ArrayList<Curation>();
+		
+		list = mainservice.curationforDuck();
+		
+	
+		Map<String, List> map = new HashMap<String, List>();
+		
+		List listC = new ArrayList();
+		List<String> listT = new ArrayList<String>();
+		List<String> listP = new ArrayList<String>();
+		
+		
+		for (Curation c : list) {
+			listC.add(c.getC_no());
+			listT.add(c.getC_title());
+			listP.add(c.getC_picrenamed());
+		}
+		
+		map.put("Cnum", listC);
+		map.put("title", listT);
+		map.put("pic", listP);
+		
+		System.out.println(map);
+		return map;
+	}
+	
 	@RequestMapping("/main/mainHotReview.do")
 	@ResponseBody
 	public Map<String, List<String>> mainHotReview() {
@@ -184,6 +216,11 @@ public class mainController {
 		
 		list = mainservice.HotReview();
 		
+		List<Member> listmp = new ArrayList<Member>();
+		
+		listmp = mainservice.memberpic();
+		
+		System.out.println(listmp);
 		
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		
@@ -237,15 +274,6 @@ public class mainController {
 	@ResponseBody
 	public Map<String, List> genreM(@RequestParam int m_no) {
 	
-	
-			
-
-		
-	
-	
-		
-		
-		
 		
 		List<Play> list = new ArrayList<Play>();
 		

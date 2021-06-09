@@ -119,88 +119,8 @@
         <div class="button-container">
           <button class="prev2"><i class="arrow left2"></i></button>
         </div>
-        <ul class="main_curcontainer">
-          <li class="cell2">
-            <img src="resources/images/agatha.jpg">
-            <div class="main_curcontent">
-             <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/aida.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/cats.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/grease.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/ludwig.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/matilda.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/midnight.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/mozart.png">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/phantom.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
-          <li class="cell2"><img src="resources/images/Rebecca.jpg">
-            <div class="main_curcontent">
-              <h3 style="color: #fff;">뮤지컬 제목</h3>
-              <div class="main_curicon">
-                <i class="far fa-star" id="star" style="color: yellow;"></i>
-              </div>
-            </div>
-          </li>
+        <ul class="main_curcontainer" id="curation_ran">
+         
         </ul>
         <div class="button-container">
           <button class="next2"><i class="arrow right2"></i></button>
@@ -296,7 +216,7 @@
 					innerHtml =	  '<li class="cell">'
 					innerHtml +='<img src='+data.poster[i] +'>'
 					innerHtml +='<div class="main_topinfo" style="display:none;">'
-					innerHtml +=  '<button class="main_toprevieww"'
+					innerHtml +=  "<button class='main_toprevieww' onclick=\"location.href='detail/detail.do?p_no="+data.pnum[i]+"'\""
 					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
 					innerHtml +=  '<hr>'
 					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[i]+"'\""
@@ -365,6 +285,36 @@
 	 });
  });
  
+	// 큐레이션 for DUCKs
+	$(function(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/main/curationforDuck.do",
+			type : 'get',
+			success : function(data){
+				console.log(data);
+				
+				var innerHtml = "";
+				
+				for(var i in data.title) {
+					
+					innerHtml = '<li class="cell2">'
+					innerHtml += '<img src="resources/images/'+data.pic[i]+'">'
+					innerHtml += '<div class="main_curcontent">'
+					innerHtml += ' <h3 style="color: #fff;">'+data.title[i]+'</h3>'
+					innerHtml += ' <div class="main_curicon">'
+					innerHtml +=     '<i class="far fa-star" id="star" style="color: yellow;"></i>'
+					innerHtml +=  ' </div>'
+					innerHtml += ' </div>'
+					innerHtml += ' </li>'
+					
+					$("#curation_ran").append(innerHtml);
+				}
+			}
+		})
+	})
+	
+	
+	
  
  	// Hot 리뷰 Top3
  	$(function(){
@@ -440,7 +390,7 @@
  					innerHtml = '<li class="cell3">'
  					innerHtml += '<img src="'+data.poster[arr[i]]+'">'
  					innerHtml += '<div class="main_recinfo" style="display:none;">'
- 					innerHtml += '<button class="main_toprevieww"'
+ 					innerHtml += "<button class='main_toprevieww' onclick=\"location.href='detail/detail.do?p_no="+data.pnum[i]+"'\""
  					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
  					innerHtml += '<hr>'
  					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[i]+"'\""

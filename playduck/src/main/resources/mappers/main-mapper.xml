@@ -56,6 +56,17 @@ WHERE ROWNUM &lt; =10
 		FROM MEMBER
 		WHERE M_NO = #{ m_no }
 	</select>
+	
+	<select id="curationforDuck"  resultType="curation">
+		SELECT *
+		FROM CURATION
+	</select>
+	
+	
+	<select id="memberpic"  resultType="member">
+		SELECT M_PICRENAMED
+		FROM MEMBER
+	</select>
 
 
 </mapper>

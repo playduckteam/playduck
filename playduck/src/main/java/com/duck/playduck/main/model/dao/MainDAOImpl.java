@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.vo.Main;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Play;
@@ -57,6 +58,20 @@ public class MainDAOImpl implements MainDAO {
 	public List<Member> memberGenrenmG(int m_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.memberGenrenmG", m_no);
+	}
+
+
+	@Override
+	public List<Curation> curationforDuck() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("main-mapper.curationforDuck");
+	}
+
+
+	@Override
+	public List<Member> memberpic() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("main-mapper.memberpic");
 	}
 
 
