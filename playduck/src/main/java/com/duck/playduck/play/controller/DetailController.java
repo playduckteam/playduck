@@ -1,7 +1,6 @@
 package com.duck.playduck.play.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,8 +15,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.duck.playduck.main.model.vo.Main;
 import com.duck.playduck.play.model.service.DetailService;
+import com.duck.playduck.play.model.vo.Play;
+import com.duck.playduck.review.model.vo.PlayDetail;
 
 @Controller
 public class DetailController {
@@ -37,15 +37,18 @@ public class DetailController {
 	
 
 	@RequestMapping("/detail/detail.do")
-	public String selectDetailOne(Model model,
-			@RequestParam String p_no) {
+	public String selectDetailOne(Model model, 
+			@RequestParam String p_no
+			) {
 		
-		List<Main> list = new ArrayList();
-		
-		 list = detailservice.selectDetailOne();
+			 
+		 ArrayList dlist = new ArrayList();
 		 
-		 System.out.println(list);
-		 model.addAttribute("date", list);
+		 
+		
+		 PlayDetail playDetail = detailservice.selectPDOne(p_no);
+		 Play play = detailservice.selectPlayOne(p_no);
+			
 		
 			try {
 
@@ -56,11 +59,8 @@ public class DetailController {
 				Document doc =dBuilder.parse(url);
 				
 				doc.getDocumentElement().normalize();
-				System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
 				
 				NodeList nList =doc.getElementsByTagName("db");
-				
-				
 				
 				for(int temp=0; temp < nList.getLength(); temp++) {
 					Node nNode = nList.item(temp);
@@ -68,26 +68,35 @@ public class DetailController {
 						
 						Element eElement = (Element) nNode;
 						
-						 System.out.println("제목 : "+getTagValue("prfnm", eElement));
-						 System.out.println("상영일 : "+getTagValue("prfpdfrom", eElement));
-						 System.out.println("나이 : "+getTagValue("prfage", eElement));
-						 
-				
+						dlist.add(getTagValue("prfnm", eElement));
+						dlist.add(getTagValue("poster", eElement));
+						dlist.add(getTagValue("genrenm", eElement));
+						dlist.add(getTagValue("fcltynm", eElement));
+						dlist.add(getTagValue("prfruntime", eElement));
+						dlist.add(getTagValue("entrpsnm", eElement));
+						dlist.add(getTagValue("prfpdfrom	", eElement));
+						dlist.add(getTagValue("prfpdto", eElement));
+						dlist.add(getTagValue("prfcast", eElement));
 						
+//					System.out.println(plist);
+//					System.out.println(plist2);
 					
 						
-				
-						
+					}	
 					
-					}
 				}
 				
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		 
-		 
-		return "index";
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+				
+			
+				
+				model.addAttribute("dlist", dlist);
+
+		return "detail";
 	}
 }
+

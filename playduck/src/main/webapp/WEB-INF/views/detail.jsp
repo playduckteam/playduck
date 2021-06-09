@@ -28,7 +28,7 @@
 		<a href="MD_play.jsp"><img class="detail_mdLink" src="${pageContext.request.contextPath}/resources/images/md_link.png"></a>
 		<div class="detail_main">
 			<div class="detail_poster">
-				<img class="detail_poster" src="${pageContext.request.contextPath}/resources/images/poster.jpg"
+				<img class="detail_poster" src="${dlist[1]}"
 					alt="">
 				<i class="far fa-star" id="star" style="color: yellow;"></i>	
 			</div>
@@ -45,7 +45,7 @@
 			
 			<table class="detail_content">
 				<tr>
-					<td class="detail_title">레미제라블</td>
+					<td class="detail_title">${dlist[0]}</td>
 					<td class="detail_rating">95 <img
 						src="${pageContext.request.contextPath}/resources/images/rating.png"></td>
 				</tr>
@@ -62,19 +62,19 @@
 						<table class="detail_detailContent">
 							<tr>
 								<td class="detail_ContentTilte">장르</td>
-								<td class="detail_ContentContent">뮤지컬</td>
+								<td class="detail_ContentContent">${dlist[2]}</td>
 								<td class="detail_ContentTilte">장소</td>
-								<td class="detail_ContentContent">디큐브아트센터</td>
+								<td class="detail_ContentContent">${dlist[3]}</td>
 							</tr>
 							<tr>
 								<td class="detail_ContentTilte">관람시간</td>
-								<td class="detail_ContentContent">150분</td>
+								<td class="detail_ContentContent">${dlist[4]}</td>
 								<td class="detail_ContentTilte">제작사</td>
-								<td class="detail_ContentContent">극단 피에로</td>
+								<td class="detail_ContentContent">${dlist[5]}</td>
 							</tr>
 							<tr>
 								<td class="detail_ContentTilte">기간</td>
-								<td colspan="3" class="detail_ContentContent">2021.04.02 ~ 2021.07.18</td>
+								<td colspan="3" class="detail_ContentContent">${dlist[6]} ~ ${dlist[7]}</td>
 							</tr>
 						</table>
 					</td>
@@ -139,8 +139,7 @@
 				필요한 사항은 법률로 정한다.</p>
 				 -->
 			<h4 class="detail_sub_title">출연진</h4>
-			<p class="detail_sub_content">최정원 | 윤공주 | 티파니 영 | 아이비 | 민경아 | 박건형
-				| 최재림 | 김영주 | 김경선</p>
+			<p class="detail_sub_content">${dlist[7]}</p>
 
 			<hr>
 			

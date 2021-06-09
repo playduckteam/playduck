@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +48,7 @@ body, html, section{
 		<form name="curationFrm" action="${pageContext.request.contextPath}/curation/curationWrite.do" method="post" enctype="multipart/form-data">
 			<img src="../resources/images/noimage_cu.png" id="curationImg" alt="" />
 			<input type="file" class="hidden" accept="image/*" name="c_pic_file" id="curationImg1" onchange="readURL(input)" />
+			<input type="text" class="hidden" name="m_no" value="${member.m_no}">
 			
 			<script>
 	        	$('#curationImg').on('click', function(){

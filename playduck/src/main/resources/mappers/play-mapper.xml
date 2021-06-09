@@ -10,4 +10,18 @@ SELECT P_NO FROM PLAY
 SELECT COUNT(*) FROM PLAY
 </select>
 
+	<!-- 플레이디테일 평균점수 가져오기 -->
+	<select id="selectPD" resultType="playDetail">
+		SELECT AVG(PD_THEATER), AVG(PD_STORY), AVG(PD_PRODUCING), AVG(PD_CASTING)
+FROM PLAYDETAIL
+WHERE P_NO = #{p_no};
+	</select>
+	
+	<!-- 플레이 평점 가져오기 -->
+	<select id="selectPlay"  parameterType="int"  resultType="play">
+	SELECT P_GOOD/(P_GOOD + P_BAD)*100
+FROM PLAY
+WHERE P_NO = #{p_no};
+	</select>
+
 </mapper>

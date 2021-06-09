@@ -15,6 +15,7 @@
 		<typeAlias type="com.duck.playduck.review.model.vo.PlayDetail" alias="playDetail" />
 		<typeAlias type="com.duck.playduck.play.model.vo.Play" alias="play" />
 		<typeAlias type="com.duck.playduck.md.model.vo.Md" alias="md" />
+		<typeAlias type="com.duck.playduck.curation.model.vo.Curation" alias="curation" />
 	</typeAliases>
 	
 
