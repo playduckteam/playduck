@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.dao.MainDAO;
 import com.duck.playduck.main.model.vo.Main;
 import com.duck.playduck.member.model.vo.Member;
@@ -52,6 +53,18 @@ public class MainServiceImpl implements MainService {
 	public List<Member> memberGenrenmG(int m_no) {
 		// TODO Auto-generated method stub
 		return mainDAO.memberGenrenmG(m_no);
+	}
+
+	@Override
+	public List<Curation> curationforDuck() {
+		// TODO Auto-generated method stub
+		return mainDAO.curationforDuck();
+	}
+
+	@Override
+	public List<Member> memberpic() {
+		// TODO Auto-generated method stub
+		return mainDAO.memberpic();
 	}
 
 
