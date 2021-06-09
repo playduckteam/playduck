@@ -6,6 +6,14 @@ import com.duck.playduck.play.model.vo.Play;
 
 public interface PlayService {
 
-	List<Play> selectPlayList();
+	
+
+	List<Play> selectPlayList(int cPage, int numPerPage);
+
+	
+
+	int selectTotalContents();
+
+	
 
 }

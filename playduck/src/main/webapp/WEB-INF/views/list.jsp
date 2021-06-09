@@ -46,8 +46,9 @@ body, html, section{
 	<section>
 	<div class="list_sort">최신 순 ▼</div>
 	
-
+	<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 	<div class="list_container">
+	
 		<c:forEach items="${plist2}" var="pi" begin="0" varStatus="status">
 		<div class="listArea">
 			<img src="${pi}">
@@ -61,6 +62,7 @@ body, html, section{
 		</div>
 		</c:forEach>
 	</div>
+	<c:out value="${pageBar}" escapeXml="false"/>
 	</section>
 <br /><br /><br /><br /><br /><br /><br /><br />
 	<%@ include file="common/footer.jsp"%>

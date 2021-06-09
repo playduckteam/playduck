@@ -60,7 +60,9 @@
 		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
 		</c:if>
 		<c:if test="${!empty member}">
-		<a href="${pageContext.request.contextPath}/mypage/mypage.do">마이페이지</a>
+		<a href="${pageContext.request.contextPath}/mypage/mypage.do">마이페이지</a>|
+		<a href="${pageContext.request.contextPath}/mypage/mypage.do">구매목록</a>|
+		<a href="${pageContext.request.contextPath}/mypage/mypage.do">장바구니</a>
 		</c:if>
 		<div class="modal_search">
             <div class="modal_searchDiv" title="검색">
