@@ -65,11 +65,13 @@ public class MdController {
 				
 				System.out.println(play.get("title"));
 				
-				
+				//연극별 MD 리스트
 				List<Md> mdPlayList = mdService.mdPlayList();
 				
-			
+				System.out.println(mdPlayList);
 				
+			
+				model.addAttribute("mdPlayList", mdPlayList);
 				model.addAttribute("play",play);
 
 	} catch (Exception e) {
@@ -97,7 +99,11 @@ private static String getTagValue (String tag, Element eElement) {
 	
 // MD 상세보기 페이지
 	@RequestMapping("/MD/MD_order")
-	public String Md_order() {
+	public String Md_order(@RequestParam int dno, Model model) {
+		
+		Md md = mdService.selectOneMd(dno);
+		
+		model.addAttribute("md", md);
 		
 		return "MD_order";
 	}
