@@ -58,11 +58,19 @@
 		WHERE M_NO = #{m_no}
 	</select>
 	
-	<select id="bookmarkCuration" resultType="Curation" parameterType="_int">
-		SELECT C_TITLE, C_PIC
+	<select id="bookmarkCuration" resultType="curation" parameterType="_int">
+		SELECT C_TITLE, C_PIC, C_NO
 		FROM BOOKMARK
-		JOIN CURATION ON BOOKMARK.M_NO = CURATION.M_NO
+		JOIN CURATION ON CURATION.C_NO = BOOKMARK.C_LIST
 		WHERE BOOKMARK.M_NO = #{m_no}
 	</select>
+	
+	<delete id="deletePlay" parameterType="string">
+		DELETE FROM BOOKMARK WHERE P_LIST = #{ no }
+	</delete>
+	
+	<delete id="deleteCuration" parameterType="_int">
+		DELETE FROM BOOKMARK WHERE C_LIST = #{ no }
+	</delete>
 	
 </mapper>
