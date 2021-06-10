@@ -61,7 +61,7 @@
 		</c:if>
 		<c:if test="${!empty member}">
 		<a href="${pageContext.request.contextPath}/mypage/mypage.do">마이페이지</a>|
-		<a href="${pageContext.request.contextPath}/mypage/mypage.do">구매목록</a>|
+		<a href="${pageContext.request.contextPath}/buy/buylist.do">구매목록</a>|
 		<a href="${pageContext.request.contextPath}/mypage/mypage.do">장바구니</a>
 		</c:if>
 		<div class="modal_search">

@@ -24,4 +24,5 @@ FROM PLAY
 WHERE P_NO = #{p_no};
 	</select>
 
+
 </mapper>
