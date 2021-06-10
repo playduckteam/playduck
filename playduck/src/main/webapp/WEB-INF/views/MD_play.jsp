@@ -28,8 +28,8 @@
            <c:forEach items="${mdPlayList}"  var="List">
             <div class="MD_play_item">
                 <div class="MD_play_mdimage" id="${List.d_no }"><img src="${List.d_pic }" alt=""></div>
-                <div class="MD_play_mdtitle">${List.d_title}</div>
-                <div class="MD_play_mdprice">${List.d_price }</div>
+                <div class="MD_play_mdtitle" >${List.d_title}</div>
+                <div class="MD_play_mdprice">${List.d_price }원</div>
             </div>
             </c:forEach>
             
@@ -43,8 +43,9 @@
   	$(function(){
   		$("div[id]").on("click",function(){
   			var dno = $(this).attr("id");
-  			console.log("dno="+dno);
-  			location.href = "${pageContext.request.contextPath}/MD/MD_order.do?dno="+dno;
+  			var mno =${member.m_no};
+  			console.log("dno="+mno);
+  			location.href = "${pageContext.request.contextPath}/MD/MD_order.do?dno="+dno+"&mno="+mno;
   		});
   	});
   </script>

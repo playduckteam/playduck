@@ -16,4 +16,10 @@
 	WHERE D_NO = #{dno}
 	</select>
 		
+	<!-- // reward 값 가져오기 -->
+	<select id="getReward" parameterType="_int"  resultType="_int">
+		SELECT SUM(W_UP)-SUM(W_DOWN)
+		FROM REWARD
+		WHERE M_NO = #{m_no}
+	</select>
 	</mapper>

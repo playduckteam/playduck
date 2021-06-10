@@ -11,4 +11,6 @@ public interface MdService {
 
 	Md selectOneMd(int dno);
 
+	int getReward(int mno);
+
 }

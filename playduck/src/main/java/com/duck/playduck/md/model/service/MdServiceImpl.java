@@ -29,5 +29,12 @@ public class MdServiceImpl implements MdService {
 		return mdDAO.selectOneMd(dno);
 	}
 
+	// reward 값 가져오기
+	@Override
+	public int getReward(int mno) {
+		
+		return mdDAO.getReward(mno);
+	}
+
 
 }

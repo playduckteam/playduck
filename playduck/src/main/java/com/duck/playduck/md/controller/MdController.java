@@ -20,6 +20,7 @@ import org.w3c.dom.NodeList;
 import com.duck.playduck.md.model.service.MdService;
 import com.duck.playduck.md.model.service.MdServiceImpl;
 import com.duck.playduck.md.model.vo.Md;
+import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Play;
 
 @Controller
@@ -99,11 +100,19 @@ private static String getTagValue (String tag, Element eElement) {
 	
 // MD 상세보기 페이지
 	@RequestMapping("/MD/MD_order")
-	public String Md_order(@RequestParam int dno, Model model) {
+	public String Md_order(
+				@RequestParam int dno, 
+				@RequestParam int mno,
+				Model model) {
 		
 		Md md = mdService.selectOneMd(dno);
+		int reward = mdService.getReward(mno);
 		
+		
+		
+		System.out.println("내리워드 확인 :" + reward);
 		model.addAttribute("md", md);
+		model.addAttribute("getReward", reward);
 		
 		return "MD_order";
 	}
