@@ -189,12 +189,21 @@ hr{
     top: -50px;
     left: 20px;
 }
-.tab-content{
-    display: none;
-}
+/* .tab-content{ */
+/*     display: none; */
+/* } */
 .tab-content.current{
     display: inherit;
-  }
+    width: 1000px;
+    height: auto;
+}
+
+.tab-content{
+    display: inline-block;
+    width: 1000px;
+    height: auto;
+}
+
 
 .detail_reviewWrite{
     width: 540px;
