@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  파일이 생성됨 - 화요일-6월-08-2021   
+--  파일이 생성됨 - 목요일-6월-10-2021   
 --------------------------------------------------------
 DROP TABLE "PLAYDUCK"."BASKET";
 DROP TABLE "PLAYDUCK"."BOOKMARK";
@@ -11,6 +11,7 @@ DROP TABLE "PLAYDUCK"."PLAY";
 DROP TABLE "PLAYDUCK"."PLAYDETAIL";
 DROP TABLE "PLAYDUCK"."REVIEW";
 DROP TABLE "PLAYDUCK"."REWARD";
+DROP TABLE "PLAYDUCK"."RLIKE";
 DROP TABLE "PLAYDUCK"."STOCK";
 --------------------------------------------------------
 --  DDL for Table BASKET
@@ -42,16 +43,12 @@ DROP TABLE "PLAYDUCK"."STOCK";
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
-
-   COMMENT ON COLUMN "PLAYDUCK"."BOOKMARK"."M_NO" IS '회원번호';
-   COMMENT ON COLUMN "PLAYDUCK"."BOOKMARK"."P_LIST" IS '찜목록';
 --------------------------------------------------------
 --  DDL for Table CURATION
 --------------------------------------------------------
 
   CREATE TABLE "PLAYDUCK"."CURATION" 
    (	"C_NO" NUMBER, 
-	"P_NO" VARCHAR2(500 BYTE), 
 	"M_NO" NUMBER, 
 	"C_TITLE" VARCHAR2(200 BYTE), 
 	"C_CONTENT" VARCHAR2(4000 BYTE), 
@@ -65,7 +62,6 @@ DROP TABLE "PLAYDUCK"."STOCK";
   TABLESPACE "SYSTEM" ;
 
    COMMENT ON COLUMN "PLAYDUCK"."CURATION"."C_NO" IS '큐레이션번호';
-   COMMENT ON COLUMN "PLAYDUCK"."CURATION"."P_NO" IS '공연번호';
    COMMENT ON COLUMN "PLAYDUCK"."CURATION"."M_NO" IS '회원번호';
    COMMENT ON COLUMN "PLAYDUCK"."CURATION"."C_TITLE" IS '제목';
    COMMENT ON COLUMN "PLAYDUCK"."CURATION"."C_CONTENT" IS '내용';
@@ -143,7 +139,7 @@ DROP TABLE "PLAYDUCK"."STOCK";
 	"M_NO" NUMBER, 
 	"D_NO" NUMBER, 
 	"O_QUAN" NUMBER, 
-	"O_DATE" DATE, 
+	"O_DATE" DATE DEFAULT SYSDATE, 
 	"O_STATUS" CHAR(3 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
@@ -206,8 +202,6 @@ DROP TABLE "PLAYDUCK"."STOCK";
 	"P_NO" VARCHAR2(500 BYTE), 
 	"M_NO" NUMBER, 
 	"R_CONTENT" VARCHAR2(300 BYTE), 
-	"R_GOOD" NUMBER, 
-	"R_BAD" NUMBER, 
 	"R_STATUS" CHAR(3 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
@@ -219,8 +213,6 @@ DROP TABLE "PLAYDUCK"."STOCK";
    COMMENT ON COLUMN "PLAYDUCK"."REVIEW"."P_NO" IS '공연번호';
    COMMENT ON COLUMN "PLAYDUCK"."REVIEW"."M_NO" IS '회원번호';
    COMMENT ON COLUMN "PLAYDUCK"."REVIEW"."R_CONTENT" IS '한줄평';
-   COMMENT ON COLUMN "PLAYDUCK"."REVIEW"."R_GOOD" IS '좋아요';
-   COMMENT ON COLUMN "PLAYDUCK"."REVIEW"."R_BAD" IS '싫어요';
    COMMENT ON COLUMN "PLAYDUCK"."REVIEW"."R_STATUS" IS '상태';
 --------------------------------------------------------
 --  DDL for Table REWARD
@@ -243,6 +235,25 @@ DROP TABLE "PLAYDUCK"."STOCK";
    COMMENT ON COLUMN "PLAYDUCK"."REWARD"."W_UP" IS '+점수';
    COMMENT ON COLUMN "PLAYDUCK"."REWARD"."W_DOWN" IS '-점수';
    COMMENT ON COLUMN "PLAYDUCK"."REWARD"."W_DATE" IS '날짜';
+--------------------------------------------------------
+--  DDL for Table RLIKE
+--------------------------------------------------------
+
+  CREATE TABLE "PLAYDUCK"."RLIKE" 
+   (	"L_NO" NUMBER, 
+	"M_NO" NUMBER, 
+	"R_NO" NUMBER, 
+	"RL_STATUS" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+
+   COMMENT ON COLUMN "PLAYDUCK"."RLIKE"."L_NO" IS '좋아요번호';
+   COMMENT ON COLUMN "PLAYDUCK"."RLIKE"."M_NO" IS '회원번호';
+   COMMENT ON COLUMN "PLAYDUCK"."RLIKE"."R_NO" IS '리뷰번호';
+   COMMENT ON COLUMN "PLAYDUCK"."RLIKE"."RL_STATUS" IS '상태';
 --------------------------------------------------------
 --  DDL for Table STOCK
 --------------------------------------------------------
@@ -315,14 +326,14 @@ Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (46,'P
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (47,'PF162601','[2020 뮤지컬 알렉산더] 프로그램북',8000,'https://shop-phinf.pstatic.net/20200903_157/1599128794470EsGup_JPEG/264574127625300_125406250.jpg?type=f232_232','https://shop-phinf.pstatic.net/20200903_157/1599128794470EsGup_JPEG/264574127625300_125406250.jpg?type=f232_232');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (48,'PF162601','[2020 뮤지컬 알렉산더] OST(Live Recording)',45000,'https://shop-phinf.pstatic.net/20200903_151/15991288647066SS8O_JPEG/264644424449592_1050249413.jpg?type=f232_232','https://shop-phinf.pstatic.net/20200903_151/15991288647066SS8O_JPEG/264644424449592_1050249413.jpg?type=f232_232');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (49,'PF146540','[2019 뮤지컬 해적] 로우즈 아일랜드 에코백',5000,'https://shop-phinf.pstatic.net/20200903_176/1599131413715th26w_JPEG/267312208567777_2080849504.jpg?type=f232_232','https://shop-phinf.pstatic.net/20200903_176/1599131413715th26w_JPEG/267312208567777_2080849504.jpg?type=f232_232');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (50,'PF174958','[2021더픽션]유리컵-와이트',10000,'https://admin.hjmembership.com/media/commonfile/202102/26/5f276547a809d2e5db2ff8239c1f4f9b.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/0c65e0537cc78fa455fe7ddea10ba063.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (51,'PF174958','[2021더픽션]유리컵-그레이',10000,'https://admin.hjmembership.com/media/commonfile/202102/26/e912e3f774e5cfd5e64e0628cda3f70d.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/3d1cc5bf955d7160dbbc2bc90cc07e42.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (52,'PF174958','[2021더픽션]안경케이스',13000,'https://admin.hjmembership.com/media/commonfile/202102/26/b916abffaeb89178fa034eff28ebcb9f.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/fbd39b892aa2a3d8b2247c558b3146e6.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (53,'PF174958','[2021더픽션]뱃지-서류가방',8000,'https://admin.hjmembership.com/media/commonfile/202102/26/d8cf17ace7fb49bbcc557d2e3e866440.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/551d3cac99259204da1dd69ab72d2388.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (54,'PF174958','[2021더픽션]뱃지-경찰차',7000,'https://admin.hjmembership.com/media/commonfile/202102/26/048bedfc879c562b04a4cb9096682b9d.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/70e360cc248ac239bf193abe0d32a371.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (55,'PF174958','[2021더픽션]뱃지-책세트',12000,'https://admin.hjmembership.com/media/commonfile/202102/26/8db751fdcfa0155f20d26db78af8819d.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/58bd5f604ca1bfcf46b2685e947d1647.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (56,'PF174958','[2021더픽션]학용품 세트',15000,'https://admin.hjmembership.com/media/commonfile/202103/03/4b0f8fb9c01f2d63f225f9a4af702c30.jpg','https://admin.hjmembership.com/media/commonfile/202103/03/66eba4013737446dd6cdc193b0f027c2.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (57,'PF174958','[2021더픽션]프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202104/05/bf1b1d01203030e6cefc82194261c1b3.jpg','https://admin.hjmembership.com/media/commonfile/202104/05/4cba76e7c000213dc6acd2723dc447df.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (50,'PF171440','[2021더픽션]유리컵-와이트',10000,'https://admin.hjmembership.com/media/commonfile/202102/26/5f276547a809d2e5db2ff8239c1f4f9b.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/0c65e0537cc78fa455fe7ddea10ba063.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (51,'PF171440','[2021더픽션]유리컵-그레이',10000,'https://admin.hjmembership.com/media/commonfile/202102/26/e912e3f774e5cfd5e64e0628cda3f70d.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/3d1cc5bf955d7160dbbc2bc90cc07e42.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (52,'PF171440','[2021더픽션]안경케이스',13000,'https://admin.hjmembership.com/media/commonfile/202102/26/b916abffaeb89178fa034eff28ebcb9f.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/fbd39b892aa2a3d8b2247c558b3146e6.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (53,'PF171440','[2021더픽션]뱃지-서류가방',8000,'https://admin.hjmembership.com/media/commonfile/202102/26/d8cf17ace7fb49bbcc557d2e3e866440.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/551d3cac99259204da1dd69ab72d2388.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (54,'PF171440','[2021더픽션]뱃지-경찰차',7000,'https://admin.hjmembership.com/media/commonfile/202102/26/048bedfc879c562b04a4cb9096682b9d.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/70e360cc248ac239bf193abe0d32a371.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (55,'PF171440','[2021더픽션]뱃지-책세트',12000,'https://admin.hjmembership.com/media/commonfile/202102/26/8db751fdcfa0155f20d26db78af8819d.jpg','https://admin.hjmembership.com/media/commonfile/202102/26/58bd5f604ca1bfcf46b2685e947d1647.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (56,'PF171440','[2021더픽션]학용품 세트',15000,'https://admin.hjmembership.com/media/commonfile/202103/03/4b0f8fb9c01f2d63f225f9a4af702c30.jpg','https://admin.hjmembership.com/media/commonfile/202103/03/66eba4013737446dd6cdc193b0f027c2.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (57,'PF171440','[2021더픽션]프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202104/05/bf1b1d01203030e6cefc82194261c1b3.jpg','https://admin.hjmembership.com/media/commonfile/202104/05/4cba76e7c000213dc6acd2723dc447df.jpg');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (58,'PF174958','2020 라흐마니노프 실황OST',45000,'https://admin.hjmembership.com/media/commonfile/202006/24/e0744add6354a083665dcf059d5c308c.jpg','https://admin.hjmembership.com/media/commonfile/202006/24/384da21950fb49f3d53e1ada6895129b.jpg');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (59,'PF174958','2020 라흐마니노프 틴케이스',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/0ebc2c3e60fbb40c3206b8ef4a8dd7c9.png','https://admin.hjmembership.com/media/commonfile/202006/15/cf7143afcc5191cbbee0df2e4ad972ff.jpg');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (60,'PF174958','2020 라흐마니노프 달박사가방 뱃지',6000,'https://admin.hjmembership.com/media/commonfile/202007/13/99a8bd20560cfdcdbc60ea212bf1e134.png','https://admin.hjmembership.com/media/commonfile/202007/13/4f2121e8c6603500afde23e0d0c0fc24.jpg');
@@ -330,80 +341,86 @@ Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (61,'P
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (62,'PF174958','2020 라흐마니노프 손수건',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/6add1a13895ded7939c2a2a74d78be54.png','https://admin.hjmembership.com/media/commonfile/202006/15/18f82db21d965aa344d018f1f945a05c.jpg');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (63,'PF174958','2018 라흐마니노프 플립북A',7000,'https://admin.hjmembership.com/media/commonfile/202006/15/3b962d3b4b9acb30b3a162c8eead6e8d.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/703f58f3d539bb9d44efc7129ce0d0e2.jpg');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (64,'PF174958','2018 라흐마니노프 플립북B',7000,'https://admin.hjmembership.com/media/commonfile/202006/15/633ef5ac78c0290b6f3e35ff1556b545.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/6081596a1e248ce5e176ffbb180ccb85.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (65,'PF174958','2019 빈센트 반 고흐 대본집',12000,'https://admin.hjmembership.com/media/commonfile/202006/15/0c6c9d0735e085261eef5bb9a305fb98.png','https://admin.hjmembership.com/media/commonfile/202006/15/b256fd2053af5c86dac91811d123cdfa.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (66,'PF174958','2019 빈센트 반 고흐 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/2857f10d813a40d67c84000db68c01eb.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/06b541b3ae0c348c318d8bcd7427bc46.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (67,'PF174958','2019 빈센트 반 고흐 키링 팔레트',12000,'https://admin.hjmembership.com/media/commonfile/202006/15/a23d8874bec89ced5485e8d36aa60bdb.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/a23d8874bec89ced5485e8d36aa60bdb.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (68,'PF174958','2019 빈센트 반 고흐 티켓북',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/faa8ccd98814ad9564a4d033a47905c8.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/c0aa274a51e2a1e99ddfaa765930f83f.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (65,'PF172959','2019 빈센트 반 고흐 대본집',12000,'https://admin.hjmembership.com/media/commonfile/202006/15/0c6c9d0735e085261eef5bb9a305fb98.png','https://admin.hjmembership.com/media/commonfile/202006/15/b256fd2053af5c86dac91811d123cdfa.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (66,'PF172959','2019 빈센트 반 고흐 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/2857f10d813a40d67c84000db68c01eb.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/06b541b3ae0c348c318d8bcd7427bc46.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (67,'PF172959','2019 빈센트 반 고흐 키링 팔레트',12000,'https://admin.hjmembership.com/media/commonfile/202006/15/a23d8874bec89ced5485e8d36aa60bdb.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/a23d8874bec89ced5485e8d36aa60bdb.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (68,'PF172959','2019 빈센트 반 고흐 티켓북',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/faa8ccd98814ad9564a4d033a47905c8.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/c0aa274a51e2a1e99ddfaa765930f83f.jpg');
 Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (69,'PF174958','2020 라흐마니노프 실황DVD',90000,'https://admin.hjmembership.com/media/commonfile/202009/10/b1007fcbfae1c771e8b828d505bd7d41.jpg','https://admin.hjmembership.com/media/commonfile/202009/10/40af73d752a8e408be4eebb146d65411.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (70,'PF174958','2018 1446 실황OST',40000,'https://admin.hjmembership.com/media/commonfile/202010/12/459ec6b126149e81c00c5309b27f680d.jpg','https://admin.hjmembership.com/media/commonfile/202010/12/6e1b1a433678cd44a25a5cdce4b14ec6.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (71,'PF174958','나노블럭',15000,'https://admin.hjmembership.com/media/commonfile/202006/10/c72e1e8e3c0774d75e413d4c96ba9a70.jpg','https://admin.hjmembership.com/media/commonfile/202006/10/4d0c781fba65d8f387f1594062eb46b2.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (72,'PF174958','아트토이',30000,'https://admin.hjmembership.com/media/commonfile/202006/10/36b472c7c2f567f027332725f1824e61.jpg','https://admin.hjmembership.com/media/commonfile/202006/10/eecc96077ea6474d3ff05d5dce3e063b.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (73,'PF174958','고흐 브러쉬 붓펜 - 노랑',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/3ede264a351ec8318f2261579be45467.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/03819a5d732bb4ac0b823be18e2f1bd6.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (74,'PF174958','고흐 브러쉬 붓펜 - 파랑',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/89e82d3491a8c27792424a9866db75b0.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/9d812c1a19670a75f75ed0169ba756ca.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (75,'PF174958','고흐 브러쉬 붓펜 - 초록',4000,'https://admin.hjmembership.com/media/commonfile/202006/10/497919fc81b86cd8e2ca59d1ecc674be.jpg','https://admin.hjmembership.com/media/commonfile/202006/10/b72d3c97266bfbe43b68e34ecbfebc34.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (76,'PF174958','고흐 브러쉬 붓펜 - 보라',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/ce38f0fd344c85dd34cdb8b2e4433e3f.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/3212fa353229eb44833fa0c4aa7254be.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (77,'PF174958','고흐 브러쉬 붓펜 - 빨강',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/4561d0d6b4b38b422b78d86b460e55a7.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/ba90d014cfc4fa4baf61edad05211e6c.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (78,'PF174958','2019 세종, 1446 - 자수주머니',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/3a838a321dcbe32e6c2144281dc6785d.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5ae0210951a323b8a38d0672a1028f01.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (79,'PF174958','2019 세종, 1446 - 백성공책',8000,'https://admin.hjmembership.com/media/commonfile/202006/15/abd29fadca65bc29fb6abbd7b6530ca7.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/df0bf8b332556762fd31daf6438c5074.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (80,'PF174958','2019 세종, 1446 - 세종의 서한',20000,'https://admin.hjmembership.com/media/commonfile/202006/15/75e8fb499676f27f6c33ebb2490edab1.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8535d1f4afcd78305654099e8637902b.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (81,'PF174958','2019 세종,1446 - 해례본',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/49c3e18e0bcba664bd66cf43343d3503.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/bb3d38485f9ccf20be8051ced188781b.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (82,'PF174958','2018 1446 - 책전등',27000,'https://admin.hjmembership.com/media/commonfile/202006/15/a2a3a08e95739b89113d0a2ed72c197f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/d2550a83fce3e678cfbd66948e02870d.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (83,'PF174958','2019 세종, 1446 - 자수가방',15000,'https://admin.hjmembership.com/media/commonfile/202006/15/bf6e1e1e82a07bafa276a5d026e4b575.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/4a7181cb8466509fe822d76d53e1e0bd.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (84,'PF174958','2019 세종, 1446 - 배지 - 합죽선',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/64ba6317503879513974b5d8eea5f546.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/47a58a2e2577faffb2f3f6145f569fac.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (85,'PF174958','2019 세종,1446 배지-월인천강지곡',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/bf8bb7e6962161cb9aad276dcb4042ff.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/3c53ca205ee64cb05b79f09569ffe7e3.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (86,'PF174958','2019 세종, 1446 - 배지 - 세종대왕',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/26b9e8196956a48777745ffc60f9bc3c.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/dfc11487fa72b43fc0323b7548fa8f99.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (87,'PF174958','2019 세종, 1446 - 배지 - 훈민정음',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/d874c51ce13a269159d9366fa22163fb.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/f5c7bb6991521815f4a785510efe62e1.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (88,'PF174958','2019 세종, 1446 - 다시쓰는 스티커',2000,'https://admin.hjmembership.com/media/commonfile/202007/30/eb6cde2269025ad2f277f50a64ed2c1d.jpg','https://admin.hjmembership.com/media/commonfile/202007/30/d258f23c34c84a6250a99e0a8aada030.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (89,'PF174958','2019 세종, 1446 업적 티셔츠 - M',25000,'https://admin.hjmembership.com/media/commonfile/202006/15/6761903826434592cae1882a4ad9fb5f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/ab8a285e2ef8bbbaae431bdf44cd687e.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (90,'PF174958','2019 세종, 1446 업적 티셔츠 - L',25000,'https://admin.hjmembership.com/media/commonfile/202006/23/2761b58373841bbf41fd53fa0b821e5b.PNG','https://admin.hjmembership.com/media/commonfile/202006/23/3c79f868c7afed3d2c0b1b10eb47c10c.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (91,'PF174958','2019 세종, 1446 업적 티셔츠 - XL',25000,'https://admin.hjmembership.com/media/commonfile/202006/23/3e85ea620db56167f13baa2d9285b872.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/3939d32747199278112360624bb97906.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (92,'PF174958','2018 1446 - 향로-ㄹㅎ',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/c4573cc5213dc66f6f5711494016bd0a.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/a816c5909477599714a49a385d47939a.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (93,'PF174958','2018 1446 - 향로-ㅂㅇ',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/17cab0fd73db43ae23c01862cf95fdab.PNG','https://admin.hjmembership.com/media/commonfile/202006/15/3c6dc2a8c7c126bd6563d6565b48b017.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (94,'PF174958','2018 1446 - 선향',12500,'https://admin.hjmembership.com/media/commonfile/202006/15/c3046253d3f02de138a5d27a6051a2bf.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/763e1067a389863405fb088c40954445.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (95,'PF174958','2019 리틀잭 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/1135b2de751421b18d63e1f465fe7128.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/abc3f470a6d4b875e9912b6c0d7b5bab.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (96,'PF174958','2019 리틀잭 - 핀뱃지 - 해변의 줄리',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/2f45215080302f45a8fdc3a2869f899f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8f4c06de9c92497d93a0946d5ccced94.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (97,'PF174958','2019 리틀잭 - 핀뱃지 - 마틴의 잭',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/1a7af7b45cf1a513a070d2e0e9530db1.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5525861b6c2026bb0d18245536744300.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (98,'PF174958','2019 리틀잭 - 줄리의 손수건',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/1a6f830aee4d88a3ab0528abde953982.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/3e1d1a4e7817efca695a375a9bce8c8e.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (99,'PF174958','2019 리틀잭 - 잭의 손수건',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/f0789ad74ea9828dbe322e6a392cfab2.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/c8dad21a59e89ba3749227e6764a0c6c.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (100,'PF174958','2017 리틀잭 모먼트 키링',7000,'https://admin.hjmembership.com/media/commonfile/202006/15/4ce7aa2728c60bedcb0247d16a109679.png','https://admin.hjmembership.com/media/commonfile/202006/15/ef8c274f159d175e77937bfdd0899941.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (101,'PF174958','2017 리틀잭 손거울',3000,'https://admin.hjmembership.com/media/commonfile/202006/15/075a13f083b7183468c762d3bf38b2ab.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/c3be2e9d02a84e631689081afff1cc92.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (102,'PF174958','2019 리틀잭 - 클리어우산',7000,'https://admin.hjmembership.com/media/commonfile/202006/15/a18bde538573c4fa6612bea312b65890.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/ca56666054dea6045a6152e360fc2292.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (103,'PF174958','2019 더픽션 실황DVD',80000,'https://admin.hjmembership.com/media/commonfile/202006/15/739b0c77f96fb17c45a96d7ad5d569ef.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/586d7b82bd692ed58dc0f058af1ec52e.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (104,'PF174958','2019 더픽션 실황OST',40000,'https://admin.hjmembership.com/media/commonfile/202006/15/2a85328780f78a5ec8f3aa0265318c3c.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/fa7812f55ab6f318272be2ae91a260a2.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (105,'PF174958','2019 더픽션 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/b53ae25baa4e7ef68da30a3598b54a4f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/0f5ede27059c03484fdca5877887402e.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (106,'PF174958','2019 더픽션 메탈 핀뱃지_와이트',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/e17d67f0bb299ec4eb19a912af2d1829.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5dbfc7c5c47d236da12d9b9403d9d34a.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (107,'PF174958','2019 더픽션 메탈 핀뱃지_휴',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/9c6e3ce6344bd2bf3b1fc1dead92ff7c.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/e0ac77aafea1214e57eabfe6b3364645.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (108,'PF174958','2019 더픽션 폴리스 마스킹테이프',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/2a98aa28a7fb5e008bc0160ef53ae14f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/b215b74ec5d7f25d68d1ca32ff8ba4f7.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (109,'PF174958','2019 더픽션 우드장우산',17000,'https://admin.hjmembership.com/media/commonfile/202007/30/a3d939fbcb3602c4316cffd2c2f7be1c.jpg','https://admin.hjmembership.com/media/commonfile/202007/30/21dc0d3d0034ca5dbcff8d9c75b2e559.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (110,'PF174958','2019 더픽션 레트로 파우치',5000,'https://admin.hjmembership.com/media/commonfile/202006/15/c618b3b2c18db34de4ac1db41e816a26.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8898f51d0ea75904fbe3d60c25ce1a5f.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (111,'PF174958','장화 신은 고양이 비긴즈 OST',10000,'https://admin.hjmembership.com/media/commonfile/202005/12/00619b0b3706f6700f0ff145c9eff4de.jpg','https://admin.hjmembership.com/media/commonfile/202005/12/53dbee00da96cf2b4aad9ba68363541f.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (112,'PF174958','장화 신은 고양이 비긴즈 BOOK',7000,'https://admin.hjmembership.com/media/commonfile/202005/12/69b52c9b14ce581bf411d1c83d2d043f.jpg','https://admin.hjmembership.com/media/commonfile/202005/12/9f2a2372ed1b4bdae7f886196e8beb70.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (113,'PF174958','2019 어린왕자 실황 OST',25000,'https://admin.hjmembership.com/media/commonfile/202006/15/0a44aa2ed11262acba860f2f2ba67cad.png','https://admin.hjmembership.com/media/commonfile/202006/15/8882b9ad35cc6033c48cd01f778f6ca2.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (114,'PF174958','2019 어린왕자 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/9b2c8fa0df4402d32be3ff3c87f56e2e.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/2accca560aee8b56492cfb11f5761dc5.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (115,'PF174958','2019 어린왕자 티켓북',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/fb329912b13256050d5878adb00e030f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/be790e50fd9dcdafaf487f9210d2f175.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (116,'PF174958','2019 어린왕자 엽서세트',5000,'https://admin.hjmembership.com/media/commonfile/202009/22/94a4ec95d26cd52d3394bdb1fb109079.jpg','https://admin.hjmembership.com/media/commonfile/202009/22/aa031eb8c7aa1126fd34a45e19ba7eed.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (117,'PF174958','2019 어린왕자 손거울',3000,'https://admin.hjmembership.com/media/commonfile/202006/15/6066941c3205243e28f54f1804309963.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/49559975f7bf13a38c3c6e8488d76745.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (118,'PF174958','2018 낭독뮤지컬 살리에르 뱃지',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/ece4497dddd943799206900c80bc2b14.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/f440d04eeb44d1386a76c304326421e0.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (119,'PF174958','2018 낭독뮤지컬 파리넬리 뱃지',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/bdb488cc57e1ace4b34f264f20962dce.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/df1cf16e6c1d2e45ee5912e02d4a1b9a.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (120,'PF174958','2018 낭독뮤지컬 마리아마리아 뱃지',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/7b7f37515188761778a77b216229403d.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5b2581d459a2229b90fc9c75119f2f44.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (121,'PF174958','2018 낭독뮤지컬 마스킹테이프 퍼플',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/8584d0bbcfd534364e1c507a9e17a2ed.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/abd6fba3ecbc560a4ff7969c8864d906.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (122,'PF174958','2019 파가니니 실황 OST',30000,'https://admin.hjmembership.com/media/commonfile/202006/15/92a84b34999dd5e286d4918cec2be6ec.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8add6ccd9dfa2c36a7ed49ca6b60c1cf.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (123,'PF174958','2019 파가니니 마스킹테이프 - 필름',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/59192b2122ba52329c9064f7b54a32c3.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/004c57cbca1adb9c77687feddd56524e.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (124,'PF174958','2019 파가니니 마스킹테이프 - 디에스이레',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/28cb7e97f673e97d6a89796943f6742d.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/2c52e7044e8fa36747ac1e665368394b.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (125,'PF174958','2019 파가니니 리유저블컵',5000,'https://admin.hjmembership.com/media/commonfile/202006/15/5de1207c2d8a54dad51a698c0d6d3d58.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/4b903a53c0892b67673e1e1866aca996.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (126,'PF174958','2019 파가니니 메탈북마크 - 바이올린',6000,'https://admin.hjmembership.com/media/commonfile/202007/30/8c6edb927e8aeaef8e1b41d51b6b169c.jpg','https://admin.hjmembership.com/media/commonfile/202007/30/80bfc5c00fb8fcd7a0e973bb603c4983.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (127,'PF174958','2019 파가니니 메탈북마크 - 의사봉',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/f5b37c06e45cbd215781ef71bdebbd67.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/08f6be0bc5a62cda4242db0861eb8d72.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (128,'PF174958','2019 파가니니 바이올린클립펜 - 화이트',8000,'https://admin.hjmembership.com/media/commonfile/202007/23/f1064a5bce2cf144b93f28c29392b375.jpg','https://admin.hjmembership.com/media/commonfile/202007/23/53c4035f8f4c4e7899924dac2a1038f2.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (129,'PF174958','2018 낭독뮤지컬 우드마그넷',9000,'https://admin.hjmembership.com/media/commonfile/202006/15/62eda0a6c61721fd51d2ce55d076cbe3.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/86a00665f1e8b66b64e03332a5a6ac4f.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (130,'PF174958','판타지아 OST 2015 ver.',7000,'https://admin.hjmembership.com/media/commonfile/202006/07/6e0ba2d333c245a90906e51ec8b1da5c.jpg','https://admin.hjmembership.com/media/commonfile/202006/07/5523a2acdb994de9227996125e73e5e4.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (131,'PF174958','2018 존도우 화이트 파우치',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/09d1b9342df4d6e64d2483752114505b.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/1ffee83fdf61d49b79d90be7e76f6e02.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (132,'PF174958','2019 빈센트 반 고흐 실황DVD',90000,'https://admin.hjmembership.com/media/commonfile/202007/14/5915d00ca0f7fb239f6a1338ffa213bb.jpg','https://admin.hjmembership.com/media/commonfile/202007/14/79e62f651798acb517f63dc5893d9f73.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (133,'PF174958','2019 빈센트 반 고흐 DVD+프로그램북 패키지',95000,'https://admin.hjmembership.com/media/commonfile/202007/14/74d262fbd279323917e71f2911cfa6af.jpg','https://admin.hjmembership.com/media/commonfile/202007/14/8d8bc68049f2177caa3a6c5cffc1ae53.jpg');
-Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (134,'PF174958','2019 빈센트 반 고흐 OST',45000,'https://admin.hjmembership.com/media/commonfile/202012/30/eef8a91683142efa192a63443dd4d68b.jpg','https://admin.hjmembership.com/media/commonfile/202012/30/afec8823b54ca635eea35dc611d97469.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (70,'PF169786','2018 1446 실황OST',40000,'https://admin.hjmembership.com/media/commonfile/202010/12/459ec6b126149e81c00c5309b27f680d.jpg','https://admin.hjmembership.com/media/commonfile/202010/12/6e1b1a433678cd44a25a5cdce4b14ec6.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (71,'PF141414','나노블럭',15000,'https://admin.hjmembership.com/media/commonfile/202006/10/c72e1e8e3c0774d75e413d4c96ba9a70.jpg','https://admin.hjmembership.com/media/commonfile/202006/10/4d0c781fba65d8f387f1594062eb46b2.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (72,'PF141414','아트토이',30000,'https://admin.hjmembership.com/media/commonfile/202006/10/36b472c7c2f567f027332725f1824e61.jpg','https://admin.hjmembership.com/media/commonfile/202006/10/eecc96077ea6474d3ff05d5dce3e063b.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (73,'PF172959','고흐 브러쉬 붓펜 - 노랑',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/3ede264a351ec8318f2261579be45467.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/03819a5d732bb4ac0b823be18e2f1bd6.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (74,'PF172959','고흐 브러쉬 붓펜 - 파랑',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/89e82d3491a8c27792424a9866db75b0.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/9d812c1a19670a75f75ed0169ba756ca.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (75,'PF172959','고흐 브러쉬 붓펜 - 초록',4000,'https://admin.hjmembership.com/media/commonfile/202006/10/497919fc81b86cd8e2ca59d1ecc674be.jpg','https://admin.hjmembership.com/media/commonfile/202006/10/b72d3c97266bfbe43b68e34ecbfebc34.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (76,'PF172959','고흐 브러쉬 붓펜 - 보라',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/ce38f0fd344c85dd34cdb8b2e4433e3f.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/3212fa353229eb44833fa0c4aa7254be.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (77,'PF172959','고흐 브러쉬 붓펜 - 빨강',4000,'https://admin.hjmembership.com/media/commonfile/202006/23/4561d0d6b4b38b422b78d86b460e55a7.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/ba90d014cfc4fa4baf61edad05211e6c.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (78,'PF169786','2019 세종, 1446 - 자수주머니',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/3a838a321dcbe32e6c2144281dc6785d.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5ae0210951a323b8a38d0672a1028f01.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (79,'PF169786','2019 세종, 1446 - 백성공책',8000,'https://admin.hjmembership.com/media/commonfile/202006/15/abd29fadca65bc29fb6abbd7b6530ca7.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/df0bf8b332556762fd31daf6438c5074.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (80,'PF169786','2019 세종, 1446 - 세종의 서한',20000,'https://admin.hjmembership.com/media/commonfile/202006/15/75e8fb499676f27f6c33ebb2490edab1.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8535d1f4afcd78305654099e8637902b.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (81,'PF169786','2019 세종,1446 - 해례본',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/49c3e18e0bcba664bd66cf43343d3503.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/bb3d38485f9ccf20be8051ced188781b.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (82,'PF169786','2018 1446 - 책전등',27000,'https://admin.hjmembership.com/media/commonfile/202006/15/a2a3a08e95739b89113d0a2ed72c197f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/d2550a83fce3e678cfbd66948e02870d.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (83,'PF169786','2019 세종, 1446 - 자수가방',15000,'https://admin.hjmembership.com/media/commonfile/202006/15/bf6e1e1e82a07bafa276a5d026e4b575.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/4a7181cb8466509fe822d76d53e1e0bd.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (84,'PF169786','2019 세종, 1446 - 배지 - 합죽선',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/64ba6317503879513974b5d8eea5f546.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/47a58a2e2577faffb2f3f6145f569fac.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (85,'PF169786','2019 세종,1446 배지-월인천강지곡',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/bf8bb7e6962161cb9aad276dcb4042ff.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/3c53ca205ee64cb05b79f09569ffe7e3.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (86,'PF169786','2019 세종, 1446 - 배지 - 세종대왕',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/26b9e8196956a48777745ffc60f9bc3c.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/dfc11487fa72b43fc0323b7548fa8f99.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (87,'PF169786','2019 세종, 1446 - 배지 - 훈민정음',6000,'https://admin.hjmembership.com/media/commonfile/202006/23/d874c51ce13a269159d9366fa22163fb.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/f5c7bb6991521815f4a785510efe62e1.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (88,'PF169786','2019 세종, 1446 - 다시쓰는 스티커',2000,'https://admin.hjmembership.com/media/commonfile/202007/30/eb6cde2269025ad2f277f50a64ed2c1d.jpg','https://admin.hjmembership.com/media/commonfile/202007/30/d258f23c34c84a6250a99e0a8aada030.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (89,'PF169786','2019 세종, 1446 업적 티셔츠 - M',25000,'https://admin.hjmembership.com/media/commonfile/202006/15/6761903826434592cae1882a4ad9fb5f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/ab8a285e2ef8bbbaae431bdf44cd687e.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (90,'PF169786','2019 세종, 1446 업적 티셔츠 - L',25000,'https://admin.hjmembership.com/media/commonfile/202006/23/2761b58373841bbf41fd53fa0b821e5b.PNG','https://admin.hjmembership.com/media/commonfile/202006/23/3c79f868c7afed3d2c0b1b10eb47c10c.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (91,'PF169786','2019 세종, 1446 업적 티셔츠 - XL',25000,'https://admin.hjmembership.com/media/commonfile/202006/23/3e85ea620db56167f13baa2d9285b872.jpg','https://admin.hjmembership.com/media/commonfile/202006/23/3939d32747199278112360624bb97906.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (92,'PF169786','2018 1446 - 향로-ㄹㅎ',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/c4573cc5213dc66f6f5711494016bd0a.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/a816c5909477599714a49a385d47939a.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (93,'PF169786','2018 1446 - 향로-ㅂㅇ',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/17cab0fd73db43ae23c01862cf95fdab.PNG','https://admin.hjmembership.com/media/commonfile/202006/15/3c6dc2a8c7c126bd6563d6565b48b017.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (94,'PF169786','2018 1446 - 선향',12500,'https://admin.hjmembership.com/media/commonfile/202006/15/c3046253d3f02de138a5d27a6051a2bf.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/763e1067a389863405fb088c40954445.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (95,'PF175111','2019 리틀잭 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/1135b2de751421b18d63e1f465fe7128.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/abc3f470a6d4b875e9912b6c0d7b5bab.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (96,'PF175111','2019 리틀잭 - 핀뱃지 - 해변의 줄리',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/2f45215080302f45a8fdc3a2869f899f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8f4c06de9c92497d93a0946d5ccced94.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (97,'PF175111','2019 리틀잭 - 핀뱃지 - 마틴의 잭',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/1a7af7b45cf1a513a070d2e0e9530db1.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5525861b6c2026bb0d18245536744300.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (98,'PF175111','2019 리틀잭 - 줄리의 손수건',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/1a6f830aee4d88a3ab0528abde953982.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/3e1d1a4e7817efca695a375a9bce8c8e.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (99,'PF175111','2019 리틀잭 - 잭의 손수건',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/f0789ad74ea9828dbe322e6a392cfab2.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/c8dad21a59e89ba3749227e6764a0c6c.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (100,'PF175111','2017 리틀잭 모먼트 키링',7000,'https://admin.hjmembership.com/media/commonfile/202006/15/4ce7aa2728c60bedcb0247d16a109679.png','https://admin.hjmembership.com/media/commonfile/202006/15/ef8c274f159d175e77937bfdd0899941.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (101,'PF175111','2017 리틀잭 손거울',3000,'https://admin.hjmembership.com/media/commonfile/202006/15/075a13f083b7183468c762d3bf38b2ab.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/c3be2e9d02a84e631689081afff1cc92.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (102,'PF175111','2019 리틀잭 - 클리어우산',7000,'https://admin.hjmembership.com/media/commonfile/202006/15/a18bde538573c4fa6612bea312b65890.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/ca56666054dea6045a6152e360fc2292.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (103,'PF147151','2019 더픽션 실황DVD',80000,'https://admin.hjmembership.com/media/commonfile/202006/15/739b0c77f96fb17c45a96d7ad5d569ef.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/586d7b82bd692ed58dc0f058af1ec52e.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (104,'PF147151','2019 더픽션 실황OST',40000,'https://admin.hjmembership.com/media/commonfile/202006/15/2a85328780f78a5ec8f3aa0265318c3c.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/fa7812f55ab6f318272be2ae91a260a2.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (105,'PF147151','2019 더픽션 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/b53ae25baa4e7ef68da30a3598b54a4f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/0f5ede27059c03484fdca5877887402e.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (106,'PF147151','2019 더픽션 메탈 핀뱃지_와이트',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/e17d67f0bb299ec4eb19a912af2d1829.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5dbfc7c5c47d236da12d9b9403d9d34a.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (107,'PF147151','2019 더픽션 메탈 핀뱃지_휴',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/9c6e3ce6344bd2bf3b1fc1dead92ff7c.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/e0ac77aafea1214e57eabfe6b3364645.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (108,'PF147151','2019 더픽션 폴리스 마스킹테이프',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/2a98aa28a7fb5e008bc0160ef53ae14f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/b215b74ec5d7f25d68d1ca32ff8ba4f7.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (109,'PF147151','2019 더픽션 우드장우산',17000,'https://admin.hjmembership.com/media/commonfile/202007/30/a3d939fbcb3602c4316cffd2c2f7be1c.jpg','https://admin.hjmembership.com/media/commonfile/202007/30/21dc0d3d0034ca5dbcff8d9c75b2e559.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (110,'PF147151','2019 더픽션 레트로 파우치',5000,'https://admin.hjmembership.com/media/commonfile/202006/15/c618b3b2c18db34de4ac1db41e816a26.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8898f51d0ea75904fbe3d60c25ce1a5f.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (111,'PF175111','장화 신은 고양이 비긴즈 OST',10000,'https://admin.hjmembership.com/media/commonfile/202005/12/00619b0b3706f6700f0ff145c9eff4de.jpg','https://admin.hjmembership.com/media/commonfile/202005/12/53dbee00da96cf2b4aad9ba68363541f.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (112,'PF175111','장화 신은 고양이 비긴즈 BOOK',7000,'https://admin.hjmembership.com/media/commonfile/202005/12/69b52c9b14ce581bf411d1c83d2d043f.jpg','https://admin.hjmembership.com/media/commonfile/202005/12/9f2a2372ed1b4bdae7f886196e8beb70.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (113,'PF175515','2019 어린왕자 실황 OST',25000,'https://admin.hjmembership.com/media/commonfile/202006/15/0a44aa2ed11262acba860f2f2ba67cad.png','https://admin.hjmembership.com/media/commonfile/202006/15/8882b9ad35cc6033c48cd01f778f6ca2.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (114,'PF175515','2019 어린왕자 프로그램북',10000,'https://admin.hjmembership.com/media/commonfile/202006/15/9b2c8fa0df4402d32be3ff3c87f56e2e.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/2accca560aee8b56492cfb11f5761dc5.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (115,'PF175515','2019 어린왕자 티켓북',13000,'https://admin.hjmembership.com/media/commonfile/202006/15/fb329912b13256050d5878adb00e030f.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/be790e50fd9dcdafaf487f9210d2f175.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (116,'PF175515','2019 어린왕자 엽서세트',5000,'https://admin.hjmembership.com/media/commonfile/202009/22/94a4ec95d26cd52d3394bdb1fb109079.jpg','https://admin.hjmembership.com/media/commonfile/202009/22/aa031eb8c7aa1126fd34a45e19ba7eed.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (117,'PF175515','2019 어린왕자 손거울',3000,'https://admin.hjmembership.com/media/commonfile/202006/15/6066941c3205243e28f54f1804309963.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/49559975f7bf13a38c3c6e8488d76745.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (118,'PF143973','2018 낭독뮤지컬 살리에르 뱃지',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/ece4497dddd943799206900c80bc2b14.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/f440d04eeb44d1386a76c304326421e0.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (119,'PF143973','2018 낭독뮤지컬 파리넬리 뱃지',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/bdb488cc57e1ace4b34f264f20962dce.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/df1cf16e6c1d2e45ee5912e02d4a1b9a.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (120,'PF143973','2018 낭독뮤지컬 마리아마리아 뱃지',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/7b7f37515188761778a77b216229403d.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/5b2581d459a2229b90fc9c75119f2f44.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (121,'PF143973','2018 낭독뮤지컬 마스킹테이프 퍼플',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/8584d0bbcfd534364e1c507a9e17a2ed.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/abd6fba3ecbc560a4ff7969c8864d906.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (122,'PF146140','2019 파가니니 실황 OST',30000,'https://admin.hjmembership.com/media/commonfile/202006/15/92a84b34999dd5e286d4918cec2be6ec.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/8add6ccd9dfa2c36a7ed49ca6b60c1cf.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (123,'PF146140','2019 파가니니 마스킹테이프 - 필름',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/59192b2122ba52329c9064f7b54a32c3.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/004c57cbca1adb9c77687feddd56524e.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (124,'PF146140','2019 파가니니 마스킹테이프 - 디에스이레',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/28cb7e97f673e97d6a89796943f6742d.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/2c52e7044e8fa36747ac1e665368394b.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (125,'PF146140','2019 파가니니 리유저블컵',5000,'https://admin.hjmembership.com/media/commonfile/202006/15/5de1207c2d8a54dad51a698c0d6d3d58.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/4b903a53c0892b67673e1e1866aca996.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (126,'PF146140','2019 파가니니 메탈북마크 - 바이올린',6000,'https://admin.hjmembership.com/media/commonfile/202007/30/8c6edb927e8aeaef8e1b41d51b6b169c.jpg','https://admin.hjmembership.com/media/commonfile/202007/30/80bfc5c00fb8fcd7a0e973bb603c4983.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (127,'PF146140','2019 파가니니 메탈북마크 - 의사봉',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/f5b37c06e45cbd215781ef71bdebbd67.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/08f6be0bc5a62cda4242db0861eb8d72.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (128,'PF146140','2019 파가니니 바이올린클립펜 - 화이트',8000,'https://admin.hjmembership.com/media/commonfile/202007/23/f1064a5bce2cf144b93f28c29392b375.jpg','https://admin.hjmembership.com/media/commonfile/202007/23/53c4035f8f4c4e7899924dac2a1038f2.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (129,'PF146140','2018 낭독뮤지컬 우드마그넷',9000,'https://admin.hjmembership.com/media/commonfile/202006/15/62eda0a6c61721fd51d2ce55d076cbe3.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/86a00665f1e8b66b64e03332a5a6ac4f.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (130,'PF146140','판타지아 OST 2015 ver.',7000,'https://admin.hjmembership.com/media/commonfile/202006/07/6e0ba2d333c245a90906e51ec8b1da5c.jpg','https://admin.hjmembership.com/media/commonfile/202006/07/5523a2acdb994de9227996125e73e5e4.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (131,'PF172959','2018 존도우 화이트 파우치',6000,'https://admin.hjmembership.com/media/commonfile/202006/15/09d1b9342df4d6e64d2483752114505b.jpg','https://admin.hjmembership.com/media/commonfile/202006/15/1ffee83fdf61d49b79d90be7e76f6e02.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (132,'PF172959','2019 빈센트 반 고흐 실황DVD',90000,'https://admin.hjmembership.com/media/commonfile/202007/14/5915d00ca0f7fb239f6a1338ffa213bb.jpg','https://admin.hjmembership.com/media/commonfile/202007/14/79e62f651798acb517f63dc5893d9f73.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (133,'PF172959','2019 빈센트 반 고흐 DVD+프로그램북 패키지',95000,'https://admin.hjmembership.com/media/commonfile/202007/14/74d262fbd279323917e71f2911cfa6af.jpg','https://admin.hjmembership.com/media/commonfile/202007/14/8d8bc68049f2177caa3a6c5cffc1ae53.jpg');
+Insert into PLAYDUCK.MD (D_NO,P_NO,D_TITLE,D_PRICE,D_PIC,D_DETAIL) values (134,'PF172959','2019 빈센트 반 고흐 OST',45000,'https://admin.hjmembership.com/media/commonfile/202012/30/eef8a91683142efa192a63443dd4d68b.jpg','https://admin.hjmembership.com/media/commonfile/202012/30/afec8823b54ca635eea35dc611d97469.jpg');
 REM INSERTING into PLAYDUCK.MEMBER
 SET DEFINE OFF;
+Insert into PLAYDUCK.MEMBER (M_NO,M_NAME,M_ID,M_PWD,M_GENDER,M_DATE,M_PHONE,M_EMAIL,M_ADDRESS,M_STATUS,M_ENROLLDATE,M_PIC,M_GENRE,M_PICRENAMED) values (1,'현종일','test','$2a$10$bE/NAGesEnO3Nk.9CAeZseb/rsOJcaTNn4E4gOGu928rYY/btzUX.','F  ',to_date('21/01/01','RR/MM/DD'),'010-1234-1234','tony7943@naver.com','06035/서울 강남구 가로수길 5/3206','1     ',to_date('21/06/08','RR/MM/DD'),'nopic.jpg','뮤지컬,국악','null');
 REM INSERTING into PLAYDUCK.ORDERS
 SET DEFINE OFF;
+Insert into PLAYDUCK.ORDERS (O_NO,M_NO,D_NO,O_QUAN,O_DATE,O_STATUS) values (1,1,10,2,to_date('21/06/10','RR/MM/DD'),'1  ');
+Insert into PLAYDUCK.ORDERS (O_NO,M_NO,D_NO,O_QUAN,O_DATE,O_STATUS) values (2,1,20,2,to_date('21/06/10','RR/MM/DD'),'1  ');
+Insert into PLAYDUCK.ORDERS (O_NO,M_NO,D_NO,O_QUAN,O_DATE,O_STATUS) values (3,1,35,4,to_date('21/06/10','RR/MM/DD'),'1  ');
+Insert into PLAYDUCK.ORDERS (O_NO,M_NO,D_NO,O_QUAN,O_DATE,O_STATUS) values (4,1,27,6,to_date('21/06/10','RR/MM/DD'),'1  ');
+Insert into PLAYDUCK.ORDERS (O_NO,M_NO,D_NO,O_QUAN,O_DATE,O_STATUS) values (5,1,30,2,to_date('21/06/10','RR/MM/DD'),'1  ');
 REM INSERTING into PLAYDUCK.PLAY
 SET DEFINE OFF;
 Insert into PLAYDUCK.PLAY (P_NO,P_GOOD,P_BAD) values ('PF175518',0,0);
@@ -1433,17 +1450,12 @@ REM INSERTING into PLAYDUCK.REVIEW
 SET DEFINE OFF;
 REM INSERTING into PLAYDUCK.REWARD
 SET DEFINE OFF;
+Insert into PLAYDUCK.REWARD (W_NO,M_NO,W_UP,W_DOWN,W_DATE) values (1,1,100,10,to_date('21/06/10','RR/MM/DD'));
+Insert into PLAYDUCK.REWARD (W_NO,M_NO,W_UP,W_DOWN,W_DATE) values (2,1,50,10,to_date('21/06/10','RR/MM/DD'));
+REM INSERTING into PLAYDUCK.RLIKE
+SET DEFINE OFF;
 REM INSERTING into PLAYDUCK.STOCK
 SET DEFINE OFF;
---------------------------------------------------------
---  DDL for Index PK_BOOKMARK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "PLAYDUCK"."PK_BOOKMARK" ON "PLAYDUCK"."BOOKMARK" ("M_NO") 
-  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
-  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "SYSTEM" ;
 --------------------------------------------------------
 --  DDL for Index SYS_C008402
 --------------------------------------------------------
@@ -1526,14 +1538,14 @@ SET DEFINE OFF;
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM" ;
 --------------------------------------------------------
---  Constraints for Table BOOKMARK
+--  DDL for Index SYS_C008576
 --------------------------------------------------------
 
-  ALTER TABLE "PLAYDUCK"."BOOKMARK" ADD CONSTRAINT "PK_BOOKMARK" PRIMARY KEY ("M_NO")
-  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  CREATE UNIQUE INDEX "PLAYDUCK"."SYS_C008576" ON "PLAYDUCK"."RLIKE" ("L_NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "SYSTEM"  ENABLE;
+  TABLESPACE "SYSTEM" ;
 --------------------------------------------------------
 --  Constraints for Table CURATION
 --------------------------------------------------------
@@ -1637,6 +1649,18 @@ SET DEFINE OFF;
   TABLESPACE "SYSTEM"  ENABLE;
   ALTER TABLE "PLAYDUCK"."REWARD" MODIFY ("W_DATE" NOT NULL ENABLE);
 --------------------------------------------------------
+--  Constraints for Table RLIKE
+--------------------------------------------------------
+
+  ALTER TABLE "PLAYDUCK"."RLIKE" MODIFY ("RL_STATUS" NOT NULL ENABLE);
+  ALTER TABLE "PLAYDUCK"."RLIKE" ADD PRIMARY KEY ("L_NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "PLAYDUCK"."RLIKE" MODIFY ("R_NO" NOT NULL ENABLE);
+  ALTER TABLE "PLAYDUCK"."RLIKE" MODIFY ("M_NO" NOT NULL ENABLE);
+--------------------------------------------------------
 --  Constraints for Table STOCK
 --------------------------------------------------------
 
@@ -1650,13 +1674,17 @@ SET DEFINE OFF;
   ALTER TABLE "PLAYDUCK"."BASKET" ADD CONSTRAINT "FK_BASKET_M_NO" FOREIGN KEY ("M_NO")
 	  REFERENCES "PLAYDUCK"."MEMBER" ("M_NO") ON DELETE CASCADE ENABLE;
 --------------------------------------------------------
+--  Ref Constraints for Table BOOKMARK
+--------------------------------------------------------
+
+  ALTER TABLE "PLAYDUCK"."BOOKMARK" ADD FOREIGN KEY ("M_NO")
+	  REFERENCES "PLAYDUCK"."MEMBER" ("M_NO") ENABLE;
+--------------------------------------------------------
 --  Ref Constraints for Table CURATION
 --------------------------------------------------------
 
   ALTER TABLE "PLAYDUCK"."CURATION" ADD CONSTRAINT "FK_CURATION_M_NO" FOREIGN KEY ("M_NO")
 	  REFERENCES "PLAYDUCK"."MEMBER" ("M_NO") ENABLE;
-  ALTER TABLE "PLAYDUCK"."CURATION" ADD CONSTRAINT "FK_CURATION_P_NO" FOREIGN KEY ("P_NO")
-	  REFERENCES "PLAYDUCK"."PLAY" ("P_NO") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table MD
 --------------------------------------------------------
@@ -1692,11 +1720,20 @@ SET DEFINE OFF;
   ALTER TABLE "PLAYDUCK"."REWARD" ADD CONSTRAINT "FK_REWARD_M_NO" FOREIGN KEY ("M_NO")
 	  REFERENCES "PLAYDUCK"."MEMBER" ("M_NO") ON DELETE SET NULL ENABLE;
 --------------------------------------------------------
+--  Ref Constraints for Table RLIKE
+--------------------------------------------------------
+
+  ALTER TABLE "PLAYDUCK"."RLIKE" ADD CONSTRAINT "FK_RLIKE_M_NO" FOREIGN KEY ("M_NO")
+	  REFERENCES "PLAYDUCK"."MEMBER" ("M_NO") ENABLE;
+  ALTER TABLE "PLAYDUCK"."RLIKE" ADD CONSTRAINT "FK_RLIKE_R_NO" FOREIGN KEY ("R_NO")
+	  REFERENCES "PLAYDUCK"."REVIEW" ("R_NO") ENABLE;
+--------------------------------------------------------
 --  Ref Constraints for Table STOCK
 --------------------------------------------------------
 
   ALTER TABLE "PLAYDUCK"."STOCK" ADD CONSTRAINT "FK_STOCK_P_NO" FOREIGN KEY ("D_NO")
 	  REFERENCES "PLAYDUCK"."MD" ("D_NO") ON DELETE CASCADE ENABLE;
+
 
 
 --시퀀스
