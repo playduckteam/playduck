@@ -29,5 +29,12 @@ public class MdDAOImpl implements MdDAO {
 		return sqlSession.selectOne("md2-mapper.selectOneMd", dno);
 	}
 
+	// reward 값 가져오기
+	@Override
+	public int getReward(int mno) {
+		
+		return sqlSession.selectOne("md2-mapper.getReward",mno);
+	}
+
 
 }
