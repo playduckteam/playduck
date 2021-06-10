@@ -23,6 +23,7 @@ import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.service.MainService;
 import com.duck.playduck.main.model.vo.Main;
 import com.duck.playduck.member.model.vo.Member;
+import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.play.model.vo.Play;
 import com.duck.playduck.review.model.vo.Review;
 
@@ -219,8 +220,12 @@ public class mainController {
 		List<Member> listmp = new ArrayList<Member>();
 		
 		listmp = mainservice.memberpic();
+	
+		List<String> list0 = new ArrayList<String>();
 		
-		System.out.println(listmp);
+		for(Member mp : listmp) {
+			list0.add(mp.getM_picRenamed());
+		}
 		
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		
@@ -262,6 +267,7 @@ public class mainController {
 		e.printStackTrace();
 	}		
 	}
+		map.put("pic", list0);
 		map.put("content", list1);
 		map.put("poster", list2);
 		
@@ -343,16 +349,34 @@ public class mainController {
 		
 	}
 	
-
-		
 		map.put("title", tlist);
 		map.put("grade", glist);
 		map.put("poster", ilist);
 		map.put("pnum", plist);
-		
 	
-		
-		
 		return map;
+	}
+	
+	@RequestMapping("/main/bookmarkcheck.do")
+	@ResponseBody
+	public List<String> BookMarkC(
+						@RequestParam(value="p_num[]") List<String> p_no, @RequestParam(value="m_no") int m_no) {
+		List<Bookmark> list = new ArrayList<Bookmark>();
+
+		list = mainservice.BookMarkC(m_no);
+		
+		List<String> listp = new ArrayList<String>();
+	
+	
+		for(Bookmark b : list) {
+			for(String p : p_no) {
+				if(b.getP_list().equals(p)) {
+					listp.add(p);
+				}
+			}
+		}
+	
+
+		return listp;
 	}
 }
