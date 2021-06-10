@@ -11,17 +11,17 @@ SELECT COUNT(*) FROM PLAY
 </select>
 
 	<!-- 플레이디테일 평균점수 가져오기 -->
-	<select id="selectPD" resultType="playDetail">
-		SELECT AVG(PD_THEATER), AVG(PD_STORY), AVG(PD_PRODUCING), AVG(PD_CASTING)
+	<select id="selectPD" parameterType="String" resultType="playDetail">
+		SELECT floor(AVG(PD_THEATER)) avg_pd_theater, floor(AVG(PD_STORY)) avg_pd_story, floor(AVG(PD_PRODUCING)) avg_pd_producing, floor(AVG(PD_CASTING)) avg_pd_casting
 FROM PLAYDETAIL
-WHERE P_NO = #{p_no};
+WHERE P_NO = #{p_no}
 	</select>
 	
 	<!-- 플레이 평점 가져오기 -->
-	<select id="selectPlay"  parameterType="int"  resultType="play">
-	SELECT P_GOOD/(P_GOOD + P_BAD)*100
+	<select id="selectPlay"  parameterType="String"  resultType="play">
+	SELECT floor(P_GOOD/(P_GOOD + P_BAD)*100) p_rating
 FROM PLAY
-WHERE P_NO = #{p_no};
+WHERE P_NO = #{p_no}
 	</select>
 
 

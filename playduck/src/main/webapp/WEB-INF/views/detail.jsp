@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +49,7 @@
 			<table class="detail_content">
 				<tr>
 					<td class="detail_title">${dlist[0]}</td>
-					<td class="detail_rating">95 <img
+					<td class="detail_rating">${ play.p_rating } <img
 						src="${pageContext.request.contextPath}/resources/images/rating.png"></td>
 				</tr>
 				<tr>
@@ -90,39 +93,39 @@
 						<table class="detail_ratingArea">
 							<tr>
 								<td>공연장</td>
-								<td>
+								<td class="progressArea">
 									<div class="progress">
-										<div class="progress-bar" style="width: 90%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_theater}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">90%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_theater}</td>
 							</tr>
 							<tr>
 								<td>스토리</td>
-								<td>
+								<td class="progressArea">
 									<div class="progress">
-										<div class="progress-bar" style="width: 70%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_story}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">70%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_story}</td>
 							</tr>
 							<tr>
 								<td>연출</td>
-								<td>
+								<td class="progressArea">
 									<div class="progress">
-										<div class="progress-bar" style="width: 60%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_producing}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">60%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_producing}</td>
 							</tr>
 							<tr>
-								<td>캐스팅</td>
+								<td class="progressArea">캐스팅</td>
 								<td>
 									<div class="progress">
-										<div class="progress-bar" style="width: 90%;"></div>
+										<div class="progress-bar" style="width: ${playDetail.avg_pd_casting}%;"></div>
 									</div>
 								</td>
-								<td style="font-weight: 300;">90%</td>
+								<td style="font-weight: 300;">${playDetail.avg_pd_casting}</td>
 							</tr>
 						</table>
 					</td>
@@ -150,302 +153,131 @@
 				<button class="detail_reviewWrite" onclick = "fn_goReviewForm()">리뷰 작성하기</button>
 				<script>
 				function fn_goReviewForm(){
-					location.href = "${pageContext.request.contextPath}/review/reviewForm.do"
+					location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=${param.p_no}"
 				}
 				</script>
 				<div class="detail_reviewTab">
 					<img class="good" src="${pageContext.request.contextPath}/resources/images/review_good_current.png"
-						alt=""> <img class="good_gray" data-tab="good_gray"
+						alt=""> <img class="good_gray" data-tab="tab_goodReview"
 						src="${pageContext.request.contextPath}/resources/images/review_good.png" alt=""> <img
 						class="bad" src="${pageContext.request.contextPath}/resources/images/review_bad_current.png"
-						alt=""> <img class="bad_gray" data-tab="bad_gray"
+						alt=""> <img class="bad_gray" data-tab="tab_badReview"
 						src="${pageContext.request.contextPath}/resources/images/review_bad.png" alt="">
 				</div>
 				<script>
-                    $(document).ready(function () {
-                        /*웹페이지 열었을 때*/
-                        $(".good").show();
-                        $(".bad_gray").show();
-                        $(".good_gray").hide();
-                        $(".bad").hide();
+//                    $(document).ready(function () {
+//                         /*웹페이지 열었을 때*/
+//                         $(".good").show();
+//                         $(".bad_gray").show();
+//                         $(".good_gray").hide();
+//                         $(".bad").hide();
 
-                        /*bad_gray 클릭했을 때 bad를 보여줌*/
-                        $(".bad_gray").click(function () {
-                            $(".good").hide();
-                            $(".bad_gray").hide();
-                            $(".good_gray").show();
-                            $(".bad").show();
-                            var tab_id = $(this).attr('data-tab');
+//                         /*bad_gray 클릭했을 때 bad를 보여줌*/
+//                         $(".bad_gray").click(function () {
+//                             $(".good").hide();
+//                             $(".bad_gray").hide();
+//                             $(".good_gray").show();
+//                             $(".bad").show();
+//                             var tab_id = $(this).attr('data-tab');
 
-                            $('.tab-content').removeClass('current');
+//                             $('.tab-content').removeClass('current');
 
-                            $(this).addClass('current');
-                            $("#" + tab_id).addClass('current');
-                        });
+//                             $(this).addClass('current');
+//                             $("#" + tab_id).addClass('current');
+//                         });
 
-                        /*good_gray를 클릭했을 때 good을 보여줌*/
-                        $(".good_gray").click(function () {
-                            $(".good").show();
-                            $(".bad_gray").show();
-                            $(".good_gray").hide();
-                            $(".bad").hide();
+//                         /*good_gray를 클릭했을 때 good을 보여줌*/
+//                         $(".good_gray").click(function () {
+//                             $(".good").show();
+//                             $(".bad_gray").show();
+//                             $(".good_gray").hide();
+//                             $(".bad").hide();
 
-                            var tab_id = $(this).attr('data-tab');
+//                             var tab_id = $(this).attr('data-tab');
 
-                            $('.tab-content').removeClass('current');
+//                             $('.tab-content').removeClass('current');
 
-                            $(this).addClass('current');
-                            $("#" + tab_id).addClass('current');
-                        });
+//                             $(this).addClass('current');
+//                             $("#" + tab_id).addClass('current');
+//                         });
 
+//                    });
+                    
+                    $(function() {
+//                     	 /*웹페이지 열었을 때*/
+//                         $(".good").show();
+//                         $(".bad_gray").show();
+//                         $(".good_gray").hide();
+//                         $(".bad").hide();
+
+                        $(".good_gray").click();
+                      });
+                    
+                    /*bad_gray 클릭했을 때 bad를 보여줌*/
+                    $(".bad_gray").click(function () {
+                        $(".good").hide();
+                        $(".bad").show();
+                        $(".good_gray").show();
+                        $(".bad_gray").hide();
+                        var tab_id = $(this).attr('data-tab');
+                        
+                        $('.tab-content').removeClass('current');
+
+                        $(this).addClass('current');
+                        $("#" + tab_id).addClass('current');
+                        
+                        loadReview(tab_id);
                     });
+
+                    /*good_gray를 클릭했을 때 good을 보여줌*/
+                    $(".good_gray").click(function () {
+                        $(".good").show();
+                        $(".bad").hide();
+                        $(".good_gray").hide();
+                        $(".bad_gray").show();
+
+                        var tab_id = $(this).attr('data-tab');
+
+                        $('.tab-content').removeClass('current');
+
+                        $(this).addClass('current');
+                        $("#" + tab_id).addClass('current');
+                        
+                        loadReview(tab_id);
+                    });
+                    
+                    function loadReview(tab_id){
+                    	var urlPath = "";
+          				
+          				if ( tab_id == 'tab_goodReview' ) {
+          					urlPath = '/playduck/review/tab_goodReview.do';
+          				} else if( tab_id == 'tab_badReview') {
+          					urlPath = '/playduck/review/tab_badReview.do';
+          				} 
+          				
+          	            $.ajax({
+          	                 type : 'GET',                 //get방식으로 통신
+          	                 url : urlPath,    //탭의 data-tab속성의 값으로 된 html파일로 통신
+          	                 dataType : "html",//html형식으로 값 읽기 
+          	                 data: { p_no : '${param.p_no}' } ,
+          	                 error : function(error, status) {           //통신 실패시
+          	                  alert('통신실패!');
+          	                  console.log('--------------------');
+          	                  console.log(error);
+          	                  console.log(status);
+          	                  console.log('--------------------');
+          	                 },
+          	                 success : function(data) {    //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+          	                 	
+          	                	 $("#tab-content").html(data);
+          	                 	console.log( "통신성공");
+          	                 }
+          	            });	
+                    }
                 </script>
-				<div class="tab-content current" id="good_gray">
+                <div id="tab-content"></div>
 				
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					
-				</div>
-				<div class="tab-content" id="bad_gray">
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-					<!-- 리뷰 1 -->
-					<div id="detail_goodContent" style="position: relative;">
-						<div class="detail_reviewProfile"></div>
-						<div class="detail_reviewOne">
-							<table>
-								<tr>
-									<td class="detail_reviewContent">국회는 국가의 예산안을 심의·확정한다.
-										헌법재판소에서 법률의 위헌 결정, 탄핵의 결정, 정당해핵의 결정, 정당핵의 결정, 정당</td>
-									<td>
-									<table class="review_thumbsArea">
-										<tr>
-										<td class="review_thumbs" style="height: 30px">
-										<i class="far fa-thumbs-up" style="color: var(--main-color)"></i> <p class="thumb_count">3</p><br>
-										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">  3</p></td>
-										</tr>
-									</table>
-									</td>
-									
-								</tr>
-							</table>
-							<button class="detail_reviewDelete">삭제하기</button>
-						</div>
-					</div>
-					<!-- ---------- -->
-				</div>
+				
 			</div>
 		</div>
 	<!--	<button class="detail_reviewWrite" onclick = "location.href = 'reviewWrite.jsp'">리뷰 작성하기</button>  -->

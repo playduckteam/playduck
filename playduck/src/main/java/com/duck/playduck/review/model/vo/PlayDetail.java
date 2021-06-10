@@ -18,5 +18,9 @@ public class PlayDetail implements Serializable{
 	private int pd_story;
 	private int pd_producing;
 	private int pd_casting;
+	private int avg_pd_theater;
+	private int avg_pd_story;
+	private int avg_pd_producing;
+	private int avg_pd_casting;
 	
 }

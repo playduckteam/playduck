@@ -16,5 +16,7 @@ public class Play implements Serializable {
 	private String p_no;
 	private int p_good;
 	private int p_bad;
+	private int p_rating;
+	
 	
 }

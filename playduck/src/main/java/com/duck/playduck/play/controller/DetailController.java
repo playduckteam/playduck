@@ -1,6 +1,9 @@
 package com.duck.playduck.play.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,9 +18,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.duck.playduck.main.model.vo.Main;
 import com.duck.playduck.play.model.service.DetailService;
 import com.duck.playduck.play.model.vo.Play;
 import com.duck.playduck.review.model.vo.PlayDetail;
+import com.duck.playduck.review.model.vo.Review;
 
 @Controller
 public class DetailController {
@@ -41,7 +46,9 @@ public class DetailController {
 			@RequestParam String p_no
 			) {
 		
-			 
+			 System.out.println(p_no);
+
+		
 		 ArrayList dlist = new ArrayList();
 		 
 		 
@@ -95,8 +102,45 @@ public class DetailController {
 			
 				
 				model.addAttribute("dlist", dlist);
+				model.addAttribute("playDetail", playDetail);
+				model.addAttribute("play", play);
 
 		return "detail";
 	}
+	
+	@RequestMapping("/review/tab_goodReview.do")
+	public String selectGoodReview(Model model, 
+			@RequestParam String p_no
+			) {
+		
+		List<Review> rlist = new ArrayList<Review>();
+		rlist = detailservice.selectGoodReview(p_no);
+		
+		System.out.println(rlist);
+		model.addAttribute("rlist", rlist);
+		
+		return "tab_goodReview";
+	}
+	
+	@RequestMapping("/review/tab_badReview.do")
+	public String selectBadReview(Model model, 
+			@RequestParam String p_no
+			) {
+		List<Review> rlist = new ArrayList<Review>();
+		rlist = detailservice.selectBadReview(p_no);
+		model.addAttribute("rlist", rlist);
+		
+		return "tab_badReview";
+	}
+	
+	  @RequestMapping("/review/reviewDelete.do")
+		public String deleteMemo(Model model, 
+				@RequestParam int r_no){
+	    
+		detailservice.deleteReview(r_no);
+			
+			return "detail";
+		}
+	
 }
 
