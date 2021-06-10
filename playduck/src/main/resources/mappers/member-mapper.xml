@@ -55,12 +55,14 @@
 		SELECT P_LIST, C_LIST
 		FROM BOOKMARK
 		JOIN MEMBER USING(M_NO)
+		WHERE M_NO = #{m_no}
 	</select>
 	
 	<select id="bookmarkCuration" resultType="Curation" parameterType="_int">
 		SELECT C_TITLE, C_PIC
-		FROM CURATION
-		WHERE M_NO = #{m_no}
+		FROM BOOKMARK
+		JOIN CURATION ON BOOKMARK.M_NO = CURATION.M_NO
+		WHERE BOOKMARK.M_NO = #{m_no}
 	</select>
 	
 </mapper>

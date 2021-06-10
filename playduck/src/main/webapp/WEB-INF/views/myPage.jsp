@@ -241,6 +241,11 @@
     .mypage_myReview{
     margin-top: 80px
     }
+    
+    .main_toprevieww{
+    	cursor : pointer;
+    }
+    
     </style>
 </head>
 
@@ -594,8 +599,7 @@
 				
 					// 글자 수 제한
 					var length = 8;
-					
-					// 확인
+				
 					$('.titleremove'+i).each(function(){
 						if($('.titleremove'+i).text().length >= length){
 							$('.titleremove'+i).text($('.titleremove'+i).text().substr(0,length)+'...');
@@ -603,33 +607,31 @@
 					});
 					
 					
-					   const container = document.querySelector(".main_topcontainer");
-				        const prevBtn = document.querySelector(".prev");
-				        const nextBtn = document.querySelector(".next");
+					const container = document.querySelector(".main_topcontainer");
+				    const prevBtn = document.querySelector(".prev");
+				   	const nextBtn = document.querySelector(".next");
 						
-				        // 확인
-				        (function addEvent() {
-				          prevBtn.addEventListener('click', translateContainer.bind(this, 1));
-				          nextBtn.addEventListener('click', translateContainer.bind(this, -1));
-				        })();
-				     // 확인
-				        function translateContainer(direction) {
-				          const selectedBtn = (direction === 1) ? 'prev' : 'next';
-				          container.style.transitionDuration = '500ms';
-				          container.style.transform = `translateX(${direction * ( 4.7 )}%)`;
-				          container.ontransitionend = () => reorganizeEl(selectedBtn);
-				        }
-				     	// 확인
-				        function reorganizeEl(selectedBtn) {
-				          container.removeAttribute('style');
-				          (selectedBtn === 'prev') ? container.insertBefore(container.lastElementChild, container.firstElementChild):
-				            container.appendChild(container.firstElementChild);
-				        }
-				     	
-				     	
-				     	
-				     // 확인
-				     }
+				    
+				    (function addEvent() {
+				      prevBtn.addEventListener('click', translateContainer.bind(this, 1));
+				      nextBtn.addEventListener('click', translateContainer.bind(this, -1));
+				    })();
+				   
+				    function translateContainer(direction) {
+				      const selectedBtn = (direction === 1) ? 'prev' : 'next';
+				      container.style.transitionDuration = '500ms';
+				      container.style.transform = `translateX(${direction * ( 4.7 )}%)`;
+				      container.ontransitionend = () => reorganizeEl(selectedBtn);
+				    }
+				    
+				    function reorganizeEl(selectedBtn) {
+				      container.removeAttribute('style');
+				      (selectedBtn === 'prev') ? container.insertBefore(container.lastElementChild, container.firstElementChild):
+				      container.appendChild(container.firstElementChild);
+				    }
+				    
+				    
+				}
 				
 				
 			    
@@ -722,7 +724,7 @@
 			 success : function(data) {
 				console.log(data);
 				 
-				for(var i in data.title){
+				for(var i in data.title1){
 							
 					var innerHtml = ""
 					
@@ -735,7 +737,7 @@
 					
 					innerHtml +='</div>'
 					innerHtml += '<div class="main_topcontent">'
-					innerHtml +=   '<h3 style="color: #fff;" class="titleremove'+i+'">'+data.title[i]+'</h3>'
+					innerHtml +=   '<h3 style="color: #fff;" class="titleremove1'+i+'">'+data.title1[i]+'</h3>'
 					innerHtml +=   '<span class="main_toprate"></span>'
 					innerHtml +=  '<div class="main_topicon">'
 					innerHtml +=    '<i class="far fa-star" id="star" style="color: yellow;"></i>'
@@ -749,9 +751,9 @@
 					var length = 8;
 					
 					// 확인
-					$('.titleremove'+i).each(function(){
-						if($('.titleremove'+i).text().length >= length){
-							$('.titleremove'+i).text($('.titleremove'+i).text().substr(0,length)+'...');
+					$('.titleremove1'+i).each(function(){
+						if($('.titleremove1'+i).text().length >= length){
+							$('.titleremove1'+i).text($('.titleremove1'+i).text().substr(0,length)+'...');
 						}
 					});
 					
@@ -855,7 +857,7 @@
 		 $.ajax({
 			 url : "${pageContext.request.contextPath}/mypage/mybookmarkContent.do",
 			 type : 'get',
-			 data : {mm : ${member.m_no}},
+			 data : {	mm : ${member.m_no} },
 			 success : function(data) {
 				console.log(data);
 				 
@@ -872,7 +874,7 @@
 					
 					innerHtml +='</div>'
 					innerHtml += '<div class="main_topcontent">'
-					innerHtml +=   '<h3 style="color: #fff;" class="titleremove'+i+'">'+data.title[i]+'</h3>'
+					innerHtml +=   '<h3 style="color: #fff;" class="titleremove2'+i+'">'+data.title[i]+'</h3>'
 					innerHtml +=   '<span class="main_toprate"> </span>'
 					innerHtml +=  '<div class="main_topicon">'
 					innerHtml +=    '<i class="far fa-star" id="star" style="color: yellow;"></i>'
@@ -885,67 +887,63 @@
 					// 글자 수 제한
 					var length = 8;
 					
-					// 확인
-					$('.titleremove'+i).each(function(){
-						if($('.titleremove'+i).text().length >= length){
-							$('.titleremove'+i).text($('.titleremove'+i).text().substr(0,length)+'...');
+					
+					$('.titleremove2'+i).each(function(){
+						if($('.titleremove2'+i).text().length >= length){
+							$('.titleremove2'+i).text($('.titleremove2'+i).text().substr(0,length)+'...');
 						}
 					});
 					
 					
 					   const container = document.querySelector(".main_topcontainer");
-				        const prevBtn = document.querySelector(".prev");
-				        const nextBtn = document.querySelector(".next");
+				       const prevBtn = document.querySelector(".prev");
+				       const nextBtn = document.querySelector(".next");
 						
-				        // 확인
+				       
 				        (function addEvent() {
 				          prevBtn.addEventListener('click', translateContainer.bind(this, 1));
 				          nextBtn.addEventListener('click', translateContainer.bind(this, -1));
 				        })();
-				     // 확인
+				    
 				        function translateContainer(direction) {
 				          const selectedBtn = (direction === 1) ? 'prev' : 'next';
 				          container.style.transitionDuration = '500ms';
 				          container.style.transform = `translateX(${direction * ( 4.7 )}%)`;
 				          container.ontransitionend = () => reorganizeEl(selectedBtn);
 				        }
-				     	// 확인
+				     	
 				        function reorganizeEl(selectedBtn) {
 				          container.removeAttribute('style');
 				          (selectedBtn === 'prev') ? container.insertBefore(container.lastElementChild, container.firstElementChild):
 				            container.appendChild(container.firstElementChild);
 				        }
 
-				     // 확인
+				    
 				     }
 
 			    
-				// 찜 클릭 시
-			    $(function () {
-			    	$(".main_topicon").on("click",function () {
-			            $("#star").removeClass("far");
-			            $("#star").addClass("fas");
-			          })
-			    });
+					// 찜 클릭 시
+				    $(function () {
+				    	$(".main_topicon").on("click",function () {
+				            $("#star").removeClass("far");
+				            $("#star").addClass("fas");
+				          })
+				        
+				    });
+					
+					
+					// 포스터에 hover 시 리뷰보기 / 작성하기
+				    $('.cell').on('mouseenter', function () {
+				         	 $(this).children('.main_topinfo').show();
+				    }).on('mouseleave', function () {
+				        	 $(this).children('.main_topinfo').hide();
+				    });
 				
 				
-				// 포스터에 hover 시 리뷰보기 / 작성하기
-			    $('.cell').on('mouseenter', function () {
-			         	 $(this).children('.main_topinfo').show();
-			    }).on('mouseleave', function () {
-			        	 $(this).children('.main_topinfo').hide();
-			     });
 
 				}
 			 });
 		 });
-        
-        
-        
-        
-        
-        
-        
         
         
         

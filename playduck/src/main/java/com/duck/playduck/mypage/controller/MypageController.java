@@ -281,7 +281,7 @@ public class MypageController {
 			
 		}	
 
-		map.put("title", list1);
+		map.put("title1", list1);
 		map.put("poster", list2);
 		//map.put("pnum", list3);
 
@@ -289,7 +289,7 @@ public class MypageController {
 	}
 	
 	// 특정 회원이 찜한 큐레이션 콘텐츠 목록 받아오기
-			
+	
 	@RequestMapping("/mypage/mybookmarkContent.do")
 	@ResponseBody
 	public Map<String, List> mybookmarkContent(@RequestParam int mm){
