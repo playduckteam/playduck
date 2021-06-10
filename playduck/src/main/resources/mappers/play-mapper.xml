@@ -9,5 +9,4 @@ SELECT P_NO FROM PLAY
 <select id="selectTotalContents" resultType="_int">
 SELECT COUNT(*) FROM PLAY
 </select>
-
 </mapper>
