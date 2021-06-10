@@ -44,6 +44,7 @@ public class ReviewController {
 	public String ReviewForm(Model model,
 			@RequestParam String p_no) {
 		
+		System.out.println(p_no);
 		ArrayList rwlist = new ArrayList();
 		
 		try {

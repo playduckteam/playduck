@@ -30,5 +30,10 @@ WHERE P_NO = #{p_no} AND R_STATUS = '2'
 	<delete id="deleteReview">
   		delete from review where r_no = #{r_no}
  	</delete>
+	<select id="myReview" resultType="Review" parameterType="_int">
+		SELECT P_NO
+		FROM REVIEW
+		WHERE M_NO = #{ m_no }
+	</select>
 	
 </mapper>

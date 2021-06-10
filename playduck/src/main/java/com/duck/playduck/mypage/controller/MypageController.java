@@ -5,20 +5,32 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.mypage.model.service.MypageService;
+import com.duck.playduck.play.model.vo.Bookmark;
+import com.duck.playduck.play.model.vo.Play;
 import com.duck.playduck.review.model.vo.Review;
 
 
@@ -29,6 +41,24 @@ public class MypageController {
 	
 	@Autowired
 	MypageService mypageService;
+	
+	
+	private static String getTagValue (String tag, Element eElement) {
+		
+		NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
+		
+		Node nValue = (Node) nlList.item(0);
+		if(nValue == null)
+			return null;
+		return nValue.getNodeValue();
+		}
+	
+	
+	
+	
+	
+	
+	
 	
 
 	@RequestMapping("/mypage/mypage.do")
@@ -67,15 +97,7 @@ public class MypageController {
 			model.addAttribute("rank", "일반회원");
 		}
 		
-	/*
-	 * int rank = mypageService.selectRank(m);
-	 * 
-	 * if(result > 0) { reward = mypageService.selectReward(m); }
-	 * 
-	 * System.out.println("rank : " + rank);
-	 * 
-	 * model.addAttribute("rank", rank);
-	 */
+	
 		
 		return "myPage";
 	}
@@ -142,6 +164,160 @@ public class MypageController {
 			return sdf.format(new Date(System.currentTimeMillis())) + "_" + rnd + "." + ext;
 			
 		}
+	
+	// 000님이 작성한 리뷰 가져오는 부분
+	@RequestMapping("/mypage/myReview.do")
+	@ResponseBody
+	public Map<String, List> myReview(@RequestParam int mm) {
+		
+		// 특정 회원이 작성한 리뷰의 공연 번호 받아오기
+		List<Review> list = new ArrayList<Review>();
+		
+		list = mypageService.myReview(mm);
+		
+		// 특정 회원이 찜한 공연 목록 받아오기
+		List<Bookmark> bookmark = mypageService.bookmarkPlay(mm);
+		System.out.println("bookmark 결과 : "+ bookmark);
+		
+		
+		
+		System.out.println("리스트 결과 : "+ list);
+		
+		List<String> list1 = new ArrayList<String>();
+		List<String> list2 = new ArrayList<String>();
+		//List<String> list3 = new ArrayList<String>();
+		
+		Map<String, List> map = new HashMap<String, List>();
+		
+		for(Review i : list ) {
+			try {
 
+				String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+	i.getP_no()+"?service=f6ad9fc845404d7db3617fe6ebac38a7";
+				
+				DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder =dbFactoty.newDocumentBuilder();
+				Document doc =dBuilder.parse(url);
+				
+				doc.getDocumentElement().normalize();
+				
+				
+				NodeList nList =doc.getElementsByTagName("db");
+				
+				
+				
+				for(int temp=0; temp < nList.getLength(); temp++) {
+					Node nNode = nList.item(temp);
+					if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+						
+						Element eElement = (Element) nNode;
+						
+						list1.add(getTagValue("prfnm", eElement) );
+						list2.add(getTagValue("poster", eElement) );	
+						//list3.add(i.getP_no());
+					}	
+				}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+			
+		}	
+
+		
+		map.put("title", list1);
+		map.put("poster", list2);
+		//map.put("pnum", list3);
+		
+		
+		return map;
+	}	
+	
+	// 찜한 공연 목록 불러오기
+	@RequestMapping("/mypage/mybookmarkPlay.do")
+	@ResponseBody
+	public Map<String, List> mybookmarkPlay(@RequestParam int mm){
+	
+		// 특정 회원이 찜한 공연 목록 받아오기
+		List<Bookmark> bookmark = mypageService.bookmarkPlay(mm);
+		System.out.println("bookmark 결과 : "+ bookmark);
+		
+		List<String> list1 = new ArrayList<String>();
+		List<String> list2 = new ArrayList<String>();
+		//List<String> list3 = new ArrayList<String>();
+	
+		Map<String, List> map = new HashMap<String, List>();
+	
+		for(Bookmark bk : bookmark ) {
+			try {
+
+				String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+	bk.getP_list()+"?service=f6ad9fc845404d7db3617fe6ebac38a7";
+				
+				DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder =dbFactoty.newDocumentBuilder();
+				Document doc =dBuilder.parse(url);
+				
+				doc.getDocumentElement().normalize();
+				
+				
+				NodeList nList =doc.getElementsByTagName("db");
+				
+				
+				
+				for(int temp=0; temp < nList.getLength(); temp++) {
+					Node nNode = nList.item(temp);
+					if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+						
+						Element eElement = (Element) nNode;
+						
+						list1.add(getTagValue("prfnm", eElement) );
+						list2.add(getTagValue("poster", eElement) );	
+						//list3.add(i.getP_no());
+					}	
+				}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+			
+		}	
+
+		map.put("title1", list1);
+		map.put("poster", list2);
+		//map.put("pnum", list3);
+
+		return map;
+	}
+	
+	// 특정 회원이 찜한 큐레이션 콘텐츠 목록 받아오기
+	
+	@RequestMapping("/mypage/mybookmarkContent.do")
+	@ResponseBody
+	public Map<String, List> mybookmarkContent(@RequestParam int mm){
+		
+		List<Curation> mycuration = mypageService.bookmarkCuration(mm);
+		System.out.println("mycuration 결과 : "+ mycuration);
+		
+		List<String> list1 = new ArrayList<String>();
+		List<String> list2 = new ArrayList<String>();
+	
+		Map<String, List> map = new HashMap<String, List>();
+		
+		for(Curation c : mycuration) {
+			
+			if(c != null) {
+				list1.add(c.getC_title());
+				list2.add(c.getC_pic());
+			}
+			
+		}
+		
+		map.put("title", list1);
+		map.put("poster", list2);
+		
+		return map;
+	
+	}
+			
+			
 	
 }
