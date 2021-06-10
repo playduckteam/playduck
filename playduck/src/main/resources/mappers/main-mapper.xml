@@ -8,64 +8,75 @@
 		<result property="p_good" column="p_good" />
 		<result property="p_bad" column="max(p_bad)" />
 	</resultMap>
-	
+
 	<resultMap type="Member" id="resultMember">
-		<result property="m_genre" column="m_genre" typeHandler="MyTypeHandler" />
+		<result property="m_genre" column="m_genre"
+			typeHandler="MyTypeHandler" />
 	</resultMap>
 
-<select id="reviewTop10" resultType="review">
-SELECT *
-FROM (SELECT COUNT(P_NO),P_NO
-	FROM REVIEW
-	GROUP BY P_NO
-	ORDER BY COUNT(P_NO) DESC, P_NO DESC)
-WHERE ROWNUM &lt;= 10
-</select>
-
-<select id="playgb" resultType="play" resultMap="resultPlay">
-SELECT *
-FROM (SELECT COUNT(P_NO),P_NO
-	FROM REVIEW
-	GROUP BY P_NO
-	ORDER BY COUNT(P_NO) DESC, P_NO DESC) Q
-JOIN (SELECT P.P_NO, FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) / DECODE(MAX(P_GOOD), 0, NULL, MAX(P_GOOD)), 0)*100)"p_good" 
-	FROM PLAY P
-	JOIN REVIEW R ON (P.P_NO = R.P_NO)
-	GROUP BY P.P_NO,P_GOOD,P_BAD
-	ORDER BY COUNT(P.P_NO) DESC, P.P_NO DESC)  S ON(S.P_NO =Q.P_NO )      
-WHERE ROWNUM &lt; =10  
-
-</select>
-
-<select id="hotReview" resultType="review">
-	SELECT *
-	FROM (SELECT *
-	FROM REVIEW
-	ORDER BY R_GOOD+R_BAD  DESC)
-	WHERE ROWNUM &lt;=3
-</select>
-
-	<select  id="allPlaySelect" resultType="play" resultMap="resultPlay">
-		 SELECT P_NO,FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) / DECODE(MAX(P_GOOD), 0, NULL, MAX(P_GOOD)), 0)*100)"p_good" 
-  	 	 FROM PLAY
-   		 GROUP BY P_NO
+	<select id="reviewTop10" resultType="review">
+		SELECT *
+		FROM (SELECT COUNT(P_NO),P_NO
+		FROM REVIEW
+		GROUP BY P_NO
+		ORDER BY COUNT(P_NO) DESC, P_NO DESC)
+		WHERE ROWNUM &lt;= 10
 	</select>
-	
-	<select id="memberGenrenmG"  parameterType="_int" resultMap="resultMember">
+
+	<select id="playgb" resultType="play" resultMap="resultPlay">
+		SELECT *
+		FROM (SELECT COUNT(P_NO),P_NO
+		FROM REVIEW
+		GROUP BY P_NO
+		ORDER BY COUNT(P_NO) DESC, P_NO DESC) Q
+		JOIN (SELECT P.P_NO, FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) /
+		DECODE(MAX(P_GOOD), 0, NULL, MAX(P_GOOD)), 0)*100)"p_good"
+		FROM PLAY P
+		JOIN REVIEW R ON (P.P_NO = R.P_NO)
+		GROUP BY P.P_NO,P_GOOD,P_BAD
+		ORDER BY COUNT(P.P_NO) DESC, P.P_NO DESC) S ON(S.P_NO =Q.P_NO )
+		WHERE ROWNUM &lt; =10
+
+	</select>
+
+	<select id="hotReview" resultType="review">
+		SELECT *
+		FROM (SELECT *
+		FROM REVIEW
+		ORDER BY R_GOOD+R_BAD DESC)
+		WHERE ROWNUM &lt;=3
+	</select>
+
+	<select id="allPlaySelect" resultType="play"
+		resultMap="resultPlay">
+		SELECT P_NO,FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) / DECODE(MAX(P_GOOD), 0,
+		NULL, MAX(P_GOOD)), 0)*100)"p_good"
+		FROM PLAY
+		GROUP BY P_NO
+	</select>
+
+	<select id="memberGenrenmG" parameterType="_int"
+		resultMap="resultMember">
 		SELECT *
 		FROM MEMBER
 		WHERE M_NO = #{ m_no }
 	</select>
-	
-	<select id="curationforDuck"  resultType="curation">
+
+	<select id="curationforDuck" resultType="curation">
 		SELECT *
 		FROM CURATION
 	</select>
-	
-	
-	<select id="memberpic"  resultType="member">
+
+
+	<select id="memberpic" resultType="member">
 		SELECT M_PICRENAMED
 		FROM MEMBER
+	</select>
+	
+	<select  id="BookMarkC" parameterType="_int"  resultType="bookmark">
+		SELECT *
+		FROM BOOKMARK
+		WHERE M_NO = #{m_no}
 	</select>
 
 

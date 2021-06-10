@@ -1,26 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>메인 페이지</title>
-  <script src="resources/js/jquery-3.6.0.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+<title>메인 페이지</title>
+<script src="resources/js/jquery-3.6.0.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+	crossorigin="anonymous">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+	integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+	crossorigin="anonymous">
   </script>
-  <script src="https://kit.fontawesome.com/2004329f9f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="resources/css/common.css">
-  <link rel="stylesheet" href="resources/css/main.css">
-  <link rel="stylesheet" href="resources/css/headerfooter.css">
+<script src="https://kit.fontawesome.com/2004329f9f.js"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="resources/css/common.css">
+<link rel="stylesheet" href="resources/css/main.css">
+<link rel="stylesheet" href="resources/css/headerfooter.css">
 <link rel="stylesheet" href="resources/css/join.css">
 <link rel="stylesheet" href="resources/css/login.css">
 <link rel="stylesheet" href="resources/css/findIdPw.css">
@@ -31,102 +41,119 @@
 </head>
 
 <body>
- 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-  <!--메인 슬라이드-->
-  <a href="${pageContext.request.contextPath}/MD/MD_play.do">연극별 Md</a>
-  <a href="${pageContext.request.contextPath}/MD/MD_buy.do"> MD 결제페이지</a>
-  <a href="${pageContext.request.contextPath}/MD/MD_order.do"> MD 상세보기</a>
- 
-  <article class="main_slide">
-    <img class="main_ribbon" src="resources/images/top10_ribbon.png">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"
-      style="height:730px; width:1400px;">
-      <div class="carousel-inner">
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<!--메인 슬라이드-->
+	<a href="${pageContext.request.contextPath}/MD/MD_play.do">연극별 Md</a>
+	<a href="${pageContext.request.contextPath}/MD/MD_buy.do"> MD 결제페이지</a>
+	<a href="${pageContext.request.contextPath}/MD/MD_order.do"> MD
+		상세보기</a>
 
-        <div class="carousel-item active">
-          <img src="resources/images/slide01.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide02.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide03.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide04.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide05.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide06.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide07.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide08.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide09.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-        <div class="carousel-item">
-          <img src="resources/images/slide10.jpg" class="d-block w-100" height="730px" width="1400px"
-            id="main_slideimg">
-        </div>
-      </div>
-    </div>
-  </article>
-  <section>
-    <!--탑10 슬라이드-->
-    <article class="main_top10">
-      <div> <span class="main_fontw">TOP 10</span> <span class="main_fonto">작품 리뷰</span></div>
-      <div class="main_topwindow">
-        <div class="button-container" >
-          <button class="prev"><i class="arrow left"></i></button>
-        </div>
-        <ul class="main_topcontainer" id="review_top10">
-          
-        </ul>
-        <div class="button-container">
-          <button class="next"><i class="arrow right"></i></button>
-        </div>
-      </div>
-      <script>
+	<article class="main_slide">
+		<img class="main_ribbon" src="resources/images/top10_ribbon.png">
+		<div id="carouselExampleSlidesOnly" class="carousel slide"
+			data-bs-ride="carousel" style="height: 730px; width: 1400px;">
+			<div class="carousel-inner">
+
+				<div class="carousel-item active">
+					<img src="resources/images/slide01.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide02.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide03.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide04.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide05.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide06.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide07.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide08.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide09.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+				<div class="carousel-item">
+					<img src="resources/images/slide10.jpg" class="d-block w-100"
+						height="730px" width="1400px" id="main_slideimg">
+				</div>
+			</div>
+		</div>
+	</article>
+	<section>
+		<!--탑10 슬라이드-->
+		<article class="main_top10">
+			<div>
+				<span class="main_fontw">TOP 10</span> <span class="main_fonto">작품
+					리뷰</span>
+			</div>
+			<div class="main_topwindow">
+				<div class="button-container">
+					<button class="prev">
+						<i class="arrow left"></i>
+					</button>
+				</div>
+				<ul class="main_topcontainer" id="review_top10">
+
+				</ul>
+				<div class="button-container">
+					<button class="next">
+						<i class="arrow right"></i>
+					</button>
+				</div>
+			</div>
+			<script>
      
     
       </script>
-    </article>
+		</article>
 
-    <!--큐레이션 슬라이드-->
-    <article class="main_curation">
-      <div> <span class="main_fontw">큐레이션</span> <span class="main_fonto">for DUCKs</span> <button class="curation_write" onclick = "fn_goCurationForm()">큐레이션 작성하기</button></div>
-     <script>
+		<!--큐레이션 슬라이드-->
+		<article class="main_curation">
+			<div>
+				<span class="main_fontw">큐레이션</span> <span class="main_fonto">for
+					DUCKs</span>
+				<button class="curation_write" onclick="fn_goCurationForm()">큐레이션
+					작성하기</button>
+			</div>
+			<script>
 				function fn_goCurationForm(){
 					location.href = "${pageContext.request.contextPath}/curation/curationForm.do"
 				}
 				</script>
-      <div class="main_curwindow">
-        <div class="button-container">
-          <button class="prev2"><i class="arrow left2"></i></button>
-        </div>
-        <ul class="main_curcontainer" id="curation_ran">
-         
-        </ul>
-        <div class="button-container">
-          <button class="next2"><i class="arrow right2"></i></button>
-        </div>
-      </div>
-      <script>
+			<div class="main_curwindow">
+				<div class="button-container">
+					<button class="prev2">
+						<i class="arrow left2"></i>
+					</button>
+				</div>
+				<ul class="main_curcontainer" id="curation_ran">
+
+				</ul>
+				<div class="button-container">
+					<button class="next2">
+						<i class="arrow right2"></i>
+					</button>
+				</div>
+			</div>
+			<script>
         const container2 = document.querySelector(".main_curcontainer");
         const prevBtn2 = document.querySelector(".prev2");
         const nextBtn2 = document.querySelector(".next2");
@@ -155,50 +182,53 @@
           })
         });
       </script>
-    </article>
-    <!--핫리뷰-->
-    <article class="main_hotreview">
-      <div id="Hotreview3"> <span class="main_fonto">HOT</span> <span class="main_fontw">리뷰</span></div>
+		</article>
+		<!--핫리뷰-->
+		<article class="main_hotreview">
+			<div id="Hotreview3">
+				<span class="main_fonto">HOT</span> <span class="main_fontw">리뷰</span>
+			</div>
 
-    
 
-    </article>
-    <!--추천 슬라이드-->
- 
-    <article class="main_recommend">
-       <c:if test="${member != null}">
-      <div><span class="main_fontw">${member.m_name}님, 이 작품은 어떠세요?</span></div> 
-     </c:if>
-      <c:if test="${member == null}">
-       <div><span class="main_fontw">방문자님, 이 작품은 어떠세요?</span></div> 
-    </c:if>
-      <div class="main_recwindow">
-        <div class="button-container">
-          <button class="prev3"><i class="arrow left3"></i></button>
-        </div>
-        <ul class="main_reccontainer" id="member_Genre1">
-        
-        </ul>
-        <div class="button-container">
-          <button class="next3"><i class="arrow right3"></i></button>
-        </div>
-      </div>
-     
-      <script>
+
+		</article>
+		<!--추천 슬라이드-->
+
+		<article class="main_recommend">
+			<c:if test="${member != null}">
+				<div>
+					<span class="main_fontw">${member.m_name}님, 이 작품은 어떠세요?</span>
+				</div>
+			</c:if>
+			<c:if test="${member == null}">
+				<div>
+					<span class="main_fontw">방문자님, 이 작품은 어떠세요?</span>
+				</div>
+			</c:if>
+			<div class="main_recwindow">
+				<div class="button-container">
+					<button class="prev3">
+						<i class="arrow left3"></i>
+					</button>
+				</div>
+				<ul class="main_reccontainer" id="member_Genre1">
+
+				</ul>
+				<div class="button-container">
+					<button class="next3">
+						<i class="arrow right3"></i>
+					</button>
+				</div>
+			</div>
+
+			<script>
       
       </script>
 
-    </article>
-	<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-  </section>
-  <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</article>
+		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+	</section>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 
 <script>
@@ -226,7 +256,7 @@
 					innerHtml +=   '<h3 style="color: #fff;" class="titleremove'+i+'">'+data.title[i]+'</h3>'
 					innerHtml +=   '<span class="main_toprate">'+data.grade[i]+'%</span>'
 					innerHtml +=  '<div class="main_topicon">'
-					innerHtml +=    '<i class="far fa-star" id="star" style="color: yellow;"></i>'
+					innerHtml +=    '<i class="far fa-star '+data.pnum[i]+'" id="star" style="color: yellow;" ></i>'
 					innerHtml += ' </div>'
 					innerHtml += '</div>'
 					innerHtml +='</li>'
@@ -266,14 +296,55 @@
 				        }
 				};
 			
-			// 찜 클릭 시
-		    $(function () {
-		    	$(".main_topicon").on("click",function () {
-		            $("#star").removeClass("far");
-		            $("#star").addClass("fas");
-		          })
-		        });
-		    
+		
+	
+			<c:if test="${ member == null}">
+				$(function() {	
+
+					$(".main_topicon").on("click",function () {	
+						
+						alert("로그인을 해주세요!")
+		
+				 	 })
+				});	
+			</c:if>
+			
+			<c:if test="${ member != null}">
+		    	$(function() {
+		    		
+		    		var data1 = {
+		    				"m_no" : ${member.m_no},
+		    				"p_num" : data.pnum
+		    		}
+  		
+		     			$.ajax({
+		     				url :  "${pageContext.request.contextPath}/main/bookmarkcheck.do",
+		     				type : "get",
+		     				data : data1,
+		     				success : function(data) {
+		     					
+		     					
+		     					for(var i in data) {
+		     						for(var j in data.pnum) {
+		     							if(data[i].equals(data.pnum[j])){
+		     								$(function(){
+		     									$(data.pnum[j])addClass("fas");
+		     								})
+		     							}
+		     						}
+		     					}
+		    				$(".main_topicon").on("click",function () {
+		    				
+		     						
+		     				
+		       				   })
+		     				}
+		     			});
+		     		});	
+		    	</c:if>
+		    	
+		    	
+		    	
 			// 포스터에 hover 시 리뷰보기 / 작성하기
 		    $('.cell').on('mouseenter', function () {
 		         	 $(this).children('.main_topinfo').show();
@@ -329,7 +400,9 @@
 					 
 					 innerHtml = '<table class="main_hotreviewTable">'
 					 innerHtml +=  '<tr>'
-					 innerHtml += ' <td class="main_hotreviewprofile"></td>'
+					 innerHtml += ' <td class="main_hotreviewprofile">'
+					 innerHtml +=	 '<img src="resources/images/'+data.pic[i]+'" width="120" height="120">'
+					 innerHtml += '</td>'
 					 innerHtml +='<td class="main_hotreviewcontent">'+data.content[i]+'</td>'
 					 innerHtml +=  ' <td class="main_hotreviewimg"><img src='+data.poster[i] +' width="280" height="120"></td>'
 					 innerHtml += '</tr>'
@@ -416,7 +489,7 @@
 						}
 					});
 					
-					 const container3 = document.querySelector(".main_reccontainer");
+					    const container3 = document.querySelector(".main_reccontainer");
 	 			        const prevBtn3 = document.querySelector(".prev3");
 	 			        const nextBtn3 = document.querySelector(".next3");
 
