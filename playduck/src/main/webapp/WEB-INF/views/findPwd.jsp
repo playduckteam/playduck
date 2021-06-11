@@ -21,11 +21,13 @@ height: 100%}
                 <div class="modal_content findArea">
                     <div class="find_id">
                         <h2 class=find_title>비밀번호 변경</h2>
-                        <form action="" method="post">
+                        <form action="${pageContext.request.contextPath}/member/changePwd.do" method="post">
                         <p class="findPwd_result">변경할 비밀번호를 입력하세요</p><br><br>
-                            <input type="text" name="m_id" id="findPwd1" maxlength="20" placeholder="비밀번호"/>
-                            <input type="text" name="m_email" id="findPwd2" placeholder="비밀번호 확인"/>
-                            <button type="submit" class="login_box find orange">메인으로 이동</button>
+                            <input type="password" name="m_pwd" id="mm_pwd" maxlength="20" onkeyup="isSame();" placeholder="비밀번호"/>
+                            <input type="password" name="m_pwd2" id="mm_pwd2" onkeyup="isSame();" placeholder="비밀번호 확인"/>
+                            <input type="hidden" name="m_email" value="${email}">
+                            <div id="pwdValue"></div>
+                            <button type="submit" class="login_box find orange">비밀번호 변경</button>
                         </form>
                     </div>
 
@@ -33,4 +35,20 @@ height: 100%}
             </div>
             	<%@ include file="common/footer.jsp"%>
 </body>
+<script>
+    <!-- 비밀번호가 같은지를 확인하는 함수 -->
+    function isSame(){
+        var password = document.getElementById("mm_pwd").value;
+        var passwordCheck = document.getElementById("mm_pwd2").value;
+        console.log(password +" / " + passwordCheck);
+        console.log(password == passwordCheck);
+        if(password == passwordCheck){
+	         document.getElementById("pwdValue").innerHTML = '비밀번호가 일치합니다.';
+	         document.getElementById("pwdValue").style.color = 'blue';    
+        }else{
+            document.getElementById("pwdValue").innerHTML = '비밀번호가 일치하지 않습니다.';
+            document.getElementById("pwdValue").style.color = 'red';  
+        }
+    }
+</script>
 </html>

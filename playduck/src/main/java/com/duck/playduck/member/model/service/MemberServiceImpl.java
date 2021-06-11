@@ -29,4 +29,21 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.selectOneMember(m_id);
 	}
 
+	@Override
+	public Member selectMember(String m_email) {
+		
+		return memberDAO.selectMember(m_email);
+	}
+
+	@Override
+	public int pwdUpdate(Member member) {
+		// TODO Auto-generated method stub
+		return memberDAO.pwdUpdate(member);
+	}
+
+
+
+	
+
+
 }

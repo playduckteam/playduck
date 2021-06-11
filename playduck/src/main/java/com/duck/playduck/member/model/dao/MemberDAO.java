@@ -12,4 +12,8 @@ public interface MemberDAO {
 
 	Member selectOneMember(String m_id);
 
+	Member selectMember(String m_email);
+
+	int pwdUpdate(Member member);
+
 }
