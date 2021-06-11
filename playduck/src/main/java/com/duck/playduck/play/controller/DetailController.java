@@ -171,6 +171,7 @@ public class DetailController {
 		}
 
 	  @RequestMapping("/review/reviewLike.do")
+	  @ResponseBody
 		public int likeInsert(Model model, 
 				@RequestParam int r_no,
 				@RequestParam(required=false, defaultValue="0") int m_no){
@@ -179,7 +180,7 @@ public class DetailController {
 		  System.out.println(m_no);
 		  
 		  Map<String, Object> lmap = new HashMap<>();
-		  lmap.put("p_no", r_no);
+		  lmap.put("r_no", r_no);
 		  lmap.put("m_no", m_no);
 	    
 		detailservice.likeInsert(lmap);
@@ -190,11 +191,107 @@ public class DetailController {
 			return result;
 		}
 	
+	  
+	  @RequestMapping("/review/reviewLikeDelete.do")
+	  @ResponseBody
+		public int likeDelete(Model model, 
+				@RequestParam int r_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println("delete r_no : "+r_no);
+		  System.out.println("delete m_no : "+m_no);
+		  
+		  Map<String, Object> lmap = new HashMap<>();
+		  lmap.put("r_no", r_no);
+		  lmap.put("m_no", m_no);
+	    
+		detailservice.likeDelete(lmap);
+		detailservice.likeDelete2(lmap);
+		
+		int result = detailservice.likeCount(lmap);
+			
+			return result;
+		}
 
+	  @RequestMapping("/review/likecheck.do")
+	  @ResponseBody
+		public int likeCheck(Model model, 
+				@RequestParam String r_no,
+				@RequestParam int m_no
+				) {
+			
+		  System.out.println(r_no);
+		  System.out.println(m_no);
+			Map<String, Object> rmap = new HashMap<>();
+			rmap.put("r_no", r_no);
+			rmap.put("m_no", m_no);
+			
+			int result = detailservice.selectLikecheck(rmap);
+			
+			
+			return result;
+		}
 
+	  @RequestMapping("/review/reviewHate.do")
+	  @ResponseBody
+		public int HateInsert(Model model, 
+				@RequestParam int r_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println(r_no);
+		  System.out.println(m_no);
+		  
+		  Map<String, Object> lmap = new HashMap<>();
+		  lmap.put("r_no", r_no);
+		  lmap.put("m_no", m_no);
+	    
+		detailservice.HateInsert(lmap);
+		detailservice.HateInsert2(lmap);
+		
+		int result = detailservice.HateCount(lmap);
+			
+			return result;
+		}
+	
+	  
+	  @RequestMapping("/review/reviewHateDelete.do")
+	  @ResponseBody
+		public int HateDelete(Model model, 
+				@RequestParam int r_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println("delete r_no : "+r_no);
+		  System.out.println("delete m_no : "+m_no);
+		  
+		  Map<String, Object> lmap = new HashMap<>();
+		  lmap.put("r_no", r_no);
+		  lmap.put("m_no", m_no);
+	    
+		detailservice.HateDelete(lmap);
+		detailservice.HateDelete2(lmap);
+		
+		int result = detailservice.HateCount(lmap);
+			
+			return result;
+		}
 
-
-
+	  @RequestMapping("/detail/bookmarkcheck.do")
+	  @ResponseBody
+		public int detailBookmarkCheck(Model model, 
+				@RequestParam String p_no,
+				@RequestParam int m_no){
+		  
+		  System.out.println(p_no + "/"+ m_no);
+		  
+		  Map<String, Object> rmap = new HashMap<>();
+		  rmap.put("p_no", p_no);
+		  rmap.put("m_no", m_no);
+	  
+		  
+		int result = detailservice.detailBookmarkCheck(rmap);
+			
+			return result;
+		}
 
 }
 

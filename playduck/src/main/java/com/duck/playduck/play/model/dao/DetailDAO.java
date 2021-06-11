@@ -27,4 +27,24 @@ public interface DetailDAO {
 
 	int likeCount(Map<String, Object> lmap);
 
+	int selectLikecheck(Map<String, Object> rmap);
+
+	int likeDelete(Map<String, Object> lmap);
+
+	int likeDelete2(Map<String, Object> lmap);
+
+	int HateInsert(Map<String, Object> lmap);
+
+	int HateInsert2(Map<String, Object> lmap);
+
+	int HateCount(Map<String, Object> lmap);
+
+	int HateDelete(Map<String, Object> lmap);
+
+	int HateDelete2(Map<String, Object> lmap);
+
+	int detailBookmarkCheck(Map<String, Object> rmap);
+
+	
+
 }
