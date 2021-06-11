@@ -102,7 +102,6 @@ public class MemberController {
 	public String memberLogin(@RequestParam String m_id,@RequestParam String m_pwd, Model model) {
 		
 		Member result = memberService.selectOneMember(m_id);
-		System.out.println(result.getM_status());
 		
 		String msg= "";
 		String loc= "/";
