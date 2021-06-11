@@ -44,7 +44,7 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<!--메인 슬라이드-->
 	<a href="${pageContext.request.contextPath}/MD/MD_play.do">연극별 Md</a>
-	<a href="${pageContext.request.contextPath}/MD/MD_buy2.do"> MD 결제페이지</a>
+	<a href="${pageContext.request.contextPath}/MD/MD_buy2?mno=${member.m_no}"> MD 결제페이지</a>
 	<a href="${pageContext.request.contextPath}/MD/MD_order.do"> MD
 		상세보기</a>
 

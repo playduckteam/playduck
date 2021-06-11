@@ -64,6 +64,13 @@ public class MdServiceImpl implements MdService {
 		return mdDAO.selectOneBasket(dno, mno, num);
 	}
 	
+	// 장바구니에서 수량 수정
+	@Override
+	public int update2Basket(int dno, int mno, int num) {
+		
+		return mdDAO.update2Basket(dno,mno,num);
+	}
+	
 
 	
 

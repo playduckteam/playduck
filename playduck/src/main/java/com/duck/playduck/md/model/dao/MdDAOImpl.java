@@ -71,6 +71,14 @@ public class MdDAOImpl implements MdDAO {
 		
 		return sqlSession.selectOne("md2-mapper.selectOneBasket", basket);
 	}
+
+	// 장바구니에서 수량 수정
+	@Override
+	public int update2Basket(int dno, int mno, int num) {
+		Basket basket = new Basket(mno,dno,num);
+		
+		return sqlSession.update("md2-mapper.update2Basket", basket);
+	}
 	
 
 
