@@ -1,6 +1,7 @@
 package com.duck.playduck.play.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.duck.playduck.main.model.vo.Main;
 import com.duck.playduck.play.model.vo.Play;
@@ -14,10 +15,19 @@ public interface DetailService {
 
 	Play selectPlayOne(String p_no);
 
-	List<Review> selectGoodReview(String p_no);
+	List<Review> selectGoodReview(Map<String, Object> rmap);
 
-	List<Review> selectBadReview(String p_no);
+	List<Review> selectBadReview(Map<String, Object> rmap);
 
-	int deleteReview( int r_no);
+	int deleteReview(int r_no);
+
+	int reviewDupl(Map<String, Object> rmap);
+
+	int likeInsert(Map<String, Object> lmap);
+
+	int likeInsert2(Map<String, Object> lmap);
+
+	int likeCount(Map<String, Object> lmap);
+
 
 }

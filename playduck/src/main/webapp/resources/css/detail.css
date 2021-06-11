@@ -28,6 +28,8 @@
 .detail_title{
     font-size: 27px;
     font-weight: 700;
+    line-height: 40px;
+    width: 460px
 }
 
 .detail_rating{
@@ -50,12 +52,13 @@
     line-height: 45px;
     font-size: 17px;
     cursor: pointer;
+    position: relative;
 }
 .detail_ReservationLink>img{
     top: 10px;
     position: absolute;
-    top: 95px;
-    left: 650px;
+    top: 6px;
+    left: 180px;
 }
 
 .detail_detailContent{
@@ -188,6 +191,12 @@ hr{
     position: absolute;
     top: -50px;
     left: 20px;
+}
+.detail_reviewProfile>img{
+    width: 145px;
+    height: 145px;
+    border-radius: 145px;
+
 }
 /* .tab-content{ */
 /*     display: none; */

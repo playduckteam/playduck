@@ -4,7 +4,7 @@
 <mapper namespace="review-mapper">
 
 	<insert id="insertReview" parameterType="map">
-		insert into review values(seq_r_no.nextval, 'PF175502', 1, #{r_content}, default, default, #{r_status})
+		insert into review values(seq_r_no.nextval, #{p_no}, #{m_no}, #{r_content}, default, default, #{r_status})
 	</insert>
 
 	<insert id="insertReview2" parameterType="map">
@@ -17,14 +17,24 @@
 		WHERE M_NO = #{ m_no }
 	</select>
 	
-	<select id="selectGood" resultType="review" parameterType="review">
-	SELECT * FROM REVIEW
-WHERE P_NO = #{p_no} AND R_STATUS = '1'
+	<select id="selectGood" resultType="hashmap" parameterType="review">
+	SELECT '1', R.*, M.* FROM REVIEW R
+JOIN MEMBER M ON(R.M_NO = M.M_NO)
+WHERE P_NO = #{p_no} AND R_STATUS = '1' and R.m_no = #{m_no}
+union
+SELECT '2', R.*, M.* FROM REVIEW R
+JOIN MEMBER M ON(R.M_NO = M.M_NO)
+WHERE P_NO = #{p_no} AND R_STATUS = '1' and R.m_no != #{m_no}
 	</select>
 	
-	<select id="selectBad" resultType="review" parameterType="review">
-	SELECT * FROM REVIEW
-WHERE P_NO = #{p_no} AND R_STATUS = '2'
+	<select id="selectBad" resultType="hashmap" parameterType="review">
+	SELECT '1', R.*, M.* FROM REVIEW R
+JOIN MEMBER M ON(R.M_NO = M.M_NO)
+WHERE P_NO = #{p_no} AND R_STATUS = '2' and R.m_no = #{m_no}
+union
+SELECT '2', R.*, M.* FROM REVIEW R
+JOIN MEMBER M ON(R.M_NO = M.M_NO)
+WHERE P_NO = #{p_no} AND R_STATUS = '2' and R.m_no != #{m_no}
 	</select>
 	
 	<delete id="deleteReview">
@@ -34,6 +44,26 @@ WHERE P_NO = #{p_no} AND R_STATUS = '2'
 		SELECT P_NO
 		FROM REVIEW
 		WHERE M_NO = #{ m_no }
+	</select>
+	
+	<select id="reviewDupl" resultType="_int" parameterType="hashmap">
+	SELECT COUNT(*) count FROM REVIEW 
+WHERE M_NO = #{m_no} AND P_NO = #{p_no}
+	</select>
+	
+	<insert id="likeInsert" parameterType="map">
+		insert into rlike values(seq_l_no.nextval, #{p_no}, #{r_no}, 1)
+	</insert>
+	
+	<update id="likeInsert2">
+	UPDATE REVIEW
+		SET R_GOOD = R_GOOD + 1
+		WHERE R_NO = #{ r_no } 
+	</update>
+	
+	<select id="likeCount" resultType="_int" parameterType="hashmap">
+	SELECT COUNT(*) count FROM REVIEW 
+WHERE M_NO = #{m_no} AND R_NO = #{r_no} AND RL_STATUS = 1
 	</select>
 	
 </mapper>

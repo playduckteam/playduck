@@ -19,7 +19,7 @@ WHERE P_NO = #{p_no}
 	
 	<!-- 플레이 평점 가져오기 -->
 	<select id="selectPlay"  parameterType="String"  resultType="play">
-	SELECT floor(P_GOOD/(P_GOOD + P_BAD)*100) p_rating
+	SELECT floor(P_GOOD/DECODE((P_GOOD + P_BAD),0,1,(P_GOOD + P_BAD))*100) p_rating
 FROM PLAY
 WHERE P_NO = #{p_no}
 	</select>

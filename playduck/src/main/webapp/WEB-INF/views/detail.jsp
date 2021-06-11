@@ -150,11 +150,45 @@
 			<div class="detail_review">
 			
 				<h3 class="detail_reviewTitle">DUCK's 리뷰</h3>
-				<button class="detail_reviewWrite" onclick = "fn_goReviewForm()">리뷰 작성하기</button>
+				<button class="detail_reviewWrite" >리뷰 작성하기</button>
 				<script>
-				function fn_goReviewForm(){
-					location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=${param.p_no}"
-				}
+// 				function fn_goReviewForm(){
+// 					location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=${param.p_no}"
+// 				}
+				
+				/* 아이디 중복검사 이벤트 추가 */
+				$(".detail_reviewWrite").on("click", function(){
+        			var m_no = '${ member.m_no }';
+        			
+        			if( m_no != '' ){
+        				$.ajax({
+				            url  : "${pageContext.request.contextPath}/review/reviewDuplicate.do",
+				            data : {p_no : '${param.p_no}',
+      	                	    m_no : '${ member.m_no }'},
+				            dataType: "json",
+				            success : function(data){
+				                console.log('버튼통신성공');
+				                console.log(data);
+				                if(data == 0){ 
+				                	location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=${param.p_no}"
+				                } else {
+				                    alert('리뷰를 작성한 공연입니다');
+				                    
+				                   
+				                }
+				            }, error : function(jqxhr, textStatus, errorThrown){
+				                console.log("ajax 처리 실패");
+
+				            }
+			        	});
+        			} else {
+        				alert("로그인 후 이용 가능한 기능입니다.");
+        				$('a.modal_loginBtn').click();
+        			}
+				        
+	     	});
+				
+				
 				</script>
 				<div class="detail_reviewTab">
 					<img class="good" src="${pageContext.request.contextPath}/resources/images/review_good_current.png"
@@ -259,9 +293,10 @@
           	                 type : 'GET',                 //get방식으로 통신
           	                 url : urlPath,    //탭의 data-tab속성의 값으로 된 html파일로 통신
           	                 dataType : "html",//html형식으로 값 읽기 
-          	                 data: { p_no : '${param.p_no}' } ,
+          	                 data: { p_no : '${param.p_no}',
+          	                	    m_no : '${ member.m_no }'} ,
           	                 error : function(error, status) {           //통신 실패시
-          	                  alert('통신실패!');
+          	                  console.log('통신실패!');
           	                  console.log('--------------------');
           	                  console.log(error);
           	                  console.log(status);
