@@ -24,13 +24,13 @@
 
     .Sale_list{
         margin-top: 50px ;
-        margin-bottom:30px ;
+        margin-bottom:60px ;
         position: relative;
 
     }
 
     #Sale_img{
-        margin-left: 10px;
+        margin-left: 20px;
         position:absolute;
     }
 
@@ -92,12 +92,12 @@
             padding-top: 20px;
             padding-left: 250px;
             color: #ff6801;
-            font-size: x-large;
-            font-weight: bolder;
+			 font-size: 27px;
+            font-weight: 700;
         }
 
         #Sale_price_tr1{
-            text-decoration: line-through;
+    
             color: #ff6801;
             font-size: 27px;
             font-weight: 700;
@@ -106,9 +106,9 @@
 
         #Sale_price_tr2{
             padding-top: 100px;
-            color: #ff6801;
-            font: 27px;
+             font-size: 27px;
             font-weight: 700;
+            color: #ff6801;
         }
 
         /* 전체가격 */
@@ -226,3 +226,4 @@
 	padding-bottom: 20px;
 	text-align: center
 }
+

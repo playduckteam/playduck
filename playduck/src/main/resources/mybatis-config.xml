@@ -18,6 +18,8 @@
 		<typeAlias type="com.duck.playduck.curation.model.vo.Curation" alias="curation" />
 		<typeAlias type="com.duck.playduck.orders.model.vo.BuyList" alias="buy" />
 		<typeAlias type="com.duck.playduck.play.model.vo.Bookmark" alias="bookmark" />
+		<typeAlias type="com.duck.playduck.md.model.vo.Basket" alias="basket" />
+		
 	</typeAliases>
 	
 

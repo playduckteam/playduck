@@ -13,4 +13,12 @@ public interface MdService {
 
 	int getReward(int mno);
 
+	int addBasket(int dno, int mno, int num);
+
+	List<Md> getbasketList(int mno);
+
+	int updateBasket(int dno, int mno, int num);
+
+	Md selectOneBasket(int dno, int mno, int num);
+
 }
