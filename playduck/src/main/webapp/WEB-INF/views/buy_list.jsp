@@ -28,6 +28,7 @@
 <input type="number" autocomplete="on" placeholder="송장번호" class="input input_invoice">
 <a class="trackingBtn" href="#" target="_blank">배송조회</a></div>
          <!--물품 구매 리스트-->
+         <p style="color:var(--black-color)">총 ${totalContents}건의 상품이 있습니다.</p>
          <div class="Sale_list">
          <c:forEach items="${blist}" var="bl" begin="0">
             <div class="S_list" id="Sale_img">
@@ -39,7 +40,7 @@
                     <tr> 
                         <td class="Sale_title_th1"colspan="4">${bl.d_title }</td>
                 
-                        <td colspan="2" ><p class="Sale_price_td1" >${bl.d_price}</p></td>
+                        <td colspan="2" ><p class="Sale_price_td1" >${bl.d_price}원</p></td>
                     </tr>
                     <tr>
                     	<td class="Sale_title_td1"> 주문일자</td>
@@ -49,19 +50,19 @@
                         <td class="Sale_title_td1">수량</td>
                         <td class="Sale_title_td2">${bl.o_quan}</td>
                         <td class="Sale_title_td1">리워드 사용</td>
-                        <td class="Sale_title_td2"> ${bl.point}원 </td>
+                        <td class="Sale_title_td2"> ${bl.w_down}원 </td>
                     </tr>
                     <tr>
                         <td class="Sale_title_td1" style="padding-bottom: 0px;">송장번호</td>
-                        <td class="Sale_title_td2" style="padding-bottom: 0px;">12345678</td>
+                        <td class="Sale_title_td2" style="padding-bottom: 0px;">380848576315</td>
                         <td></td>
                         <td><p class="Sale_price_td2">합계</p></td>
-                        <td><p class="Sale_price_td3">62,340원</p></td>
+                        <td><p class="Sale_price_td3">${bl.total}원</p></td>
                     </tr>
                     <tr>
                     <td class="Sale_title_td1" style="padding-bottom: 0px;">주문번호 </td>
                     <td class="Sale_title_td2" style="padding-bottom: 0px;">${bl.o_no}</td>
-                    <td colspan="5"><button class="Sale_returnBtn">반품</button><button class="Sale_canclenBtn">취소</button></td>
+                    <td colspan="5"><button class="Sale_returnBtn">반품</button><button class="Sale_canclenBtn" onclick="goDelete(${bl.o_no});">취소</button></td>
                     </tr>
                  </table>
             </div>
@@ -75,10 +76,12 @@
         		var invoice_number = $(this).parent().children('.input_invoice').val();
         		$(this).siblings('a.trackingBtn').attr('href', 'https://tracker.delivery/#/' + shipment_comp + '/' + invoice_number);
         	});
-        
+        	function goDelete(o_no) {
+        		location.href = "${pageContext.request.contextPath}/buy/buycancel.do?o_no="+o_no
+        	}
         </script>
         <!-- 물품 구매 리스트 끝-->
-        
+        <c:out value="${pageBar}" escapeXml="false"/>
     </section>
     <br /><br /><br /><br /><br />
     	<%@ include file="common/footer.jsp"%>

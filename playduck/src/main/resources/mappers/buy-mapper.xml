@@ -6,13 +6,18 @@
 
 
 <select id="selectBuyList" resultType="buy" parameterType="Member" >
-SELECT M.D_TITLE, M.D_PRICE, M.D_PIC, O.O_QUAN, O.O_NO,O.O_DATE,(SELECT SUM(W_UP)-SUM(W_DOWN)
-FROM REWARD
- WHERE M_NO = #{m_no}) POINT
-FROM ORDERS O
-JOIN MD M USING(D_NO)
-WHERE M_NO = #{m_no}
+select O.O_NO,O.O_QUAN,O.O_DATE, MD.D_TITLE, MD.D_PRICE,MD.D_PIC, (D_PRICE - W_DOWN+2500)TOTAL ,R.W_DOWN from orders O
+join reward R ON(O.W_NO = R.W_NO)
+JOIN MD ON(MD.D_NO = O.D_NO)
+WHERE O.M_NO = #{m_no}
 </select>
 
+<select id="selectTotalContents" resultType="_int">
+SELECT COUNT(*) FROM ORDERS
+</select>
+
+<delete id="buyCancel" parameterType="_int">
+	DELETE FROM ORDERS WHERE O_NO = #{O_NO}
+</delete>
 </mapper>
 

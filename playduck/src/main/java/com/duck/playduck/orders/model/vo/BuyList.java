@@ -17,5 +17,6 @@ public class BuyList implements Serializable {
 	private int o_quan;
 	private int o_no;
 	private Date o_date;
-	private int point;
+	private int total;
+	private int w_down;
 }
