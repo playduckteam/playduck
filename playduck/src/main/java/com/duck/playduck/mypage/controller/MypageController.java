@@ -55,12 +55,6 @@ public class MypageController {
 		}
 	
 	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping("/mypage/mypage.do")
 	public String mypage(HttpServletRequest req, Model model) {
@@ -333,7 +327,7 @@ public class MypageController {
 		System.out.println("삭제 결과 : " + result);
 		
 		
-		return "myPage";
+		return "redirect:/mypage/mypage.do";
 	}
 	
 	// 찜한 큐레이션 삭제
@@ -345,7 +339,7 @@ public class MypageController {
 		System.out.println("큐레이션 삭제 : " + result);
 		
 		
-		return "myPage";
+		return "redirect:/mypage/mypage.do";
 		
 	}
 			
