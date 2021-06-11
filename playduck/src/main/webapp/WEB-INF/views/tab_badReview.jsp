@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="tab-content" id="tab_badReview">
-					<c:forEach items="${rlist}" var="r">
+					<c:forEach items="${rlist2}" var="r">
 					<!-- 리뷰 1 -->
 					<div id="detail_goodContent" style="position: relative;">
 						<div class="detail_reviewProfile">
@@ -19,45 +22,53 @@
 										<i class="far fa-thumbs-down" style="color: gray"></i> <p class="thumb_count">${r.R_BAD}</p></td>
 										<script>
 										$(".fa-thumbs-up").on("click", function(){
-											
-											if(hasclass("far")){
-												
-											$.ajax({
-												url : "${pageContext.request.contextPath}/review/reviewLike.do"
-												data : { r_no : '${r.R_NO'},
-														m_no : '${member.m_no}'},
-												dataType : "json",
-												success : function(data){
-													 $(".fa-thumbs-up").removeClass("far");
-											         $(".fa-thumbs-up").addClass("fas");
-											         $(".thumb_count").text(data);
-												},
-												error : function(error){
-													console.log("좋아요 통신 성공");
-												}
-												
-										
-											
-											}else{
-												
+											var m_no = '${ member.m_no }';
+
+						        			if( m_no != '' ){
+												if($(this).hasClass("far") === true){
+													
 												$.ajax({
-													url : "${pageContext.request.contextPath}/review/reviewLikeDelete.do"
-													data : { r_no : '${r.R_NO'},
+													url : "${pageContext.request.contextPath}/review/reviewLike.do",
+													data : { r_no : '${r.R_NO}',
 															m_no : '${member.m_no}'},
 													dataType : "json",
 													success : function(data){
-														$(".fa-thumbs-down").removeClass("fas");
-												         $(".fa-thumbs-down").addClass("far");
-													}
-														
+														 $(".fa-thumbs-up").removeClass("far");
+												         $(".fa-thumbs-up").addClass("fas");
+												         $(".thumb_count").text(data);
 													},
 													error : function(error){
-														console.log("좋아요취소 통신 성공");
+														console.log("좋아요 통신 성공");
 													}
 													
+												});
+											
 												
-											}
-									});
+	 											}else{
+													
+													$.ajax({
+														url : "${pageContext.request.contextPath}/review/reviewLikeDelete.do",
+														data : { r_no : '${r.R_NO}',
+																m_no : '${member.m_no}'},
+														dataType : "json",
+														success : function(data){
+															$(".fa-thumbs-down").removeClass("fas");
+													         $(".fa-thumbs-down").addClass("far");
+														},
+															
+												
+														error : function(error){
+															console.log("좋아요취소 통신 성공");
+														}
+														
+													
+													});
+	 											}
+									
+						        			}else{
+						        				alert("로그인 후 이용 가능한 기능입니다.");
+						        				$('a.modal_loginBtn').click();
+						        			}
 										});
 										
 										</script>

@@ -82,7 +82,7 @@ public class DetailController {
 						dlist.add(getTagValue("fcltynm", eElement));
 						dlist.add(getTagValue("prfruntime", eElement));
 						dlist.add(getTagValue("entrpsnm", eElement));
-						dlist.add(getTagValue("prfpdfrom	", eElement));
+						dlist.add(getTagValue("prfpdfrom", eElement));
 						dlist.add(getTagValue("prfpdto", eElement));
 						dlist.add(getTagValue("prfcast", eElement));
 						
@@ -138,9 +138,10 @@ public class DetailController {
 		rmap.put("p_no", p_no);
 		rmap.put("m_no", m_no);
 		
-		List<Review> rlist = new ArrayList<Review>();
-		rlist = detailservice.selectBadReview(rmap);
-		model.addAttribute("rlist", rlist);
+		List<Review> rlist2 = new ArrayList<Review>();
+		rlist2 = detailservice.selectBadReview(rmap);
+		model.addAttribute("rlist2", rlist2);
+		System.out.println(rlist2);
 		
 		return "tab_badReview";
 	}
@@ -173,6 +174,9 @@ public class DetailController {
 		public int likeInsert(Model model, 
 				@RequestParam int r_no,
 				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println(r_no);
+		  System.out.println(m_no);
 		  
 		  Map<String, Object> lmap = new HashMap<>();
 		  lmap.put("p_no", r_no);

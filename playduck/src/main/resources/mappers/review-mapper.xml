@@ -17,7 +17,7 @@
 		WHERE M_NO = #{ m_no }
 	</select>
 	
-	<select id="selectGood" resultType="HashMap" parameterType="review">
+	<select id="selectGood" resultType="hashmap" parameterType="review">
 	SELECT '1', R.*, M.* FROM REVIEW R
 JOIN MEMBER M ON(R.M_NO = M.M_NO)
 WHERE P_NO = #{p_no} AND R_STATUS = '1' and R.m_no = #{m_no}
@@ -27,7 +27,7 @@ JOIN MEMBER M ON(R.M_NO = M.M_NO)
 WHERE P_NO = #{p_no} AND R_STATUS = '1' and R.m_no != #{m_no}
 	</select>
 	
-	<select id="selectBad" resultType="HashMap" parameterType="review">
+	<select id="selectBad" resultType="hashmap" parameterType="review">
 	SELECT '1', R.*, M.* FROM REVIEW R
 JOIN MEMBER M ON(R.M_NO = M.M_NO)
 WHERE P_NO = #{p_no} AND R_STATUS = '2' and R.m_no = #{m_no}
