@@ -110,11 +110,9 @@ private static String getTagValue (String tag, Element eElement) {
 			int result = mdService.updateBasket(dno,mno,num);
 		}
 	
-	
-
-		
 	return "redirect:/MD/MD_buy2?mno="+mno;
 	}
+	
 	
 	@RequestMapping("/MD/MD_buy2")
 	public String Md_buy2(Model model, @RequestParam int mno) {
