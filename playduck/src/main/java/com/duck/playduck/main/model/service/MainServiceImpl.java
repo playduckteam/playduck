@@ -73,6 +73,18 @@ public class MainServiceImpl implements MainService {
 		return mainDAO.BookMarkC(m_no);
 	}
 
+	@Override
+	public int insertBM(Bookmark b) {
+		// TODO Auto-generated method stub
+		return mainDAO.insertBM(b);
+	}
+
+	@Override
+	public int insertDe(Bookmark b) {
+		// TODO Auto-generated method stub
+		return mainDAO.insertDe(b);
+	}
+
 
 
 

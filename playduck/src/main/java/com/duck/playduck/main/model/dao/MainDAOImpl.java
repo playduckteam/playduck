@@ -18,14 +18,12 @@ public class MainDAOImpl implements MainDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
-	
+
 	@Override
 	public List<Main> selectMainTopList() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.selectMainTopList");
 	}
-
 
 	@Override
 	public List<Review> ReviewTop10() {
@@ -33,13 +31,11 @@ public class MainDAOImpl implements MainDAO {
 		return sqlSession.selectList("main-mapper.reviewTop10");
 	}
 
-
 	@Override
 	public List<Play> playgb() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.playgb");
 	}
-
 
 	@Override
 	public List<Review> HotReview() {
@@ -47,13 +43,11 @@ public class MainDAOImpl implements MainDAO {
 		return sqlSession.selectList("main-mapper.hotReview");
 	}
 
-
 	@Override
 	public List<Play> allPlaySelect() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.allPlaySelect");
 	}
-
 
 	@Override
 	public List<Member> memberGenrenmG(int m_no) {
@@ -61,13 +55,11 @@ public class MainDAOImpl implements MainDAO {
 		return sqlSession.selectList("main-mapper.memberGenrenmG", m_no);
 	}
 
-
 	@Override
 	public List<Curation> curationforDuck() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.curationforDuck");
 	}
-
 
 	@Override
 	public List<Member> memberpic() {
@@ -75,16 +67,22 @@ public class MainDAOImpl implements MainDAO {
 		return sqlSession.selectList("main-mapper.memberpic");
 	}
 
-
 	@Override
 	public List<Bookmark> BookMarkC(int m_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.BookMarkC", m_no);
 	}
 
+	@Override
+	public int insertBM(Bookmark b) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("main-mapper.insertBM", b);
+	}
 
-	
-
-
+	@Override
+	public int insertDe(Bookmark b) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("main-mapper.deleteBM", b);
+	}
 
 }
