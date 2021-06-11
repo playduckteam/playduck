@@ -263,7 +263,7 @@ hr{
 	padding-top: 30px
 }
 
-.thumb_count{
+.thumb_likecount,.thumb_hatecount{
 	font-size: 14px;
 	color: gray;
 	text-align: right;

@@ -52,7 +52,7 @@ WHERE M_NO = #{m_no} AND P_NO = #{p_no}
 	</select>
 	
 	<insert id="likeInsert" parameterType="map">
-		insert into rlike values(seq_l_no.nextval, #{p_no}, #{r_no}, 1)
+		insert into rlike values(seq_l_no.nextval, #{m_no}, #{r_no}, 1)
 	</insert>
 	
 	<update id="likeInsert2">
@@ -62,8 +62,53 @@ WHERE M_NO = #{m_no} AND P_NO = #{p_no}
 	</update>
 	
 	<select id="likeCount" resultType="_int" parameterType="hashmap">
-	SELECT COUNT(*) count FROM REVIEW 
+	SELECT COUNT(*) count FROM RLIKE 
 WHERE M_NO = #{m_no} AND R_NO = #{r_no} AND RL_STATUS = 1
 	</select>
 	
+	<select id="selectLikecheck" resultType="_int" parameterType="hashmap">
+	SELECT RL_STATUS FROM RLIKE
+	WHERE M_NO = #{m_no} AND R_NO = #{r_no}
+	</select>
+	
+		<delete id="likeDelete">
+  		delete from rlike where r_no = #{r_no} and m_no = #{m_no}
+ 	</delete>
+	
+		<update id="likeDelete2">
+	UPDATE REVIEW
+		SET R_GOOD = R_GOOD - 1
+		WHERE R_NO = #{ r_no } 
+	</update>
+	
+		<insert id="HateInsert" parameterType="map">
+		insert into rlike values(seq_l_no.nextval, #{m_no}, #{r_no}, 2)
+	</insert>
+	
+	<update id="HateInsert2">
+	UPDATE REVIEW
+		SET R_BAD = R_BAD + 1
+		WHERE R_NO = #{ r_no } 
+	</update>
+	
+		<select id="HateCount" resultType="_int" parameterType="hashmap">
+	SELECT COUNT(*) count FROM RLIKE 
+WHERE M_NO = #{m_no} AND R_NO = #{r_no} AND RL_STATUS = 2
+	</select>
+	
+	
+	<delete id="HateDelete">
+  		delete from rlike where r_no = #{r_no} and m_no = #{m_no}
+ 	</delete>
+	
+		<update id="HateDelete2">
+	UPDATE REVIEW
+		SET R_BAD = R_BAD - 1
+		WHERE R_NO = #{ r_no } 
+	</update>
+	
+		<select id="detailBookmarkCheck" resultType="_int" parameterType="hashmap">
+	SELECT COUNT(*) count FROM BOOKMARK
+	WHERE M_NO = #{m_no} AND P_LIST = #{r_no}
+	</select>
 </mapper>
