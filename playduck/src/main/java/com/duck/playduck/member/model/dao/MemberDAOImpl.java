@@ -33,5 +33,15 @@ public class MemberDAOImpl implements MemberDAO{
 	public Member selectId(String m_email) {
 		return sqlSession.selectOne("member.selectId",m_email);
 	}
+	public Member selectMember(String m_email) {
+		
+		return sqlSession.selectOne("member.selectMember", m_email);
+	}
+
+	@Override
+	public int pwdUpdate(Member member) {
+		
+		return sqlSession.update("member.pwdUpdate", member);
+	}
 
 }

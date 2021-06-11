@@ -13,5 +13,10 @@ public interface MemberService {
 	Member selectOneMember(String m_id);
 
 	Member selectId(String m_email);
+	
+	Member selectMember(String m_email);
+
+	int pwdUpdate(Member member);
+
 
 }

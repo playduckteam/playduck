@@ -326,10 +326,13 @@
 
                     <div class="find_pwd">
                         <h2 class=find_title>비밀번호 변경</h2>
-                        <form action="">
-                            <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디"/>
-                            <input type="text" name="m_email" id="find_m_email" placeholder="이메일 주소"/>
-                            <button type="submit" class="login_box login orange">이메일 인증받기</button>      
+                        <form action="${pageContext.request.contextPath}/member/findPwd.do" method="POST">
+                            <div class="textbox">
+	                            <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디"/>
+	                            <input id="email" name="m_email" id="m_email" required="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)?$/i" type="email" placeholder="이메일 주소"/>
+	                         <div class="error">유효하지 않은 이메일주소 입니다  </div>  
+	                         </div> 
+                            <button type="submit" id="check" class="login_box login orange">이메일 인증받기</button>
                         </form>
                     </div>
 

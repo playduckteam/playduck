@@ -30,8 +30,25 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+
 	public Member selectId(String m_email) {
 		return memberDAO.selectId(m_email);
 	}
+
+	public Member selectMember(String m_email) {
+		
+		return memberDAO.selectMember(m_email);
+	}
+
+	@Override
+	public int pwdUpdate(Member member) {
+		// TODO Auto-generated method stub
+		return memberDAO.pwdUpdate(member);
+	}
+
+
+
+	
+
 
 }
