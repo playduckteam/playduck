@@ -6,9 +6,13 @@
 
 
 <select id="selectBuyList" resultType="buy" parameterType="Member" >
-SELECT M.D_TITLE, M.D_PRICE, M.D_PIC, O.O_QUAN, O.O_NO
+SELECT M.D_TITLE, M.D_PRICE, M.D_PIC, O.O_QUAN, O.O_NO,O.O_DATE,(SELECT SUM(W_UP)-SUM(W_DOWN)
+FROM REWARD
+ WHERE M_NO = #{m_no}) POINT
 FROM ORDERS O
 JOIN MD M USING(D_NO)
 WHERE M_NO = #{m_no}
 </select>
+
 </mapper>
+

@@ -28,7 +28,7 @@ public class BuyController {
 		
 		System.out.println(blist);
 		
-		model.addAttribute(blist);
+		model.addAttribute("blist",blist);
 		return"buy_list";
 	}
 	
