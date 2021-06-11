@@ -28,8 +28,8 @@
   <c:forEach items="${baskList}" var="baskList">
         <div class="Sale_list">
             <div class="S_list" id="Sale_check">
-                <input type="checkbox" name="list" id="펭수" value="펭수" checked>
-                <label for="펭수"></label>
+                <input type="checkbox" name="list" id="${baskList.d_no}ch" value="${baskList.d_no }" checked>
+                <label for="${baskList.d_no }ch"></label>
             </div>
             <div class="S_list" id="Sale_img">
                 <img src="${baskList.d_pic}" width="200px" height="200px">
@@ -58,11 +58,11 @@
             </div>
             <div class="S_list" id="Sale_price">
                 <table>
-                    <tr class="Sale_price_tr1">    ${ formatter.format(baskList.d_price )}원   </tr>
+                    <tr class="Sale_price_tr1">    ${ formatter.format(baskList.d_price )} 원   </tr>
                     <tr>
                            <td><p class="Sale_price_tr2" >합계</p></td>
                            <td></td>
-                           <td ><p class="Sale_price_tr3">${ formatter.format( baskList.d_price* baskList.b_quan + 2500 ) }  </p></td>
+                           <td ><p class="Sale_price_tr3">${ formatter.format( baskList.d_price* baskList.b_quan + 2500 ) } 원 </p></td>
                     </tr>
                 </table>
             </div>
@@ -75,22 +75,23 @@
                  	 <tr>
                  	 	<td  id="table3_td1" rowspan="4"> 전체 합계 </td>
                  	 	<td class="table3_td2"> 상품수 </td>
-                 	 	<td class="table3_td2"> 1개</td>
+                 	 	<td class="table3_td3"> 1개</td>
                  	 	</tr>
                  	 <tr>
                  	 	 <td class="table3_td2">상품 금액</td>
-                 	 	 <td class="table3_td2">40000원</td>
+                 	 	 <td class="table3_td3">40000원</td>
                  	 </tr>
                  	 <tr>
                         <td class="table3_td2">내 리워드  </td>
-                        <td class="table3_td2">
+                        <td class="table3_td3">
                           ${getReward}점
                         </td>
                     </tr>
                    <tr>
                    <td class="table3_td2">리워드 사용</td>
-                   <td class="table3_td2"> 
+                   <td class="table3_td3"> 
                    <input type="number" id="reward" value="0"  step="10"max="${getReward}">원
+                  	<button type="submit" id="rewardbtn">사용</button>
                    </td>
                    </tr>
                     </table>
@@ -171,7 +172,7 @@
     			  type:"post",
     			  data:{ mno : mno, dno : dno, num : num},
     			  success:function(){
-    				  sss.html(reprice + "원")
+    				  sss.html(reprice + " 원")
     				  
     			  },
     			  error:function(){}
@@ -179,6 +180,11 @@
     		  
     		 
     	  });
+       
+         /* 장바구니 선택하기 */
+       $('input[type=checkbox]').on('change', function(){
+    	   
+       });
       
       
       /*3자리마다 컴마 표시  
