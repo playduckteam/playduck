@@ -12,4 +12,6 @@ public interface MemberDAO {
 
 	Member selectOneMember(String m_id);
 
+	Member selectId(String m_email);
+
 }

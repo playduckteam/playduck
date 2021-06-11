@@ -29,4 +29,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.selectOneMember(m_id);
 	}
 
+	@Override
+	public Member selectId(String m_email) {
+		return memberDAO.selectId(m_email);
+	}
+
 }
