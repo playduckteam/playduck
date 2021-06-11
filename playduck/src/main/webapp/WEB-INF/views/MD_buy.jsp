@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,37 +22,42 @@
 <%@ include file="common/header.jsp"%>
     <section>
         <!--물품 구매 리스트-->
+  
+  <c:forEach items="${baskList}" var="baskList">
         <div class="Sale_list">
             <div class="S_list" id="Sale_check">
                 <input type="checkbox" name="list" id="펭수" value="펭수" checked>
                 <label for="펭수"></label>
             </div>
             <div class="S_list" id="Sale_img">
-                <img src="../resources/images/noimage.png" width="200px" height="200px">
+                <img src="${baskList.d_pic}" width="200px" height="200px">
             </div>
             <div class="S_list" id="Sale_title">
                 <table>
                     <tr> 
-                        <td class="Sale_title_th1"colspan="2">[EMK] 레베카 프로그램북 세트</td>
+                        <td class="Sale_title_th1"colspan="2">${baskList.d_title }</td>
                     </tr>
                     <tr>
                         <td class="Sale_title_td1">배송비</td>
                         <td class="Sale_title_td2">2,500원</td>
                     </tr>
                     <tr>
-                        <td class="Sale_title_td1">수량</td>
-                        <td class="Sale_title_td2">1</td>
+                        <td class="Sale_title_td1"></td>
+                        <td class="Sale_title_td2"></td>
                     </tr>
-                    <tr>
-                        <td class="Sale_title_td1">리워드 사용</td>
-                        <td class="Sale_title_td2"> 160원 </td>
+				     <tr>
+                        <td class="Sale_title_td1">수량</td>
+                        <td class="Sale_title_td2">
+        
+                            <input type="number" id="num" value="0"  min="0">
+                        </td>
                     </tr>
                 </table>
             </div>
             <div class="S_list" id="Sale_price">
                 <table>
                     <tr>
-                     <p id="Sale_price_tr1"> 60,000원 </p>
+                     <p id="Sale_price_tr1"> ${ baskList.d_price }원 </p>
                     </tr>
                     <tr>
                        <p id="Sale_price_tr2">
@@ -61,6 +69,7 @@
             </div>
         </div>
         <hr style="border: solid 1px;">
+        </c:forEach>
 
         <div class="Sale_list">
             <div class="S_list" id="Sale_check">
@@ -148,7 +157,20 @@
             </table>
         </form>
         </div>
-
+  <%--  <tr class="MD_order_text">
+                    <c:if test="${empty member}">
+					 <td class="Sale_title_td1"> 리워드 사용 <span class="MD_myreword">내 리워드 : 0점</span></td>
+                       <td>
+                            <input type="number" id="reward" value="0" max="0"}>원
+                        </td>
+                    </c:if>
+                     <c:if test="${!empty member}">
+                        <td class="Sale_title_td1">리워드 사용 <span class="MD_myreword">내 리워드 : ${getReward}점</span></td>
+                        <td>
+                            <input type="number" id="reward" value="0"  step="10"max="${getReward}">원
+                        </td>
+                     </c:if>
+                    </tr> --%>
         <!-- 구매하기 버튼 -->
         <div class="Sale_buybox">
             <button class="Sale_buybtn">
@@ -159,6 +181,33 @@
         </div>
        
         <br><br><br><br><br>
+<!--        <script>
+       /* 리워드 max 값 제한, 리워드 사용 값 반영*/
+       $('#reward').on('input', function() {
+    	    var $this = $(this);
+    	    var max = ${getReward};
+    	    var str = parseInt(max/10)*10
+    	    var value = $this.val();
+    	    var totalprice = $('#num').val()*${md.d_price} + 2500 -$this.val();
+    	/*     alert(str); */
+    	   	if(value )
+    	    if (value >= max ) {
+    	        $this.val(str);
+    	    }
+    	    var sum1 = document.getElementById('sum1');
+    		  /*3자리마다 컴마 표시  */
+    		  var reprice = totalprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	
+    		  sum1.innerHTML = reprice+"원";
+    	});
+      /* 리워드 10원 단위로 사용 */ 
+       $('#reward').on('change', function() {
+    	    var $this = $(this);
+    	    var value = $this.val();
+    	    value = parseInt(value/10)*10;
+    	    $this.val(value); 
+    	});
+       </script> -->
         
     </section>
         	<%@ include file="common/footer.jsp"%>

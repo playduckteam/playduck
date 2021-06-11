@@ -11,7 +11,7 @@
 	
 	<!-- Md 한 개 정보 가져오기 -->
 	<select id="selectOneMd"  parameterType="_int"  resultType="md">
-	SELECT  D_TITLE, D_PRICE, D_PIC, D_DETAIL 
+	SELECT  D_TITLE, D_PRICE, D_PIC, D_DETAIL,D_NO
 	FROM MD
 	WHERE D_NO = #{dno}
 	</select>
@@ -22,4 +22,37 @@
 		FROM REWARD
 		WHERE M_NO = #{m_no}
 	</select>
+	
+	<!-- 장바구니에 MD 담기 -->
+	<insert id="addBasket" parameterType="basket" >
+		INSERT INTO BASKET VALUES(
+		#{m_no}, #{d_no}, #{b_quan}
+		)
+		</insert>
+		
+	<!--장바구니 리스트 불러오기  -->
+	<select id="getbasketList" parameterType="_int" resultType="md">
+		SELECT D_NO, D_TITLE, D_PRICE, D_PIC ,B_QUAN
+		FROM MD
+		JOIN BASKET USING(D_NO)
+		WHERE D_NO IN(
+                SELECT D_NO FROM BASKET
+                WHERE M_NO =#{m_no}) 
+	</select>
+	
+		<!--  basket 숫자 업데이트 -->
+		<update id="updateBasket" parameterType="basket">
+			UPDATE BASKET SET B_QUAN = B_QUAN + #{b_quan}
+			WHERE M_NO = #{ m_no }
+				AND D_NO = #{ d_no}
+		</update>
+		
+		<!-- basket 한 개 정보 가져오기 -->
+		<select id="selectOneBasket"  parameterType="basket"  resultType="md">
+		SELECT *
+		FROM BASKET
+		WHERE D_NO = #{d_no}
+			AND M_NO = #{ m_no}
+		</select>
+	
 	</mapper>

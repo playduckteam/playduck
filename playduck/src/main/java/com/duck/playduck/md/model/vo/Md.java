@@ -17,4 +17,5 @@ public class Md {
 	private int d_price;
 	private String d_pic;
 	private String d_detail;
+	private int b_quan;
 }

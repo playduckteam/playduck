@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -24,7 +27,7 @@
                 <table class="MD_order_maintbl">
                     <tr class="MD_order_title">
                         <td>${md.d_title }</td>
-                        <td>${md.d_price }원</td>
+                        <td id="mdprice">${md.d_price }원</td>
                     </tr>
                     <tr class="MD_order_text">
                         <td>배송비</td>
@@ -36,28 +39,14 @@
                             <input type="number" id="num" value="0"  min="0">
                         </td>
                     </tr>
-                    <tr class="MD_order_text">
-                    <c:if test="${empty member}">
-					 <td>리워드 사용 <span class="MD_myreword">내 리워드 : 0점</span></td>
-                       <td>
-                            <input type="number" id="reward" value="0" max="0"}>원
-                        </td>
-                    </c:if>
-                     <c:if test="${!empty member}">
-                        <td>리워드 사용 <span class="MD_myreword">내 리워드 : ${getReward}점</span></td>
-                        <td>
-                            <input type="number" id="reward" value="0"  step="10"max="${getReward}">원
-                        </td>
-                     </c:if>
-                    </tr>
                     <tr class="MD_order_sum">
                     <td>합계</td>
                     <td id="sum1">0 원</td>
              
                     </tr>
                     <tr class="MD_order_btn MD_order_basketbtn">
-                        <td colspan="2">
-                            <div>
+                        <td colspan="2">              
+                            <div id="goCart">          
                                 <img src="../resources/images/md_basket.png">
                                 <p>장바구니</p>
                             </div>
@@ -80,30 +69,12 @@
     </form>
     <br /><br /><br /><br /><br />
    <script>
-	/* 리워드 max 값 제한 */
-   $('#reward').on('input', function() {
-	    var $this = $(this);
-	    var max = ${getReward};
-	    var str = parseInt(max/10)*10
-	    var value = $this.val();
-	/*     alert(str); */
-	   	if(value )
-	    if (value >= max ) {
-	        $this.val(str);
-	    }
-	});
-  /* 리워드 10원 단위로 사용 */ 
-   $('#reward').on('change', function() {
-	    var $this = $(this);
-	    var value = $this.val();
-	    value = parseInt(value/10)*10;
-	    $this.val(value); 
-	});
+	
   
   /* 수량변화에 따른 합계금액변화  */
    $('#num').on('input',function(){
 		  var $this = $(this);
-		  var totalprice = $this.val()*${md.d_price};
+		  var totalprice = $this.val()*${md.d_price} + 2500 ;
 		  var sum1 = document.getElementById('sum1');
 		
 		  /*3자리마다 컴마 표시  */
@@ -112,18 +83,46 @@
 		  sum1.innerHTML = reprice+"원";
 	  });
   
-  $
-   function numberWithCommas(${md.d_price}) {
-	    return ${md.d_price}.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	
-   }
-
-  $(function(){
-
   
-      $('input:checkbox').attr('checked', true);
-      
+  /*3자리마다 컴마 표시  */
+   $(function(){
+	   
+	   
+	  var mdp = ${md.d_price};
+	  var mdptd = document.getElementById('mdprice');
 
+	  var reprice = mdp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	  
+	 mdptd.innerHTML = reprice+"원"
+	
+   
+   }); 
+
+  /* 장바구니로 담기 */
+  $('#goCart').on('click',function(){
+	  var mno = ${member.m_no};
+	  var dno = ${md.d_no};
+	  var num = $('#num').val();
+	  var sum1 = num*${md.d_price} + 2500;
+	 
+	/*   console.log(mno);
+	  console.log(dno);
+	  console.log(num);
+	  console.log(reward);
+	  console.log(sum1);
+	   */
+	   alert('장바구니에 상품이 담겼습니다.')
+	  var com = confirm("장바구니로 이동하시겠습니까?")
+	  
+	  if(com==true){
+			location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?dno="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
+
+		  
+	  }else if(com==false){
+		 
+	  }
+	   
+	  
   });
   	
 
