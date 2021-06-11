@@ -50,12 +50,16 @@
                     <tr>
                         <td class="Sale_title_td1" style="padding-bottom: 0px;">송장번호</td>
                         <td class="Sale_title_td2" style="padding-bottom: 0px;">12345678</td>
-                        <td colspan="2" style="padding-bottom: 0px;"><a href="">>>송장번호 조회하러가기</a></td>
+                        <td></td>
                         <td><p class="Sale_price_td2">합계</p></td>
                         <td><p class="Sale_price_td3">62,340원</p></td>
                     </tr>
                     <tr>
                     	<td colspan="6"><button class="Sale_returnBtn">반품</button><button class="Sale_canclenBtn">취소</button></td>
+                    </tr>
+                    <tr>
+                    
+                    <td>주문날짜</td>
                     </tr>
                 </table>
             </div>

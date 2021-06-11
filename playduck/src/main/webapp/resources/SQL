@@ -1,4 +1,5 @@
---------------------------------------------------------
+
+-------------------------------------------------------------------------
 --  파일이 생성됨 - 목요일-6월-10-2021   
 --------------------------------------------------------
 DROP TABLE "PLAYDUCK"."BASKET";
@@ -12,8 +13,7 @@ DROP TABLE "PLAYDUCK"."PLAYDETAIL";
 DROP TABLE "PLAYDUCK"."REVIEW";
 DROP TABLE "PLAYDUCK"."REWARD";
 DROP TABLE "PLAYDUCK"."RLIKE";
-DROP TABLE "PLAYDUCK"."STOCK";
---------------------------------------------------------
+DROP TABLE "PLAYDUCK"."STOCK";---------------------------------------
 --  DDL for Table BASKET
 --------------------------------------------------------
 
@@ -202,6 +202,8 @@ DROP TABLE "PLAYDUCK"."STOCK";
 	"P_NO" VARCHAR2(500 BYTE), 
 	"M_NO" NUMBER, 
 	"R_CONTENT" VARCHAR2(300 BYTE), 
+    "R_GOOD" NUMBER,
+    "R_BAD" NUMBER,
 	"R_STATUS" CHAR(3 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
@@ -1736,17 +1738,14 @@ SET DEFINE OFF;
 
 
 
---시퀀스
-	  --------------------------------------------------------
---  파일이 생성됨 - 일요일-6월-06-2021   
+
+
+--  DDL for Sequence SEQ_L_NO
 --------------------------------------------------------
-DROP SEQUENCE "PLAYDUCK"."SEQ_C_NO";
-DROP SEQUENCE "PLAYDUCK"."SEQ_D_NO";
-DROP SEQUENCE "PLAYDUCK"."SEQ_M_NO";
-DROP SEQUENCE "PLAYDUCK"."SEQ_O_NO";
-DROP SEQUENCE "PLAYDUCK"."SEQ_PD_NO";
-DROP SEQUENCE "PLAYDUCK"."SEQ_R_NO";
-DROP SEQUENCE "PLAYDUCK"."SEQ_W_NO";
+
+   CREATE SEQUENCE  "PLAYDUCK"."SEQ_L_NO"  MINVALUE 1 MAXVALUE 1000 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+
+
 --------------------------------------------------------
 --  DDL for Sequence SEQ_C_NO
 --------------------------------------------------------
