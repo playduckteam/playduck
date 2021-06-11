@@ -1,6 +1,7 @@
 package com.duck.playduck.play.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -16,8 +17,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.duck.playduck.play.model.compare.AscTitle;
+import com.duck.playduck.play.model.compare.AscYear;
 import com.duck.playduck.play.model.service.PlayService;
 import com.duck.playduck.play.model.vo.Play;
+import com.duck.playduck.play.model.vo.PlayElement;
 
 @Controller
 public class PlayController {
@@ -36,7 +40,7 @@ private static String getTagValue (String tag, Element eElement) {
 		}
 	
 	@RequestMapping("/list/playlist.do")
-	public String selectPlayList(Model model, @RequestParam(value="cPage",required=false,defaultValue="1")int cPage){
+	public String selectPlayList(Model model,@RequestParam(required = false, defaultValue = "0") int sortType, @RequestParam(value="cPage",required=false,defaultValue="1")int cPage){
 		
 		//한 페이지당 페이지수
 		int numPerPage =8;
@@ -45,11 +49,14 @@ private static String getTagValue (String tag, Element eElement) {
 		int totalContents = playService.selectTotalContents();
 		
 		//페이지 처리 html 생성하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/list/playlist.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage,sortType, "/playduck/list/playlist.do");
 		
 		List<Play>list = playService.selectPlayList(cPage,numPerPage);
+		List<PlayElement> plist = new ArrayList<>();
+		/*
 		ArrayList plist = new ArrayList();
 		ArrayList plist2 = new ArrayList();
+		*/
 //		System.out.println(list.get(0).getP_no());
 		for(Play p : list) {
 		try {
@@ -69,9 +76,7 @@ private static String getTagValue (String tag, Element eElement) {
 				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
 					
 					Element eElement = (Element) nNode;
-					
-					plist.add(getTagValue("prfnm", eElement));
-					plist2.add(getTagValue("poster", eElement));
+					plist.add(new PlayElement(getTagValue("prfnm", eElement), getTagValue("poster", eElement), getTagValue("prfpdfrom", eElement)));
 					
 //				System.out.println(plist);
 //				System.out.println(plist2);
@@ -87,8 +92,16 @@ private static String getTagValue (String tag, Element eElement) {
 	}
 		}
 		
+		
+		if(sortType==3) {
+			plist.sort(new AscTitle());
+		}else if(sortType==4) {
+			plist.sort(new AscYear());
+			
+		}
+		
+		
 		model.addAttribute("plist", plist);
-		model.addAttribute("plist2", plist2);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
