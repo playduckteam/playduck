@@ -175,12 +175,7 @@
           (selectedBtn2 === 'prev2') ? container2.insertBefore(container2.lastElementChild, container2
             .firstElementChild): container2.appendChild(container2.firstElementChild);
         }
-        $(function () {
-          $(".main_topicon").click(function () {
-            $("#star").removeClass("far");
-            $("#star").addClass("fas");
-          })
-        });
+     
       </script>
 		</article>
 		<!--핫리뷰-->
@@ -256,7 +251,7 @@
 					innerHtml +=   '<h3 style="color: #fff;" class="titleremove'+i+'">'+data.title[i]+'</h3>'
 					innerHtml +=   '<span class="main_toprate">'+data.grade[i]+'%</span>'
 					innerHtml +=  '<div class="main_topicon">'
-					innerHtml +=    '<i class="far fa-star '+data.pnum[i]+'" id="star" style="color: yellow;" ></i>'
+					innerHtml +=    '<i class="far fa-star '+data.pnum[i]+'" name='+data.pnum[i]+' id="star" style="color: yellow;" ></i>'
 					innerHtml += ' </div>'
 					innerHtml += '</div>'
 					innerHtml +='</li>'
@@ -296,9 +291,9 @@
 				        }
 				};
 			
-		
-	
+			// 회원이 로그인이 x 라면 찜 목록 클릭 시 "로그인 필요"
 			<c:if test="${ member == null}">
+			
 				$(function() {	
 
 					$(".main_topicon").on("click",function () {	
@@ -309,6 +304,7 @@
 				});	
 			</c:if>
 			
+			// 회원이 로그인이 됐다면 찜리스트를 가져옴
 			<c:if test="${ member != null}">
 		    	$(function() {
 		    		
@@ -322,28 +318,74 @@
 		     				type : "get",
 		     				data : data1,
 		     				success : function(data) {
-		     					
-		     					
+
+		     					//가져온 찜 리스트에 공연번호와 현재 메인페이지에 나와 있는 공연번호 유효성 검사
 		     					for(var i in data) {
-		     						for(var j in data.pnum) {
-		     							if(data[i].equals(data.pnum[j])){
-		     								$(function(){
-		     									$(data.pnum[j])addClass("fas");
-		     								})
-		     							}
+		     						for(var j in data1.p_num) {
+		     							if(data[i] == data1.p_num[j]){
+		     								
+		     									$('.'+data1.p_num[j]).removeClass("far");
+		     									$('.'+data1.p_num[j]).addClass("fas");
+		     									
+		     							}					
 		     						}
 		     					}
-		    				$(".main_topicon").on("click",function () {
-		    				
+		     			
+		     						// 별 클릭 시
+		     				    	$(".fa-star").on("click",function () {
+		     				   			
+		     				    			// 만약 클릭 시 별이 없었다면(현재 찜이 안돼있음)
+			     							if($(this).hasClass('far') === true) {
+			     								
+			     								// 꽉 찬 별을 생기게 함
+			     								$(this).removeClass("far");
+			  	     				            $(this).addClass("fas");
+			  	     				            
+			  	     				            
+			  	     				         var getName=$(this).attr("name");
+
+			  	     				 
+			  	     				            // 찜 목록 INSERT
+			  	     				            $.ajax({
+			  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkIn.do",
+			  	     				            	type : 'get',
+			  	     				            	data : { m_no : ${member.m_no},
+			  	     				            			 p_no : getName },
+			  	     				            	success : function(data) {
+			  	     				            		alert("오케이 인서트 합니다!");
+			  	     				            	}
+			  	     				            });
+			  	     				           
+			  	     				        // 만약 클릭 시 별이 있었다면(현재 찜이 돼 있음)    
+			     							} else if ($(this).hasClass('far') === false) {
+			     								
+			     								// 빈 별을 생기게 함
+			     								$(this).removeClass("fas");
+			  	     				            $(this).addClass("far");
+			  	     				            
+			  	     				          
+			  	     				            
+			  	     				         var getName=$(this).attr("name");
+			  	     				         
+			  	     				         // 찜 목록 DELETE
+			  	     				         $.ajax({   				        	 
+			  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkDe.do",
+			  	     				            	type : 'get',
+			  	     				            	data : { m_no : ${member.m_no},
+			  	     				            			 p_no : getName },
+			  	     				            	success : function(data) {
+			  	     				            		
+			  	     				            		alert("오케이 딜리트 합니다!");
+			  	     				            	}
+			  	     				            })
+			     							}
+			     				
+		     				          })
 		     						
-		     				
-		       				   })
 		     				}
 		     			});
 		     		});	
 		    	</c:if>
-		    	
-		    	
 		    	
 			// 포스터에 hover 시 리뷰보기 / 작성하기
 		    $('.cell').on('mouseenter', function () {
@@ -362,7 +404,6 @@
 			url : "${pageContext.request.contextPath}/main/curationforDuck.do",
 			type : 'get',
 			success : function(data){
-				console.log(data);
 				
 				var innerHtml = "";
 				
@@ -381,8 +422,8 @@
 					$("#curation_ran").append(innerHtml);
 				}
 			}
-		})
-	})
+		});
+	});
 	
 	
 	
@@ -412,7 +453,7 @@
 				 
 				 }
 			 }
-		 });	
+		 })	
 	 
  	});
  	
@@ -420,15 +461,18 @@
  		
  		var a = "";
  		
+ 	// 만약 세션이 연결 O
  	<c:if test="${ member != null}">
  		a = ${member.m_no}
  	</c:if>
+ 	
+ 	// 만약 세션이 연결 X
  	<c:if test="${ member == null}">
 		a = 0;
 	</c:if>
 		
 
- 		
+ 		// 빼내 온 공연 정보를 랜덤으로 10개만 화면에 보이게 함
  		$.ajax({
  			url : "${pageContext.request.contextPath}/main/mainGenreM.do",
  			type : 'get',
@@ -514,14 +558,9 @@
  				 
  				 
  			        
- 			       $(function () {
- 				    	$(".main_topicon").on("click",function () {
- 				            $("#star").removeClass("far");
- 				            $("#star").addClass("fas");
- 				          })
- 				        });
  			      
- 			          
+ 			      
+ 			        // hover시 리뷰 작성, 리뷰 보기 
  			        $('.cell3').on('mouseenter', function () {
  			          $(this).children('.main_recinfo').show();
  			        }).on('mouseleave', function () {
@@ -533,8 +572,8 @@
  		 
 		     
 			 
- 		})
- 	})
+ 		});
+ 	});
  
 
 </script>
