@@ -27,6 +27,10 @@ public interface MypageService {
 
 	List<Curation> bookmarkCuration(int mm);
 
+	int deletePlay(String no);
+
+	int deleteCuration(int no);
+
 
 
 

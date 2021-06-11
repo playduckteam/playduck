@@ -68,6 +68,21 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.bookmarkCuration(mm);
 	}
 
+	@Override
+	public int deletePlay(String no) {
+		
+		return mypageDAO.deletePlay(no);
+	}
+
+	@Override
+	public int deleteCuration(int no) {
+		
+		return mypageDAO.deleteCuration(no);
+	}
+
+
+
+
 
 
 

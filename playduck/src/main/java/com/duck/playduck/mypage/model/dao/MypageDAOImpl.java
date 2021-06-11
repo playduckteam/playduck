@@ -65,6 +65,18 @@ public class MypageDAOImpl implements MypageDAO {
 		return sqlSession.selectList("member.bookmarkCuration", mm);
 	}
 
+	@Override
+	public int deletePlay(String no) {
+		
+		return sqlSession.delete("member.deletePlay", no);
+	}
+
+	@Override
+	public int deleteCuration(int no) {
+		
+		return sqlSession.delete("member.deleteCuration", no);
+	}
+
 
 	
 
