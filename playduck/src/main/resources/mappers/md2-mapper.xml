@@ -54,5 +54,12 @@
 		WHERE D_NO = #{d_no}
 			AND M_NO = #{ m_no}
 		</select>
+		
+		<!--  장바구니에서 basket 숫자 업데이트 -->
+		<update id="update2Basket" parameterType="basket">
+			UPDATE BASKET SET B_QUAN = #{b_quan}
+			WHERE M_NO = #{ m_no }
+				AND D_NO = #{ d_no}
+		</update>
 	
 	</mapper>
