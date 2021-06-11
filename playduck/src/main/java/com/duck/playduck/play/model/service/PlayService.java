@@ -8,7 +8,7 @@ public interface PlayService {
 
 	
 
-	List<Play> selectPlayList(int cPage, int numPerPage);
+	List<Play> selectPlayList(int cPage, int numPerPage, int sortType);
 
 	
 

@@ -16,7 +16,7 @@ public class PlayDAOImpl implements PlayDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Play> selectPlayList(int cPage, int numPerPage) {
+	public List<Play> selectPlayList(int cPage, int numPerPage,int sortType) {
 		//데이터베이스 sql에서 특정 개수의 행만 뽑아오는 객체
 		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
 		return sqlSession.selectList("play-mapper.selectPlayList",null,rows);

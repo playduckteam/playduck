@@ -49,9 +49,9 @@ private static String getTagValue (String tag, Element eElement) {
 		int totalContents = playService.selectTotalContents();
 		
 		//페이지 처리 html 생성하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/list/playlist.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage,sortType, "/playduck/list/playlist.do");
 		
-		List<Play>list = playService.selectPlayList(cPage,numPerPage);
+		List<Play>list = playService.selectPlayList(cPage,numPerPage,sortType);
 		List<PlayElement> plist = new ArrayList<>();
 		/*
 		ArrayList plist = new ArrayList();
