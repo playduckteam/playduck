@@ -82,4 +82,8 @@
 		DELETE FROM BOOKMARK WHERE C_LIST = #{ no }
 	</delete>
 	
+	<select id="selectId" parameterType="Member" resultType="Member">
+		SELECT * FROM MEMBER WHERE M_EMAIL = #{m_email}
+	</select>
+	
 </mapper>

@@ -65,4 +65,49 @@ public class DetailServiceImpl implements DetailService {
 		return detailDAO.likeCount(lmap);
 	}
 
+	@Override
+	public int selectLikecheck(Map<String, Object> rmap) {
+		return detailDAO.selectLikecheck(rmap);
+	}
+
+	@Override
+	public int likeDelete(Map<String, Object> lmap) {
+		return detailDAO.likeDelete(lmap);
+	}
+
+	@Override
+	public int likeDelete2(Map<String, Object> lmap) {
+		return detailDAO.likeDelete2(lmap);
+	}
+
+	@Override
+	public int HateInsert(Map<String, Object> lmap) {
+		return detailDAO.HateInsert(lmap);
+	}
+
+	@Override
+	public int HateInsert2(Map<String, Object> lmap) {
+		return detailDAO.HateInsert2(lmap);
+	}
+
+	@Override
+	public int HateCount(Map<String, Object> lmap) {
+		return detailDAO.HateCount(lmap);
+	}
+
+	@Override
+	public int HateDelete(Map<String, Object> lmap) {
+		return detailDAO.HateDelete(lmap);
+	}
+
+	@Override
+	public int HateDelete2(Map<String, Object> lmap) {
+		return detailDAO.HateDelete2(lmap);
+	}
+
+	@Override
+	public int detailBookmarkCheck(Map<String, Object> rmap) {
+		return detailDAO.detailBookmarkCheck(rmap);
+	}
+
 }

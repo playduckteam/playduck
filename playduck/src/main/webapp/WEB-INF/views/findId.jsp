@@ -22,7 +22,8 @@ height: 100%}
                     <div class="find_id">
                         <h2 class=find_title>아이디 찾기</h2>
                         <form action="" method="post">
-                            <p class="findId_result">user01</p>
+                            <p class="findId_result">${ m_name } 님의 아이디는</p>
+                            <p class="findId_result">( ${ m_id } )입니다.</p>
                             <button type="submit" class="login_box find orange">메인으로 이동</button>
                         </form>
                     </div>

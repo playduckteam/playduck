@@ -21,4 +21,6 @@ public interface MdService {
 
 	Md selectOneBasket(int dno, int mno, int num);
 
+	int update2Basket(int dno, int mno, int num);
+
 }

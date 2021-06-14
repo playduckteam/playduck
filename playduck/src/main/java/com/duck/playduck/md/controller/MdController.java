@@ -1,5 +1,6 @@
 package com.duck.playduck.md.controller;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,9 +122,24 @@ private static String getTagValue (String tag, Element eElement) {
 		List<Md> MdbasketList = mdService.getbasketList(mno);
 		
 //		System.out.println(MdbasketList);
+		 DecimalFormat formatter = new DecimalFormat("###,###");
 		
+		 model.addAttribute("formatter",formatter);
 		model.addAttribute("baskList",MdbasketList);
 	return "MD_buy";
+}
+	
+	// 장바구니에서 수량 수정
+	@RequestMapping("/MD/MD_buy3")
+	public String Md_buy3(Model model, 
+									@RequestParam int dno,
+									@RequestParam int mno,
+									@RequestParam int num) {
+			
+		int result = mdService.update2Basket(dno,mno,num);
+		
+		
+	return "redirect:/MD/MD_buy2?mno="+mno;
 }
 	
 // MD 상세보기 페이지

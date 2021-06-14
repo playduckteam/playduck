@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -147,7 +148,49 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	@RequestMapping("/member/memberIdFind.do")
+	@ResponseBody
+	public Map memberIdFind(@RequestParam String m_email,@RequestParam String m_name) {
+		
+		Member result = (Member)memberService.selectId(m_email);
+		String name = "";
+		String msg= "";
+		String email= "";
+		if(result!=null) {
+			name = result.getM_name();
+			email = result.getM_email();
+			if(name.equals(m_name)) {
+				msg="이메일 찾기 화면으로 이동합니다.";
+			} else {
+				msg="입력하신 이름과 일치하는 회원이 없습니다!";
+			}
+		} else {
+			msg="입력하신 이메일로 가입된 회원이 없습니다!";
+		}
+		
+		Map<String,String> map = new HashMap<String,String>();
+		
+		map.put("m_email", email);
+		map.put("msg", msg);
+
+		return map;
+	}
 	
+	@RequestMapping("/member/memberIdFindResult.do")
+	public String memberIdFindResult(@RequestParam String m_email,Model model) {
+		Member result = (Member)memberService.selectId(m_email);
+		String m_name =result.getM_name();
+		String m_id = result.getM_id();
+		
+		m_id = m_id.substring(0, m_id.length()-2);
+		m_id = m_id + "**";
+		
+		model.addAttribute("m_id",m_id);
+		model.addAttribute("m_name",m_name);
+		
+		return "findId";
+	}
+		
 	
 	// 비밀번호 찾기 부분 by수영
 	@RequestMapping("/member/findPwd.do")

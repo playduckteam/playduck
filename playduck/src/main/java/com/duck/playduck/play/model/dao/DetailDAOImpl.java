@@ -62,4 +62,57 @@ public class DetailDAOImpl implements DetailDAO {
 		return sqlSession.selectOne("review-mapper.likeCount", lmap);
 	}
 
+	@Override
+	public int selectLikecheck(Map<String, Object> rmap) {
+		
+		//rl_like 가 null 이 들어올 수 있으니 0으로 처리하기
+		Object rl_like = sqlSession.selectOne("review-mapper.selectLikecheck", rmap);
+		
+		if( rl_like == null) {
+			rl_like = 0;
+		}
+		
+		return (Integer)rl_like;
+	}
+
+	@Override
+	public int likeDelete(Map<String, Object> lmap) {
+		return sqlSession.delete("review-mapper.likeDelete", lmap);
+	}
+
+	@Override
+	public int likeDelete2(Map<String, Object> lmap) {
+		return sqlSession.update("review-mapper.likeDelete2", lmap);
+	}
+
+	@Override
+	public int HateInsert(Map<String, Object> lmap) {
+		return sqlSession.insert("review-mapper.HateInsert", lmap);
+	}
+
+	@Override
+	public int HateInsert2(Map<String, Object> lmap) {
+		return sqlSession.insert("review-mapper.HateInsert2", lmap);
+	}
+
+	@Override
+	public int HateCount(Map<String, Object> lmap) {
+		return sqlSession.selectOne("review-mapper.HateCount", lmap);
+	}
+
+	@Override
+	public int HateDelete(Map<String, Object> lmap) {
+		return sqlSession.delete("review-mapper.HateDelete", lmap);
+	}
+
+	@Override
+	public int HateDelete2(Map<String, Object> lmap) {
+		return sqlSession.delete("review-mapper.HateDelete2", lmap);
+	}
+
+	@Override
+	public int detailBookmarkCheck(Map<String, Object> rmap) {
+		return sqlSession.selectOne("review-mapper.detailBookmarkCheck", rmap);
+	}
+
 }

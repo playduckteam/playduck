@@ -30,12 +30,12 @@
     }
 
     #Sale_img{
-        margin-left: 20px;
+        margin-left: 30px;
         position:absolute;
     }
 
     #Sale_title{
-      margin-left: 230px;
+      margin-left: 260px;
       padding-top: 10px;
     }
 
@@ -94,9 +94,10 @@
             color: #ff6801;
 			 font-size: 27px;
             font-weight: 700;
+            text-align: right;
         }
 
-        #Sale_price_tr1{
+       .Sale_price_tr1{
     
             color: #ff6801;
             font-size: 27px;
@@ -104,20 +105,29 @@
             text-align: right;
         }
 
-        #Sale_price_tr2{
+ 		.Sale_price_tr2{
+        	padding-right:20px;
             padding-top: 100px;
              font-size: 27px;
             font-weight: 700;
             color: #ff6801;
         }
+          .Sale_price_tr3{
+          	width: 150px;
+            padding-top: 100px;
+             font-size: 27px;
+            font-weight: 700;
+            color: #ff6801;
+            text-align: right;
+        }
 
         /* 전체가격 */
         #Sale_AllPrice{
-            background-color: silver;
+            background-color: #ff6801;
             color: white;
             font-size: 27px;
             font-weight: 700;
-            margin-top: 50px;
+            margin-top: 80px;
             text-align: center;
             padding-top: 32px;
             width: 670px;
@@ -227,3 +237,56 @@
 	text-align: center
 }
 
+#num {
+	width : 50px;
+}
+
+/* 전체 합계  */
+.MD_order_text{
+	margin-top :30px;
+	padding-top : 40px;
+	width: 800px;
+    height: 350px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    text-align: center;
+   	font-size: 14px;
+	font-weight: 300;
+}
+
+#table3_td1{
+	 color: black;
+      font-size: 30px;
+      font-weight: 700;
+      padding-right:100px;
+}
+
+#reward{
+	width:70px;
+	height: 30px;
+}
+
+.table3_td2{
+	border-bottom : 1px solid gray;
+	font-size: 20px;
+	font-weigth:500;
+	padding: 20px;
+	padding-right:100px;
+}
+
+.table3_td3{
+	border-bottom : 1px solid gray;
+	font-size: 20px;
+	font-weigth:500;
+	padding: 20px;
+	padding-left:100px;
+	 text-align:right;
+}
+
+#rewardbtn{
+	    background-color: #ff6801;
+	    padding: 6px;
+	    border-radius: 5px;
+		font-size: 20px;
+		margin-left:10px;
+}

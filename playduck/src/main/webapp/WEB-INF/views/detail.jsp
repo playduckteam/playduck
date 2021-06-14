@@ -34,15 +34,91 @@
 				<img class="detail_poster" src="${dlist[1]}"
 					alt="">
 				<i class="far fa-star" id="star" style="color: yellow;"></i>	
+				
+				
 			</div>
 			
 		<script>
-	    $(function () {
-	        $("#star").click(function () {
-	            $("#star").removeClass("far");
-	            $("#star").addClass("fas");
-	          })
-	        });
+	
+	    
+	 // 회원이 로그인이 됐다면 찜리스트를 가져옴
+		<c:if test="${ member != null}">
+	    	$(function() {
+	    		
+	    		var data1 = {
+	    				"m_no" : ${member.m_no},
+	    				"p_no" : '${param.p_no}'
+	    		};
+	    		
+	    		console.log(data1);
+		
+	     			$.ajax({
+	     				url :  "${pageContext.request.contextPath}/detail/bookmarkcheck.do",
+	     				type : "get",
+	     				data : data1,
+	     				success : function(data) {
+
+	     					//가져온 찜 리스트에 공연번호와 현재 메인페이지에 나와 있는 공연번호 유효성 검사
+	     					if(data == 1){
+	     						$(".fa-star").removeClass("far");
+	     						$(".fa-star").addClass("fas");
+	     					}
+	     			
+	     						// 별 클릭 시
+	     				    	$(".fa-star").on("click",function () {
+	     				   			
+	     				    			// 만약 클릭 시 별이 없었다면(현재 찜이 안돼있음)
+		     							if($(this).hasClass('far') === true) {
+		     								
+		     								// 꽉 찬 별을 생기게 함
+		     								$(this).removeClass("far");
+		  	     				            $(this).addClass("fas");
+		  	     				            
+		  	     				            
+		  	     				         
+
+		  	     				 
+		  	     				            // 찜 목록 INSERT
+		  	     				            $.ajax({
+		  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkIn.do",
+		  	     				            	type : 'get',
+		  	     				            	data : { m_no : ${member.m_no},
+		  	     				            			 p_no : '${param.p_no}' },
+		  	     				            	success : function(data) {
+		  	     				            		console.log("오케이 인서트 합니다!");
+		  	     				            	}
+		  	     				            });
+		  	     				           
+		  	     				        // 만약 클릭 시 별이 있었다면(현재 찜이 돼 있음)    
+		     							} else if ($(this).hasClass('far') === false) {
+		     								
+		     								// 빈 별을 생기게 함
+		     								$(this).removeClass("fas");
+		  	     				            $(this).addClass("far");
+		  	     				            
+		  	     				          
+		  	     				            
+		  	     				       
+		  	     				         
+		  	     				         // 찜 목록 DELETE
+		  	     				         $.ajax({   				        	 
+		  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkDe.do",
+		  	     				            	type : 'get',
+		  	     				            	data : { m_no : ${member.m_no},
+		  	     				            			 p_no : '${param.p_no}' },
+		  	     				            	success : function(data) {
+		  	     				            		
+		  	     				            		console.log("오케이 딜리트 합니다!");
+		  	     				            	}
+		  	     				            })
+		     							}
+		     				
+	     				          })
+	     						
+	     				}
+	     			});
+	     		});	
+	    	</c:if>
 		</script>
 			
 			
