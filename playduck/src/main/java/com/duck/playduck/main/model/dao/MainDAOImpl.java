@@ -62,7 +62,7 @@ public class MainDAOImpl implements MainDAO {
 	}
 
 	@Override
-	public List<Member> memberpic() {
+	public List<String> memberpic() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("main-mapper.memberpic");
 	}
@@ -83,6 +83,31 @@ public class MainDAOImpl implements MainDAO {
 	public int insertDe(Bookmark b) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("main-mapper.deleteBM", b);
+	}
+
+	@Override
+	public List<Bookmark> BookMarkCL(int m_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("main-mapper.BookMarkCL", m_no);
+	
+	}
+
+	@Override
+	public int CBookMarkIn(Bookmark b) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("main-mapper.CBookMarkIn", b);
+	}
+
+	@Override
+	public int CBookMarkDe(Bookmark b) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("main-mapper.CBookMarkDe", b);
+	}
+
+	@Override
+	public String curationforDuck(int parseInt) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("main-mapper.curationforDucksel", parseInt);
 	}
 
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin2-mapper">
+
+	<select id="selectReviewList" resultType="review">
+		SELECT R.R_NO,
+		M.M_NAME, R.M_NO, R.R_CONTENT
+		FROM REVIEW R
+		JOIN MEMBER M ON (R.M_NO
+		=M.M_NO)
+		ORDER BY R.R_NO
+	</select>
+
+	<select id="selectReviewTotalContents" resultType="_int">
+		SELECT
+		COUNT(*) FROM REVIEW
+	</select>
+
+	<select id="reviewSr" resultType="review">
+		SELECT R.R_NO,
+		M.M_NAME, R.M_NO,
+		R.R_CONTENT
+		FROM REVIEW R
+		JOIN MEMBER M ON (R.M_NO =M.M_NO)
+		WHERE R.R_CONTENT LIKE '%'|| #{text} ||'%' OR
+		M.M_NAME LIKE '%' || #{text} || '%'
+		ORDER BY R.R_NO
+
+	</select>
+
+	<select id="selectreviewSrTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW R
+		JOIN MEMBER M ON (R.M_NO =M.M_NO)
+		WHERE R.R_CONTENT LIKE '%'|| #{text} ||'%' OR
+		M.M_NAME LIKE '%' || #{text} || '%'
+		ORDER BY R.R_NO
+
+	</select>
+
+	<select id="deleteReview" parameterType="_int">
+		DELETE FROM REVIEW
+		WHERE
+		R_NO = #{ r_no }
+	</select>
+</mapper>

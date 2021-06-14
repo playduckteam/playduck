@@ -25,13 +25,21 @@ public interface MainService {
 
 	List<Curation> curationforDuck();
 
-	List<Member> memberpic();
+	List<String> memberpic();
 
 	List<Bookmark> BookMarkC(int m_no);
 
 	int insertBM(Bookmark b);
 
 	int insertDe(Bookmark b);
+
+	List<Bookmark> BookMarkCL(int m_no);
+
+	int CBookMarkIn(Bookmark b);
+
+	int CBookMarkDe(Bookmark b);
+
+	String curationforDuck(int parseInt);
 
 	
 
