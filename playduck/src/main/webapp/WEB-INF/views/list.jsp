@@ -33,27 +33,31 @@ body, html, section{
 <body>
 	<h1 class="hidden">playduck</h1>
 	<%@ include file="common/header.jsp"%>
+	
 		 <div class="madal_listSort">
             <div class="madal_listSortDiv" title="">
                 <span class="modal_content_close_1">X</span>
-                <a href="" class="sort_title" style="margin-left:27px;">평점 높은 순</a>
+                <a href="/playduck/list/playlist.do?sortType=1" class="sort_title" style="margin-left:27px;">평점 높은 순</a>
                 <hr class="sort_line"/>
-                <a href="" class="sort_title">리뷰 많은 순</a>
+                <a href="/playduck/list/playlist.do?sortType=2" class="sort_title">리뷰 많은 순</a>
                 <hr class="sort_line"/>
-                <a href="" class="sort_title">가나다 순</a>
+                <a href="/playduck/list/playlist.do?sortType=3" class="sort_title">가나다 순</a>
+                <hr class="sort_line"/>
+                <a href="/playduck/list/playlist.do?sortType=4" class="sort_title">최신 순</a>
             </div>
     </div>
+    
 	<section>
-	<div class="list_sort">최신 순 ▼</div>
-	
+	<div class="list_sort">분류 ▼</div>
 	<p>총 ${totalContents}건의 게시물이 있습니다.</p>
+	
 	<div class="list_container">
 	
-		<c:forEach items="${plist2}" var="pi" begin="0" varStatus="status">
+		<c:forEach items="${plist}" var="pi" begin="0" varStatus="status">
 		<div class="listArea">
-			<img src="${pi}">
+			<img src="${pi.poster}">
 			<div class="list_content">
-				 <h3 style="color: #fff;">${plist.get(status.index)}</h3>
+				 <h3 style="color: #fff;">${pi.prfnm}</h3>
               <span class="main_toprate">95%</span>
 				<div class="list_icon">
 					<i class="far fa-star" id="star" style="color: yellow;"></i>
@@ -64,6 +68,7 @@ body, html, section{
 	</div>
 	<c:out value="${pageBar}" escapeXml="false"/>
 	</section>
+
 <br /><br /><br /><br /><br /><br /><br /><br />
 	<%@ include file="common/footer.jsp"%>
 </body>

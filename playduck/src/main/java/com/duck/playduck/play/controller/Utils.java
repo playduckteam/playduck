@@ -1,10 +1,12 @@
 package com.duck.playduck.play.controller;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 public class Utils {
 
 	//페이지 계산 처리 및 HTML 생성용 클래스
 
-	public static String getPageBar(int totalContents, int cPage, int numPerPage, String url ){
+	public static String getPageBar(int totalContents, int cPage, int numPerPage,int sortType, String url ){
 		String pageBar = "";
 		int pageBarSize = 5; // 1, 2, 3, 4, 5 --> 6, 7, 8, 9, 10
 		cPage = cPage==0?1:cPage;
@@ -66,7 +68,7 @@ public class Utils {
 		//fn_paging함수
 		pageBar += "<script>";
 		pageBar += "function fn_paging(cPage,numPerPage){";
-		pageBar += "location.href='"+url+"?cPage='+cPage;";
+		pageBar += "location.href='"+url+"?cPage='+cPage+'&sortType='"+sortType+";";
 		pageBar += "}";
 		pageBar += "</script>";
 		

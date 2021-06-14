@@ -29,6 +29,10 @@ public interface MainService {
 
 	List<Bookmark> BookMarkC(int m_no);
 
+	int insertBM(Bookmark b);
+
+	int insertDe(Bookmark b);
+
 	
 
 	

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -81,7 +82,7 @@ public class DetailController {
 						dlist.add(getTagValue("fcltynm", eElement));
 						dlist.add(getTagValue("prfruntime", eElement));
 						dlist.add(getTagValue("entrpsnm", eElement));
-						dlist.add(getTagValue("prfpdfrom	", eElement));
+						dlist.add(getTagValue("prfpdfrom", eElement));
 						dlist.add(getTagValue("prfpdto", eElement));
 						dlist.add(getTagValue("prfcast", eElement));
 						
@@ -110,11 +111,16 @@ public class DetailController {
 	
 	@RequestMapping("/review/tab_goodReview.do")
 	public String selectGoodReview(Model model, 
-			@RequestParam String p_no
+			@RequestParam String p_no,
+			@RequestParam(required=false, defaultValue="0") int m_no
 			) {
 		
+		Map<String, Object> rmap = new HashMap<>();
+		rmap.put("p_no", p_no);
+		rmap.put("m_no", m_no);
+		
 		List<Review> rlist = new ArrayList<Review>();
-		rlist = detailservice.selectGoodReview(p_no);
+		rlist = detailservice.selectGoodReview(rmap);
 		
 		System.out.println(rlist);
 		model.addAttribute("rlist", rlist);
@@ -124,17 +130,24 @@ public class DetailController {
 	
 	@RequestMapping("/review/tab_badReview.do")
 	public String selectBadReview(Model model, 
-			@RequestParam String p_no
+			@RequestParam String p_no,
+			@RequestParam(required=false, defaultValue="0") int m_no
 			) {
-		List<Review> rlist = new ArrayList<Review>();
-		rlist = detailservice.selectBadReview(p_no);
-		model.addAttribute("rlist", rlist);
+		
+		Map<String, Object> rmap = new HashMap<>();
+		rmap.put("p_no", p_no);
+		rmap.put("m_no", m_no);
+		
+		List<Review> rlist2 = new ArrayList<Review>();
+		rlist2 = detailservice.selectBadReview(rmap);
+		model.addAttribute("rlist2", rlist2);
+		System.out.println(rlist2);
 		
 		return "tab_badReview";
 	}
 	
 	  @RequestMapping("/review/reviewDelete.do")
-		public String deleteMemo(Model model, 
+		public String deleteReview(Model model, 
 				@RequestParam int r_no){
 	    
 		detailservice.deleteReview(r_no);
@@ -142,5 +155,143 @@ public class DetailController {
 			return "detail";
 		}
 	
+	  @RequestMapping("/review/reviewDuplicate.do")
+	  @ResponseBody
+		public int reviewDupl(Model model, 
+				@RequestParam String p_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+	    
+		  Map<String, Object> rmap = new HashMap<>();
+			rmap.put("p_no", p_no);
+			rmap.put("m_no", m_no);
+		  
+		int result = detailservice.reviewDupl(rmap);
+			
+			return result;
+		}
+
+	  @RequestMapping("/review/reviewLike.do")
+	  @ResponseBody
+		public int likeInsert(Model model, 
+				@RequestParam int r_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println(r_no);
+		  System.out.println(m_no);
+		  
+		  Map<String, Object> lmap = new HashMap<>();
+		  lmap.put("r_no", r_no);
+		  lmap.put("m_no", m_no);
+	    
+		detailservice.likeInsert(lmap);
+		detailservice.likeInsert2(lmap);
+		
+		int result = detailservice.likeCount(lmap);
+			
+			return result;
+		}
+	
+	  
+	  @RequestMapping("/review/reviewLikeDelete.do")
+	  @ResponseBody
+		public int likeDelete(Model model, 
+				@RequestParam int r_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println("delete r_no : "+r_no);
+		  System.out.println("delete m_no : "+m_no);
+		  
+		  Map<String, Object> lmap = new HashMap<>();
+		  lmap.put("r_no", r_no);
+		  lmap.put("m_no", m_no);
+	    
+		detailservice.likeDelete(lmap);
+		detailservice.likeDelete2(lmap);
+		
+		int result = detailservice.likeCount(lmap);
+			
+			return result;
+		}
+
+	  @RequestMapping("/review/likecheck.do")
+	  @ResponseBody
+		public int likeCheck(Model model, 
+				@RequestParam String r_no,
+				@RequestParam int m_no
+				) {
+			
+		  System.out.println(r_no);
+		  System.out.println(m_no);
+			Map<String, Object> rmap = new HashMap<>();
+			rmap.put("r_no", r_no);
+			rmap.put("m_no", m_no);
+			
+			int result = detailservice.selectLikecheck(rmap);
+			
+			
+			return result;
+		}
+
+	  @RequestMapping("/review/reviewHate.do")
+	  @ResponseBody
+		public int HateInsert(Model model, 
+				@RequestParam int r_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println(r_no);
+		  System.out.println(m_no);
+		  
+		  Map<String, Object> lmap = new HashMap<>();
+		  lmap.put("r_no", r_no);
+		  lmap.put("m_no", m_no);
+	    
+		detailservice.HateInsert(lmap);
+		detailservice.HateInsert2(lmap);
+		
+		int result = detailservice.HateCount(lmap);
+			
+			return result;
+		}
+	
+	  
+	  @RequestMapping("/review/reviewHateDelete.do")
+	  @ResponseBody
+		public int HateDelete(Model model, 
+				@RequestParam int r_no,
+				@RequestParam(required=false, defaultValue="0") int m_no){
+		  
+		  System.out.println("delete r_no : "+r_no);
+		  System.out.println("delete m_no : "+m_no);
+		  
+		  Map<String, Object> lmap = new HashMap<>();
+		  lmap.put("r_no", r_no);
+		  lmap.put("m_no", m_no);
+	    
+		detailservice.HateDelete(lmap);
+		detailservice.HateDelete2(lmap);
+		
+		int result = detailservice.HateCount(lmap);
+			
+			return result;
+		}
+
+	  @RequestMapping("/detail/bookmarkcheck.do")
+	  @ResponseBody
+		public int detailBookmarkCheck(Model model, 
+				@RequestParam String p_no,
+				@RequestParam int m_no){
+		  
+		  System.out.println(p_no + "/"+ m_no);
+		  
+		  Map<String, Object> rmap = new HashMap<>();
+		  rmap.put("p_no", p_no);
+		  rmap.put("m_no", m_no);
+	  
+		  
+		int result = detailservice.detailBookmarkCheck(rmap);
+			
+			return result;
+		}
+
 }
 

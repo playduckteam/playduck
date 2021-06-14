@@ -38,7 +38,30 @@
                 }
             }).open();
     	});
+    	
+        $('#find_idbtn').on('click',function(){
+        	$.ajax({
+    			url : '${pageContext.request.contextPath}/member/memberIdFind.do',
+    			type : 'post',
+    			data : { 
+    				m_email : $('#find_m_email').val()
+    				,m_name : $('#find_m_name').val()
+    		},
+    			async : 'false',
+    			success : function(data) {
+    				alert(data.msg)
+    				if(data.msg=="이메일 찾기 화면으로 이동합니다."){
+    					location.href="${pageContext.request.contextPath}/member/memberIdFindResult.do?m_email="+data.m_email;
+    				}
+    				
+    			}
+    		
+        	}); // ajax
+        	
+        }); // function
     });
+    
+
 
     
 </script>
@@ -296,18 +319,20 @@
                 <div class="modal_content findArea">
                     <div class="find_id">
                         <h2 class=find_title>아이디 찾기</h2>
-                        <form action="" method="post">
                             <input type="text" name="m_email" id="find_m_email" placeholder="이메일 주소"/>
-                            <button type="submit" class="login_box find orange">이메일 인증받기</button>
-                        </form>
+                            <input type="text" name="m_name" id="find_m_name" placeholder="이름"/>
+                            <button type="button" class="login_box find orange" id="find_idbtn">아이디 찾기</button>
                     </div>
 
                     <div class="find_pwd">
                         <h2 class=find_title>비밀번호 변경</h2>
-                        <form action="">
-                            <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디"/>
-                            <input type="text" name="m_email" id="find_m_email" placeholder="이메일 주소"/>
-                            <button type="submit" class="login_box login orange">이메일 인증받기</button>      
+                        <form action="${pageContext.request.contextPath}/member/findPwd.do" method="POST">
+                            <div class="textbox">
+	                            <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디"/>
+	                            <input id="email" name="m_email" id="m_email" required="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)?$/i" type="email" placeholder="이메일 주소"/>
+	                         <div class="error">유효하지 않은 이메일주소 입니다  </div>  
+	                         </div> 
+                            <button type="submit" id="check" class="login_box login orange">이메일 인증받기</button>
                         </form>
                     </div>
 

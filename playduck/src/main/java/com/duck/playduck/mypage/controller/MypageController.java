@@ -16,6 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,12 +55,6 @@ public class MypageController {
 		}
 	
 	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping("/mypage/mypage.do")
 	public String mypage(HttpServletRequest req, Model model) {
@@ -69,6 +64,8 @@ public class MypageController {
 		// 작성한 리뷰 개수 받아오기
 		
 		int review = mypageService.selectCount(m);
+		
+		System.out.println(m);
 			
 		// System.out.println("review결과 : " + review);
 		model.addAttribute("review", review);
@@ -177,7 +174,7 @@ public class MypageController {
 		
 		// 특정 회원이 찜한 공연 목록 받아오기
 		List<Bookmark> bookmark = mypageService.bookmarkPlay(mm);
-		System.out.println("bookmark 결과 : "+ bookmark);
+		//System.out.println("bookmark 결과 : "+ bookmark);
 		
 		
 		
@@ -239,11 +236,11 @@ public class MypageController {
 	
 		// 특정 회원이 찜한 공연 목록 받아오기
 		List<Bookmark> bookmark = mypageService.bookmarkPlay(mm);
-		System.out.println("bookmark 결과 : "+ bookmark);
+		//System.out.println("bookmark 결과 : "+ bookmark);
 		
 		List<String> list1 = new ArrayList<String>();
 		List<String> list2 = new ArrayList<String>();
-		//List<String> list3 = new ArrayList<String>();
+		List<String> list3 = new ArrayList<String>();
 	
 		Map<String, List> map = new HashMap<String, List>();
 	
@@ -271,7 +268,7 @@ public class MypageController {
 						
 						list1.add(getTagValue("prfnm", eElement) );
 						list2.add(getTagValue("poster", eElement) );	
-						//list3.add(i.getP_no());
+						list3.add(getTagValue("mt20id", eElement) );
 					}	
 				}
 			
@@ -283,7 +280,7 @@ public class MypageController {
 
 		map.put("title1", list1);
 		map.put("poster", list2);
-		//map.put("pnum", list3);
+		map.put("pnum", list3);
 
 		return map;
 	}
@@ -295,10 +292,11 @@ public class MypageController {
 	public Map<String, List> mybookmarkContent(@RequestParam int mm){
 		
 		List<Curation> mycuration = mypageService.bookmarkCuration(mm);
-		System.out.println("mycuration 결과 : "+ mycuration);
+		//System.out.println("mycuration 결과 : "+ mycuration);
 		
 		List<String> list1 = new ArrayList<String>();
 		List<String> list2 = new ArrayList<String>();
+		List<Integer> list3 = new ArrayList<Integer>();
 	
 		Map<String, List> map = new HashMap<String, List>();
 		
@@ -307,17 +305,43 @@ public class MypageController {
 			if(c != null) {
 				list1.add(c.getC_title());
 				list2.add(c.getC_pic());
+				list3.add(c.getC_no());
 			}
 			
 		}
 		
 		map.put("title", list1);
 		map.put("poster", list2);
+		map.put("cu", list3);
 		
 		return map;
 	
 	}
-			
+	
+	// 찜한 공연 삭제
+	@RequestMapping("/mypage/deletePlay.do")
+	public String deletePlay(Model model, @RequestParam String no) {
+		
+		int result = mypageService.deletePlay(no);
+		
+		System.out.println("삭제 결과 : " + result);
+		
+		
+		return "redirect:/mypage/mypage.do";
+	}
+	
+	// 찜한 큐레이션 삭제
+	@RequestMapping("/mypage/deleteCuration.do")
+	public String deleteCuration (Model model, @RequestParam int no) {
+		
+		int result = mypageService.deleteCuration(no);
+		
+		System.out.println("큐레이션 삭제 : " + result);
+		
+		
+		return "redirect:/mypage/mypage.do";
+		
+	}
 			
 	
 }

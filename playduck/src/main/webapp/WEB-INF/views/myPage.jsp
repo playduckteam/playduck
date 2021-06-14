@@ -242,7 +242,7 @@
     margin-top: 80px
     }
     
-    .main_toprevieww{
+    button {
     	cursor : pointer;
     }
     
@@ -642,21 +642,13 @@
 			        	 $(this).children('.main_topinfo').hide();
 			     });
 				
-				
-				
-				}
-			 
-			 
-			 });
+			
+			}
+
 		 });
+	 });
 			
-			
-                
-            		
-		 
-			
-	                
-                
+	
                 
             </script>
         </article>
@@ -714,6 +706,19 @@
                     });
                     
                     
+                 // 찜 삭제 function
+                    
+                    function deleteMyP(no){
+            		if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+            		    
+            		    location.href="${pageContext.request.contextPath}/mypage/deletePlay.do?no="+no;
+
+            		}else{   //취소
+            		    return;
+            		}
+            		}
+
+                    
                     //*****************************************************************//
                     
 	$(function(){
@@ -732,15 +737,20 @@
 					innerHtml +='<img src='+data.poster[i] +'>'
 					innerHtml +='<div class="main_topinfo" style="display:none;">'
 					innerHtml +=  '<button class="main_toprevieww"'
-					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
+					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">상세보기</button>'
 					innerHtml +=  '<hr>'
+					innerHtml +=  '<br>'
+					
+					innerHtml +=  "<button class='main_topreviewr' "
+					innerHtml +=   ' style="border: none; background-color: var(--black-color);color: #fff;" onclick="deleteMyP(\''+ data.pnum[i] +'\')">찜 삭제</button>'
+					
 					
 					innerHtml +='</div>'
 					innerHtml += '<div class="main_topcontent">'
-					innerHtml +=   '<h3 style="color: #fff;" class="titleremove1'+i+'">'+data.title1[i]+'</h3>'
+					innerHtml +=   '<h3 style="color: #fff;" class="bookmarkPlay'+i+'">'+data.title1[i]+'</h3>'
 					innerHtml +=   '<span class="main_toprate"></span>'
 					innerHtml +=  '<div class="main_topicon">'
-					innerHtml +=    '<i class="far fa-star" id="star" style="color: yellow;"></i>'
+					// 찜 아이콘 삭제
 					innerHtml += ' </div>'
 					innerHtml += '</div>'
 					innerHtml +='</li>'
@@ -751,9 +761,9 @@
 					var length = 8;
 					
 					// 확인
-					$('.titleremove1'+i).each(function(){
-						if($('.titleremove1'+i).text().length >= length){
-							$('.titleremove1'+i).text($('.titleremove1'+i).text().substr(0,length)+'...');
+					$('.bookmarkPlay'+i).each(function(){
+						if($('.bookmarkPlay'+i).text().length >= length){
+							$('.bookmarkPlay'+i).text($('.bookmarkPlay'+i).text().substr(0,length)+'...');
 						}
 					});
 					
@@ -850,6 +860,19 @@
             $(this).children('.main_topinfo').hide();
         });
         
+        // 찜 삭제 function
+        
+        function deleteMyC(no){
+        	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    		    
+    		    location.href="${pageContext.request.contextPath}/mypage/deleteCuration.do?no="+no;
+
+    		}else{   //취소
+    		    return;
+    		}
+    		}
+
+        
         
         //*****************************************************************//
         
@@ -869,15 +892,17 @@
 					innerHtml +='<img src='+data.poster[i] +'>'
 					innerHtml +='<div class="main_topinfo" style="display:none;">'
 					innerHtml +=  '<button class="main_toprevieww"'
-					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
+					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">상세보기</button>'
 					innerHtml +=  '<hr>'
-					
+					innerHtml +=  '<br>'
+					innerHtml +=  "<button class='main_topreviewr' "
+					innerHtml +=   ' style="border: none; background-color: var(--black-color);color: #fff;" onclick="deleteMyC('+ data.cu[i] +')">찜 삭제</button>'
 					innerHtml +='</div>'
 					innerHtml += '<div class="main_topcontent">'
-					innerHtml +=   '<h3 style="color: #fff;" class="titleremove2'+i+'">'+data.title[i]+'</h3>'
+					innerHtml +=   '<h3 style="color: #fff;" class="bookmarkCuration'+i+'">'+data.title[i]+'</h3>'
 					innerHtml +=   '<span class="main_toprate"> </span>'
 					innerHtml +=  '<div class="main_topicon">'
-					innerHtml +=    '<i class="far fa-star" id="star" style="color: yellow;"></i>'
+						// 찜 아이콘 삭제
 					innerHtml += ' </div>'
 					innerHtml += '</div>'
 					innerHtml +='</li>'
@@ -888,9 +913,9 @@
 					var length = 8;
 					
 					
-					$('.titleremove2'+i).each(function(){
-						if($('.titleremove2'+i).text().length >= length){
-							$('.titleremove2'+i).text($('.titleremove2'+i).text().substr(0,length)+'...');
+					$('.bookmarkCuration'+i).each(function(){
+						if($('.bookmarkCuration'+i).text().length >= length){
+							$('.bookmarkCuration'+i).text($('.bookmarkCuration'+i).text().substr(0,length)+'...');
 						}
 					});
 					

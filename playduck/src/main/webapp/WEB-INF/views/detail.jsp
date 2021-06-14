@@ -34,15 +34,91 @@
 				<img class="detail_poster" src="${dlist[1]}"
 					alt="">
 				<i class="far fa-star" id="star" style="color: yellow;"></i>	
+				
+				
 			</div>
 			
 		<script>
-	    $(function () {
-	        $("#star").click(function () {
-	            $("#star").removeClass("far");
-	            $("#star").addClass("fas");
-	          })
-	        });
+	
+	    
+	 // 회원이 로그인이 됐다면 찜리스트를 가져옴
+		<c:if test="${ member != null}">
+	    	$(function() {
+	    		
+	    		var data1 = {
+	    				"m_no" : ${member.m_no},
+	    				"p_no" : '${param.p_no}'
+	    		};
+	    		
+	    		console.log(data1);
+		
+	     			$.ajax({
+	     				url :  "${pageContext.request.contextPath}/detail/bookmarkcheck.do",
+	     				type : "get",
+	     				data : data1,
+	     				success : function(data) {
+
+	     					//가져온 찜 리스트에 공연번호와 현재 메인페이지에 나와 있는 공연번호 유효성 검사
+	     					if(data == 1){
+	     						$(".fa-star").removeClass("far");
+	     						$(".fa-star").addClass("fas");
+	     					}
+	     			
+	     						// 별 클릭 시
+	     				    	$(".fa-star").on("click",function () {
+	     				   			
+	     				    			// 만약 클릭 시 별이 없었다면(현재 찜이 안돼있음)
+		     							if($(this).hasClass('far') === true) {
+		     								
+		     								// 꽉 찬 별을 생기게 함
+		     								$(this).removeClass("far");
+		  	     				            $(this).addClass("fas");
+		  	     				            
+		  	     				            
+		  	     				         
+
+		  	     				 
+		  	     				            // 찜 목록 INSERT
+		  	     				            $.ajax({
+		  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkIn.do",
+		  	     				            	type : 'get',
+		  	     				            	data : { m_no : ${member.m_no},
+		  	     				            			 p_no : '${param.p_no}' },
+		  	     				            	success : function(data) {
+		  	     				            		console.log("오케이 인서트 합니다!");
+		  	     				            	}
+		  	     				            });
+		  	     				           
+		  	     				        // 만약 클릭 시 별이 있었다면(현재 찜이 돼 있음)    
+		     							} else if ($(this).hasClass('far') === false) {
+		     								
+		     								// 빈 별을 생기게 함
+		     								$(this).removeClass("fas");
+		  	     				            $(this).addClass("far");
+		  	     				            
+		  	     				          
+		  	     				            
+		  	     				       
+		  	     				         
+		  	     				         // 찜 목록 DELETE
+		  	     				         $.ajax({   				        	 
+		  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkDe.do",
+		  	     				            	type : 'get',
+		  	     				            	data : { m_no : ${member.m_no},
+		  	     				            			 p_no : '${param.p_no}' },
+		  	     				            	success : function(data) {
+		  	     				            		
+		  	     				            		console.log("오케이 딜리트 합니다!");
+		  	     				            	}
+		  	     				            })
+		     							}
+		     				
+	     				          })
+	     						
+	     				}
+	     			});
+	     		});	
+	    	</c:if>
 		</script>
 			
 			
@@ -150,11 +226,45 @@
 			<div class="detail_review">
 			
 				<h3 class="detail_reviewTitle">DUCK's 리뷰</h3>
-				<button class="detail_reviewWrite" onclick = "fn_goReviewForm()">리뷰 작성하기</button>
+				<button class="detail_reviewWrite" >리뷰 작성하기</button>
 				<script>
-				function fn_goReviewForm(){
-					location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=${param.p_no}"
-				}
+// 				function fn_goReviewForm(){
+// 					location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=${param.p_no}"
+// 				}
+				
+				/* 아이디 중복검사 이벤트 추가 */
+				$(".detail_reviewWrite").on("click", function(){
+        			var m_no = '${ member.m_no }';
+        			
+        			if( m_no != '' ){
+        				$.ajax({
+				            url  : "${pageContext.request.contextPath}/review/reviewDuplicate.do",
+				            data : {p_no : '${param.p_no}',
+      	                	    m_no : '${ member.m_no }'},
+				            dataType: "json",
+				            success : function(data){
+				                console.log('버튼통신성공');
+				                console.log(data);
+				                if(data == 0){ 
+				                	location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=${param.p_no}"
+				                } else {
+				                    alert('리뷰를 작성한 공연입니다');
+				                    
+				                   
+				                }
+				            }, error : function(jqxhr, textStatus, errorThrown){
+				                console.log("ajax 처리 실패");
+
+				            }
+			        	});
+        			} else {
+        				alert("로그인 후 이용 가능한 기능입니다.");
+        				$('a.modal_loginBtn').click();
+        			}
+				        
+	     	});
+				
+				
 				</script>
 				<div class="detail_reviewTab">
 					<img class="good" src="${pageContext.request.contextPath}/resources/images/review_good_current.png"
@@ -259,9 +369,10 @@
           	                 type : 'GET',                 //get방식으로 통신
           	                 url : urlPath,    //탭의 data-tab속성의 값으로 된 html파일로 통신
           	                 dataType : "html",//html형식으로 값 읽기 
-          	                 data: { p_no : '${param.p_no}' } ,
+          	                 data: { p_no : '${param.p_no}',
+          	                	    m_no : '${ member.m_no }'} ,
           	                 error : function(error, status) {           //통신 실패시
-          	                  alert('통신실패!');
+          	                  console.log('통신실패!');
           	                  console.log('--------------------');
           	                  console.log(error);
           	                  console.log(status);

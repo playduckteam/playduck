@@ -14,13 +14,28 @@ public class BuyServiceImpl implements BuyService {
 
 	@Autowired
 	BuyDAO buyDAO;
-	
 
 
 	@Override
-	public List<BuyList> selectBuyList(Member m) {
+	public List<BuyList> selectBuyList(Member m, int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
-		return buyDAO.selectBuyList(m);
+		return buyDAO.selectBuyList(m,cPage, numPerPage);
+	}
+
+
+
+	@Override
+	public int selectTotalContents() {
+		// TODO Auto-generated method stub
+		return buyDAO.selectTotalContents();
+	}
+
+
+
+	@Override
+	public int buyCancel(int o_no) {
+		// TODO Auto-generated method stub
+		return buyDAO.buyCancel(o_no);
 	}
 
 }
