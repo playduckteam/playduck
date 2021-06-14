@@ -233,9 +233,14 @@ public class MemberController {
 			}
 	} 
 	
-	// 비밀번호 업데이트
+	// 새 비밀번호 업데이트
 	@RequestMapping("/member/changePwd.do")
-	public String changePwd(Member member , Model model, HttpSession session) throws IOException {
+	public String changePwd(Member member , Model model, HttpSession session, SessionStatus status) throws IOException {
+		
+		String pass1 = member.getM_pwd(); 					// 원래 비밀번호
+		String pass2 = bcryptPasswordEncoder.encode(pass1);		// 암호화 처리
+		
+		member.setM_pwd(pass2);
 		
 		int result = memberService.pwdUpdate(member);
 		System.out.println("비밀번호 변경결과" + result);
@@ -247,6 +252,7 @@ public class MemberController {
     	    model.addAttribute("loc",loc);
     	    
  
+    	    status.setComplete();	// 세션 강제 종료
     	    
     	    return "common/msg";
 		}
@@ -258,6 +264,7 @@ public class MemberController {
 			
 			return "findPwd";
 		}
+		
 		
 	}
 	// 오류 메시지 전송 후 모달창을 다시 띄우기 위한 기능
