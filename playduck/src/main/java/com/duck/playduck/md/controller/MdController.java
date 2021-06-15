@@ -160,4 +160,13 @@ private static String getTagValue (String tag, Element eElement) {
 		
 		return "MD_order";
 	}
+	
+	
+// MD 메인 페이지 by 수영
+	@RequestMapping("/md/md_main.do")
+	public String md_main() {
+		
+		return "MD_main";
+	}
+	
 }
