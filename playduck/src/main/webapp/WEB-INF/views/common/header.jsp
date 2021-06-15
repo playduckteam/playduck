@@ -167,7 +167,7 @@
 	<div class="header_searchArea">
 		<img class="header_search" src="${pageContext.request.contextPath}/resources/images/main_search.png"
 			alt="">
-		<a class="all_content" href="${pageContext.request.contextPath}/list/playlist.do">전체작품</a> | <a class="all_md" href="${pageContext.request.contextPath}/md/md_main.do">전체MD</a>
+		<a class="all_content" href="${pageContext.request.contextPath}/list/playlist.do">전체작품</a> | 	<a class="all_content" href="${pageContext.request.contextPath}/curation/culist.do">전체큐레이션</a> | <a class="all_md" href="${pageContext.request.contextPath}/md/md_main.do">전체MD</a>
 	</div>
 	
 	<a href="${pageContext.request.contextPath}/"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" ></a>

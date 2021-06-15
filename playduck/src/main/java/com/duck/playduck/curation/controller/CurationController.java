@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duck.playduck.curation.model.service.CurationService;
 import com.duck.playduck.curation.model.vo.Curation;
+import com.duck.playduck.play.model.vo.Bookmark;
+import com.duck.playduck.play.model.vo.Play;
 
 @Controller
 public class CurationController {
@@ -92,6 +95,71 @@ public class CurationController {
 			
 		}
 
+	@RequestMapping("/curation/culist.do")
+	public String selectPlayList(Model model,
+			@RequestParam(required=false, defaultValue="0") int m_no){
+		
+		
+		
+		int totalContents = curationService.selectTotalCuration();
+		
+		List<Bookmark> blist = curationService.selectBookList(m_no);
+		
+		List<Play> culist = curationService.selectCurationList();
+		
+		
+		model.addAttribute("culist", culist);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("blist", blist);
+		return"Cu_list";
+	}
 	
+	@RequestMapping("/curation/culistsort1.do")
+	public String culistsort1(Model model,
+			@RequestParam(required=false, defaultValue="0") int m_no){
+		
+		
+		
+		int totalContents = curationService.selectTotalCuration();
+		List<Bookmark> blist = curationService.selectBookList(m_no);
+		
+		List<Play> culist = curationService.selectCurationList1();
 
+		
+		model.addAttribute("culist", culist);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("blist", blist);
+
+		return"Cu_list";
+	}
+	
+	@RequestMapping("/curation/culistsort2.do")
+	public String culistsort2(Model model,
+			@RequestParam(required=false, defaultValue="0") int m_no){
+		
+		
+		
+		int totalContents = curationService.selectTotalCuration();
+		List<Bookmark> blist = curationService.selectBookList(m_no);
+		
+		List<Play> culist = curationService.selectCurationList2();
+
+		
+		model.addAttribute("culist", culist);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("blist", blist);
+
+		return"Cu_list";
+	}
+
+	
+//	@RequestMapping("curation/curationSelectOne.do")
+//	public String curationSelectOne(Model model,
+//			@RequestParam int c_no){
+//		
+//		
+//		
+//		return"Curation_detail";
+//	}
+	
 }
