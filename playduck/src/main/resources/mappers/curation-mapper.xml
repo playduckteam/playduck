@@ -6,6 +6,23 @@
 	<insert id="insertCuration" parameterType="curation">
 		insert into curation values(seq_c_no.nextval, #{ m_no }, #{ c_title }, #{ c_content }, sysdate, #{ c_pic }, #{ c_picrenamed })
 	</insert>
+<select id="selectCurationList" resultType="curation" parameterType="curation">
+SELECT * FROM CURATION
+</select>
+<select id="selectTotalCuration" resultType="_int">
+SELECT COUNT(*) FROM CURATION
+</select>
+	<select id="selectCurationList1" resultType="curation" parameterType="curation">
+SELECT * FROM CURATION
+ORDER BY C_TITLE DESC
+</select>
+<select id="selectCurationList2" resultType="curation" parameterType="curation">
+SELECT * FROM CURATION
+ORDER BY C_DATE DESC
+</select>
 
-	
+<select id="selectBookList" resultType="bookmark" parameterType="bookmark">
+SELECT * FROM BOOKMARK
+WHERE M_NO = #{m_no}
+</select>
 </mapper>
