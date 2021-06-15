@@ -13,7 +13,7 @@
 	<select id="selectOneMd"  parameterType="_int"  resultType="md">
 	SELECT  D_TITLE, D_PRICE, D_PIC, D_DETAIL,D_NO
 	FROM MD
-	WHERE D_NO = #{dno}
+	WHERE D_NO = #{d_no}
 	</select>
 		
 	<!-- // reward 값 가져오기 -->
@@ -61,5 +61,15 @@
 			WHERE M_NO = #{ m_no }
 				AND D_NO = #{ d_no}
 		</update>
+		
+	<select id="selectTotalContents" resultType="_int">
+	SELECT COUNT(*) FROM MD
+	</select>
 	
-	</mapper>
+	<select id="selectBoardList" resultType="md">
+	SELECT *   
+	FROM MD 
+	ORDER BY  D_NO
+	</select>
+	
+</mapper>

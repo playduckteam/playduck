@@ -1,7 +1,9 @@
 package com.duck.playduck.md.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,9 +27,9 @@ public class MdDAOImpl implements MdDAO {
 
 	// Md 한개 정보 가져오기
 	@Override
-	public Md selectOneMd(int dno) {
+	public Md selectOneMd(int d_no) {
 		
-		return sqlSession.selectOne("md2-mapper.selectOneMd", dno);
+		return sqlSession.selectOne("md2-mapper.selectOneMd", d_no);
 	}
 
 	// reward 값 가져오기
@@ -78,6 +80,21 @@ public class MdDAOImpl implements MdDAO {
 		Basket basket = new Basket(mno,dno,num);
 		
 		return sqlSession.update("md2-mapper.update2Basket", basket);
+	}
+
+	// 전체 MD 페이지_ 페이징처리
+	@Override
+	public int selectTotalContents() {
+		
+		return sqlSession.selectOne("md2-mapper.selectTotalContents");
+	}
+
+	@Override
+	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
+		
+		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("md2-mapper.selectBoardList", null, rows);
 	}
 	
 

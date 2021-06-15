@@ -77,7 +77,7 @@
 		<a class="all_content" href="${pageContext.request.contextPath}/list/playlist.do">전체작품</a> | <a class="all_md" href="${pageContext.request.contextPath}/md/md_main.do">전체MD</a>
 	</div>
 	
-	<a href="../views/index.jsp"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""></a>
+	<a href="${pageContext.request.contextPath}/"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" ></a>
 	<div class="header_login">
 		<c:if test="${empty member}">
 		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
