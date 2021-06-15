@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 찾기</title>
+<title>이메일 인증번호 확인</title>
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/findIdPw.css">
 <link rel="stylesheet" href="../resources/css/headerfooter.css">
@@ -13,11 +13,34 @@
 <style>
 body,html{
 height: 100%}
+
+#email_injeung {
+	width: 298px;
+	height: 38px;
+	display: block;
+	padding: 5px;
+	border: 1px solid var(--black-color);
+	margin-bottom: 10px;
+	margin-left : 37.3%;
+}
+
+#authCheck{
+
+	color: white;
+	background-color: #ff6801;
+	width: 298px;
+	height: 38px;
+	display: block;
+	padding: 5px;
+	cursor: pointer;
+}
+
+
 </style>
 </head>
 <body>
 	<%@ include file="common/header.jsp"%>
-            <div class="modal_findPwdDiv" title="아이디 비밀번호 찾기">
+            <div class="modal_findPwdDiv" title="이메일 인증번호 확인">
                 <div class="modal_content findArea">
                     <div class="find_id">
                         <h2 class=find_title>이메일 인증번호 확인</h2>
@@ -25,10 +48,10 @@ height: 100%}
                         	<input type="hidden" name ="num" value="${num }">
 							<div class=content>
 								<div class="textbox">
-								<input type="text" name="email_injeung" placeholder="인증번호를 입력하세요"><label>인증번호 </label>
+								<input type="text" id="email_injeung" name="email_injeung" placeholder="인증번호를 입력하세요"><label>인증번호 </label>
 								<div class="error"> </div>
 							</div><br><br>
-								<input type="submit" id="check" value="확인">
+								<input type="submit" id="authCheck" name="authCheck" value="인증번호 확인">
                         </form>
                     </div>
 

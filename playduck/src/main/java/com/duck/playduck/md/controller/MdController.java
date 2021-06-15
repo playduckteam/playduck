@@ -175,7 +175,7 @@ private static String getTagValue (String tag, Element eElement) {
 		int totalContents = mdService.selectTotalContents();
 		
 		// 페이지 처리 HTML 생성하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck//md/md_main.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/md/md_main.do");
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalContents", totalContents);
