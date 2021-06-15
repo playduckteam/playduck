@@ -130,10 +130,11 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<div class="detail_ReservationLink">
+						<div class="detail_ReservationLink" OnClick="location.href='https://tickets.interpark.com/search?keyword=' + '${dlist[0]}'">
 							<img src="${pageContext.request.contextPath}/resources/images/detail_card.png">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예매처 바로가기
 						</div>
+						
 					</td>
 				</tr>
 				<tr>
@@ -218,7 +219,7 @@
 				필요한 사항은 법률로 정한다.</p>
 				 -->
 			<h4 class="detail_sub_title">출연진</h4>
-			<p class="detail_sub_content">${dlist[7]}</p>
+			<p class="detail_sub_content">${dlist[8]}</p>
 
 			<hr>
 			
