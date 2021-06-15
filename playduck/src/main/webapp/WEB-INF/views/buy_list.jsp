@@ -30,7 +30,9 @@
          <!--물품 구매 리스트-->
          <p style="color:var(--black-color)">총 ${totalContents}건의 상품이 있습니다.</p>
          <div class="Sale_list">
+         
          <c:forEach items="${blist}" var="bl" begin="0">
+         <c:if test="${bl.o_status eq 1 }">
             <div class="S_list" id="Sale_img">
                 <img src="${bl.d_pic}" width="200px" height="200px">
             </div>
@@ -39,7 +41,6 @@
                 <table>
                     <tr> 
                         <td class="Sale_title_th1"colspan="4">${bl.d_title }</td>
-                
                         <td colspan="2" ><p class="Sale_price_td1" >${bl.d_price}원</p></td>
                     </tr>
                     <tr>
@@ -62,13 +63,15 @@
                     <tr>
                     <td class="Sale_title_td1" style="padding-bottom: 0px;">주문번호 </td>
                     <td class="Sale_title_td2" style="padding-bottom: 0px;">${bl.o_no}</td>
-                    <td colspan="5"><button class="Sale_returnBtn">반품</button><button class="Sale_canclenBtn" onclick="goDelete(${bl.o_no});">취소</button></td>
+                    <td colspan="5"><button class="Sale_returnBtn" onclick="goReturn(${bl.o_no});" >반품</button><button class="Sale_canclenBtn" onclick="goDelete(${bl.o_no});">취소</button></td>
                     </tr>
+                    </c:if>
                  </table>
             </div>
         </div>
         <hr style="border: solid 1px;">
         </c:forEach>
+      
         <script>
         // 끝
         	$('.shipment-comp,.input_invoice').on('change', function(){
@@ -78,6 +81,9 @@
         	});
         	function goDelete(o_no) {
         		location.href = "${pageContext.request.contextPath}/buy/buycancel.do?o_no="+o_no
+        	}
+        	function goReturn(o_no) {
+        		location.href = "${pageContext.request.contextPath}/buy/buyreturn.do?o_no="+o_no
         	}
         </script>
         <!-- 물품 구매 리스트 끝-->

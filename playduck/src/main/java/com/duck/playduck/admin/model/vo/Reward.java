@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reward implements Serializable {
-
+	String m_no;
+	String m_name;
+	int m_status;
 	int point;
 }

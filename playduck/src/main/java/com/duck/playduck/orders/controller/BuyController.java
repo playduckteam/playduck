@@ -44,7 +44,7 @@ public class BuyController {
 		return"buy_list";
 	}
 	@RequestMapping("/buy/buycancel.do")
-	public String buyCancel(Model model, @RequestParam int o_no){
+	public String buyCancel(@RequestParam int o_no){
 		
 		
 		int result = buyService.buyCancel(o_no);
@@ -53,4 +53,17 @@ public class BuyController {
 		
 		return"redirect:/buy/buylist.do";
 	}
+	
+	@RequestMapping("/buy/buyreturn.do")
+	public String buyReturn(@RequestParam int o_no) {
+		
+		
+		
+		int result = buyService.buyReturn(o_no);
+		
+		return"redirect:/buy/buylist.do";
+	}
+	
+	
+	
 }

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BuyList implements Serializable {
+	private String m_name;
 	private String d_title;
 	private int d_price;
 	private String d_pic;
@@ -19,4 +20,5 @@ public class BuyList implements Serializable {
 	private Date o_date;
 	private int total;
 	private int w_down;
+	private int o_status;
 }

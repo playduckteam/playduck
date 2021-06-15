@@ -38,4 +38,12 @@ public class BuyServiceImpl implements BuyService {
 		return buyDAO.buyCancel(o_no);
 	}
 
+
+
+	@Override
+	public int buyReturn(int o_no) {
+		// TODO Auto-generated method stub
+		return buyDAO.buyReturn(o_no);
+	}
+
 }

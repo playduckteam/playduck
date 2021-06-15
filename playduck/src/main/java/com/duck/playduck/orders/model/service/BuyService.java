@@ -13,6 +13,8 @@ public interface BuyService {
 
 	int buyCancel(int o_no);
 
+	int buyReturn(int o_no);
+
 	
 
 }

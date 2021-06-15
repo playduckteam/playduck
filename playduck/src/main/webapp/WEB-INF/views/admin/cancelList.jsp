@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>관리자 페이지 - 취소 관리</title>
-    <link rel="stylesheet" href="../../resources/css/common.css">
-    <link rel="stylesheet" href="../../resources/css/headerfooter.css">
-    <link rel="stylesheet" href="../../resources/css/sidevar.css">
-    <link rel="stylesheet" href="../../resources/css/admin.css">
-	<script src="../../resources/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../resources/css/common.css">
+    <link rel="stylesheet" href="../resources/css/headerfooter.css">
+    <link rel="stylesheet" href="../resources/css/sidevar.css">
+    <link rel="stylesheet" href="../resources/css/admin.css">
+	<script src="../resources/js/jquery-3.6.0.min.js"></script>
     
 </head>
 
@@ -29,7 +32,7 @@
             <div class="AD_cancelList_search_img">
 
                 <input type="text" class="searchbox">
-                <img src="../../resources/images/search.png">
+                <img src="../resources/images/search.png">
             </div>
 
 
@@ -45,39 +48,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                <c:forEach items="${clist}" var="ci" >
                     <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td><img src="../../resources/images/panda.gif"></td>
-                        <td>팬더팬더</td>
-                        <td>60,000</td>
-                        <td>1</td>
+                        <td>${ci.o_no}</td>
+                        <td>${ci.m_name }</td>
+                        <td><img src="${ci.d_pic}"></td>
+                        <td>${ci.d_title}</td>
+                        <td>${ci.d_price}</td>
+                        <td>${ci.o_quan}</td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td><img src="../../resources/images/panda.gif"></td>
-                        <td>팬더팬더</td>
-                        <td>60,000</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td><img src="../../resources/images/panda.gif"></td>
-                        <td>팬더팬더</td>
-                        <td>60,000</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td><img src="../../resources/images/panda.gif"></td>
-                        <td>팬더팬더</td>
-                        <td>60,000</td>
-                        <td>1</td>
-                    </tr>
-
+                    </c:forEach>
                 </tbody>
             </table>
 
