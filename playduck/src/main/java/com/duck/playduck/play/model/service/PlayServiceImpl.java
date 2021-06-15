@@ -25,9 +25,9 @@ public class PlayServiceImpl implements PlayService {
 
 
 	@Override
-	public List<Play> selectPlayList(int cPage, int numPerPage) {
+	public List<Play> selectPlayList() {
 		// TODO Auto-generated method stub
-		return playDAO.selectPlayList(cPage, numPerPage);
+		return playDAO.selectPlayList();
 	}
 	
 	

@@ -40,18 +40,18 @@ private static String getTagValue (String tag, Element eElement) {
 		}
 	
 	@RequestMapping("/list/playlist.do")
-	public String selectPlayList(Model model,@RequestParam(required = false, defaultValue = "0") int sortType, @RequestParam(value="cPage",required=false,defaultValue="1")int cPage){
+	public String selectPlayList(Model model,@RequestParam(required = false, defaultValue = "0") int sortType){
 		
 		//한 페이지당 페이지수
-		int numPerPage =8;
+		
 		
 		
 		int totalContents = playService.selectTotalContents();
 		
 		//페이지 처리 html 생성하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage,sortType, "/playduck/list/playlist.do");
 		
-		List<Play>list = playService.selectPlayList(cPage,numPerPage);
+		
+		List<Play>list = playService.selectPlayList();
 		List<PlayElement> plist = new ArrayList<>();
 		/*
 		ArrayList plist = new ArrayList();
@@ -103,9 +103,7 @@ private static String getTagValue (String tag, Element eElement) {
 		
 		model.addAttribute("plist", plist);
 		model.addAttribute("totalContents", totalContents);
-		model.addAttribute("numPerPage", numPerPage);
-		model.addAttribute("pageBar", pageBar);
-		
+
 		return"list";
 	}
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin-mapper">
+
+<select id="Memberadmin" resultType="member">
+SELECT M_NO, M_NAME FROM MEMBER
+</select>
+
+<select id="memberadminReward" parameterType="_int" resultType="reward">
+SELECT SUM(W_UP)-SUM(W_DOWN) point
+		FROM REWARD
+        WHERE M_NO = #{m_no}
+</select>
+</mapper>

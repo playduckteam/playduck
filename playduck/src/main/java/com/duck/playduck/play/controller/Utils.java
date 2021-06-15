@@ -6,7 +6,7 @@ public class Utils {
 
 	//페이지 계산 처리 및 HTML 생성용 클래스
 
-	public static String getPageBar(int totalContents, int cPage, int numPerPage,int sortType, String url ){
+	public static String getPageBar(int totalContents, int cPage, int numPerPage, String url ){
 		String pageBar = "";
 		int pageBarSize = 5; // 1, 2, 3, 4, 5 --> 6, 7, 8, 9, 10
 		cPage = cPage==0?1:cPage;
@@ -65,12 +65,12 @@ public class Utils {
 		pageBar += "</ul>";
 		
 		//2.스크립트 태그 작성
-		//fn_paging함수
-		pageBar += "<script>";
-		pageBar += "function fn_paging(cPage,numPerPage){";
-		pageBar += "location.href='"+url+"?cPage='+cPage+'&sortType='"+sortType+";";
-		pageBar += "}";
-		pageBar += "</script>";
+				//fn_paging함수
+				pageBar += "<script>";
+				pageBar += "function fn_paging(cPage,numPerPage){";
+				pageBar += "location.href='"+url+"?cPage='+cPage;";
+				pageBar += "}";
+				pageBar += "</script>";
 		
 		return pageBar; 
 	}

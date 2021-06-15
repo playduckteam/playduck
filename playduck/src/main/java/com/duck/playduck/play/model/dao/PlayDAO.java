@@ -7,6 +7,6 @@ import com.duck.playduck.play.model.vo.Play;
 public interface PlayDAO {
 
 	int selectTotalContents();
-	List<Play> selectPlayList(int cPage, int numPerPage);
+	List<Play> selectPlayList();
 
 }

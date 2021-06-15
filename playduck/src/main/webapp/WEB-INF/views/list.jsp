@@ -66,7 +66,6 @@ body, html, section{
 		</div>
 		</c:forEach>
 	</div>
-	<c:out value="${pageBar}" escapeXml="false"/>
 	</section>
 
 <br /><br /><br /><br /><br /><br /><br /><br />

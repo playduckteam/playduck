@@ -50,62 +50,6 @@
                         <td>파트너 큐레이터</td>
                         <td> <div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
-                        <td>파트너 큐레이터</td>
-                        <td><div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
-                    </tr>
                 </tbody>
             </table>
 

@@ -19,7 +19,7 @@
 		<typeAlias type="com.duck.playduck.orders.model.vo.BuyList" alias="buy" />
 		<typeAlias type="com.duck.playduck.play.model.vo.Bookmark" alias="bookmark" />
 		<typeAlias type="com.duck.playduck.md.model.vo.Basket" alias="basket" />
-		
+		<typeAlias type="com.duck.playduck.admin.model.vo.Reward" alias="reward"/>
 	</typeAliases>
 	
 
