@@ -25,7 +25,7 @@ public interface MainDAO {
 
 	List<Curation> curationforDuck();
 
-	List<Member> memberpic();
+	List<String> memberpic();
 
 	List<Bookmark> BookMarkC(int m_no);
 
@@ -33,11 +33,12 @@ public interface MainDAO {
 
 	int insertDe(Bookmark b);
 
-	
+	List<Bookmark> BookMarkCL(int m_no);
 
-	
+	int CBookMarkIn(Bookmark b);
 
+	int CBookMarkDe(Bookmark b);
 
-	
+	String curationforDuck(int parseInt);
 
 }

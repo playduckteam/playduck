@@ -42,7 +42,10 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	
+	<a href="${pageContext.request.contextPath}/admin2/reviewList.do">리뷰목록</a>
 	<!--메인 슬라이드-->
+
 	<a href="${pageContext.request.contextPath}/MD/MD_play.do">연극별 Md</a>
 	<a href="${pageContext.request.contextPath}/MD/MD_buy2?mno=${member.m_no}"> MD 결제페이지</a>
 	<a href="${pageContext.request.contextPath}/MD/MD_order.do"> MD
@@ -119,10 +122,7 @@
 					</button>
 				</div>
 			</div>
-			<script>
-     
-    
-      </script>
+
 		</article>
 
 		<!--큐레이션 슬라이드-->
@@ -153,30 +153,7 @@
 					</button>
 				</div>
 			</div>
-			<script>
-        const container2 = document.querySelector(".main_curcontainer");
-        const prevBtn2 = document.querySelector(".prev2");
-        const nextBtn2 = document.querySelector(".next2");
 
-        (function addEvent() {
-          prevBtn2.addEventListener('click', translateContainer2.bind(this, 1));
-          nextBtn2.addEventListener('click', translateContainer2.bind(this, -1));
-        })();
-
-        function translateContainer2(direction) {
-          const selectedBtn2 = (direction === 1) ? 'prev2' : 'next2';
-          container2.style.transitionDuration = '500ms';
-          container2.style.transform = `translateX(${direction * ( 20 )}%)`;
-          container2.ontransitionend = () => reorganizeEl2(selectedBtn2);
-        }
-
-        function reorganizeEl2(selectedBtn2) {
-          container2.removeAttribute('style');
-          (selectedBtn2 === 'prev2') ? container2.insertBefore(container2.lastElementChild, container2
-            .firstElementChild): container2.appendChild(container2.firstElementChild);
-        }
-     
-      </script>
 		</article>
 		<!--핫리뷰-->
 		<article class="main_hotreview">
@@ -216,9 +193,6 @@
 				</div>
 			</div>
 
-			<script>
-      
-      </script>
 
 		</article>
 		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -227,12 +201,13 @@
 </body>
 
 <script>
+
 	// Top 10 작품리뷰
 	 $(function(){
 		 $.ajax({
 			 url : "${pageContext.request.contextPath}/main/mainReviewTop10.do",
 			 type : 'get',
-			 success : function(data) {
+			 success : function(data) { // 공연포스터, 공연번호, 공연이름, 점수
 	
 				for(var i in data.title){
 							
@@ -251,7 +226,7 @@
 					innerHtml +=   '<h3 style="color: #fff;" class="titleremove'+i+'">'+data.title[i]+'</h3>'
 					innerHtml +=   '<span class="main_toprate">'+data.grade[i]+'%</span>'
 					innerHtml +=  '<div class="main_topicon">'
-					innerHtml +=    '<i class="far fa-star '+data.pnum[i]+'" name='+data.pnum[i]+' id="star" style="color: yellow;" ></i>'
+					innerHtml +=    '<i class="far fa-star zzim1 '+data.pnum[i]+'" name='+data.pnum[i]+' id="star" style="color: yellow;" ></i>'
 					innerHtml += ' </div>'
 					innerHtml += '</div>'
 					innerHtml +='</li>'
@@ -299,7 +274,8 @@
 					$(".main_topicon").on("click",function () {	
 						
 						alert("로그인을 해주세요!")
-		
+						$('.modal_loginBtn').click();
+										
 				 	 })
 				});	
 			</c:if>
@@ -313,26 +289,27 @@
 		    				"p_num" : data.pnum
 		    		}
   		
+		    		
 		     			$.ajax({
 		     				url :  "${pageContext.request.contextPath}/main/bookmarkcheck.do",
 		     				type : "get",
 		     				data : data1,
-		     				success : function(data) {
-
+		     				success : function(data) { // 찜목록 공연번호
+								
 		     					//가져온 찜 리스트에 공연번호와 현재 메인페이지에 나와 있는 공연번호 유효성 검사
 		     					for(var i in data) {
 		     						for(var j in data1.p_num) {
 		     							if(data[i] == data1.p_num[j]){
 		     								
-		     									$('.'+data1.p_num[j]).removeClass("far");
-		     									$('.'+data1.p_num[j]).addClass("fas");
+		     									$('.'+data[i]).removeClass("far");
+		     									$('.'+data[i]).addClass("fas");
 		     									
 		     							}					
 		     						}
 		     					}
 		     			
 		     						// 별 클릭 시
-		     				    	$(".fa-star").on("click",function () {
+		     				    	$(".zzim1").on("click",function () {
 		     				   			
 		     				    			// 만약 클릭 시 별이 없었다면(현재 찜이 안돼있음)
 			     							if($(this).hasClass('far') === true) {
@@ -349,10 +326,11 @@
 			  	     				            $.ajax({
 			  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkIn.do",
 			  	     				            	type : 'get',
-			  	     				            	data : { m_no : ${member.m_no},
+			  	     				            	contentType : "application/json; charset:UTF-8", // return을 string으로 할 시 AJAX에 "contentType" 과 
+			  	     				            	data : { m_no : ${member.m_no},					 // controller > RequestMapping 부분에 "produces"를 하지 않으면 문자가 깨져서 옴	
 			  	     				            			 p_no : getName },
 			  	     				            	success : function(data) {
-			  	     				            		alert("오케이 인서트 합니다!");
+			  	     				            		alert('" ' + data + ' "' + " 이(가) 공연 북마크에 추가 됐습니다");
 			  	     				            	}
 			  	     				            });
 			  	     				           
@@ -371,11 +349,12 @@
 			  	     				         $.ajax({   				        	 
 			  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkDe.do",
 			  	     				            	type : 'get',
-			  	     				            	data : { m_no : ${member.m_no},
+			  	     				            	contentType : "application/json; charset:UTF-8", //return을 string으로 할 시 AJAX에 "contentType"과 
+			  	     				            	data : { m_no : ${member.m_no},					// controller > RequestMapping 부분에 "produces"를 하지 않으면 문자가 깨져서 옴
 			  	     				            			 p_no : getName },
 			  	     				            	success : function(data) {
 			  	     				            		
-			  	     				            		alert("오케이 딜리트 합니다!");
+			  	     				            		alert('" ' + data + ' "' + " 이(가) 공연 북마크에서 삭제 됐습니다");
 			  	     				            	}
 			  	     				            })
 			     							}
@@ -403,7 +382,7 @@
 		$.ajax({
 			url : "${pageContext.request.contextPath}/main/curationforDuck.do",
 			type : 'get',
-			success : function(data){
+			success : function(data){ // 큐레이션 사진, 큐레이션 제목, 큐레이션 번호 
 				
 				var innerHtml = "";
 				
@@ -414,13 +393,139 @@
 					innerHtml += '<div class="main_curcontent">'
 					innerHtml += ' <h3 style="color: #fff;">'+data.title[i]+'</h3>'
 					innerHtml += ' <div class="main_curicon">'
-					innerHtml +=     '<i class="far fa-star" id="star" style="color: yellow;"></i>'
-					innerHtml +=  ' </div>'
-					innerHtml += ' </div>'
+					innerHtml +=     '<i class="far fa-star zzim2 a'+data.Cnum[i]+'" name=c'+data.Cnum[i]+' id="star" style="color: yellow;"></i>'
+					innerHtml +=  ' </div>'				// 큐레이션 번호는 int 이므로 앞에 문자를 추가 해준다(name, class, id 는 숫자가 먼저 들어가면 X)
+					innerHtml += ' </div>'				// 숫자만 들어가야 할 경우 문자를 추가 후 controller에서 replace로 c나 a만 자르면 된다
 					innerHtml += ' </li>'
 					
 					$("#curation_ran").append(innerHtml);
 				}
+				
+				
+			    const container2 = document.querySelector(".main_curcontainer");
+		        const prevBtn2 = document.querySelector(".prev2");
+		        const nextBtn2 = document.querySelector(".next2");
+
+		        (function addEvent() {
+		          prevBtn2.addEventListener('click', translateContainer2.bind(this, 1));
+		          nextBtn2.addEventListener('click', translateContainer2.bind(this, -1));
+		        })();
+
+		        function translateContainer2(direction) {
+		          const selectedBtn2 = (direction === 1) ? 'prev2' : 'next2';
+		          container2.style.transitionDuration = '500ms';
+		          container2.style.transform = `translateX(${direction * ( 20 )}%)`;
+		          container2.ontransitionend = () => reorganizeEl2(selectedBtn2);
+		        }
+
+		        function reorganizeEl2(selectedBtn2) {
+		          container2.removeAttribute('style');
+		          (selectedBtn2 === 'prev2') ? container2.insertBefore(container2.lastElementChild, container2
+		            .firstElementChild): container2.appendChild(container2.firstElementChild);
+		        }
+				
+				// 만약 회원이 로그인이 안 돼 있다면
+				<c:if test="${ member == null}">	
+				
+				$(function() {	
+					$(".main_curicon").on("click",function () {	
+
+						alert("로그인을 해주세요!")
+						$('.modal_loginBtn').click();	
+						
+				 	 })
+				});	
+				
+				</c:if>
+				
+				// 만약 회원이 로그인이 돼 있다면
+				<c:if test="${ member != null}">	
+				
+				$(function() {
+					
+					
+					var data1 = {
+		    				"m_no" : ${member.m_no},
+		    				"c_num" : data.Cnum // 부모 AJAX에서 불러온 큐레이션 번호 리스트
+		    		}
+					
+					// 찜 목록에 큐레이션 확인 AJAX
+					$.ajax({
+						url : "${pageContext.request.contextPath}/main/bookmarkcheckC.do",
+						type : 'get',	
+						data : data1,
+						success : function(data) { // Controller에서 메인페이지에 나와 있는 큐레이션과 유효성 검사 완료 후 공연번호 리스트
+						
+							// 유효성 재검사
+							for(var i in data) {
+	     						for(var j in data1.c_num) {
+	     							if(data[i] == data1.c_num[j]){
+	     							
+	     									$('.a'+data1.c_num[j]).removeClass("far");
+	     									$('.a'+data1.c_num[j]).addClass("fas");
+	     									
+	     							}					
+	     						}
+	     					}
+							
+							// 별 클릭 시
+     				    	$(".zzim2").on("click",function () {
+     				   		
+     				    			// 만약 클릭 시 별이 없었다면(현재 찜이 안돼있음)
+	     							if($(this).hasClass('far') === true) {
+	     								
+	     								// 꽉 찬 별을 생기게 함
+	     								$(this).removeClass("far");
+	  	     				            $(this).addClass("fas");
+	  	     				            
+	  	     				         // 클릭 한 클래스에 name을 가져옴  
+	  	     				         var getName=$(this).attr("name");
+
+	  	     				 
+	  	     				            // 찜 목록 INSERT
+	  	     				            $.ajax({
+	  	     				            	url : "${pageContext.request.contextPath}/main/CBookMarkIn.do",
+	  	     				            	type : 'get',
+	  	     				            	data : { m_no : ${member.m_no},
+	  	     				            			 c_no : getName },
+	  	     				            	contentType : "application/json; charset:UTF-8", //return을 string으로 할 시 AJAX에 "contentType"과 
+	  	     				            	success : function(data) {						// controller > RequestMapping 부분에 "produces"를 하지 않으면 문자가 깨져서 옴	
+	  	     				            	
+	  	     				            		alert('" ' + data + ' "' + " 이(가) 큐레이션 북마크에 추가 됐습니다")
+	  	     				            	}
+	  	     				            });
+	  	     				           
+	  	     				        // 만약 클릭 시 별이 있었다면(현재 찜이 돼 있음)    
+	     							} else if ($(this).hasClass('far') === false) {
+	     								
+	     								// 빈 별을 생기게 함
+	     								$(this).removeClass("fas");
+	  	     				            $(this).addClass("far");
+	  	     				            
+	  	     				          
+	  	     				        // 클릭 한 클래스에 name을 가져옴
+	  	     				         var getName=$(this).attr("name");
+	  	     				         
+	  	     				         // 찜 목록 DELETE
+	  	     				         $.ajax({   				        	 
+	  	     				            	url : "${pageContext.request.contextPath}/main/CBookMarkDe.do",
+	  	     				            	type : 'get',
+	  	     				            	data : { m_no : ${member.m_no},
+	  	     				            			 c_no : getName },
+	  	     				            	contentType : "application/json; charset:UTF-8", //return을 string으로 할 시 AJAX에 "contentType"과 
+	  	     				            	success : function(data) {		// controller > RequestMapping 부분에 "produces"를 하지 않으면 문자가 깨져서 옴
+	  	     				            		
+	  	     				            		alert('" ' + data + ' "' + " 이(가) 큐레이션 북마크에서 삭제 됐습니다")
+	  	     				            	
+	  	     				            	}
+	  	     				            })
+	     							}
+	     				
+     				          })
+						}
+					})
+				})
+				</c:if>
 			}
 		});
 	});
@@ -433,8 +538,8 @@
 		 $.ajax({
 			 url : "${pageContext.request.contextPath}/main/mainHotReview.do",
 			 type : 'get',
-			 success : function(data){
-	
+			 success : function(data){ // 공연사진, 리뷰 내용, 공연 포스터
+				console.log(data);
 				 for(var i in data.poster){
 				 
 					 var innerHtml = "";
@@ -442,16 +547,21 @@
 					 innerHtml = '<table class="main_hotreviewTable">'
 					 innerHtml +=  '<tr>'
 					 innerHtml += ' <td class="main_hotreviewprofile">'
-					 innerHtml +=	 '<img src="resources/images/'+data.pic[i]+'" width="120" height="120">'
+					 innerHtml +=	 '<img src="resources/profileImg/'+data.pic[i]+'" width="120" height="120"  >'
 					 innerHtml += '</td>'
 					 innerHtml +='<td class="main_hotreviewcontent">'+data.content[i]+'</td>'
-					 innerHtml +=  ' <td class="main_hotreviewimg"><img src='+data.poster[i] +' width="280" height="120"></td>'
+					 innerHtml +=  ' <td class="main_hotreviewimg imgRe" name='+data.pnum[i]+'><img src='+data.poster[i] +' width="280" height="120" style="cursor:pointer; "  ></td>'
 					 innerHtml += '</tr>'
 					 innerHtml += ' </table>'
 				 
 					 $("#Hotreview3").append(innerHtml);
 				 
 				 }
+				 
+				 $(".imgRe").click(function(){
+					 var getName=$(this).attr("name");
+					 location.href = "${pageContext.request.contextPath}/detail/detail.do?p_no="+getName;
+				 })
 			 }
 		 })	
 	 
@@ -468,8 +578,8 @@
  	
  	// 만약 세션이 연결 X
  	<c:if test="${ member == null}">
-		a = 0;
-	</c:if>
+		a = 0; // AJAX로 a라는 값을 보내는 데, 만약 a라는 값이 비어 있다면 무조건 오류가 생김 
+	</c:if>	   // 현재 페이지가 열리면 회원이 null 인지 not null 인지 판단을 함 즉 페이지가 열리면 무조건 AJAX 실행이 되므로 a 라는 값은 존재해야 함
 		
 
  		// 빼내 온 공연 정보를 랜덤으로 10개만 화면에 보이게 함
@@ -492,7 +602,7 @@
  				
  				// [0, 1, 2 . . . 62, 63]
  		
- 				
+ 				// 랜덤으로 돌릴 때 랜덤 값이 중복이 생기면 안 되므로 * 주의 요망 *
  				for(var i =0; i<len; i++) { // 0 ~ 0.9999 * 64 -> 0 ~ 63.9999
  					rnum = Math.floor(Math.random()*len); 
  					temp = arr[i];                    
@@ -500,6 +610,7 @@
  					arr[rnum] = temp;				
  				}
 		
+ 				// 공연 포스터를 다 보일 수 없으므로 위에서 랜덤으로 돌린 공연 10개만 뽑음
  				 for(var i = 0; i < 10 ; ++i){
  					 
  					 var innerHtml = "";
@@ -507,17 +618,17 @@
  					innerHtml = '<li class="cell3">'
  					innerHtml += '<img src="'+data.poster[arr[i]]+'">'
  					innerHtml += '<div class="main_recinfo" style="display:none;">'
- 					innerHtml += "<button class='main_toprevieww' onclick=\"location.href='detail/detail.do?p_no="+data.pnum[i]+"'\""
+ 					innerHtml += "<button class='main_toprevieww' onclick=\"location.href='detail/detail.do?p_no="+data.pnum[arr[i]]+"'\""
  					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
  					innerHtml += '<hr>'
- 					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[i]+"'\""
+ 					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[arr[i]]+"'\""
  					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'
  					innerHtml += '</div>'
  					innerHtml += '<div class="main_reccontent">'
  					innerHtml +=  '<h3 style="color: #fff;" class="membergood1'+i+'">'+data.title[arr[i]]+'</h3>'
  					innerHtml += '<span class="main_recrate">'+data.grade[arr[i]]+'%</span>'
  					innerHtml +=  '<div class="main_recicon">'
- 					innerHtml +=   '<i class="far fa-star" id="star" style="color: yellow;"></i>'
+ 					innerHtml +=   '<i class="far fa-star zzim3 '+data.pnum[arr[i]]+'" name='+data.pnum[arr[i]]+' id="star" style="color: yellow;"></i>'
  					innerHtml += '</div>'
  					innerHtml += '</div>'
  					innerHtml += '</li>'
@@ -567,11 +678,108 @@
  			          $(this).children('.main_recinfo').hide();
  			        });
  				 
- 				 }
- 			
- 		 
-		     
-			 
+ 			        
+ 			        
+ 			   	// 회원이 로그인이 x 라면 찜 목록 클릭 시 "로그인 필요"
+ 					<c:if test="${ member == null}">
+ 					
+ 						$(function() {	
+
+ 							$(".main_recicon").on("click",function () {	
+ 								
+ 								alert("로그인을 해주세요!")
+ 								$('.modal_loginBtn').click();
+ 				
+ 						 	 })
+ 						});	
+ 					</c:if>
+ 					
+ 					// 회원이 로그인이 됐다면 찜리스트를 가져옴
+ 					<c:if test="${ member != null}">
+ 				    	$(function() {
+ 				    		
+ 				    		var data1 = {
+ 				    				"m_no" : ${member.m_no},
+ 				    				"p_num" : data.pnum
+ 				    		}
+ 		  		
+ 				    		
+ 				     			$.ajax({
+ 				     				url :  "${pageContext.request.contextPath}/main/bookmarkcheck.do",
+ 				     				type : "get",
+ 				     				data : data1,
+ 				     				success : function(data) { // 찜목록 공연번호
+ 										
+ 				     					//가져온 찜 리스트에 공연번호와 현재 메인페이지에 나와 있는 공연번호 유효성 검사
+ 				     					for(var i in data) {
+ 				     						for(var j in data1.p_num) {
+ 				     							if(data[i] == data1.p_num[j]){
+ 				     								
+ 				     									$('.'+data[i]).removeClass("far");
+ 				     									$('.'+data[i]).addClass("fas");
+ 				     									
+ 				     							}					
+ 				     						}
+ 				     					}
+ 				     			
+ 				     						// 별 클릭 시
+ 				     				    	$(".zzim3").on("click",function () {
+ 				     				   			
+ 				     				    			// 만약 클릭 시 별이 없었다면(현재 찜이 안돼있음)
+ 					     							if($(this).hasClass('far') === true) {
+ 					     								
+ 					     								// 꽉 찬 별을 생기게 함
+ 					     								$(this).removeClass("far");
+ 					  	     				            $(this).addClass("fas");
+ 					  	     				            
+ 					  	     				            
+ 					  	     				         var getName=$(this).attr("name");
+
+ 					  	     				 
+ 					  	     				            // 찜 목록 INSERT
+ 					  	     				            $.ajax({
+ 					  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkIn.do",
+ 					  	     				            	type : 'get',
+ 					  	     				            	contentType : "application/json; charset:UTF-8", // return을 string으로 할 시 AJAX에 "contentType" 과 
+ 					  	     				            	data : { m_no : ${member.m_no},					 // controller > RequestMapping 부분에 "produces"를 하지 않으면 문자가 깨져서 옴	
+ 					  	     				            			 p_no : getName },
+ 					  	     				            	success : function(data) {
+ 					  	     				            		alert('" ' + data + ' "' + " 이(가) 공연 북마크에 추가 됐습니다");
+ 					  	     				            	}
+ 					  	     				            });
+ 					  	     				           
+ 					  	     				        // 만약 클릭 시 별이 있었다면(현재 찜이 돼 있음)    
+ 					     							} else if ($(this).hasClass('far') === false) {
+ 					     								
+ 					     								// 빈 별을 생기게 함
+ 					     								$(this).removeClass("fas");
+ 					  	     				            $(this).addClass("far");
+ 					  	     				            
+ 					  	     				          
+ 					  	     				            
+ 					  	     				         var getName=$(this).attr("name");
+ 					  	     				         
+ 					  	     				         // 찜 목록 DELETE
+ 					  	     				         $.ajax({   				        	 
+ 					  	     				            	url : "${pageContext.request.contextPath}/main/MBookMarkDe.do",
+ 					  	     				            	type : 'get',
+ 					  	     				            	contentType : "application/json; charset:UTF-8", //return을 string으로 할 시 AJAX에 "contentType"과 
+ 					  	     				            	data : { m_no : ${member.m_no},					// controller > RequestMapping 부분에 "produces"를 하지 않으면 문자가 깨져서 옴
+ 					  	     				            			 p_no : getName },
+ 					  	     				            	success : function(data) {
+ 					  	     				            		
+ 					  	     				            		alert('" ' + data + ' "' + " 이(가) 공연 북마크에서 삭제 됐습니다");
+ 					  	     				            	}
+ 					  	     				            })
+ 					     							}
+ 					     				
+ 				     				          })
+ 				     						
+ 				     				}
+ 				     			});
+ 				     		});	
+ 				    	</c:if>
+ 				 }	 
  		});
  	});
  

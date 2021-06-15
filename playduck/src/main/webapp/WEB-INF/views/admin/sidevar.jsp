@@ -3,7 +3,7 @@
    <div class="AD_sidevar_container">
 
         <div class="AD_sidevar_title">
-            <img src="../../resources/images/logo.png">
+            <img src="../resources/images/logo.png">
         </div>
 
         <div>

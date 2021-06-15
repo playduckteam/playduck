@@ -33,6 +33,7 @@ public class mainController {
 	@Autowired
 	MainService mainservice;
 
+	// 공공 데이터를 xml 파싱 시 무조건 선언 해야 함
 	private static String getTagValue(String tag, Element eElement) {
 
 		NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
@@ -41,46 +42,6 @@ public class mainController {
 		if (nValue == null)
 			return null;
 		return nValue.getNodeValue();
-	}
-
-	@RequestMapping("/main/mainR")
-	public String selectMainTopList(Model model) {
-
-		List<Main> list = new ArrayList<Main>();
-
-		list = mainservice.selectMainTopList();
-
-		try {
-
-			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/PF132236?service=f6ad9fc845404d7db3617fe6ebac38a7";
-
-			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-			Document doc = dBuilder.parse(url);
-
-			doc.getDocumentElement().normalize();
-			System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
-
-			NodeList nList = doc.getElementsByTagName("db");
-
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-				Node nNode = nList.item(temp);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-					Element eElement = (Element) nNode;
-
-					System.out.println("제목 : " + getTagValue("prfnm", eElement));
-					System.out.println("상영일 : " + getTagValue("prfpdfrom", eElement));
-					System.out.println("나이 : " + getTagValue("prfage", eElement));
-
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return "index";
 	}
 
 	@RequestMapping("/main/mainReviewTop10.do")
@@ -102,11 +63,6 @@ public class mainController {
 
 		}
 
-		// Map<String, String> map = new HashMap<String,String>();
-		// Map<String, String> map1 = new HashMap<String,String>();
-		// List list1 = new ArrayList();
-
-		// List<Map<String,String>> list1 = new ArrayList<Map<String,String>>();
 		List<String> list1 = new ArrayList<String>();
 		List<String> list2 = new ArrayList<String>();
 		List<String> list3 = new ArrayList<String>();
@@ -151,7 +107,6 @@ public class mainController {
 		map.put("poster", list2);
 		map.put("pnum", list3);
 
-		// System.out.println(map);
 		return map;
 	}
 
@@ -179,7 +134,6 @@ public class mainController {
 		map.put("title", listT);
 		map.put("pic", listP);
 
-	
 		return map;
 	}
 
@@ -191,21 +145,26 @@ public class mainController {
 
 		list = mainservice.HotReview();
 
-		List<Member> listmp = new ArrayList<Member>();
+		List<String> listmp = new ArrayList<String>();
 
 		listmp = mainservice.memberpic();
 
 		List<String> list0 = new ArrayList<String>();
 
-		for (Member mp : listmp) {
-			list0.add(mp.getM_picRenamed());
+		for (String mp : listmp) {
+			if (mp == null) {
+				list0.add("nopic.jpg");
+			} else {
+				list0.add(mp);
+			}
+
 		}
 
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 
 		List<String> list1 = new ArrayList<String>();
 		List<String> list2 = new ArrayList<String>();
-
+		List<String> list3 = new ArrayList<String>();
 		for (Review i : list) {
 			try {
 
@@ -228,7 +187,7 @@ public class mainController {
 
 						list1.add(i.getR_content());
 						list2.add(getTagValue("poster", eElement));
-
+						list3.add(i.getP_no());
 					}
 				}
 
@@ -236,10 +195,12 @@ public class mainController {
 				e.printStackTrace();
 			}
 		}
+
 		map.put("pic", list0);
 		map.put("content", list1);
 		map.put("poster", list2);
-
+		map.put("pnum", list3);
+		
 		return map;
 	}
 
@@ -323,6 +284,7 @@ public class mainController {
 	@ResponseBody
 	public List<String> BookMarkC(@RequestParam(value = "p_num[]") List<String> p_no,
 			@RequestParam(value = "m_no") int m_no) {
+
 		List<Bookmark> list = new ArrayList<Bookmark>();
 
 		list = mainservice.BookMarkC(m_no);
@@ -331,46 +293,164 @@ public class mainController {
 
 		for (Bookmark b : list) {
 			for (String p : p_no) {
-				if (b.getP_list().equals(p)) {
-					listp.add(p);
+				String convert_clist = String.valueOf(p);
+				if (b.getP_list() != null && b.getP_list().equals(convert_clist)) {
+					listp.add(convert_clist);
 				}
 			}
 		}
 
 		return listp;
 	}
-	
-	@RequestMapping("/main/MBookMarkIn.do")
+
+	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
+	@RequestMapping(value = "/main/MBookMarkIn.do", produces = "application/text; charset=UTF-8")
 	@ResponseBody
-	public int MBookMarkIn(@RequestParam int m_no, @RequestParam String p_no ) {
-		
-		Bookmark b = new Bookmark();
-		
-		b.setM_no(m_no);
-		b.setP_list(p_no);
-		
-	
-		int result = mainservice.insertBM(b);
-		
-		
-		// return은 안 해도 됩니다.
-		return result;
-	}
-	
-	@RequestMapping("/main/MBookMarkDe.do")
-	@ResponseBody
-	public int MBookMarkDe(@RequestParam int m_no, @RequestParam String p_no) {
+	public String MBookMarkIn(@RequestParam int m_no, @RequestParam String p_no) {
 
 		Bookmark b = new Bookmark();
-		
+
 		b.setM_no(m_no);
 		b.setP_list(p_no);
-		
-	
+
+		int result = mainservice.insertBM(b);
+
+		String title = "";
+
+		try {
+
+			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/" + p_no
+					+ "?service=f6ad9fc845404d7db3617fe6ebac38a7";
+
+			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
+
+			doc.getDocumentElement().normalize();
+
+			NodeList nList = doc.getElementsByTagName("db");
+
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element eElement = (Element) nNode;
+
+					title = (getTagValue("prfnm", eElement));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return title;
+	}
+
+	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
+	@RequestMapping(value = "/main/MBookMarkDe.do", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String MBookMarkDe(@RequestParam int m_no, @RequestParam String p_no) {
+
+		Bookmark b = new Bookmark();
+
+		b.setM_no(m_no);
+		b.setP_list(p_no);
+
 		int result = mainservice.insertDe(b);
-		
-	
-		// return은 안 해도 됩니다.
-		return result;
+
+		String title = "";
+
+		try {
+
+			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/" + p_no
+					+ "?service=f6ad9fc845404d7db3617fe6ebac38a7";
+
+			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
+
+			doc.getDocumentElement().normalize();
+
+			NodeList nList = doc.getElementsByTagName("db");
+
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element eElement = (Element) nNode;
+
+					title = (getTagValue("prfnm", eElement));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return title;
+	}
+
+	@RequestMapping("/main/bookmarkcheckC.do")
+	@ResponseBody
+	public List<String> bookmarkcheckC(@RequestParam(value = "c_num[]") List<Integer> c_no,
+			@RequestParam(value = "m_no") int m_no) {
+
+		List<Bookmark> list = new ArrayList<Bookmark>();
+
+		list = mainservice.BookMarkCL(m_no);
+
+		List<String> listc = new ArrayList<String>();
+
+		for (Bookmark b : list) {
+			for (Integer c : c_no) {
+				String convert_clist = String.valueOf(c);
+
+				if (b.getC_list() != null && b.getC_list().equals(convert_clist)) {
+					listc.add(convert_clist);
+				}
+			}
+		}
+
+		return listc;
+
+	}
+
+	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
+	@RequestMapping(value = "/main/CBookMarkIn.do", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String CBookMarkIn(@RequestParam int m_no, @RequestParam String c_no) {
+
+		c_no = c_no.replace("c", "");
+
+		Bookmark b = new Bookmark();
+
+		b.setC_list(c_no);
+		b.setM_no(m_no);
+
+		int result = mainservice.CBookMarkIn(b);
+
+		String title = mainservice.curationforDuck(Integer.parseInt(c_no));
+
+		return title;
+	}
+
+	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
+	@RequestMapping(value = "/main/CBookMarkDe.do", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String CBookMarkDe(@RequestParam int m_no, @RequestParam String c_no) {
+
+		c_no = c_no.replace("c", "");
+
+		Bookmark b = new Bookmark();
+
+		b.setC_list(c_no);
+		b.setM_no(m_no);
+
+		int result = mainservice.CBookMarkDe(b);
+
+		String title = mainservice.curationforDuck(Integer.parseInt(c_no));
+
+		return title;
 	}
 }

@@ -15,7 +15,7 @@ import com.duck.playduck.review.model.vo.Review;
 
 @Service
 public class MainServiceImpl implements MainService {
-	
+
 	@Autowired
 	MainDAO mainDAO;
 
@@ -62,7 +62,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public List<Member> memberpic() {
+	public List<String> memberpic() {
 		// TODO Auto-generated method stub
 		return mainDAO.memberpic();
 	}
@@ -85,9 +85,29 @@ public class MainServiceImpl implements MainService {
 		return mainDAO.insertDe(b);
 	}
 
+	@Override
+	public List<Bookmark> BookMarkCL(int m_no) {
+		// TODO Auto-generated method stub
+		return mainDAO.BookMarkCL(m_no);
+	}
 
+	@Override
+	public int CBookMarkIn(Bookmark b) {
+		// TODO Auto-generated method stub
+		return mainDAO.CBookMarkIn(b);
+	}
 
+	@Override
+	public int CBookMarkDe(Bookmark b) {
+		// TODO Auto-generated method stub
+		return mainDAO.CBookMarkDe(b);
+	}
 
+	@Override
+	public String curationforDuck(int parseInt) {
+		// TODO Auto-generated method stub
+		return mainDAO.curationforDuck(parseInt);
+	}
 
 
 
