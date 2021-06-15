@@ -8,6 +8,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     $(function(){
+    	// 주소조회 api
     	$('.join_addrBtn').on('click',function(){
     		new daum.Postcode({
                 oncomplete: function(data) {
@@ -56,10 +57,87 @@
     				
     			}
     		
-        	}); // ajax
+        	});
         	
-        }); // function
-    });
+        }); // 아이디 중복체크
+        $("#join_id").on("keyup",function(){
+        	var userId = $(this).val().trim();
+        	var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+        	
+        	if(userId.length<4) {
+        		$(".id_ok").hide();
+        		$(".id_error").hide();
+        		$(".id_4").show();
+        		$(".id_error2").hide();
+        		return;
+        		
+        	} else if(!idReg.test( userId )){
+        		$(".id_ok").hide();
+        		$(".id_error").hide();
+        		$(".id_4").hide();
+        		$(".id_error2").show();
+        		return;
+        		
+        	} else {
+        		var a = $("input[name=m_id]").val()
+        		$.ajax({
+		            url  : "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
+		            data : { m_id : a },
+		            dataType: "json",
+		            async:false,
+		            success : function(data){
+		                if(data.data===true){ //viewName 방식
+		                    $(".id_error").hide();
+		                    $(".id_4").hide();
+		                    $(".id_error2").hide();
+		                    $(".id_ok").show();
+		                    if($(".joinArea input:invalid"===true)){
+		                    	$(".j_ErrorBtn").show();
+		                    }
+		                } else {
+		                    $(".id_error").show();
+		                    $(".id_4").hide();
+		                    $(".id_ok").hide();
+		                    $(".id_error2").hide();
+		                }
+		            }, error : function(jqxhr, textStatus, errorThrown){
+		                console.log("ajax 처리 실패");
+		                //에러로그
+		                console.log(jqxhr);
+		                console.log(textStatus);
+		                console.log(errorThrown);
+		            	}
+
+	        		}); // 에이잭스 끝
+        	} // else 문
+	     }); // 아이디 중복체크 끝
+	     
+	     // 비밀번호 체크
+	     $("#join_pwd1").on("blur",function(){
+	    	 var join_pwd1 = $(this).val().trim();
+	    	 var join_pwd2 = $("#join_pwd2").val().trim();
+	    	 if(join_pwd1==join_pwd2){
+	    		 $(".pwd_error").hide();
+                 $(".pwd_ok").show();
+	    	 } else {
+	    		 $(".pwd_error").show();
+                 $(".pwd_ok").hide();
+	    	 }
+	     }); 
+	     
+	     $("#join_pwd2").on("blur",function(){
+	    	 var join_pwd2 = $(this).val().trim();
+	    	 var join_pwd1 = $("#join_pwd1").val().trim();
+	    	 if(join_pwd1==join_pwd2){
+	    		 $(".pwd_error").hide();
+                 $(".pwd_ok").show();
+	    	 } else {
+	    		 $(".pwd_error").show();
+                 $(".pwd_ok").hide();
+	    	 }
+	     }); 
+        
+	}); // function
     
 
 
@@ -117,10 +195,12 @@
                                     <h4 class="join_subTitle">아이디</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_id" id="join_id" placeholder="영문, 숫자 허용">
-
+                                    <input type="text" name="m_id" id="join_id" placeholder="영문, 숫자 허용" required>
+                                    <div class="validate valigreen id_ok">사용 가능한 아이디입니다.</div>
+                                    <div class="validate valired id_4">4자리 이하는 사용하실수 없습니다.</div>
+                                    <div class="validate valired id_error">중복된 아이디입니다.</div>
+                                    <div class="validate valired id_error2">영어와 숫자만 사용가능합니다.</div>
                                 </td>
-
                             </tr>
                             <!-- PASSWORD -->
                             <tr>
@@ -128,7 +208,9 @@
                                     <h4 class="join_subTitle">비밀번호</h4>
                                 </td>
                                 <td>
-                                    <input type="password" id="join_pwd1" name="m_pwd" placeholder="6자리 이상, 영문 숫자 포함">
+                                    <input type="password" id="join_pwd1" name="m_pwd" placeholder="6자리 이상, 영문 숫자 포함" required>
+                                    <div class="validate valired pwd_error">비밀번호가 다릅니다.</div>
+                                    <div class="validate valigreen pwd_ok">사용 가능한 비밀번호 입니다.</div>
                                 </td>
                             </tr>
                             <tr>
@@ -136,7 +218,7 @@
                                     <h4 class="join_subTitle">비밀번호 확인</h4>
                                 </td>
                                 <td>
-                                    <input type="password" id="m_pwd2" name="m_pwd2">
+                                    <input type="password" id="join_pwd2" name="m_pwd2" required>
                                 </td>
                             </tr>
                             <tr>
@@ -148,7 +230,7 @@
                                     <h4 class="join_subTitle">이름</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_name" id="m_name">
+                                    <input type="text" name="m_name" id="m_name" required>
                                 </td>
                             </tr>
                             <!-- GENDER -->
@@ -157,7 +239,7 @@
                                     <h4 class="join_subTitle">성별</h4>
                                 </td>
                                 <td class="join_gender">
-                                    <input type="radio" name="m_gender" id="gender_M" value="M" /> <label
+                                    <input type="radio" name="m_gender" id="gender_M" value="M" required title="생년월일을 확인해주세요"/> <label
                                         for="gender_M">남성</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="radio" name="m_gender" id="gender_F" value="F" /> <label
                                         for="gender_F">여성</label>
@@ -172,11 +254,11 @@
                                 	<input type="hidden" name="m_pic" value="nopic.jpg"/>
                                 	<input type="date" name="m_date" value="2021-06-23" style="display:none;"/>
                                     <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="4"
-                                        placeholder="2021">
-                                    <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
-                                        placeholder="월">
-                                    <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
-                                        placeholder="일">
+                                        placeholder="2021" required>
+                                    <input type="number" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
+                                        placeholder="월" required pattern="[1-12]{1,2}" title="생년월일을 확인해주세요">
+                                    <input type="number" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
+                                        placeholder="일" required pattern="[1-31]{1,2}" title="생년월일을 확인해주세요">
                                 </td>
                             </tr>
                             <!-- PHONE -->
@@ -207,10 +289,10 @@
                                     </select>
                                     <span style="color:black">-</span>
                                     <input type="text" name="m_phone" id="m_phone" maxlength="10"
-                                        style="width: 100px;" >
+                                        style="width: 100px;" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!">
                                     <span style="color:black">-</span>
                                     <input type="text" name="m_phone" id="m_phone" maxlength="10"
-                                        style="width: 100px;" >    
+                                        style="width: 100px;" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!">    
 
                                 </td>
                             </tr>
@@ -220,8 +302,8 @@
                                     <h4 class="join_subTitle">이메일</h4>
                                 </td>
                                 <td class="join_email">
-                                    <input type="text" name="m_email" id="join_email" placeholder="example"> @
-                                    <input type="text" name="m_email" id="join_email" placeholder="example.com">
+                                    <input type="text" name="m_email" id="join_email1" placeholder="example" required > @
+                                    <input type="text" name="m_email" id="join_email2" placeholder="example.com" required >
                                 </td>
                             </tr>
                             <!-- ADDRESS -->
@@ -231,7 +313,7 @@
                                     <h4 class="join_subTitle">우편번호</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address0" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);"readonly>
+                                    <input type="text" name="m_address" id="m_address0" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);"readonly required>
                                     <button class="join_addrBtn" style="width:50px; height:26px; background:var(--main-color); text-align:center;" type="button">검색</button>
                                 </td>
                             </tr>
@@ -240,7 +322,7 @@
                                     <h4 class="join_subTitle">도로명 주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address1" size="40" maxlength="40" style="background:rgb(233, 227, 227);"readonly>
+                                    <input type="text" name="m_address" id="m_address1" size="40" maxlength="40" style="background:rgb(233, 227, 227);"readonly required>
                                 </td>
                                 
                             </tr>
@@ -249,7 +331,7 @@
                                     <h4 class="join_subTitle">상세주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address2" size="40" maxlength="40">
+                                    <input type="text" name="m_address" id="m_address2" size="40" maxlength="40" required>
                                 </td>
                             </tr>
                         </table>
@@ -284,7 +366,8 @@
                     </table>
             </div>
 
-            <button class="join_submitBtn" type="submit">회원가입</button>
+            <button class="join_submitBtn j_submitBtn" type="submit">회원가입</button>
+            <button class="join_submitBtn j_ErrorBtn" type="button" style="background:gray; display:none;">회원가입불가</button>
             </form>
 
         </div>

@@ -18,4 +18,8 @@ public interface MemberDAO {
 
 	int pwdUpdate(Member member);
 
+	int updateMember(Member m);
+
+	int checkIdDuplicate(String m_id);
+
 }

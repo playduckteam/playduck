@@ -25,6 +25,41 @@
 <link rel="stylesheet" href="../resources/css/login.css">
 <link rel="stylesheet" href="../resources/css/findIdPw.css">
 <link rel="stylesheet" href="../resources/css/profileModify.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+	    $(function(){
+	    	$('.join_addrBtn2').on('click',function(){
+	    		new daum.Postcode({
+	                oncomplete: function(data) {
+	                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+	                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+	                    var extraRoadAddr = ''; // 참고 항목 변수
+	
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraRoadAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                       extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraRoadAddr !== ''){
+	                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+	                    }
+	
+	                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                    $('#m_address3').val(data.zonecode);
+	                    $('#m_address4').val(roadAddr);
+	                }
+	            }).open();
+	    	});
+	    });
+    </script>
 
     <style>
         section {
@@ -247,6 +282,8 @@
     }
     
     </style>
+  
+
 </head>
 
 <body>
@@ -257,7 +294,7 @@
         <div class="modal_profileModifyDiv" title="회원정보 수정">
 <p class="modal_content_close ">X</p>
             <div class="modal_content loginArea">
-                <form action="" method="POST">
+                <form action="${pageContext.request.contextPath}/member/memberUpdate.do" method="POST">
                     <h2 class=pm_title>회원정보 수정</h2>
                     <div id="pm_container">
 
@@ -268,7 +305,7 @@
                                     <h4 class="pm_subTitle" >아이디</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_id" id="pm_id" placeholder="영문, 숫자 허용" value="${member.m_id}" readonly required>
+                                    <input type="text" name="m_id" id="pm_id" placeholder="영문, 숫자 허용" value="${member.m_id}" style="background:rgb(233, 227, 227);" disabled required>
 
                                 </td>
 
@@ -299,7 +336,7 @@
                                     <h4 class="pm_subTitle">이름</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_name" id="m_name" value="${member.m_name}" required>
+                                    <input type="text" name="m_name" id="m_name" value="${member.m_name}" required style="background:rgb(233, 227, 227);" disabled>
                                 </td>
                             </tr>
                             <!-- GENDER -->
@@ -308,10 +345,13 @@
                                     <h4 class="pm_subTitle">성별</h4>
                                 </td>
                                 <td class="pm_gender">
-                                    <input type="radio" name="m_gender" id="gender_M" value="M" /> <label
-                                        for="gender_M">남성</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" name="m_gender" id="gender_F" value="F" /> <label
-                                        for="gender_F">여성</label>
+                                    <input type="radio" name="m_gender" id="gender_M2" value="M" 
+                                   		${gender.equals("M") ? 'checked' : ''}/> 
+                                    <label for="gender_M2">남성</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                    <input type="radio" name="m_gender" id="gender_F2" value="F" 
+                                    	${gender.equals("F")? 'checked' : ''}/>
+                                    <label for="gender_F2">여성</label>
                                 </td>
                             </tr>
                             <!-- BIRTH -->
@@ -320,12 +360,12 @@
                                     <h4 class="pm_subTitle">생년월일</h4>
                                 </td>
                                 <td class="pm_birth">
-                                    <input type="text" class="j_birth" name="m_birth" id="pm_birth" maxlength="4"
-                                        placeholder="2021">
-                                    <input type="text" class="j_birth" name="m_birth" id="pm_birth" maxlength="2"
-                                        placeholder="월">
-                                    <input type="text" class="j_birth" name="m_birth" id="pm_birth" maxlength="2"
-                                        placeholder="일">
+                                    <input type="text" class="j_birth" name="m_date2" id="pm_birth" maxlength="4"
+                                        placeholder="2021" value="${ birth[0] }">
+                                    <input type="text" class="j_birth" name="m_date2" id="pm_birth" maxlength="2"
+                                        placeholder="월" value="${ birth[1] }">
+                                    <input type="text" class="j_birth" name="m_date2" id="pm_birth" maxlength="2"
+                                        placeholder="일" value="${ birth[2] }">
                                 </td>
                             </tr>
                             <!-- PHONE -->
@@ -334,7 +374,8 @@
                                     <h4 class="pm_subTitle">연락처</h4>
                                 </td>
                                 <td class="pm_phone">
-                                    <select name="m_phone" id="m_phone" style="height: 24px;">
+                                    <select name="m_phone" id="m_phone3" style="height: 24px;">
+                                    	<option value="${ phoneArr[0] }" selected>${ phoneArr[0] }</option>
                                         <option value="010">
                                             010
                                         </option>
@@ -354,37 +395,41 @@
                                             050
                                         </option>
                                     </select>
-                                    <input type="text" name="m_phone" id="m_phone" maxlength="10"
-                                        style="width: 249px;" placeholder="'-'를 제외하고 작성해 주세요">
+                                    <span style="color:black">-</span>
+                                    <input type="text" name="m_phone" id="m_phone4" maxlength="10"
+                                        style="width: 100px;" value="${ phoneArr[1] }">
+                                    <span style="color:black">-</span>
+                                    <input type="text" name="m_phone" id="m_phone5" maxlength="10"
+                                        style="width: 100px;" value="${ phoneArr[2] }">   
 
-                                </td>
-                            </tr>
-                            <!-- E-MAIL -->
-                            <tr>
-                                <td class="pm_title">
-                                    <h4 class="pm_subTitle">이메일</h4>
-                                </td>
-                                <td class="pm_email">
-                                    <input type="text" name="m_email" id="pm_email" placeholder="example"> @
-                                    <input type="text" name="m_email" id="pm_email" placeholder="example.com">
                                 </td>
                             </tr>
                             <!-- ADDRESS -->
 
                             <tr>
-                                <td class="pm_title">
-                                    <h4 class="pm_subTitle">주소</h4>
+                                <td class="join_title">
+                                    <h4 class="join_subTitle">우편번호</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address1" size="40" maxlength="40">
+                                    <input type="text" name="m_address" id="m_address3" value="${ addArr[0] }" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);" disabled>
+                                    <button class="join_addrBtn2" style="width:70px; height:26px; background:var(--main-color); text-align:center;" type="button">검색</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pm_title">
-                                    <h4 class="pm_subTitle">상세주소</h4>
+                                <td class="join_title">
+                                    <h4 class="join_subTitle">도로명 주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address2" size="40" maxlength="40">
+                                    <input type="text" name="m_address" id="m_address4" value="${ addArr[1] }" size="40" maxlength="40" style="background:rgb(233, 227, 227);" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="join_title">
+                                    <h4 class="join_subTitle">상세주소</h4>
+                                </td>
+                                <td>
+                                    <input type="text" name="m_address" id="m_address5" value="${ addArr[2] }" size="40" maxlength="40">
                                 </td>
                             </tr>
                         </table>
@@ -396,23 +441,23 @@
                     <h4 class="pm_checkTitle">선호 장르</h4>
                     <table class="check_table">
                         <tr>
-                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box1"
-                                    name="keyword_id" value="1"><label for="check-box1">연극</label></td>
-                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box2"
-                                    name="keyword_id" value="2"><label for="check-box2">뮤지컬</label></td>
-                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box4"
-                                    name="keyword_id" value="4"><label for="check-box4">무용</label></td>
-                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box3"
-                                    name="keyword_id" value="3"><label for="check-box3">클래식/오페라</label></td>
+                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box8"
+                                    name="m_genre" value="연극" ${genre.contains("연극")?"checked":"" }><label for="check-box8">연극</label></td>
+                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box9"
+                                    name="m_genre" value="뮤지컬" ${genre.contains("뮤지컬")?"checked":"" }><label for="check-box9">뮤지컬</label></td>
+                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box10"
+                                    name="m_genre" value="무용" ${genre.contains("무용")?"checked":"" }><label for="check-box10">무용</label></td>
+                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box11"
+                                    name="m_genre" value="클래식" ${genre.contains("클래식")?"checked":"" }><label for="check-box11">클래식</label></td>
 
                         </tr>
                         <tr>
-                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box5"
-                                    name="keyword_id" value="5"><label for="check-box5">국악</label></td>
-                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box6"
-                                    name="keyword_id" value="6"><label for="check-box6">아동</label></td>
-                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box7"
-                                    name="keyword_id" value="7"><label for="check-box7">오픈런</label></td>
+                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box12"
+                                    name="m_genre" value="오페라" ${genre.contains("오페라")?"checked":"" }><label for="check-box12">오페라</label></td>
+                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box13"
+                                    name="m_genre" value="국악" ${genre.contains("국악")?"checked":"" }><label for="check-box13">국악</label></td>
+                            <td class="pm_checkArea"><input type="checkbox" class="check-box" id="check-box14"
+                                    name="m_genre" value="복합" ${genre.contains("복합")?"checked":"" }><label for="check-box14">복합</label></td>
                             <td class="pm_checkArea"></td>
                         </tr>
 

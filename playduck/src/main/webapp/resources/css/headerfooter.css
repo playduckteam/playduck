@@ -171,3 +171,20 @@ input:focus {outline:none;}
 .join_table input{
 	height: 26px;
 }
+
+.validate{
+	color:black; 
+	margin:0px auto; 
+	text-align:center;
+	font-weight:bold;
+	display:none;
+}
+
+.valired{
+	color:red;
+}
+
+.valigreen{
+	color:green;
+}
+

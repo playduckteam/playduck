@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -94,7 +95,29 @@ public class MypageController {
 			model.addAttribute("rank", "일반회원");
 		}
 		
-	
+		// 생년월일 받아오기
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String[] dateArr = (transFormat.format(m.getM_date())).split("-");
+		
+		model.addAttribute("birth",dateArr);
+		
+		// 주소 받아오기
+		String[] addArr=m.getM_address().split("/");
+		model.addAttribute("addArr",addArr);
+		
+		// 연락처 받아오기
+		String[] phoneArr = m.getM_phone().split("-");
+		model.addAttribute("phoneArr",phoneArr);
+		
+		// 성별 trim해서 다시 넣기
+		String gender = m.getM_gender().trim();
+		model.addAttribute("gender", gender);
+		
+		// 선호장르 String화 하기
+		List<String> genre = Arrays.asList(m.getM_genre());
+		model.addAttribute("genre", genre);
+		
+		
 		
 		return "myPage";
 	}

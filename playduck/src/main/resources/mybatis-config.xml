@@ -6,7 +6,6 @@
 		<!-- 마이바티스 DB 연결 시 설정할 내용을 작성 -->
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
-
 	<typeAliases>
 		<typeAlias type="com.duck.playduck.main.model.vo.Main" alias="main" />
 		<typeAlias type="com.duck.playduck.member.model.vo.Member" alias="Member" />

@@ -18,5 +18,9 @@ public interface MemberService {
 
 	int pwdUpdate(Member member);
 
+	int updateMember(Member m);
+
+	int checkIdDuplicate(String m_id);
+
 
 }

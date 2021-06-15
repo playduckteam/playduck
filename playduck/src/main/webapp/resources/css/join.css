@@ -42,7 +42,11 @@
     cursor: pointer;
 }
 
-#join_email {
+#join_email1 {
+    width: 134px;
+}
+
+#join_email2 {
     width: 134px;
 }
 
@@ -114,7 +118,8 @@
 
 .joinArea input {
     border: 1px solid var(--black-color);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .join_birth input{
@@ -169,4 +174,7 @@
 	display:flex;
 	line-height:50px;
 	justify-content: center;
+}
+.joinArea input:invalid {
+  background-color: red;
 }

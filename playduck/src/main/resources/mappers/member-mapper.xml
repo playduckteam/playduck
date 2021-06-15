@@ -86,4 +86,14 @@
 		SELECT * FROM MEMBER WHERE M_EMAIL = #{m_email}
 	</select>
 	
+	<update id="updateMember" parameterType="Member" >
+		UPDATE MEMBER SET M_PWD = #{ m_pwd }, M_GENDER = #{ m_gender }, M_DATE = #{ m_date }
+						  , M_PHONE = #{ m_phone }, M_ADDRESS = #{ m_address }
+						  , M_GENRE = #{ m_genre, typeHandler=MyTypeHandler }
+					  WHERE M_NO = #{ m_no } 
+	</update>
+	
+	<select id="checkIdDuplicate" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE M_ID = #{ m_id }
+	</select>
 </mapper>

@@ -46,6 +46,16 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.pwdUpdate(member);
 	}
 
+	@Override
+	public int updateMember(Member m) {
+		return memberDAO.updateMember(m);
+	}
+
+	@Override
+	public int checkIdDuplicate(String m_id) {
+		return memberDAO.checkIdDuplicate(m_id);
+	}
+
 
 
 	

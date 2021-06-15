@@ -315,5 +315,67 @@ public class MemberController {
 		public String loginAgain() {
 			return "index_loginAgain";
 		}
+		
+		
+	@RequestMapping("/member/memberUpdate.do")
+	public String memberUpdate(SessionStatus status, Member m, @RequestParam String m_date2, Model model) {
+		String pass1 = m.getM_pwd(); 					// 원래 비밀번호
+		String pass2 = bcryptPasswordEncoder.encode(pass1);		// 암호화 처리
+		
+		m.setM_pwd(pass2);
+		
+		// 이메일 join
+		String newEmail = String.join("@", m.getM_email().split(","));
+		m.setM_email(newEmail);
+		// phone join
+		String newPhone = String.join("-", m.getM_phone().split(","));
+		m.setM_phone(newPhone);
+		// address join
+		String address = String.join("/", m.getM_address().split(","));
+		m.setM_address(address);
+		
+		String[] dateArr = m_date2.split(",");
+		m_date2 = String.join("-", dateArr);
+		
+		SimpleDateFormat fm= new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			m_date2 = fm.format(fm.parse(m_date2));
+			Date date = Date.valueOf(m_date2);
+			
+			m.setM_date(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		int result = memberService.updateMember(m);
+        
+        if(result!=0) {
+        	String msg= "회원수정이 완료되었습니다. 다시 로그인 해주세요!";
+    		String loc= "/";
+    	    model.addAttribute("msg",msg);
+    	    model.addAttribute("loc",loc);
+        }
+        
+        status.setComplete();
+        
+	    return "common/msg";
+
+	}
+	
+	@RequestMapping("/member/checkIdDuplicate.do")
+	@ResponseBody
+	public Map<String, Object> checkIdDuplicate(@RequestParam String m_id){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int check = memberService.checkIdDuplicate(m_id);
+		
+		boolean data = (check ==1 ? false : true);
+		
+		map.put("data", data);
+		
+		return map;
+	}
 	
 }

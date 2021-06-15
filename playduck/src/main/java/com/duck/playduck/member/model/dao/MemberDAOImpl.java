@@ -44,4 +44,14 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.update("member.pwdUpdate", member);
 	}
 
+	@Override
+	public int updateMember(Member m) {
+		return sqlSession.update("member.updateMember", m);
+	}
+
+	@Override
+	public int checkIdDuplicate(String m_id) {
+		return sqlSession.selectOne("member.checkIdDuplicate",m_id);
+	}
+
 }
