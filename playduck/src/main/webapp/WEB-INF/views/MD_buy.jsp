@@ -28,7 +28,7 @@
   <c:forEach items="${baskList}" var="baskList">
         <div class="Sale_list">
             <div class="S_list" id="Sale_check">
-                <input type="checkbox" name="list" id="${baskList.d_no}ch" value="${baskList.d_no }" checked>
+                <input type="checkbox" name="list" id="${baskList.d_no}ch" value="${baskList.d_no }" >
                 <label for="${baskList.d_no }ch"></label>
             </div>
             <div class="S_list" id="Sale_img">
@@ -75,7 +75,7 @@
                  	 <tr>
                  	 	<td  id="table3_td1" rowspan="4"> 전체 합계 </td>
                  	 	<td class="table3_td2"> 상품수 </td>
-                 	 	<td class="table3_td3"> 1개</td>
+                 	 	<td class="table3_td3"   id="totalNum"> 0개</td>
                  	 	</tr>
                  	 <tr>
                  	 	 <td class="table3_td2">상품 금액</td>
@@ -151,21 +151,57 @@
        
         <br><br><br><br><br>
        <script>
-       /* 수량변화에 따른 합계금액변화  */
+       
+       var totalnum = 0;
+       
+   
+         /* 장바구니 선택하기 */
+       
+         
+       $('input[type=checkbox]').on('change', function(){
+    	  
+    	   var $this = $(this);
+    	   var sumnum = parseInt($(this).parent().siblings('.S_list:nth-child(3)').find('.input-num').val());
+    	   var totalnumplace = $('#totalNum');
 
-       $('.input-num').on('input',function(){
+    	 
+    	  
+    	   if($(this).prop('checked')){
+    		   
+    		  
+    		  totalnum += sumnum;
+    		  
+    		  totalnumplace.html(totalnum + '개');
+    		  
+        	 
+
+    	   } else{
+    		   
+    		   totalnum -= sumnum;
+    		   
+    		   totalnumplace.html(totalnum +" 개");
+    	   }
+
+    	   console.log(totalnum);
+       });
+         
+     	var num2 = 0;
+     
+         /* 수량변화에 따른 합계금액변화  */
+
+       $('.input-num').on('change',function(){
     		  var $this = $(this);
     		  var price = $this.parent().attr('id');
-    		  var totalprice = $this.val()*price + 2500 ;
-    		  var num = $this.val();
+    		  var totalprice =$this.val()*price + 2500 ;
+    		  var num = parseInt($this.val());
 			  var mno = ${member.m_no};
 			  var dno = $this.parent().parent().attr('id');
 			  /*3자리마다 컴마 표시  */
     		  var reprice = totalprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			  var sss = $this.parent().parent().parent().parent().parent().siblings('.S_list:nth-child(4)').find('.Sale_price_tr3');
-
-			  
-    	
+			  var totalnumplace = $('#totalNum');
+			  var checkbox = $this.parent().parent().parent().parent().parent().siblings('.S_list:nth-child(1)').find('[name=list]');
+    		  var replacenum = (num-num2);
     		  
     	 	  $.ajax({
     			  url:"${pageContext.request.contextPath}/MD/MD_buy3.do",
@@ -173,20 +209,27 @@
     			  data:{ mno : mno, dno : dno, num : num},
     			  success:function(){
     				  sss.html(reprice + " 원")
-    				  
+    				  if(checkbox.prop('checked')){
+						
+    				  console.log(replacenum); 
+    				  	if(replacenum != num2 ) {
+    				  totalnumplace.html(totalnum+replacenum +"개");
+    				  totalnum+=replacenum; 
+    				  	};
+    				  };
     			  },
     			  error:function(){}
     		  });
-    		  
+    		   
+    	 	  num2 = num;
+			  console.log(num);
+			  console.log(num2);
     		 
     	  });
        
-         /* 장바구니 선택하기 */
-       $('input[type=checkbox]').on('change', function(){
-    	   
-       });
+       
       
-      
+       console.log(totalnum);
       /*3자리마다 컴마 표시  
        $(function(){
     	   
