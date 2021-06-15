@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.w3c.dom.Document;
@@ -23,6 +24,7 @@ import com.duck.playduck.md.model.service.MdServiceImpl;
 import com.duck.playduck.md.model.vo.Md;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Play;
+
 
 @Controller
 public class MdController {
@@ -145,18 +147,15 @@ private static String getTagValue (String tag, Element eElement) {
 // MD 상세보기 페이지
 	@RequestMapping("/MD/MD_order")
 	public String Md_order(
-				@RequestParam int dno, 
-				@RequestParam int mno,
+				@RequestParam int d_no, 
 				Model model) {
 		
-		Md md = mdService.selectOneMd(dno);
-		int reward = mdService.getReward(mno);
+		Md md = mdService.selectOneMd(d_no);
 		
 		
-		
-		System.out.println("내리워드 확인 :" + reward);
+	
 		model.addAttribute("md", md);
-		model.addAttribute("getReward", reward);
+
 		
 		return "MD_order";
 	}
@@ -164,8 +163,26 @@ private static String getTagValue (String tag, Element eElement) {
 	
 // MD 메인 페이지 by 수영
 	@RequestMapping("/md/md_main.do")
-	public String md_main() {
+	public String md_main(Model model, @RequestParam(value="cPage", required=false, defaultValue="1") int cPage) {
 		
+		// 한 페이지당 페이지 수
+		int numPerPage = 12;
+		
+		// 현재 페이지의 게시글 수
+		List<Map<String, String>> list = mdService.selectBoardList(cPage, numPerPage);
+		
+		// 전체 개시글 수
+		int totalContents = mdService.selectTotalContents();
+		
+		// 페이지 처리 HTML 생성하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/md/md_main.do");
+		
+		model.addAttribute("list", list);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+
 		return "MD_main";
 	}
 	

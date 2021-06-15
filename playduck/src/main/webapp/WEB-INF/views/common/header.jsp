@@ -5,6 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 	
 <head>
+<style>
+	#m_email, #find_m_name, #find_m_email {
+		width: 298px;
+	height: 38px;
+	display: block;
+	padding: 5px;
+	border: 1px solid var(--black-color);
+	margin-bottom: 10px;
+	margin-left : 37.3%;
+	}
+</style>
+
+
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     $(function(){
@@ -143,6 +157,7 @@
 
     
 </script>
+
 </head>
 
 	<div class="headerArea">
@@ -155,7 +170,7 @@
 		<a class="all_content" href="${pageContext.request.contextPath}/list/playlist.do">전체작품</a> | <a class="all_md" href="${pageContext.request.contextPath}/md/md_main.do">전체MD</a>
 	</div>
 	
-	<a href="../views/index.jsp"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""></a>
+	<a href="${pageContext.request.contextPath}/"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" ></a>
 	<div class="header_login">
 		<c:if test="${empty member}">
 		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
@@ -414,7 +429,7 @@
                         <form action="${pageContext.request.contextPath}/member/findPwd.do" method="POST">
                             <div class="textbox">
 	                            <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디"/>
-	                            <input id="email" name="m_email" id="m_email" required="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)?$/i" type="email" placeholder="이메일 주소"/>
+	                            <input type="email" name="m_email" id="m_email" required="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)?$/i"  placeholder="이메일 주소"/>
 	                         <div class="error">유효하지 않은 이메일주소 입니다  </div>  
 	                         </div> 
                             <button type="submit" id="check" class="login_box login orange">이메일 인증받기</button>

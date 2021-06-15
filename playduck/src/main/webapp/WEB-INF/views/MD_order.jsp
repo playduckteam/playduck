@@ -14,12 +14,24 @@
 	<link rel="stylesheet" href="../resources/css/findIdPw.css">
     <link rel="stylesheet" href="../resources/css/MD.css">
     <script src="../resources/js/jquery-3.6.0.min.js"></script>
-    <script src="../resources/js/MD.js"></script>
+
     <script src="../resources/js/modal.js"></script>
     <script src="../resources/js/topBtn.js"></script>
 </head>
+<style>
+	.goBackBtn{
+		cursor : pointer;
+		background-color: var(--main-color);
+	font-size: 17px;
+	font-weight: 400;
+	text-align: center;
+	}
+	
+
+</style>
 <body>
     <%@ include file="common/header.jsp"%>
+    <div class="btnArea">
     <form action="">
         <section>
             <div class="MD_order_container">
@@ -65,11 +77,17 @@
             <div class="MD_order_imgarea">
                 <img src="${md.d_detail}" alt="">
             </div>
+            
         </section>
     </form>
+ 
+    <a class="goBackBtn" href="${pageContext.request.contextPath}/md/md_main.do">목록으로 가기</a>
+    </div>
     <br /><br /><br /><br /><br />
+    
+    
    <script>
-	
+
   
   /* 수량변화에 따른 합계금액변화  */
    $('#num').on('input',function(){

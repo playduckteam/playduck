@@ -1,6 +1,7 @@
 package com.duck.playduck.md.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,9 @@ public class MdServiceImpl implements MdService {
 
 	// Md 한개 정보 가져오기
 	@Override
-	public Md selectOneMd(int dno) {
+	public Md selectOneMd(int d_no) {
 		
-		return mdDAO.selectOneMd(dno);
+		return mdDAO.selectOneMd(d_no);
 	}
 
 	// reward 값 가져오기
@@ -69,6 +70,19 @@ public class MdServiceImpl implements MdService {
 	public int update2Basket(int dno, int mno, int num) {
 		
 		return mdDAO.update2Basket(dno,mno,num);
+	}
+
+	// MD 전체 페이지_ 페이징처리
+	@Override
+	public int selectTotalContents() {
+		
+		return mdDAO.selectTotalContents();
+	}
+
+	@Override
+	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
+		
+		return mdDAO.selectBoardList(cPage, numPerPage);
 	}
 	
 
