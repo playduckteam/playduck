@@ -75,6 +75,8 @@
 	<select id="curationforDuck" resultType="curation">
 		SELECT *
 		FROM CURATION
+		WHERE ROWNUM &lt;=6
+		ORDER BY C_NO DESC
 	</select>
 
 
@@ -85,7 +87,8 @@
 		FROM
 		REVIEW
 		ORDER BY R_GOOD+R_BAD DESC) R
-		JOIN MEMBER M ON (M.M_NO = R.M_NO)
+		JOIN MEMBER M ON
+		(M.M_NO = R.M_NO)
 		WHERE ROWNUM &lt; =3
 	</select>
 
@@ -124,8 +127,9 @@
 		DELETE FROM BOOKMARK
 		WHERE M_NO = #{ m_no } AND C_LIST = #{ c_list }
 	</select>
-	
-	<select id="curationforDucksel" parameterType="_int" resultType="string">
+
+	<select id="curationforDucksel" parameterType="_int"
+		resultType="string">
 		SELECT C_TITLE
 		FROM CURATION
 		WHERE C_NO = #{ parseInt }

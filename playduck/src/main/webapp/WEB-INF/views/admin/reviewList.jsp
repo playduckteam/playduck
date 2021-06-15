@@ -29,7 +29,7 @@
 
 			<div class="AD_reviewList_search_img">
 
-				<input type="text" class="searchbox"> <img
+				<input type="text" class="searchbox"  onkeyup="enterkey();"> <img
 					src="../resources/images/search.png" class="searchGo">
 			</div>
 
@@ -50,7 +50,8 @@
 							<td>${r.m_name}</td>
 							<td>${r.r_content}</td>
 							<td><div class="reviewList_button_div">
-									<button class="reviewList_button " onclick="deleteReview(${r.r_no});" >삭제</button>
+									<button class="reviewList_button "
+										onclick="deleteReview(${r.r_no});">삭제</button>
 								</div></td>
 						</tr>
 					</c:forEach>
@@ -67,6 +68,22 @@
 <%@ include file="../common/footer.jsp"%>
 
 <script>
+function enterkey() {
+    if (window.event.keyCode == 13) {
+
+    	if ($('.searchbox').val() == "") {
+			alert("입력 해주세요");
+		} else {
+			
+			var a = $('.searchbox').val();
+				
+			location.href = "${pageContext.request.contextPath}/admin2/reviewSr.do?text="+a;
+		}
+    }
+}
+
+
+
 	$(function() {
 		$('.searchGo').on("click", function() {
 			if ($('.searchbox').val() == "") {

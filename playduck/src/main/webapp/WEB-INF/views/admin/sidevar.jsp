@@ -15,10 +15,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td onClick="location.href='userList.jsp'">회원 목록</td>
+                        <td onClick="">회원 목록</td>
                     </tr>
                     <tr>
-                        <td onClick="location.href='reviewList.jsp'">리뷰 관리</td>
+                        <td onClick="reviewListPage();">리뷰 관리</td>
                     </tr>
                 </tbody>
             </table>
@@ -33,21 +33,32 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td onClick="location.href='mdList.jsp'">목록 조회</td>
+                        <td onClick="">목록 조회</td>
                     </tr>
                     <tr>
-                        <td onClick="location.href='productEnList.jsp'">상품 등록</td>
+                        <td onClick="mdEnroll();">상품 등록</td>
                     </tr>
                     <tr>
-                        <td onClick="location.href='salesList.jsp'">판매 목록</td>
+                        <td onClick="">판매 목록</td>
                     </tr>
                     <tr>
-                        <td onClick="location.href='cancelList.jsp'">취소 관리</td>
+                        <td onClick="">취소 관리</td>
                     </tr>
                     <tr>
-                        <td onClick="location.href='returnList.jsp'">반품 관리</td>
+                        <td onClick="">반품 관리</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    
+    
+<script>
+	function reviewListPage() {
+		location.href = "${pageContext.request.contextPath}/admin2/reviewList.do"
+	}
+	
+	function mdEnroll() {
+		location.href = "${pageContext.request.contextPath}/admin2/mdEnroll.do"
+	}
+</script>    

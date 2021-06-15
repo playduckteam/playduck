@@ -44,4 +44,9 @@
 		WHERE
 		R_NO = #{ r_no }
 	</select>
+	
+	<insert id="insertMd" parameterType="md">
+		INSERT INTO MD VALUES(
+		SEQ_D_NO.NEXTVAL, 'PF172959', #{ d_title}, #{ d_price }, #{d_pic}, #{d_detail}  )
+	</insert>
 </mapper>
