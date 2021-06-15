@@ -32,7 +32,7 @@
                 <label for="${baskList.d_no }ch"></label>
             </div>
             <div class="S_list" id="Sale_img">
-                <img src="${baskList.d_pic}" width="200px" height="200px"> ${baskList.b_status }
+                <img src="${baskList.d_pic}" width="200px" height="200px">
             </div>
             <div class="S_list" id="Sale_title">
                 <table>
@@ -164,7 +164,8 @@
  	       var totalpriceplace = $('#totalPrice');
  	       var ssp =  sumprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
  	       var sssa = $this.parent().siblings('.S_list:nth-child(4)').find('.Sale_price_tr3');
- 	       
+ 	       var mno = ${member.m_no};
+ 	       var dno = $this.val();
  	       console.log(sssa);
  	       sssa.html(ssp +" 원 "); 
  	       
@@ -180,12 +181,34 @@
  			  var reprice = totalprice2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     		 
  			  totalpriceplace.html(reprice + ' 원');
+ 			  
+ 			  // md b_status 바꾸기
+    	 	  $.ajax({
+    			  url:"${pageContext.request.contextPath}/MD/MD_buy4.do",
+    			  type:"post",
+    			  data:{ mno : mno, dno : dno, b_status : 1 },
+    			  success:function(){
+    			  },  error:function(){
+    				  alert("에러");
+    			  }
+    		  });
     		  
     	   } else{
     		   /* 전체수량  */
     		   totalnum -= sumnum;
     		   
     		   totalnumplace.html(totalnum +" 개");
+    		   
+    		   // md b_status 바꾸기
+    		 	  $.ajax({
+        			  url:"${pageContext.request.contextPath}/MD/MD_buy4.do",
+        			  type:"post",
+        			  data:{ mno : mno, dno : dno, b_status : 2 },
+        			  success:function(){
+        			  },  error:function(){
+        				  alert("에러");
+        			  }
+        		  });
     		   
       		 /* 전체 가격  */
      		  totalprice2 -= sumprice;
@@ -215,6 +238,9 @@
        $('input:checkbox[name=list]').on('change', function(){
     	  
     	   calcPrice(this);
+    	   
+    	
+    	   
        });
    
      
@@ -273,13 +299,10 @@
 					    	 var allpriceplace = $('#Sale_AllPrice');
 					   	    allpriceplace.html( "총 상품 합계   " + reallprice + "원");
     				  };
-    			  },
-    			  error:function(){}
+    			  }
     		  });
-
-
-    		 
-    	  });
+       });
+   
 		       
 		   	 /* 리워드 max 값 제한, 리워드 사용 값 반영 */
 		     $('#reward').on('input', function() {
@@ -323,9 +346,23 @@
 		    
 		    
 		    $('#orderMd').on('click', function(){
+		    	var m_no = ${member.m_no}; // 회원번호
+		    	var reward = ${'#reward'}.val();	
+		    
+		    	// 리워드 사용 등록
+			 	  $.ajax({
+        			  url:"${pageContext.request.contextPath}/MD/MD_buy5.do",
+        			  type:"post",
+        			  data:{ m_no : m_no,  reward : reward  },
+        			  success:function(){
+        			  },  error:function(){
+        				  alert("에러");
+        			  }
+        		  });
 		    	
-		    	var mno = ${member.m_no}; // 회원번호
-		    	 var dno = [];  // MD 상품 번호
+		    
+		    	 var w_no = //;
+		    	 var 
 		    
 
 		    	 });
@@ -358,7 +395,7 @@
 	    			  error:function(){}
 	    		  }); */
 		    	
-		    });
+		
 		    
 		    
 

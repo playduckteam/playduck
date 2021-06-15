@@ -32,7 +32,7 @@
 		
 	<!--장바구니 리스트 불러오기  -->
 	<select id="getbasketList" parameterType="_int" resultType="md">
-		SELECT D_NO, D_TITLE, D_PRICE, D_PIC ,B_QUAN
+		SELECT D_NO, D_TITLE, D_PRICE, D_PIC ,B_QUAN, B_STATUS
 		FROM MD
 		JOIN BASKET USING(D_NO)
 		WHERE D_NO IN(
@@ -58,6 +58,13 @@
 		<!--  장바구니에서 basket 숫자 업데이트 -->
 		<update id="update2Basket" parameterType="basket">
 			UPDATE BASKET SET B_QUAN = #{b_quan}
+			WHERE M_NO = #{ m_no }
+				AND D_NO = #{ d_no}
+		</update>
+		
+	   <!--  // 장바구니 MD 선택하기 해제하기 status 변경 1 = 선택 / 2 = 해제  -->
+		<update id="update3Basket" parameterType="basket">
+			UPDATE BASKET SET B_STATUS = #{b_status}
 			WHERE M_NO = #{ m_no }
 				AND D_NO = #{ d_no}
 		</update>

@@ -7,25 +7,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Basket {
-	
+public class Reward {
+	private int w_no;
 	private int m_no;
-	private int d_no;
-	private int b_quan;
-	private int b_status;
+	private int w_up;
+	private int w_down;
 	
-	public Basket(int m_no, int d_no, int b_quan) {
+	
+	public Reward(int w_no, int w_down) {
 		super();
-		this.m_no = m_no;
-		this.d_no = d_no;
-		this.b_quan = b_quan;
+		this.w_no = w_no;
+		this.w_down = w_down;
 	}
-
-
-
-
 	
-	
- 
-	
+
 }
+
+
+
+

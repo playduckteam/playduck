@@ -70,6 +70,18 @@ public class MdServiceImpl implements MdService {
 		
 		return mdDAO.update2Basket(dno,mno,num);
 	}
+
+	// 장바구니 MD 선택하기 해제하기
+	public int update3Basket(int dno, int mno, int b_status) {
+		
+		return mdDAO.update3Basket(dno,mno, b_status);
+	}
+
+	// 사용할 리워드 값 저장하기
+	public int updateReward(int mno, int reward) {
+	
+		return mdDAO.updateReward(mno, reward);
+	}
 	
 
 	

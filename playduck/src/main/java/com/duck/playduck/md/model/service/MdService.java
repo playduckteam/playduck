@@ -23,4 +23,8 @@ public interface MdService {
 
 	int update2Basket(int dno, int mno, int num);
 
+	int update3Basket(int dno, int mno, int b_status);
+
+	int updateReward(int mno, int reward);
+
 }
