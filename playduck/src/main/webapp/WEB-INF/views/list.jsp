@@ -57,6 +57,10 @@ body, html, section{
 		<div class="listArea">
 			<img src="${pi.poster}">
 			<div class="list_content">
+			<div class="main_topinfo" style="display:none;">
+					<button class="main_toprevieww"style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
+				 <hr>
+				</div>
 				 <h3 style="color: #fff;">${pi.prfnm}</h3>
               <span class="main_toprate">95%</span>
 				<div class="list_icon">
@@ -67,7 +71,14 @@ body, html, section{
 		</c:forEach>
 	</div>
 	</section>
+<script>
 
+$('.cell').on('mouseenter', function () {
+	 $(this).children('.main_topinfo').show();
+}).on('mouseleave', function () {
+	 $(this).children('.main_topinfo').hide();
+});
+</script>
 <br /><br /><br /><br /><br /><br /><br /><br />
 	<%@ include file="common/footer.jsp"%>
 </body>

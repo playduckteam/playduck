@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>관리자 페이지 - 회원 목록</title>
-    <link rel="stylesheet" href="../../resources/css/common.css">
-    <link rel="stylesheet" href="../../resources/css/headerfooter.css">
-    <link rel="stylesheet" href="../../resources/css/sidevar.css">
-    <link rel="stylesheet" href="../../resources/css/admin.css">
-    <script src="../../resources/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../resources/css/common.css">
+    <link rel="stylesheet" href="../resources/css/headerfooter.css">
+    <link rel="stylesheet" href="../resources/css/sidevar.css">
+    <link rel="stylesheet" href="../resources/css/admin.css">
+    <script src="../resources/js/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -28,7 +31,7 @@
             <div class="AD_memberlist_search_img">
 
                 <input type="text" class="searchbox">
-                <img src="../../resources/images/search.png">
+                <img src="../resources/images/search.png">
             </div>
 
 
@@ -43,13 +46,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                 <c:forEach items="${rlist}" var="ri">
+                    <c:if test="${ri.m_status eq 1 }">
                     <tr>
-                        <td>1</td>
-                        <td>김오리</td>
-                        <td>160점</td>
+                        <td>${ri.m_no}</td>
+                        <td>${ri.m_name}</td>
+                        <c:if test="${ri.point gt 100}">
+                        <td></td>
                         <td>파트너 큐레이터</td>
-                        <td> <div class="memberlist_button_div"><button class="memberlist_button">탈퇴</button></div></td>
+                        </c:if>
+                        <c:if test="${ri.point lt 100}">
+                        <td></td>
+                        <td>일반회원</td>
+                        </c:if>
+                        <td> <div class="memberlist_button_div"><button class="memberlist_button" onclick="goDelete(${ri.m_no})">탈퇴</button></div></td>
                     </tr>
+                    </c:if>
+                </c:forEach>
                 </tbody>
             </table>
 
@@ -57,6 +70,11 @@
 
     </div>
 
+<script>
+function goDelete(m_no) {
+	location.href = "${pageContext.request.contextPath}/adminpage/adminmember.do?m_no="+m_no
+}
+</script>
 <%@ include file="../common/footer.jsp"%>
 
 </body>

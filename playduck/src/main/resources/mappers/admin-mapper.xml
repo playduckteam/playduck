@@ -4,12 +4,38 @@
 <mapper namespace="admin-mapper">
 
 <select id="Memberadmin" resultType="member">
-SELECT M_NO, M_NAME FROM MEMBER
+SELECT M_NO FROM MEMBER
 </select>
 
 <select id="memberadminReward" parameterType="_int" resultType="reward">
-SELECT SUM(W_UP)-SUM(W_DOWN) point
-		FROM REWARD
-        WHERE M_NO = #{m_no}
+SELECT M.M_NO, M.M_NAME,M.m_status,(SELECT SUM(W_UP -W_DOWN) FROM REWARD WHERE M_NO = #{m_no})POINT
+FROM MEMBER M
+WHERE M_NO = #{m_no}
 </select>
+
+
+<update id="memberadminDelete" parameterType="_int">
+UPDATE MEMBER SET M_STATUS = 3
+WHERE M_NO = #{m_no}
+</update>
+
+<select id="admincancel" resultType="buy">
+select M.M_NAME,O.O_NO, O.O_QUAN,O.O_STATUS, MD.D_TITLE, MD.D_PRICE,MD.D_PIC
+from orders O
+JOIN MD ON(MD.D_NO = O.D_NO)
+JOIN MEMBER M ON(M.M_NO=O.M_NO)
+WHERE O.O_STATUS =2;
+</select>
+
+<select id="adminreturn" resultType="buy">
+
+select M.M_NAME,O.O_NO, O.O_QUAN,O.O_STATUS, MD.D_TITLE, MD.D_PRICE,MD.D_PIC
+from orders O
+JOIN MD ON(MD.D_NO = O.D_NO)
+JOIN MEMBER M ON(M.M_NO=O.M_NO)
+WHERE O.O_STATUS =3;
+
+</select>
+
+
 </mapper>

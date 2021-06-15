@@ -37,7 +37,15 @@ public class BuyDAOImpl implements BuyDAO{
 	@Override
 	public int buyCancel(int o_no) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("buy-mapper.buyCancel",o_no);
+		return sqlSession.update("buy-mapper.buyCancel",o_no);
+	}
+
+
+
+	@Override
+	public int buyReturn(int o_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("buy-mapper.buyReturn",o_no);
 	}
 
 }

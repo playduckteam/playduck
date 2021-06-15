@@ -15,7 +15,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td onClick="location.href='userList.jsp'">회원 목록</td>
+                        <td><a href="${pageContext.request.contextPath}/adminpage/admin.do">회원 관리</a></td>
                     </tr>
                     <tr>
                         <td onClick="location.href='reviewList.jsp'">리뷰 관리</td>
@@ -42,10 +42,10 @@
                         <td onClick="location.href='salesList.jsp'">판매 목록</td>
                     </tr>
                     <tr>
-                        <td onClick="location.href='cancelList.jsp'">취소 관리</td>
+                        <td><a href="${pageContext.request.contextPath}/adminpage/admincancel.do">취소 관리</td>
                     </tr>
                     <tr>
-                        <td onClick="location.href='returnList.jsp'">반품 관리</td>
+                        <td><a href="${pageContext.request.contextPath}/adminpage/adminreturn.do">반품 관리</td>
                     </tr>
                 </tbody>
             </table>

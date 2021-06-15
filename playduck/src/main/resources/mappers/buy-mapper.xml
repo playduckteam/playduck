@@ -6,7 +6,7 @@
 
 
 <select id="selectBuyList" resultType="buy" parameterType="Member" >
-select O.O_NO,O.O_QUAN,O.O_DATE, MD.D_TITLE, MD.D_PRICE,MD.D_PIC, (D_PRICE - W_DOWN+2500)TOTAL ,R.W_DOWN from orders O
+select O.O_NO,O.O_QUAN,O.O_DATE,O.O_STATUS, MD.D_TITLE, MD.D_PRICE,MD.D_PIC, (D_PRICE - W_DOWN+2500)TOTAL ,R.W_DOWN from orders O
 join reward R ON(O.W_NO = R.W_NO)
 JOIN MD ON(MD.D_NO = O.D_NO)
 WHERE O.M_NO = #{m_no}
@@ -16,8 +16,12 @@ WHERE O.M_NO = #{m_no}
 SELECT COUNT(*) FROM ORDERS
 </select>
 
-<delete id="buyCancel" parameterType="_int">
-	DELETE FROM ORDERS WHERE O_NO = #{O_NO}
-</delete>
+<update id="buyCancel" parameterType="_int">
+	 UPDATE ORDERS SET O_STATUS = 2 WHERE O_NO = #{O_NO}
+</update>
+
+<update id="buyReturn" parameterType="_int">
+	 UPDATE ORDERS SET O_STATUS = 3 WHERE O_NO = #{O_NO}
+</update>
 </mapper>
 
