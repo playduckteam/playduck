@@ -26,13 +26,13 @@
 	<!-- 장바구니에 MD 담기 -->
 	<insert id="addBasket" parameterType="basket" >
 		INSERT INTO BASKET VALUES(
-		#{m_no}, #{d_no}, #{b_quan}
+		#{m_no}, #{d_no}, #{b_quan}, 1
 		)
 		</insert>
 		
 	<!--장바구니 리스트 불러오기  -->
 	<select id="getbasketList" parameterType="_int" resultType="md">
-		SELECT D_NO, D_TITLE, D_PRICE, D_PIC ,B_QUAN
+		SELECT D_NO, D_TITLE, D_PRICE, D_PIC ,B_QUAN, B_STATUS
 		FROM MD
 		JOIN BASKET USING(D_NO)
 		WHERE D_NO IN(
@@ -65,6 +65,14 @@
 	<select id="selectTotalContents" resultType="_int">
 	SELECT COUNT(*) FROM MD
 	</select>
+
+	   <!--  // 장바구니 MD 선택하기 해제하기 status 변경 1 = 선택 / 2 = 해제  -->
+		<update id="update3Basket" parameterType="basket">
+			UPDATE BASKET SET B_STATUS = #{b_status}
+			WHERE M_NO = #{ m_no }
+				AND D_NO = #{ d_no}
+		</update>
+
 	
 	<select id="selectBoardList" resultType="md">
 	SELECT *   

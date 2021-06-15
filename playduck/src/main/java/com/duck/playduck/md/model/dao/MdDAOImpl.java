@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.duck.playduck.md.model.vo.Basket;
 import com.duck.playduck.md.model.vo.Md;
+import com.duck.playduck.md.model.vo.Reward;
 import com.duck.playduck.play.model.vo.Play;
 
 @Repository
@@ -82,6 +83,7 @@ public class MdDAOImpl implements MdDAO {
 		return sqlSession.update("md2-mapper.update2Basket", basket);
 	}
 
+
 	// 전체 MD 페이지_ 페이징처리
 	@Override
 	public int selectTotalContents() {
@@ -95,6 +97,24 @@ public class MdDAOImpl implements MdDAO {
 		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
 		
 		return sqlSession.selectList("md2-mapper.selectBoardList", null, rows);
+	}
+
+	// 장바구니 MD 선택하기 해제하기
+	public int update3Basket(int dno, int mno, int b_status) {
+	
+		Basket basket = new Basket(mno,dno, 0,b_status);
+		
+		System.out.println(b_status);
+		return sqlSession.update("md2-mapper.update3Basket", basket);
+	}
+
+	// 사용할 리워드 값 저장하기
+	public int updateReward(int mno, int reward) {
+	
+		Reward mreward = new Reward( mno, reward);
+		
+		return sqlSession.insert("md2-mapper.updateReward", mreward );
+
 	}
 	
 

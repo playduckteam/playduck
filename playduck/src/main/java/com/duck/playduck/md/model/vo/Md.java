@@ -18,4 +18,9 @@ public class Md {
 	private String d_pic;
 	private String d_detail;
 	private int b_quan;
+	private int b_status;
+	private int reward;
+	
+	
+	
 }

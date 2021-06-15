@@ -123,9 +123,15 @@ private static String getTagValue (String tag, Element eElement) {
 		// 장바구니 리스트 불러오기
 		List<Md> MdbasketList = mdService.getbasketList(mno);
 		
+		// 내 리워드 가져오기
+		int reward = mdService.getReward(mno);
+		
 //		System.out.println(MdbasketList);
 		 DecimalFormat formatter = new DecimalFormat("###,###");
 		
+		 System.out.println("내리워드 확인 :" + reward);
+		 
+		 model.addAttribute("getReward", reward);
 		 model.addAttribute("formatter",formatter);
 		model.addAttribute("baskList",MdbasketList);
 	return "MD_buy";
@@ -144,6 +150,36 @@ private static String getTagValue (String tag, Element eElement) {
 	return "redirect:/MD/MD_buy2?mno="+mno;
 }
 	
+	// 장바구니 MD 선택하기 해제하기
+		@RequestMapping("/MD/MD_buy4")
+		public String Md_buy4(Model model, 
+										@RequestParam int dno,
+										@RequestParam int mno,
+										@RequestParam int b_status
+										) {
+				
+			int result = mdService.update3Basket(dno,mno,b_status);
+			
+			
+			
+		return "redirect:/MD/MD_buy2?mno="+mno;
+	}
+		
+	// 사용할 리워드 값 저장하기
+		@RequestMapping("/MD/MD_buy5")
+		public String Md_buy5(Model model, 
+										@RequestParam int reward,
+										@RequestParam int mno
+										) {
+				
+			int result = mdService.updateReward(mno,reward);
+			
+			
+			
+		return "redirect:/MD/MD_buy2?mno="+mno;
+	}
+	
+	
 // MD 상세보기 페이지
 	@RequestMapping("/MD/MD_order")
 	public String Md_order(
@@ -151,14 +187,15 @@ private static String getTagValue (String tag, Element eElement) {
 				Model model) {
 		
 		Md md = mdService.selectOneMd(d_no);
-		
-		
 	
 		model.addAttribute("md", md);
 
-		
 		return "MD_order";
 	}
+	
+	
+	
+	
 	
 	
 // MD 메인 페이지 by 수영
