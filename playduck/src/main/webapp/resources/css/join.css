@@ -175,6 +175,7 @@
 	line-height:50px;
 	justify-content: center;
 }
-.joinArea input:invalid {
-  background-color: red;
+.joinArea input:invalid{
+	
+    background: red;
 }

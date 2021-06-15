@@ -54,6 +54,54 @@
             }).open();
     	});
     	
+    	// invalidate 쓰는용도
+    	jQuery.extend(jQuery.expr[':'], {
+            invalid : function(elem, index, match){
+                var invalids = document.querySelectorAll(':invalid'),
+                    result = false,
+                    len = invalids.length;
+
+                if (len) {
+                    for (var i=0; i<len; i++) {
+                        if (elem === invalids[i]) {
+                            result = true;
+                            break;
+                        }
+                    }
+                }
+                return result;
+            }
+        });
+    	var idcheck = 0;
+    	var pwcheck = 0;
+    	// invalidate 쓰는용도
+        $(".joinArea input").on("click",function(){
+        	
+        	var flag = "1";
+            $("input[name='m_genre']").each( function () {
+                if (this.checked) {
+                    flag = "2"; 
+                }
+            });
+
+        	if( (! $(".joinArea input").is(":invalid") ) && flag=="2" && idcheck==1 && pwcheck==1 ){
+        		$(".j_ErrorBtn").hide();
+            	$(".j_submitBtn").show();
+        		
+            } else {
+            	$(".j_ErrorBtn").show();
+				$(".j_submitBtn").hide();
+            }
+        	
+        }); // invalidate 끝
+        
+		// readonly, required 동시사용용도
+        $(".readonly").keydown(function(e){
+            e.preventDefault();
+        });
+
+        
+    	
         $('#find_idbtn').on('click',function(){
         	$.ajax({
     			url : '${pageContext.request.contextPath}/member/memberIdFind.do',
@@ -83,6 +131,7 @@
         		$(".id_error").hide();
         		$(".id_4").show();
         		$(".id_error2").hide();
+        		idcheck = 0;
         		return;
         		
         	} else if(!idReg.test( userId )){
@@ -90,6 +139,7 @@
         		$(".id_error").hide();
         		$(".id_4").hide();
         		$(".id_error2").show();
+        		idcheck = 0;
         		return;
         		
         	} else {
@@ -105,14 +155,14 @@
 		                    $(".id_4").hide();
 		                    $(".id_error2").hide();
 		                    $(".id_ok").show();
-		                    if($(".joinArea input:invalid"===true)){
-		                    	$(".j_ErrorBtn").show();
-		                    }
+		                    idcheck = 1;
+		                    
 		                } else {
 		                    $(".id_error").show();
 		                    $(".id_4").hide();
 		                    $(".id_ok").hide();
 		                    $(".id_error2").hide();
+		                    idcheck = 0;
 		                }
 		            }, error : function(jqxhr, textStatus, errorThrown){
 		                console.log("ajax 처리 실패");
@@ -133,9 +183,11 @@
 	    	 if(join_pwd1==join_pwd2){
 	    		 $(".pwd_error").hide();
                  $(".pwd_ok").show();
+                 pwcheck = 1;
 	    	 } else {
 	    		 $(".pwd_error").show();
                  $(".pwd_ok").hide();
+                 pwcheck = 0;
 	    	 }
 	     }); 
 	     
@@ -145,9 +197,11 @@
 	    	 if(join_pwd1==join_pwd2){
 	    		 $(".pwd_error").hide();
                  $(".pwd_ok").show();
+                 pwcheck = 1;
 	    	 } else {
 	    		 $(".pwd_error").show();
                  $(".pwd_ok").hide();
+                 pwcheck = 0;
 	    	 }
 	     }); 
         
@@ -254,7 +308,7 @@
                                     <h4 class="join_subTitle">성별</h4>
                                 </td>
                                 <td class="join_gender">
-                                    <input type="radio" name="m_gender" id="gender_M" value="M" required title="생년월일을 확인해주세요"/> <label
+                                    <input type="radio" name="m_gender" id="gender_M" value="M" required/> <label
                                         for="gender_M">남성</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="radio" name="m_gender" id="gender_F" value="F" /> <label
                                         for="gender_F">여성</label>
@@ -269,11 +323,11 @@
                                 	<input type="hidden" name="m_pic" value="nopic.jpg"/>
                                 	<input type="date" name="m_date" value="2021-06-23" style="display:none;"/>
                                     <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="4"
-                                        placeholder="2021" required>
-                                    <input type="number" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
-                                        placeholder="월" required pattern="[1-12]{1,2}" title="생년월일을 확인해주세요">
-                                    <input type="number" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
-                                        placeholder="일" required pattern="[1-31]{1,2}" title="생년월일을 확인해주세요">
+                                        placeholder="2021" required pattern="19[0-9][0-9]|20\d{2}">
+                                    <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
+                                        placeholder="월" required pattern="0[0-9]|1[0-2]" title="생년월일을 확인해주세요">
+                                    <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
+                                        placeholder="일" required pattern="0[1-9]|[1-2][0-9]|3[0-1]" title="생년월일을 확인해주세요">
                                 </td>
                             </tr>
                             <!-- PHONE -->
@@ -328,7 +382,7 @@
                                     <h4 class="join_subTitle">우편번호</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address0" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);"readonly required>
+                                    <input type="text" class="readonly" name="m_address" id="m_address0" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);" required>
                                     <button class="join_addrBtn" style="width:50px; height:26px; background:var(--main-color); text-align:center;" type="button">검색</button>
                                 </td>
                             </tr>
@@ -337,7 +391,7 @@
                                     <h4 class="join_subTitle">도로명 주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address1" size="40" maxlength="40" style="background:rgb(233, 227, 227);"readonly required>
+                                    <input type="text" name="m_address" class="readonly" id="m_address1" size="40" maxlength="40" style="background:rgb(233, 227, 227);" required>
                                 </td>
                                 
                             </tr>
@@ -359,7 +413,7 @@
                     <table class="check_table">
                         <tr>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box1"
-                                    name="m_genre" value="연극"><label for="check-box1">연극</label></td>
+                                    name="m_genre" value="연극" ><label for="check-box1">연극</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box2"
                                     name="m_genre" value="뮤지컬"><label for="check-box2">뮤지컬</label></td>
                             <td class="join_checkArea"><input type="checkbox" class="check-box" id="check-box4"
@@ -381,8 +435,8 @@
                     </table>
             </div>
 
-            <button class="join_submitBtn j_submitBtn" type="submit">회원가입</button>
-            <button class="join_submitBtn j_ErrorBtn" type="button" style="background:gray; display:none;">회원가입불가</button>
+            <button class="join_submitBtn j_submitBtn" type="submit" style="display:none;">회원가입</button>
+            <button class="join_submitBtn j_ErrorBtn" type="button" style="background:gray; ">내용을 모두 채워주세요</button>
             </form>
 
         </div>
