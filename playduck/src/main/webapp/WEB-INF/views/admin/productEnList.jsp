@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지 - 상품 등록</title>
-<link rel="stylesheet" href="../../resources/css/common.css">
-<link rel="stylesheet" href="../../resources/css/headerfooter.css">
-<link rel="stylesheet" href="../../resources/css/sidevar.css">
-<link rel="stylesheet" href="../../resources/css/admin.css">
-<script src="../../resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="../resources/css/common.css">
+<link rel="stylesheet" href="../resources/css/headerfooter.css">
+<link rel="stylesheet" href="../resources/css/sidevar.css">
+<link rel="stylesheet" href="../resources/css/admin.css">
+<script src="../resources/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 
 		<div class="AD_main_productEn">
 
-			<form action="" method="" id="productForm">
+			<form method="post" action="${pageContext.request.contextPath}/admin2/mdEnIn.do" enctype="multipart/form-data" id="productForm">
 
 				<div class="AD_productEn_title">상품 등록</div>
 
@@ -31,8 +31,8 @@
 
 				<div class="AD_productEn_img_info">
 					<div class="AD_productEn_img">
-						<img src="../../resources/images/noimage.png" id="preview" onclick="mainPic()"> <input
-							type="file" style="display: none;" id="productMainPic">
+						<img src="../resources/images/noimage.png" id="preview" onclick="mainPic()"> <input
+							type="file" style="display: none;" id="productMainPic" name="mainP" >
 					</div>
 
 					<div class="AD_productEn_info">
@@ -40,17 +40,17 @@
 							<tr>
 								<td>상품명</td>
 								<td><input type="text" class="productEn_input"
-									id="productName"></td>
+									id="productName" name="name"></td>
 							</tr>
 							<tr>
 								<td>가격</td>
 								<td><input type="number" class="productEn_input"
-									id="productPrice"></td>
+									id="productPrice" name="price"></td>
 							</tr>
 							<tr>
 								<td>수량</td>
 								<td><input type="number" class="productEn_input"
-									id="productQuan"></td>
+									id="productQuan" name="quan"></td>
 							</tr>
 						</table>
 						<table class="AD_productEn_info_table2">
@@ -61,13 +61,13 @@
 
 							<tr>
 								<td><input type="text" class="upload_text"
-									readonly="readonly" id="productPic">
+									readonly="readonly" id="productPic" >
 
 									<div class="AD_upload-btn_wrap">
 										<button type="button" title="파일등록" class="productEn_fbutton">
 											파일등록</button>
 										<input type="file" class="input_file" title="파일찾기"
-											id="imgSelect">
+											id="imgSelect" name="detailP">
 									</div></td>
 							</tr>
 						</table>
@@ -146,7 +146,7 @@
         }
     }
 
-    
+ 
 </script>
 
 </html>

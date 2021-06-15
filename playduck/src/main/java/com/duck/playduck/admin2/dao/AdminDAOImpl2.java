@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.duck.playduck.md.model.vo.Md;
+
 @Repository
 public class AdminDAOImpl2 implements AdminDAO2 {
 
@@ -47,6 +49,12 @@ public class AdminDAOImpl2 implements AdminDAO2 {
 	public int selectreviewSrTotalContents() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("admin2-mapper.selectreviewSrTotalContents");
+	}
+
+	@Override
+	public int insertMd(Md m) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("admin2-mapper.insertMd", m);
 	}
 	
 

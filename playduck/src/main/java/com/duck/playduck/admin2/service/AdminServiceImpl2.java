@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duck.playduck.admin2.dao.AdminDAO2;
+import com.duck.playduck.md.model.vo.Md;
 
 @Service
 public class AdminServiceImpl2 implements AdminService2 {
@@ -42,6 +43,12 @@ public class AdminServiceImpl2 implements AdminService2 {
 	public int selectreviewSrTotalContents() {
 		// TODO Auto-generated method stub
 		return adminDAO.selectreviewSrTotalContents();
+	}
+
+	@Override
+	public int insertMd(Md m) {
+		// TODO Auto-generated method stub
+		return adminDAO.insertMd(m);
 	}
 
 	
