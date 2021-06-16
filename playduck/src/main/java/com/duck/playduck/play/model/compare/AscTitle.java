@@ -2,12 +2,12 @@ package com.duck.playduck.play.model.compare;
 
 import java.util.Comparator;
 
-import com.duck.playduck.play.model.vo.PlayElement;
+import com.duck.playduck.play.model.vo.PlayAll;
 
-public class AscTitle implements Comparator<PlayElement> {
+public class AscTitle implements Comparator<PlayAll> {
 
 	@Override
-	public int compare(PlayElement o1, PlayElement o2) {
+	public int compare(PlayAll o1, PlayAll o2) {
 		
 		int result = o1.getPrfnm().compareTo(o2.getPrfnm());
 		
