@@ -18,5 +18,6 @@ public class Curation {
 	private Date c_date;
 	private String c_pic;
 	private String c_picrenamed;
+	private String m_name;
 	
 }
