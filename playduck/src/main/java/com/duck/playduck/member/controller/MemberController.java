@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import java.util.*;
-import javax.mail.*;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -122,14 +119,13 @@ public class MemberController {
 		
 		if(result!=null) {
 			if( bcryptPasswordEncoder.matches(m_pwd, result.getM_pwd())) {
-				// 로그인 성공 (1:일반회원 2:리워드)
-				if(result.getM_status().trim().equals("1") || result.getM_status().trim().equals("2")) {
+				// 로그인 성공 (1:일반회원 3:관리자)
+				if(result.getM_status().trim().equals("1") || result.getM_status().trim().equals("3")) {
 					msg="로그인 성공!";
 					model.addAttribute("member",result);
 					
-					System.out.println("회원 정보 : " + result);
-				// (3: 탈퇴된 계정)
-				} else if(result.getM_status().trim().equals("3")) {
+				// (2: 탈퇴된 계정)
+				} else if(result.getM_status().trim().equals("2")) {
 					msg="탈퇴된 계정입니다. 관리자에게 문의하세요!";
 				// (6글자 : 이메일인증전)
 				} else {
@@ -207,7 +203,6 @@ public class MemberController {
 				session.setAttribute("email", vo.getM_email());
 				session.setAttribute("m_id", vo.getM_id());
 				
-				System.out.println("세션확인 : " + session);
 				
 				String setfrom = vo.getM_email(); 
 				String tomail = m_email; //받는사람
@@ -286,7 +281,6 @@ public class MemberController {
 		member.setM_pwd(pass2);
 		
 		int result = memberService.pwdUpdate(member);
-		System.out.println("비밀번호 변경결과" + result);
 		
 		if(result == 1) {
 			String msg= "비밀번호 변경이 완료되었습니다!";
@@ -300,7 +294,6 @@ public class MemberController {
     	    return "common/msg";
 		}
 		else {
-			System.out.println("pw_update"+ result);
 			
 			model.addAttribute("loc", "/index_loginAgain.do");
 			model.addAttribute("msg", "인증번호가 일치하지 않습니다.");
@@ -376,6 +369,53 @@ public class MemberController {
 		map.put("data", data);
 		
 		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping("/member/memberUpdatePwdcheck.do")
+	public int memberUpdatePwdcheck(Model model, @RequestParam String m_pwd ) {
+		
+		int check = 0;
+		Member m = (Member)model.getAttribute("member");
+		
+		Member result = memberService.selectOneMember(m.getM_id());
+		
+		if(result!=null) {
+			if( bcryptPasswordEncoder.matches(m_pwd, result.getM_pwd())) {
+				// 로그인 성공 (1:일반회원 2:리워드)
+				check = 1;
+			}
+		}
+		return check;
+	}
+	
+	@RequestMapping("/member/memberPwdUpdate.do")
+	public String memberPwdUpdate(SessionStatus status, Model model, @RequestParam String m_changePwd) {
+		
+		String msg= "";
+		String loc= "/";
+		
+		Member member = (Member)model.getAttribute("member");
+		
+		String pass1 = m_changePwd;
+		String pass2 = bcryptPasswordEncoder.encode(pass1);		// 암호화 처리
+		
+		member.setM_pwd(pass2);
+		
+		int result = memberService.pwdUpdate(member);
+
+		if(result == 1) {
+			msg= "비밀번호 변경이 완료되었습니다!";
+    	    status.setComplete();	// 세션 강제 종료
+    	    
+		}
+		else {
+			msg= "인증번호가 일치하지 않습니다.";
+		}		
+		model.addAttribute("msg",msg);
+	    model.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
 }

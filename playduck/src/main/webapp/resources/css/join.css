@@ -177,5 +177,5 @@
 }
 .joinArea input:invalid{
 	
-    background: red;
+    border : 3px solid red;
 }

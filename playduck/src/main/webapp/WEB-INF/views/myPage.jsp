@@ -28,6 +28,7 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
 	    $(function(){
+	    	
 	    	$('.join_addrBtn2').on('click',function(){
 	    		new daum.Postcode({
 	                oncomplete: function(data) {
@@ -55,10 +56,90 @@
 	                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                    $('#m_address3').val(data.zonecode);
 	                    $('#m_address4').val(roadAddr);
+	                    
 	                }
 	            }).open();
 	    	});
-	    });
+		    
+		    // 모달 나타내기
+		    $(".pm_submitBtn2").on("click",function(){
+		    	$(".modal_profileModify3").fadeIn();
+		    });
+		    
+		    // 모달 나타내기
+			$(".pm_submitBtn3").on("click",function(){
+				$(".modal_profileModify").fadeIn();
+		    });
+			
+		     // 비밀번호 체크
+		    $("#m_changePwd").on("keyup",function(){
+		    	var join_pwd1 = $(this).val().trim();
+		    	var join_pwd2 = $("#m_changePwd2").val().trim();
+		    	if(join_pwd1==join_pwd2){
+		    		$(".pwdCheck_error").hide();
+	                $(".pwdCheck_ok").show();
+	                
+		    	} else {
+		    		$(".pwdCheck_error").show();
+	                $(".pwdCheck_ok").hide();
+		    	}
+		    }); 
+		     
+		    $("#m_changePwd2").on("keyup",function(){
+			   	 var join_pwd2 = $(this).val().trim();
+			   	 var join_pwd1 = $("#m_changePwd").val().trim();
+			   	 if(join_pwd1==join_pwd2){
+			   		 $(".pwdCheck_error").hide();
+		             $(".pwdCheck_ok").show();
+		                
+			   	 } else {
+			   		 $(".pwdCheck_error").show();
+		             $(".pwdCheck_ok").hide();
+			   	 }
+		   	 
+		    }); 
+	        
+
+	    	
+	    });// function 끝
+	    
+    	// 회원정보 수정 가기전 비밀번호 확인모달
+	    function checkP() {
+	    	var pw1 = $("#m_checkPwd").val();
+	    	var pw2 = $("#m_checkPwd2").val();
+	    	$.ajax({
+	            url  : "${pageContext.request.contextPath}/member/memberUpdatePwdcheck.do",
+	            data : { m_pwd : $("#m_checkPwd").val() },
+	            dataType: "json",
+	            async:false,
+	            success : function(data){
+	            	if(data==1 && (pw1==pw2)) {
+	            		$(".modal_profileModify2").fadeIn();
+	            	} else {
+	            		alert("비밀번호를 확인해주세요!");
+	            	}
+	                    
+	            }, error : function(jqxhr, textStatus, errorThrown){
+	                console.log("ajax 처리 실패");
+	                //에러로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            	}
+
+	    		}); // 에이잭스 끝
+	    }; // 버튼이벤트 끝
+	    
+	    // 엔터키 이벤트 추가
+	    function enterkey() { 
+	    	if (window.event.keyCode == 13) {
+	    		
+	    		checkP();
+	    		
+	    	};
+	    };
+
+
     </script>
 
     <style>
@@ -280,6 +361,20 @@
     button {
     	cursor : pointer;
     }
+    #pm_container input {
+    	height : 26px;
+    	width: 300px;
+    	padding-left: 10px;
+    }
+    
+    #pm_container .j_birth {
+    	width: 94px;
+    }
+    
+    #pm_container input:invalid{
+	
+    border : 1px solid red;
+}
     
     </style>
   
@@ -289,10 +384,98 @@
 <body>
 <%@ include file="common/header.jsp"%>
 
+<div class="modal_profileModify1">
+	<div class="modal_profileModifyDiv1" title="비밀번호 확인">
+		<p class="modal_content_close close2 ">X</p>
+		<div class="modal_content loginArea">
+			<h2 class=pm_title>비밀번호 확인</h2>
+			<div id="pm_container">
+				<table class="pm_table">
+			        <!-- ID -->
+			        <tr>
+			            <td class="pm_title">
+			                <h4 class="pm_subTitle">비밀번호</h4>
+			            </td>
+			            <td>
+			                <input type="password" id="m_checkPwd" name="m_checkPwd" placeholder="6자리 이상, 영문 숫자 포함" onkeyup="enterkey();">
+			            </td>
+			        </tr>
+			        <tr>
+			            <td class="pm_title">
+			                <h4 class="pm_subTitle">비밀번호 확인</h4>
+			            </td>
+			            <td>
+			                <input type="password" id="m_checkPwd2" name="m_checkPwd2" onkeyup="enterkey();">
+			            </td>
+			        </tr>
+			        <tr>
+			            <td colspan="2" id="pwdValidate" class="red"></td>
+			        </tr>
+			        <!-- NAME -->
+			    </table>
+			</div>
+		</div>
+		<button class="pm_submitBtn1" type="button" onclick="checkP()">회원정보 수정</button>
+	</div>
+</div>
+
+<div class="modal_profileModify2">
+	<div class="modal_profileModifyDiv2" title="수정 사항">
+		<p class="modal_content_close close3 ">X</p>
+		<div class="modal_content loginArea">
+			<h2 class=pm_title>수정사항</h2>
+			<div id="pm_container">
+				<button class="pm_submitBtn2" type="button" >비밀번호 수정</button>
+				<button class="pm_submitBtn3" type="button" >회원정보 수정</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal_profileModify3">
+	<div class="modal_profileModifyDiv3" title="비밀번호 변경">
+		<p class="modal_content_close close4 ">X</p>
+		<form action="${pageContext.request.contextPath}/member/memberPwdUpdate.do" method="POST"">
+		
+			<div class="modal_content loginArea">
+				<h2 class=pm_title>비밀번호 변경</h2>
+					<div id="pm_container">
+						<table class="pm_table">
+				        <!-- ID -->
+					        <tr>
+					            <td class="pm_title">
+					                <h4 class="pm_subTitle">새 비밀번호</h4>
+					            </td>
+					            <td>
+					                <input type="password" id="m_changePwd" name="m_changePwd" placeholder="6자리 이상, 영문 숫자 포함">
+					            </td>
+					        </tr>
+					        <tr>
+					            <td class="pm_title">
+					                <h4 class="pm_subTitle">새 비밀번호 확인</h4>
+					            </td>
+					            <td>
+					                <input type="password" id="m_changePwd2" name="m_changePwd2">
+					                <div class="validate valired pwdCheck_error">비밀번호가 다릅니다.</div>
+                            		<div class="validate valigreen pwdCheck_ok">사용 가능한 비밀번호 입니다.</div>
+					            </td>
+					        </tr>
+					        <tr>
+					            <td colspan="2" id="pwdValidate" class="red"></td>
+					        </tr>
+				        <!-- NAME -->
+				    </table>
+				</div>
+			</div>
+		<button class="pm_submitBtn4" type="submit" >회원정보 수정</button>
+		</form>
+	</div>
+</div>
+
 <div class="modal_profileModify">
         
         <div class="modal_profileModifyDiv" title="회원정보 수정">
-<p class="modal_content_close ">X</p>
+			<p class="modal_content_close close1 ">X</p>
             <div class="modal_content loginArea">
                 <form action="${pageContext.request.contextPath}/member/memberUpdate.do" method="POST">
                     <h2 class=pm_title>회원정보 수정</h2>
@@ -309,26 +492,6 @@
 
                                 </td>
 
-                            </tr>
-                            <!-- PASSWORD -->
-                            <tr>
-                                <td class="pm_title">
-                                    <h4 class="pm_subTitle">비밀번호</h4>
-                                </td>
-                                <td>
-                                    <input type="password" id="pm_pwd1" name="m_pwd" placeholder="6자리 이상, 영문 숫자 포함">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pm_title">
-                                    <h4 class="pm_subTitle">비밀번호 확인</h4>
-                                </td>
-                                <td>
-                                    <input type="password" id="m_pwd2" name="m_pwd2">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" id="pwdValidate" class="red"></td>
                             </tr>
                             <!-- NAME -->
                             <tr>
@@ -361,11 +524,11 @@
                                 </td>
                                 <td class="pm_birth">
                                     <input type="text" class="j_birth" name="m_date2" id="pm_birth" maxlength="4"
-                                        placeholder="2021" value="${ birth[0] }">
+                                        placeholder="2021" value="${ birth[0] }" required pattern="19[0-9][0-9]|20\d{2}">
                                     <input type="text" class="j_birth" name="m_date2" id="pm_birth" maxlength="2"
-                                        placeholder="월" value="${ birth[1] }">
+                                        placeholder="월" value="${ birth[1] }" required pattern="0[0-9]|1[0-2]" title="생년월일을 확인해주세요">
                                     <input type="text" class="j_birth" name="m_date2" id="pm_birth" maxlength="2"
-                                        placeholder="일" value="${ birth[2] }">
+                                        placeholder="일" value="${ birth[2] }" required pattern="0[1-9]|[1-2][0-9]|3[0-1]" title="생년월일을 확인해주세요">
                                 </td>
                             </tr>
                             <!-- PHONE -->
@@ -397,10 +560,10 @@
                                     </select>
                                     <span style="color:black">-</span>
                                     <input type="text" name="m_phone" id="m_phone4" maxlength="10"
-                                        style="width: 100px;" value="${ phoneArr[1] }">
+                                        style="width: 100px;" value="${ phoneArr[1] }" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!">
                                     <span style="color:black">-</span>
                                     <input type="text" name="m_phone" id="m_phone5" maxlength="10"
-                                        style="width: 100px;" value="${ phoneArr[2] }">   
+                                        style="width: 100px;" value="${ phoneArr[2] }" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!">   
 
                                 </td>
                             </tr>
@@ -411,7 +574,7 @@
                                     <h4 class="join_subTitle">우편번호</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address3" value="${ addArr[0] }" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);" disabled>
+                                    <input type="text" name="m_address" id="m_address3" value="${ addArr[0] }" size="40" maxlength="40" style="width:100px; background:rgb(233, 227, 227);" readonly>
                                     <button class="join_addrBtn2" style="width:70px; height:26px; background:var(--main-color); text-align:center;" type="button">검색</button>
                                 </td>
                             </tr>
@@ -420,7 +583,7 @@
                                     <h4 class="join_subTitle">도로명 주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address4" value="${ addArr[1] }" size="40" maxlength="40" style="background:rgb(233, 227, 227);" disabled>
+                                    <input type="text" name="m_address" id="m_address4" value="${ addArr[1] }" size="40" maxlength="40" style="background:rgb(233, 227, 227);" readonly>
                                 </td>
                                 
                             </tr>

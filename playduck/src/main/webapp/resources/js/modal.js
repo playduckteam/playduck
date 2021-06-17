@@ -60,10 +60,19 @@ $(document).ready(function () {
 
 $(function () {
     $(".Mypage_update_button").click(function () {
-        $(".modal_profileModify").fadeIn();
+        $(".modal_profileModify1").fadeIn();
     });
-    $(".modal_content_close").click(function () {
+    $(".close1").click(function () {
         $(".modal_profileModify").fadeOut();
+    });
+    $(".close2").click(function () {
+        $(".modal_profileModify1").fadeOut();
+    });
+    $(".close3").click(function () {
+        $(".modal_profileModify2").fadeOut();
+    });
+    $(".close4").click(function () {
+        $(".modal_profileModify3").fadeOut();
     });
 });
 

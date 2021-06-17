@@ -131,6 +131,7 @@
         		$(".id_error").hide();
         		$(".id_4").show();
         		$(".id_error2").hide();
+        		$(this).css("border", "3px solid red");
         		idcheck = 0;
         		return;
         		
@@ -139,6 +140,7 @@
         		$(".id_error").hide();
         		$(".id_4").hide();
         		$(".id_error2").show();
+        		$(this).css("border", "3px solid red");
         		idcheck = 0;
         		return;
         		
@@ -155,6 +157,7 @@
 		                    $(".id_4").hide();
 		                    $(".id_error2").hide();
 		                    $(".id_ok").show();
+		                    $("input[name=m_id]").css("border", "1px solid black");
 		                    idcheck = 1;
 		                    
 		                } else {
@@ -162,6 +165,7 @@
 		                    $(".id_4").hide();
 		                    $(".id_ok").hide();
 		                    $(".id_error2").hide();
+		                    $("input[name=m_id]").css("border", "3px solid red");
 		                    idcheck = 0;
 		                }
 		            }, error : function(jqxhr, textStatus, errorThrown){
@@ -180,30 +184,47 @@
 	     $("#join_pwd1").on("blur",function(){
 	    	 var join_pwd1 = $(this).val().trim();
 	    	 var join_pwd2 = $("#join_pwd2").val().trim();
-	    	 if(join_pwd1==join_pwd2){
-	    		 $(".pwd_error").hide();
-                 $(".pwd_ok").show();
-                 pwcheck = 1;
-	    	 } else {
-	    		 $(".pwd_error").show();
-                 $(".pwd_ok").hide();
-                 pwcheck = 0;
+	    	 
+	    	 if((join_pwd1!==""&&join_pwd2!=="")){
+	    	 
+		    	 if(join_pwd1==join_pwd2){
+		    		 $(this).css("border", "1px solid black");
+		    		 $("#join_pwd2").css("border", "1px solid black");
+		    		 $(".pwd_error").hide();
+	                 $(".pwd_ok").show();
+	                 pwcheck = 1;
+		    	 } else {
+		    		 $(this).css("border", "3px solid red");
+		    		 $("#join_pwd2").css("border", "3px solid red");
+		    		 $(".pwd_error").show();
+	                 $(".pwd_ok").hide();
+	                 pwcheck = 0;
+		    	 }
 	    	 }
 	     }); 
 	     
 	     $("#join_pwd2").on("blur",function(){
 	    	 var join_pwd2 = $(this).val().trim();
 	    	 var join_pwd1 = $("#join_pwd1").val().trim();
-	    	 if(join_pwd1==join_pwd2){
-	    		 $(".pwd_error").hide();
-                 $(".pwd_ok").show();
-                 pwcheck = 1;
-	    	 } else {
-	    		 $(".pwd_error").show();
-                 $(".pwd_ok").hide();
-                 pwcheck = 0;
+	    	 if((join_pwd1!==""&&join_pwd2!=="")){
+	    		 
+		    	 if(join_pwd1==join_pwd2){
+		    		 $(this).css("border", "1px solid black");
+		    		 $("#join_pwd1").css("border", "1px solid black");
+		    		 $(".pwd_error").hide();
+	                 $(".pwd_ok").show();
+	                 pwcheck = 1;
+		    	 } else {
+		    		 $(this).css("border", "3px solid red");
+		    		 $("#join_pwd1").css("border", "3px solid red");
+		    		 $(".pwd_error").show();
+	                 $(".pwd_ok").hide();
+	                 pwcheck = 0;
+		    	 }
 	    	 }
 	     }); 
+	     
+	     
         
 	}); // function
     
@@ -227,13 +248,17 @@
 	<a href="${pageContext.request.contextPath}/"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" ></a>
 	<div class="header_login">
 		<c:if test="${empty member}">
-		<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
+			<a class="modal_loginBtn">로그인</a> | <a class="modal_joinBtn">회원가입</a>
 		</c:if>
-		<c:if test="${!empty member}">
-		<a href="${pageContext.request.contextPath}/mypage/mypage.do">마이페이지</a>|
-		<a href="${pageContext.request.contextPath}/buy/buylist.do">구매목록</a>|
-		<a href="${pageContext.request.contextPath}/mypage/mypage.do">장바구니</a>
-		<a href="${pageContext.request.contextPath}/adminpage/admin.do">관리자 페이지</a>
+		<c:if test="${!empty member and fn:trim(member.m_status) eq '1'}">
+			<a href="${pageContext.request.contextPath}/mypage/mypage.do">${member.m_name }</a> |
+			<a href="${pageContext.request.contextPath}/buy/buylist.do">구매목록</a> |
+			<a href="${pageContext.request.contextPath}/mypage/mypage.do">장바구니</a>
+		</c:if>
+		
+		<c:if test="${!empty member and fn:trim(member.m_status) eq '3'}">
+			<a href="${pageContext.request.contextPath}/mypage/mypage.do">${member.m_name }</a> |
+			<a href="${pageContext.request.contextPath}/adminpage/admin.do">관리자 페이지</a>
 		</c:if>
 		
 		<div class="modal_search">
@@ -278,8 +303,6 @@
                                 </td>
                                 <td>
                                     <input type="password" id="join_pwd1" name="m_pwd" placeholder="6자리 이상, 영문 숫자 포함" required>
-                                    <div class="validate valired pwd_error">비밀번호가 다릅니다.</div>
-                                    <div class="validate valigreen pwd_ok">사용 가능한 비밀번호 입니다.</div>
                                 </td>
                             </tr>
                             <tr>
@@ -288,6 +311,8 @@
                                 </td>
                                 <td>
                                     <input type="password" id="join_pwd2" name="m_pwd2" required>
+                                    <div class="validate valired pwd_error">비밀번호가 다릅니다.</div>
+                                    <div class="validate valigreen pwd_ok">사용 가능한 비밀번호 입니다.</div>
                                 </td>
                             </tr>
                             <tr>
@@ -371,12 +396,12 @@
                                     <h4 class="join_subTitle">이메일</h4>
                                 </td>
                                 <td class="join_email">
-                                    <input type="text" name="m_email" id="join_email1" placeholder="example" required > @
-                                    <input type="text" name="m_email" id="join_email2" placeholder="example.com" required >
+                                    <input type="text" name="m_email" id="join_email1" placeholder="example" pattern="[a-z0-9._%+-]{4,20}" required> @
+                                    <input type="text" name="m_email" id="join_email2" placeholder="example.com" pattern="[a-z0-9.-]+\.[a-z]{2,3}" required >
                                 </td>
                             </tr>
+                            
                             <!-- ADDRESS -->
-
                             <tr>
                                 <td class="join_title">
                                     <h4 class="join_subTitle">우편번호</h4>

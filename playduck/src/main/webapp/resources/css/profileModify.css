@@ -68,6 +68,45 @@
 }
 
 /* 검정색 전체 배경 */
+.modal_profileModify3{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    display: none;
+    max-height: 100%;
+    z-index: 10;
+}
+
+.modal_profileModify2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    display: none;
+    max-height: 100%;
+    z-index: 10;
+}
+
+.modal_profileModify1{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    display: none;
+    max-height: 100%;
+    z-index: 10;
+}
+
 .modal_profileModify{
     position: absolute;
     width: 100%;
@@ -87,8 +126,47 @@
 
 /* 흰색 안쪽 배경 */
 .modal_profileModifyDiv {
-    width: 1400px;
-    height: 950px;
+    width: 1200px;
+    height: 750px;
+    background: white;
+    margin-top: 100px;
+    padding: 10px 20px 20px 20px;
+    overflow-y: initial !important;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+}
+
+.modal_profileModifyDiv1 {
+    width: 500px;
+    height: 300px;
+    background: white;
+    margin-top: 100px;
+    padding: 10px 20px 20px 20px;
+    overflow-y: initial !important;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+}
+
+.modal_profileModifyDiv2 {
+    width: 500px;
+    height: 300px;
+    background: white;
+    margin-top: 100px;
+    padding: 10px 20px 20px 20px;
+    overflow-y: initial !important;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+}
+
+.modal_profileModifyDiv3 {
+    width: 500px;
+    height: 300px;
     background: white;
     margin-top: 100px;
     padding: 10px 20px 20px 20px;
@@ -161,6 +239,58 @@
 
 .pm_submitBtn{
     width: 400px;
+    height: 50px;
+    background-color: var(--main-color);
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 30px;
+	display:flex;
+	line-height:50px;
+	justify-content: center;
+}
+
+.pm_submitBtn1{
+    width: 200px;
+    height: 50px;
+    background-color: var(--main-color);
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 30px;
+	display:flex;
+	line-height:50px;
+	justify-content: center;
+}
+
+.pm_submitBtn2{
+    width: 200px;
+    height: 50px;
+    background-color: var(--main-color);
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 30px;
+	display:flex;
+	line-height:50px;
+	justify-content: center;
+}
+
+.pm_submitBtn3{
+    width: 200px;
+    height: 50px;
+    background-color: var(--main-color);
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 30px;
+	display:flex;
+	line-height:50px;
+	justify-content: center;
+}
+
+.pm_submitBtn4{
+    width: 200px;
     height: 50px;
     background-color: var(--main-color);
     font-size: 17px;
