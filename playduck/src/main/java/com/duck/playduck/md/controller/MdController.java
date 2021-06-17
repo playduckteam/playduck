@@ -126,11 +126,13 @@ private static String getTagValue (String tag, Element eElement) {
 		// 내 리워드 가져오기
 		int reward = mdService.getReward(mno);
 		
+	
 //		System.out.println(MdbasketList);
 		 DecimalFormat formatter = new DecimalFormat("###,###");
 		
 		 System.out.println("내리워드 확인 :" + reward);
-		 
+		
+
 		 model.addAttribute("getReward", reward);
 		 model.addAttribute("formatter",formatter);
 		model.addAttribute("baskList",MdbasketList);
@@ -168,15 +170,18 @@ private static String getTagValue (String tag, Element eElement) {
 	// 사용할 리워드 값 저장하기
 		@RequestMapping("/MD/MD_buy5")
 		public String Md_buy5(Model model, 
-										@RequestParam int reward,
-										@RequestParam int mno
+										@RequestParam int w_down,
+										@RequestParam int m_no
 										) {
+			
+			if (w_down != 0 ) {
+				int result = mdService.updateReward(m_no,w_down);
 				
-			int result = mdService.updateReward(mno,reward);
+			} 
+		
 			
 			
-			
-		return "redirect:/MD/MD_buy2?mno="+mno;
+		return "redirect:/MD/MD_buy2?mno="+m_no;
 	}
 	
 	

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.duck.playduck.md.model.vo.Basket;
 import com.duck.playduck.md.model.vo.Md;
-import com.duck.playduck.md.model.vo.Reward;
-import com.duck.playduck.play.model.vo.Play;
+import com.duck.playduck.md.model.vo.mReward;
+
 
 @Repository
 public class MdDAOImpl implements MdDAO {
@@ -36,8 +36,11 @@ public class MdDAOImpl implements MdDAO {
 	// reward 값 가져오기
 	@Override
 	public int getReward(int mno) {
-		
+		if(sqlSession.selectOne("md2-mapper.getReward",mno)==null) {
+			return 0;
+		} else {
 		return sqlSession.selectOne("md2-mapper.getReward",mno);
+		}
 	}
 
 	// basket에 담기
@@ -109,9 +112,9 @@ public class MdDAOImpl implements MdDAO {
 	}
 
 	// 사용할 리워드 값 저장하기
-	public int updateReward(int mno, int reward) {
+	public int updateReward(int m_no, int w_down) {
 	
-		Reward mreward = new Reward( mno, reward);
+		mReward mreward = new mReward( m_no, w_down);
 		
 		return sqlSession.insert("md2-mapper.updateReward", mreward );
 

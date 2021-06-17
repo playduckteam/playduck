@@ -18,7 +18,7 @@
 		
 	<!-- // reward 값 가져오기 -->
 	<select id="getReward" parameterType="_int"  resultType="_int">
-		SELECT SUM(W_UP)-SUM(W_DOWN)
+		SELECT SUM(W_UP)-SUM(NVL(W_DOWN, 0))
 		FROM REWARD
 		WHERE M_NO = #{m_no}
 	</select>
@@ -72,7 +72,13 @@
 			WHERE M_NO = #{ m_no }
 				AND D_NO = #{ d_no}
 		</update>
-
+		
+		<!-- 사용할 리워드 값 저장하기 -->
+		<insert id="updateReward" parameterType="mreward" >
+				INSERT INTO REWARD VALUES(
+				SEQ_R_NO.NEXTVAL, #{m_no}, null , #{w_down}, DEFAULT
+				)
+		</insert>
 	
 	<select id="selectBoardList" resultType="md">
 	SELECT *   

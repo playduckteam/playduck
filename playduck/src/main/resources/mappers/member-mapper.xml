@@ -49,9 +49,11 @@
 	</select>
 	
 	<select id="selectReward" resultType="_int" parameterType="Member">
-		SELECT SUM(W_UP)-SUM(W_DOWN)
+
+		SELECT SUM(W_UP)-SUM(W_DOWN, 0)
 		FROM REWARD
 		WHERE M_NO = #{m_no}
+
 	</select>
 
 	<select id="selectRank" resultType="_int" parameterType="Member">
