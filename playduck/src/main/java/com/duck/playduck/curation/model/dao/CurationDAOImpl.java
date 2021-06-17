@@ -1,7 +1,9 @@
 package com.duck.playduck.curation.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,18 +29,21 @@ public class CurationDAOImpl implements CurationDAO{
 	}
 
 	@Override
-	public List<Play> selectCurationList() {
-		return sqlSession.selectList("curation-mapper.selectCurationList");
+	public List<Curation> selectCurationList(int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		return sqlSession.selectList("curation-mapper.selectCurationList", null, rows);
 	}
 
 	@Override
-	public List<Play> selectCurationList1() {
-		return sqlSession.selectList("curation-mapper.selectCurationList1");
+	public List<Curation> selectCurationList1(int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		return sqlSession.selectList("curation-mapper.selectCurationList1", null, rows);
 	}
 
 	@Override
-	public List<Play> selectCurationList2() {
-		return sqlSession.selectList("curation-mapper.selectCurationList2");
+	public List<Curation> selectCurationList2(int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		return sqlSession.selectList("curation-mapper.selectCurationList2", null, rows);
 	}
 
 	@Override
@@ -46,5 +51,12 @@ public class CurationDAOImpl implements CurationDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("curation-mapper.selectBookList", m_no);
 	}
+
+//	@Override
+//	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
+//		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
+//		System.out.println(rows);
+//		return sqlSession.selectList("curation-mapper.selectBoardList", null, rows);
+//	}
 
 }

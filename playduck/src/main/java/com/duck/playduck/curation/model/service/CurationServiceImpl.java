@@ -1,6 +1,7 @@
 package com.duck.playduck.curation.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,20 +34,20 @@ public class CurationServiceImpl implements CurationService{
 
 
 	@Override
-	public List<Play> selectCurationList() {
-		return curationDAO.selectCurationList();
+	public List<Curation> selectCurationList(int cPage, int numPerPage) {
+		return curationDAO.selectCurationList(cPage, numPerPage);
 	}
 
 
 	@Override
-	public List<Play> selectCurationList1() {
-		return curationDAO.selectCurationList1();
+	public List<Curation> selectCurationList1(int cPage, int numPerPage) {
+		return curationDAO.selectCurationList1(cPage, numPerPage);
 	}
 
 
 	@Override
-	public List<Play> selectCurationList2() {
-		return curationDAO.selectCurationList2();
+	public List<Curation> selectCurationList2(int cPage, int numPerPage) {
+		return curationDAO.selectCurationList2(cPage, numPerPage);
 	}
 
 
@@ -54,5 +55,12 @@ public class CurationServiceImpl implements CurationService{
 	public List<Bookmark> selectBookList(int m_no) {
 		return curationDAO.selectBookList(m_no);
 	}
+
+
+//	@Override
+//	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
+//		// TODO Auto-generated method stub
+//		return curationDAO.selectBoardList(cPage, numPerPage);
+//	}
 
 }

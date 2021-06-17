@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duck.playduck.curation.model.service.CurationService;
 import com.duck.playduck.curation.model.vo.Curation;
+import com.duck.playduck.md.controller.Utils;
 import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.play.model.vo.Play;
 
@@ -97,17 +99,29 @@ public class CurationController {
 
 	@RequestMapping("/curation/culist.do")
 	public String selectPlayList(Model model,
-			@RequestParam(required=false, defaultValue="0") int m_no){
+			@RequestParam(required=false, defaultValue="0") int m_no, 
+			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage){
 		
+		// 한 페이지당 페이지 수
+				int numPerPage = 6;
+				
+				// 현재 페이지의 게시글 수
+				//List<Map<String, String>> list = curationService.selectBoardList(cPage, numPerPage);
+				
+				// 전체 개시글 수
+				int totalContents = curationService.selectTotalCuration();
+				
+				// 페이지 처리 HTML 생성하기
+				String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/curation/culist.do");
+				
 		
-		
-		int totalContents = curationService.selectTotalCuration();
 		
 		List<Bookmark> blist = curationService.selectBookList(m_no);
 		
-		List<Play> culist = curationService.selectCurationList();
+		List<Curation> culist = curationService.selectCurationList(cPage, numPerPage);
 		
-		
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("culist", culist);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("blist", blist);
@@ -116,16 +130,28 @@ public class CurationController {
 	
 	@RequestMapping("/curation/culistsort1.do")
 	public String culistsort1(Model model,
-			@RequestParam(required=false, defaultValue="0") int m_no){
+			@RequestParam(required=false, defaultValue="0") int m_no, 
+			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage){
 		
+		// 한 페이지당 페이지 수
+		int numPerPage = 6;
 		
+		// 현재 페이지의 게시글 수
+		//List<Map<String, String>> list = curationService.selectBoardList(cPage, numPerPage);
 		
+		// 전체 개시글 수
 		int totalContents = curationService.selectTotalCuration();
+		
+		// 페이지 처리 HTML 생성하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/curation/culistsort1.do");
+		
 		List<Bookmark> blist = curationService.selectBookList(m_no);
 		
-		List<Play> culist = curationService.selectCurationList1();
+		List<Curation> culist = curationService.selectCurationList1(cPage, numPerPage);
+		System.out.println("culist : " + culist);
 
-		
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("culist", culist);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("blist", blist);
@@ -135,16 +161,27 @@ public class CurationController {
 	
 	@RequestMapping("/curation/culistsort2.do")
 	public String culistsort2(Model model,
-			@RequestParam(required=false, defaultValue="0") int m_no){
+			@RequestParam(required=false, defaultValue="0") int m_no, 
+			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage){
 		
+		// 한 페이지당 페이지 수
+		int numPerPage = 6;
 		
+		// 현재 페이지의 게시글 수
+		//List<Map<String, String>> list = curationService.selectBoardList(cPage, numPerPage);
 		
+		// 전체 개시글 수
 		int totalContents = curationService.selectTotalCuration();
+		
+		// 페이지 처리 HTML 생성하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/curation/culistsort2.do");
+		
 		List<Bookmark> blist = curationService.selectBookList(m_no);
 		
-		List<Play> culist = curationService.selectCurationList2();
+		List<Curation> culist = curationService.selectCurationList2(cPage, numPerPage);
 
-		
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
 		model.addAttribute("culist", culist);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("blist", blist);
@@ -153,13 +190,13 @@ public class CurationController {
 	}
 
 	
-//	@RequestMapping("curation/curationSelectOne.do")
-//	public String curationSelectOne(Model model,
-//			@RequestParam int c_no){
-//		
-//		
-//		
-//		return"Curation_detail";
-//	}
+	@RequestMapping("curation/curationSelectOne.do")
+	public String curationSelectOne(Model model,
+			@RequestParam int c_no){
+		
+		
+		
+		return"Curation_detail";
+	}
 	
 }

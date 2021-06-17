@@ -58,6 +58,7 @@ body, html, section{
 		<c:if test="${member.m_no eq curation.m_no}">
 		    &nbsp;
 			<button class="cu_modifyBtn" type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardUpdateView.do?boardNo=${curation.c_no}'">수정</button>
+			<button class="cu_modifyBtn" type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardUpdateView.do?boardNo=${curation.c_no}'">삭제</button>
 			</c:if>
 	</section>
 <br /><br /><br /><br /><br /><br /><br /><br />

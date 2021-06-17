@@ -50,7 +50,7 @@ body, html, section{
 	<div class="list_container">
 	
 		<c:forEach items="${culist}" var="cu" begin="0" varStatus="status">
-		<div class="listArea"  onclick="location.href='curation/curationSelectOne.do?c_no='" + ${cu.c_no }>
+		<div class="listArea"  onclick="location.href='curation/curationSelectOne.do?c_no=' + ${ cu.c_no }">
 			<input type="text" class="hidden" value = "${cu.c_no}"/>
 			<img src="/playduck/resources/curation/${cu.c_picrenamed}">
 			<div class="list_content">
@@ -73,6 +73,7 @@ body, html, section{
 		</div>
 		</c:forEach>
 	</div>
+	<div class="pageBar"><c:out value="${pageBar}" escapeXml="false"/></div>
 	</section>
 		
 		<script>

@@ -1,6 +1,7 @@
 package com.duck.playduck.curation.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.play.model.vo.Bookmark;
@@ -12,12 +13,14 @@ public interface CurationDAO {
 
 	int selectTotalCuration();
 
-	List<Play> selectCurationList();
+	List<Curation> selectCurationList(int cPage, int numPerPage);
 
-	List<Play> selectCurationList1();
+	List<Curation> selectCurationList1(int cPage, int numPerPage);
 
-	List<Play> selectCurationList2();
+	List<Curation> selectCurationList2(int cPage, int numPerPage);
 
 	List<Bookmark> selectBookList(int m_no);
+
+//	List<Map<String, String>> selectBoardList(int cPage, int numPerPage);
 
 }
