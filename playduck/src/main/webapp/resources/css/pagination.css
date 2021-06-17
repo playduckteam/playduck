@@ -19,11 +19,11 @@
 .pageBar{
 	display: flex;
 	text-align: center;
-	margin-top: 50px;
 }
 
 .pagination{
-	display: inline-block;
+	display: block;
+	margin-top:50px;
 }
 
 .page-link{
