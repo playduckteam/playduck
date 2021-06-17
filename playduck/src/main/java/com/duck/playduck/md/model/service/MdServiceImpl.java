@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duck.playduck.md.model.dao.MdDAO;
+import com.duck.playduck.md.model.vo.Basket;
 import com.duck.playduck.md.model.vo.Md;
+import com.duck.playduck.md.model.vo.mOrder;
 import com.duck.playduck.play.model.vo.Play;
 
 @Service
@@ -96,6 +98,24 @@ public class MdServiceImpl implements MdService {
 	
 
 		return mdDAO.updateReward(m_no, w_down);
+	}
+
+	// basket 불러오기 (주문목록 저장용)
+	public List<Basket> getbasketList2(int m_no) {
+		
+		return mdDAO.getbasketList2(m_no);
+	}
+
+	// Order 주문목록 저장하기
+	public int insertOrderList(mOrder mOrder) {
+		
+		return mdDAO.insertOrderList(mOrder);
+	}
+
+	// 구매한 장바구니 삭제하기
+	public int deletebuyBasket(int m_no) {
+		
+		return mdDAO.deletebuyBasket(m_no);
 	}
 	
 

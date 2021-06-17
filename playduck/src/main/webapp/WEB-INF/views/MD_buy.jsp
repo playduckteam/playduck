@@ -92,7 +92,7 @@
                    <tr>
                    <td class="table3_td2">리워드 사용</td>
                    <td class="table3_td3"> 
-                   <input type="number" id="reward" value="0"  step="10"max="${getReward}">원
+                   <input type="number" id="reward" value="0"  step="10" min="0" max="${getReward}">원
                   	<button type="submit" id="rewardbtn">사용</button>
                    </td>
                    </tr>
@@ -115,17 +115,17 @@
             </tr>
                 <tr>
                     <td class="Sale_deliver_td1" >수령인</td>
-                    <td><input type="text" class="Sale_deliver_text" placeholder="수령인" ></td>
+                    <td><input type="text" class="Sale_deliver_text"  id="o_name" placeholder="수령인" ></td>
                 </tr>
                 <tr>
                     <td class="Sale_deliver_td1" >전화번호</td>
-                    <td><input type="text" class="Sale_deliver_text" placeholder="010-0000-0000"></td>
+                    <td><input type="text" class="Sale_deliver_text"  id="o_phone" placeholder="010-0000-0000"></td>
                 </tr>
                 <tr>
                     <td class="Sale_deliver_td1" rowspan="3">배송지주소</td>
                     <td>
                         <input type="text" class="Sale_deliver_text1"  id="postcode" placeholder="우편번호">
-                        <input type="button"  class="Sale_addres"  onclick="execDaumPostcode()" value="우편번호찾기">
+                        <input type="button"  class="Sale_addres" onclick="execDaumPostcode()" value="우편번호찾기">
                     </td>
                 </tr>
                 <tr>
@@ -350,9 +350,14 @@
 		    $('#orderMd').on('click', function(){
 		    	var m_no = ${member.m_no}; // 회원번호
 		    	var w_down= $('#reward').val();	
-		    	var m_name = ${member.m_name};
-		    	var m_phone = ${member.m_phone};
-		    	var m_email =${member.m_email};
+		    	var m_name = '${member.m_name}';
+		    	var m_phone = '${member.m_phone}';
+		    	var m_email ='${member.m_email}';
+		    	var price = totalprice2;
+		    	var o_name = $('#o_name').val();
+		    	var o_phone = $('#o_phone').val();
+		    	var o_address = $('#postcode').val() +'/' +$('#address').val() +'/'+$('#detailAddress').val();
+		    	var memo = $('#memo').val();
 		    	
 		    	// 결제 api
 		          var IMP = window.IMP; 
@@ -362,36 +367,41 @@
 			    	    pg : 'inicis', // version 1.1.0부터 지원.
 			    	    pay_method : 'card',
 			    	    merchant_uid : 'merchant_' + new Date().getTime(),
-			    	    name : '주문명:결제테스트',
-			    	    amount : 14000,
-			    	    buyer_name : '구매자이름',
-			    	    buyer_tel : '010-1234-5678',
-			    	    buyer_email : '',
+			    	    name : 'MD 상품',
+			    	    amount :100,
+			    	    buyer_name : m_name,
+			    	    buyer_tel : m_phone,
+			    	    buyer_email : m_email,
 			    	}, function(rsp) {
 			    	    if ( rsp.success ) {
 			    	        var msg = '결제가 완료되었습니다.';
-			    	        msg += '고유ID : ' + rsp.imp_uid;
-			    	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			    	        msg += '결제 금액 : ' + rsp.paid_amount;
-			    	        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    	        
+					      	// 리워드 사용 등록, 구매목록 저장
+						 	  $.ajax({
+			        			  url:"${pageContext.request.contextPath}/MD/MD_buy5.do",
+			        			  type:"post",
+			        			  data:{ m_no : m_no,  w_down : w_down,
+			        				  		o_name : o_name, o_phone : o_phone, o_address : o_address,
+			        				  		o_memo : memo},
+			        			  success:function(){
+			        			  },  error:function(){
+			        				
+			        			  }
+			        		  });
+					  
+						 	 location.href = "${pageContext.request.contextPath}/buy/buylist.do"
+			    	        
 			    	    } else {
 			    	        var msg = '결제에 실패하였습니다.';
 			    	        msg += '에러내용 : ' + rsp.error_msg;
+			    	        
+			    	
 			    	    }
 			    	    alert(msg);
 			    	});
 		        
-		        
-		    	// 리워드 사용 등록
-			 	  $.ajax({
-        			  url:"${pageContext.request.contextPath}/MD/MD_buy5.do",
-        			  type:"post",
-        			  data:{ m_no : m_no,  w_down : w_down  },
-        			  success:function(){
-        			  },  error:function(){
-        				  alert("에러");
-        			  }
-        		  });
+
+
 		    	
 		    	
 		    

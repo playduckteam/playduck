@@ -21,7 +21,9 @@ import org.w3c.dom.NodeList;
 
 import com.duck.playduck.md.model.service.MdService;
 import com.duck.playduck.md.model.service.MdServiceImpl;
+import com.duck.playduck.md.model.vo.Basket;
 import com.duck.playduck.md.model.vo.Md;
+import com.duck.playduck.md.model.vo.mOrder;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Play;
 
@@ -97,7 +99,7 @@ private static String getTagValue (String tag, Element eElement) {
 // MD 결제 페이지	
 	@RequestMapping("/MD/MD_buy")
 	public String Md_buy(
-			@RequestParam int dno,
+			@RequestParam int d_no,
 			@RequestParam int mno,
 			@RequestParam int num,
 			@RequestParam int sum,
@@ -105,12 +107,12 @@ private static String getTagValue (String tag, Element eElement) {
 			) {
 	// 장바구니에 MD 추가하기
 	
-		Md md = mdService.selectOneBasket(dno,mno,num);
+		Md md = mdService.selectOneBasket(d_no,mno,num);
 		
 		if( md == null) {
-			int result = mdService.addBasket(dno, mno, num);
+			int result = mdService.addBasket(d_no, mno, num);
 		}else {
-			int result = mdService.updateBasket(dno,mno,num);
+			int result = mdService.updateBasket(d_no,mno,num);
 		}
 	
 	return "redirect:/MD/MD_buy2?mno="+mno;
@@ -167,21 +169,37 @@ private static String getTagValue (String tag, Element eElement) {
 		return "redirect:/MD/MD_buy2?mno="+mno;
 	}
 		
-	// 사용할 리워드 값 저장하기
+	// 사용할 리워드 값 저장하기/ 주문목록내역 저장하기
 		@RequestMapping("/MD/MD_buy5")
 		public String Md_buy5(Model model, 
 										@RequestParam int w_down,
-										@RequestParam int m_no
+										@RequestParam int m_no,
+										mOrder mOrder
 										) {
-			
-			if (w_down != 0 ) {
-				int result = mdService.updateReward(m_no,w_down);
-				
-			} 
+		   // 리워드 사용 값 저장
 		
+			int result = mdService.updateReward(m_no,w_down);	
+			
+			// basket 불러오기
+			List<Basket> basketList = mdService.getbasketList2(m_no);
 			
 			
-		return "redirect:/MD/MD_buy2?mno="+m_no;
+			System.out.println(mOrder);
+			
+			
+			int i = 0;
+			for( i=0; i<basketList.size(); i++) {
+				mOrder.setD_no(basketList.get(i).getD_no());
+				mOrder.setO_quan(basketList.get(i).getB_quan());
+				
+				// Order 주문목록 저장하기
+			  int result1 = mdService.insertOrderList(mOrder);
+			}
+		
+			// 구매한 장바구니 삭제하기
+			int result2 = mdService.deletebuyBasket(m_no);
+			
+		return null;
 	}
 	
 	

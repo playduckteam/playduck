@@ -133,7 +133,7 @@
 	  var com = confirm("장바구니로 이동하시겠습니까?")
 	  
 	  if(com==true){
-			location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?dno="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
+			location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?d_no="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
 
 		  
 	  }else if(com==false){
