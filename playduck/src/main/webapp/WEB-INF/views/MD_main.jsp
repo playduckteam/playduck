@@ -30,13 +30,27 @@ float:left;
 .md_searchArea {
 	margin-top : 50px;
 }
+.md_searchBtn {
+	cursor:pointer;
+}
 </style>
 
 <body>
 	<%@ include file="common/header.jsp"%>
     <section>
+    <div class="md_searchArea">
+    	<form action="${pageContext.request.contextPath}/md/search_md.do" name="form1" method="post">
+	    
+		    <input class="md_searchInput" type="text" name="keyword" value="${keyword}"/>
+		    <input type="submit" class="md_searchBtn" value="상품검색"/>
+	    
+    	</form>
+    </div>
     
-    <div class="md_searchArea"><input class="md_searchInput" type="text" /><button class="md_searchBtn">상품검색</button></div>
+    
+    
+    
+    
        <br /><br />
        <p style="color:var(--white-color)">총 ${totalContents}건의 상품이 있습니다.</p>
         <div class="MD_play_playcontainer">

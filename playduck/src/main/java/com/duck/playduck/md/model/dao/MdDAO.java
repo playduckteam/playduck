@@ -27,10 +27,14 @@ public interface MdDAO {
 
 	int selectTotalContents();
 
-	List<Map<String, String>> selectBoardList(int cPage, int numPerPage);
-
 	int update3Basket(int dno, int mno, int b_status);
 
 	int updateReward(int m_no, int w_down);
+
+	List<Map<String, String>> selectMDList(int cPage, int numPerPage);
+
+	List<Map<String, String>> selectSearchList(String keyword, int cPage, int numPerPage);
+
+	int selectTotalContents2();
 
 }
