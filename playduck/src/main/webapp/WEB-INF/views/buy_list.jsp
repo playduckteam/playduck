@@ -71,8 +71,13 @@
         </div>
         <hr style="border: solid 1px;">
         </c:forEach>
-      
-        <script>
+        <!-- 물품 구매 리스트 끝-->
+        <c:out value="${pageBar}" escapeXml="false"/>
+    </section>
+    <br /><br /><br /><br /><br />
+    	<%@ include file="common/footer.jsp"%>
+</body>
+  <script>
         // 끝
         	$('.shipment-comp,.input_invoice').on('change', function(){
         		var shipment_comp = $(this).parent().children('.shipment-comp').val();
@@ -86,10 +91,4 @@
         		location.href = "${pageContext.request.contextPath}/buy/buyreturn.do?o_no="+o_no
         	}
         </script>
-        <!-- 물품 구매 리스트 끝-->
-        <c:out value="${pageBar}" escapeXml="false"/>
-    </section>
-    <br /><br /><br /><br /><br />
-    	<%@ include file="common/footer.jsp"%>
-</body>
 </html>

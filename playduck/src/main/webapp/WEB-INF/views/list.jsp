@@ -68,8 +68,9 @@ body, html, section{
 				</div>
 			</div>
 		</div>
-		</c:forEach>
-	</div>
+		</c:forEach>	
+		</div>
+	<c:out value="${pageBar}" escapeXml="false"/>
 	</section>
 <script>
 

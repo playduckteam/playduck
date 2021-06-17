@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.duck.playduck.play.model.dao.PlayDAO;
 import com.duck.playduck.play.model.vo.Play;
+import com.duck.playduck.play.model.vo.PlayAll;
+import com.duck.playduck.play.model.vo.PlayElement;
 
 
 
@@ -24,11 +26,18 @@ public class PlayServiceImpl implements PlayService {
 	}
 
 
+
+
 	@Override
-	public List<Play> selectPlayList() {
+	public List<PlayAll> selectPlayList(int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
-		return playDAO.selectPlayList();
+		return playDAO.selectPlayList(cPage,numPerPage);
 	}
+
+
+
+
+
 	
 	
 	
