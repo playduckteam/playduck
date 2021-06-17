@@ -78,9 +78,9 @@ public class MdServiceImpl implements MdService {
 	}
 
 	// 사용할 리워드 값 저장하기
-	public int updateReward(int mno, int reward) {
+	public int updateReward(int m_no, int w_down) {
 	
-		return mdDAO.updateReward(mno, reward);
+		return mdDAO.updateReward(m_no, w_down);
 	}
 	
 

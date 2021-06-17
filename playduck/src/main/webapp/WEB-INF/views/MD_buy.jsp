@@ -19,6 +19,8 @@
    <script src="../resources/js/jquery-3.6.0.min.js"></script>
 <script src="../resources/js/modal.js"></script>
 <script src="../resources/js/topBtn.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 <%@ include file="common/header.jsp"%>
@@ -307,7 +309,7 @@
 		   	 /* 리워드 max 값 제한, 리워드 사용 값 반영 */
 		     $('#reward').on('input', function() {
 		  	    var $this = $(this);
-		  	    var max = ${getReward};
+		  	    	var max = ${getReward};
 		  	    var str = parseInt(max/10)*10
 		  	    var value = $this.val();
 		  	    var totalprice = $('#num').val()*${md.d_price} + 2500 -$this.val();
@@ -347,22 +349,53 @@
 		    
 		    $('#orderMd').on('click', function(){
 		    	var m_no = ${member.m_no}; // 회원번호
-		    	var reward = ${'#reward'}.val();	
-		    
+		    	var w_down= $('#reward').val();	
+		    	var m_name = ${member.m_name};
+		    	var m_phone = ${member.m_phone};
+		    	var m_email =${member.m_email};
+		    	
+		    	// 결제 api
+		          var IMP = window.IMP; 
+			       IMP.init('imp58545522'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		        
+			       IMP.request_pay({
+			    	    pg : 'inicis', // version 1.1.0부터 지원.
+			    	    pay_method : 'card',
+			    	    merchant_uid : 'merchant_' + new Date().getTime(),
+			    	    name : '주문명:결제테스트',
+			    	    amount : 14000,
+			    	    buyer_name : '구매자이름',
+			    	    buyer_tel : '010-1234-5678',
+			    	    buyer_email : '',
+			    	}, function(rsp) {
+			    	    if ( rsp.success ) {
+			    	        var msg = '결제가 완료되었습니다.';
+			    	        msg += '고유ID : ' + rsp.imp_uid;
+			    	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			    	        msg += '결제 금액 : ' + rsp.paid_amount;
+			    	        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    	    } else {
+			    	        var msg = '결제에 실패하였습니다.';
+			    	        msg += '에러내용 : ' + rsp.error_msg;
+			    	    }
+			    	    alert(msg);
+			    	});
+		        
+		        
 		    	// 리워드 사용 등록
 			 	  $.ajax({
         			  url:"${pageContext.request.contextPath}/MD/MD_buy5.do",
         			  type:"post",
-        			  data:{ m_no : m_no,  reward : reward  },
+        			  data:{ m_no : m_no,  w_down : w_down  },
         			  success:function(){
         			  },  error:function(){
         				  alert("에러");
         			  }
         		  });
 		    	
+		    	
 		    
-		    	 var w_no = //;
-		    	 var 
+		    	
 		    
 
 		    	 });
@@ -401,6 +434,8 @@
 
 
        </script>
+
+       
        
        <!-- 주소찾기 api  -->
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

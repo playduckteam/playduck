@@ -25,6 +25,6 @@ public interface MdService {
 
 	int update3Basket(int dno, int mno, int b_status);
 
-	int updateReward(int mno, int reward);
+	int updateReward(int m_no, int w_down);
 
 }

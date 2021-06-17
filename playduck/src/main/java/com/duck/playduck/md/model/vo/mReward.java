@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reward {
+public class mReward {
 	private int w_no;
 	private int m_no;
 	private int w_up;
 	private int w_down;
 	
 	
-	public Reward(int w_no, int w_down) {
+	public mReward(int m_no, int w_down) {
 		super();
-		this.w_no = w_no;
+		this.m_no = m_no;
 		this.w_down = w_down;
 	}
 	
