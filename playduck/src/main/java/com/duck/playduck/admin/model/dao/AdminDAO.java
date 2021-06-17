@@ -2,6 +2,7 @@ package com.duck.playduck.admin.model.dao;
 
 import java.util.List;
 
+
 import com.duck.playduck.admin.model.vo.Reward;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.orders.model.vo.BuyList;
@@ -19,5 +20,13 @@ public interface AdminDAO {
 	List<BuyList> adminreturn();
 
 	List<BuyList> admincancel();
+
+	List<Member> memberadminsr(String text);
+
+	List<BuyList> admincancelsr(String text);
+
+	List<BuyList> adminreturnsr(String text);
+
+	int updatereturn(int d_no);
 
 }

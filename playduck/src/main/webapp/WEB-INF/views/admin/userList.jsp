@@ -30,8 +30,8 @@
 
             <div class="AD_memberlist_search_img">
 
-                <input type="text" class="searchbox">
-                <img src="../resources/images/search.png">
+                <input type="text" class="searchbox" onkeyup="enterkey();">
+                <img src="../resources/images/search.png" class="searchGo">
             </div>
 
 
@@ -52,11 +52,11 @@
                         <td>${ri.m_no}</td>
                         <td>${ri.m_name}</td>
                         <c:if test="${ri.point gt 100}">
-                        <td></td>
+                        <td>${ri.point}</td>
                         <td>파트너 큐레이터</td>
                         </c:if>
                         <c:if test="${ri.point lt 100}">
-                        <td></td>
+                        <td>${ri.point}</td>
                         <td>일반회원</td>
                         </c:if>
                         <td> <div class="memberlist_button_div"><button class="memberlist_button" onclick="goDelete(${ri.m_no})">탈퇴</button></div></td>
@@ -74,6 +74,36 @@
 function goDelete(m_no) {
 	location.href = "${pageContext.request.contextPath}/adminpage/adminmember.do?m_no="+m_no
 }
+
+function enterkey() {
+    if (window.event.keyCode == 13) {
+
+    	if ($('.searchbox').val() == "") {
+			alert("입력 해주세요");
+		} else {
+			
+			var a = $('.searchbox').val();
+				
+			location.href = "${pageContext.request.contextPath}/adminpage/adminmembersr.do?text="+a;
+		}
+    }
+}
+
+
+
+	$(function() {
+		$('.searchGo').on("click", function() {
+			if ($('.searchbox').val() == "") {
+				alert("입력 해주세요");
+			} else {
+				
+				var a = $('.searchbox').val();
+					
+				location.href = "${pageContext.request.contextPath}/adminpage/adminmembersr.do?text="+a;
+			}
+		})
+	})
+
 </script>
 <%@ include file="../common/footer.jsp"%>
 
