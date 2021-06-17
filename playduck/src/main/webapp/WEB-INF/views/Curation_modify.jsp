@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,16 +45,46 @@ body, html, section{
 	<%@ include file="common/header.jsp"%>
 	<section>
 		<div class="curation_container">
-			<img src="../resources/images/tower1.PNG" alt="" />
-		<span class="curation_title">제목</span> <input type="text" id="curation_titleArea"/>
-		   
-		<textarea id="summernote"></textarea>
+		<form name="curationFrm" action="${pageContext.request.contextPath}/curation/curationUpdate.do?c_no=${culist.c_no}" method="post" enctype="multipart/form-data">
+			<img class="cuwrtie_img" src="${pageContext.request.contextPath}/resources/curation/${culist.c_picrenamed}" id="curationImg" alt="" />
+			<input type="file" class="hidden" accept="image/*" name="c_pic_file" id="curationImg1" onchange="readURL(input)" />
+			<input type="text" class="hidden" name="m_no" value="${member.m_no}">
+			
+			<script>
+	        	$('#curationImg').on('click', function(){
+	        		$('#curationImg1').click();
+	        	})
+	        	
+	         // 사진 미리보기 구현
+	        	 function readURL(input) {
+      				  if (input.files && input.files[0]) {
+         				  var reader = new FileReader();
+          				  reader.onload = function(e) {
+        	     		   $('#curationImg').attr('src', e.target.result);
+          			  }
+         		   reader.readAsDataURL(input.files[0]);
+      			  }
+   					 }
+
+    				$("#curationImg1").change(function() {
+       				 readURL(this);
+   				 });
+
+	        </script>
+			
+			<div class="curation_title" >
+		<span>제목</span> <input type="text" id="curation_titleArea" name="c_title" value="${culist.c_title }"/>
+		   </div>
+		<textarea id="summernote" name="c_content">${culist.c_content }</textarea>
+		
 
     <script>
         $('#summernote').summernote();
     </script>
+		
+		<input type="submit" class="curation_writeBtn" value="리뷰 수정하기"></input>
+		</form>
 		</div>
-		<button class="curation_writeBtn">리뷰 작성하기</button>
 	</section>
 <br /><br /><br /><br /><br /><br /><br /><br />
 	<%@ include file="common/footer.jsp"%>

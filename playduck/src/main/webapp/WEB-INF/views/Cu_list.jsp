@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="../resources/css/join.css">
 <link rel="stylesheet" href="../resources/css/login.css">
 <link rel="stylesheet" href="../resources/css/findIdPw.css">
+<link rel="stylesheet" href="../resources/css/pagination.css">
 
 <link rel="stylesheet" href="../resources/css/cu_list.css">
 
@@ -50,7 +51,7 @@ body, html, section{
 	<div class="list_container">
 	
 		<c:forEach items="${culist}" var="cu" begin="0" varStatus="status">
-		<div class="listArea"  onclick="location.href='curation/curationSelectOne.do?c_no=' + ${ cu.c_no }">
+		<div class="listArea"  onclick="location.href='${pageContext.request.contextPath}/curation/curationSelectOne.do?c_no=' + '${ cu.c_no }'">
 			<input type="text" class="hidden" value = "${cu.c_no}"/>
 			<img src="/playduck/resources/curation/${cu.c_picrenamed}">
 			<div class="list_content">

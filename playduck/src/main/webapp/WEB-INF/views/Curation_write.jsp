@@ -46,7 +46,7 @@ body, html, section{
 	<section>
 		<div class="curation_container">
 		<form name="curationFrm" action="${pageContext.request.contextPath}/curation/curationWrite.do" method="post" enctype="multipart/form-data">
-			<img src="../resources/images/noimage_cu.png" id="curationImg" alt="" />
+			<img class="cuwrtie_img" src="../resources/images/noimage_cu.png" id="curationImg" alt="" />
 			<input type="file" class="hidden" accept="image/*" name="c_pic_file" id="curationImg1" onchange="readURL(input)" />
 			<input type="text" class="hidden" name="m_no" value="${member.m_no}">
 			
