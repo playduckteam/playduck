@@ -28,6 +28,25 @@
 body, html, section{
 	min-height: 100%
 }
+
+}
+.cu_searchArea {
+	margin-top : 60px;
+}
+.cu_searchBtn {
+	cursor:pointer;
+	background-color: var(--main-color);
+    font-size: 17px;
+    font-weight: 400;
+    text-align: center;
+    border-radius: .2em;
+	width : 120px;
+	height : 30px;
+}
+.cu_searchInput {
+	height : 28px;
+	width : 170px;
+}
 </style>
 
 </head>
@@ -35,7 +54,7 @@ body, html, section{
 	<h1 class="hidden">playduck</h1>
 	<%@ include file="common/header.jsp"%>
 	
-		 <div class="madal_listSort">
+	<div class="madal_listSort">
             <div class="madal_listSortDiv" title="">
                 <span class="modal_content_close_1">X</span>
                 <a href="${pageContext.request.contextPath}/curation/culistsort1.do" class="sort_title"  style="margin-left:27px;">가나다 순</a>
@@ -45,6 +64,16 @@ body, html, section{
     </div>
     
 	<section>
+	
+	<div class="cu_searchArea">
+    	<form action="${pageContext.request.contextPath}/curation/search_cu.do" name="form2" method="post">
+	    
+		    <input class="cu_searchInput" type="text" name="keyword" value="${keyword}"/>
+		    <input type="submit" class="cu_searchBtn" value="큐레이션 검색"/>
+	    
+    	</form>
+    </div>
+	
 	<div class="list_sort">분류 ▼</div>
 	<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 	

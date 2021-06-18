@@ -29,10 +29,19 @@ float:left;
 	text-decoration:none;
 }
 .md_searchArea {
-	margin-top : 50px;
+	margin-top : 60px;
 }
 .md_searchBtn {
 	cursor:pointer;
+	border-radius: .2em;
+	width : 100px;
+		width : 100px;
+	height : 30px;
+}
+.cu_searchInput {
+
+	height : 28px;
+	width : 170px;
 }
 </style>
 
@@ -42,7 +51,7 @@ float:left;
     <div class="md_searchArea">
     	<form action="${pageContext.request.contextPath}/md/search_md.do" name="form1" method="post">
 	    
-		    <input class="md_searchInput" type="text" name="keyword" value="${keyword}"/>
+		    <input class="cu_searchInput" type="text" name="keyword" value="${keyword}"/>
 		    <input type="submit" class="md_searchBtn" value="상품검색"/>
 	    
     	</form>

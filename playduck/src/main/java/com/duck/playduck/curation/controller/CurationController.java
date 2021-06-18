@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,8 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.duck.playduck.curation.model.service.CurationService;
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.md.controller.Utils;
+import com.duck.playduck.md.controller.Utils_search;
 import com.duck.playduck.play.model.vo.Bookmark;
-import com.kh.spring.board.model.vo.Attachment;
 
 @Controller
 public class CurationController {
@@ -291,6 +292,36 @@ public class CurationController {
 		model.addAttribute("msg", msg);
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/curation/search_cu.do")
+	public String search_cu(Model model,
+			  @RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+			  @RequestParam(defaultValue="") String keyword) throws Exception {
+		
+		// 한 페이지당 페이지 수
+		int numPerPage = 12;
+		
+		// 현재 페이지의 게시글 수
+		List<Map<String, String>> list = curationService.selectSearchList(keyword, cPage, numPerPage);
+		
+		System.out.println("출력 결과 : " + list);
+		// 전체 개시글 수
+		int totalContents2 = curationService.selectTotalContents2(keyword);
+		
+		// 페이지 처리 HTML 생성하기
+		String pageBar = Utils_search.getPageBar(totalContents2, cPage, numPerPage, "/playduck/md/search_md.do", keyword);
+		
+		// List<Map<String, String>> list2 = mdService.listAll(keyword, pageBar);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("totalContents", totalContents2);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("keyword", keyword);
+		
+		
+		return "Cu_list";
 	}
 	
 }

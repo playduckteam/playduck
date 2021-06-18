@@ -75,5 +75,19 @@ public class CurationServiceImpl implements CurationService{
 		
 	}
 
+	// 검색기능
+	@Override
+	public List<Map<String, String>> selectSearchList(String keyword, int cPage, int numPerPage) {
+		
+		return curationDAO.selectSearchList(keyword, cPage, numPerPage);
+	}
+
+
+	@Override
+	public int selectTotalContents2(String keyword) {
+		
+		return curationDAO.selectTotalContents2(keyword);
+	}
+
 
 }
