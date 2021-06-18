@@ -103,11 +103,32 @@
 				 AND B_STATUS=1
 			</delete>
 	
+
 	
 		<select id="selectBoardList" resultType="md">
 		SELECT *   
 		FROM MD 
 		ORDER BY  D_NO
 		</select>
+
+	<select id="selectMDList" resultType="md">
+	SELECT *   
+	FROM MD
+	ORDER BY D_NO
+	</select>
+	
+	<!-- MD MAIN 검색 부분 -->
+	<select id="selectTotalContents2" resultType="_int">
+	SELECT COUNT(*) FROM MD
+	WHERE D_TITLE LIKE '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="selectSearchList" resultType="md">
+	SELECT *   
+	FROM MD
+	WHERE D_TITLE LIKE '%' || #{ keyword } || '%'
+	ORDER BY  D_NO
+	</select>
+
 	
 </mapper>

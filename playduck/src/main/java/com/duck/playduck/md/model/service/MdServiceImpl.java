@@ -82,11 +82,6 @@ public class MdServiceImpl implements MdService {
 		return mdDAO.selectTotalContents();
 	}
 
-	@Override
-	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
-		
-		return mdDAO.selectBoardList(cPage, numPerPage);
-	}
 	// 장바구니 MD 선택하기 해제하기
 	public int update3Basket(int dno, int mno, int b_status) {
 		
@@ -99,6 +94,7 @@ public class MdServiceImpl implements MdService {
 
 		return mdDAO.updateReward(m_no, w_down);
 	}
+
 
 	// basket 불러오기 (주문목록 저장용)
 	public List<Basket> getbasketList2(int m_no) {
@@ -117,6 +113,29 @@ public class MdServiceImpl implements MdService {
 		
 		return mdDAO.deletebuyBasket(m_no);
 	}
+
+	// 페이지네이션
+	@Override
+	public List<Map<String, String>> selectMDList(int cPage, int numPerPage) {
+		
+		return mdDAO.selectMDList(cPage, numPerPage);
+	}
+
+	// 검색 결과
+	@Override
+	public List<Map<String, String>> selectSearchList(String keyword, int cPage, int numPerPage) {
+		
+		return mdDAO.selectSearchList(keyword, cPage, numPerPage);
+	}
+
+	@Override
+	public int selectTotalContents2() {
+		
+		return mdDAO.selectTotalContents2();
+	}
+
+
+
 	
 
 	

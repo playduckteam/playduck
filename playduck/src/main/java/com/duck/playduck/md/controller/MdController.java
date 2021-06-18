@@ -223,14 +223,16 @@ private static String getTagValue (String tag, Element eElement) {
 	
 // MD 메인 페이지 by 수영
 	@RequestMapping("/md/md_main.do")
-	public String md_main(Model model, @RequestParam(value="cPage", required=false, defaultValue="1") int cPage) {
+	public String md_main(Model model,
+						  @RequestParam(value="cPage", required=false, defaultValue="1") int cPage) {
 		
 		// 한 페이지당 페이지 수
 		int numPerPage = 12;
 		
 		// 현재 페이지의 게시글 수
-		List<Map<String, String>> list = mdService.selectBoardList(cPage, numPerPage);
+		List<Map<String, String>> list = mdService.selectMDList(cPage, numPerPage);
 		
+		//System.out.println("출력 결과 : " + list);
 		// 전체 개시글 수
 		int totalContents = mdService.selectTotalContents();
 		
@@ -243,6 +245,36 @@ private static String getTagValue (String tag, Element eElement) {
 		model.addAttribute("pageBar", pageBar);
 		
 
+		return "MD_main";
+	}
+	
+	@RequestMapping("/md/search_md.do")
+	public String search_md(Model model,
+			  @RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+			  @RequestParam(defaultValue="") String keyword) throws Exception {
+		
+		// 한 페이지당 페이지 수
+				int numPerPage = 12;
+				
+				// 현재 페이지의 게시글 수
+				List<Map<String, String>> list = mdService.selectSearchList(keyword, cPage, numPerPage);
+				
+				System.out.println("출력 결과 : " + list);
+				// 전체 개시글 수
+				int totalContents = mdService.selectTotalContents2();
+				
+				// 페이지 처리 HTML 생성하기
+				String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/md/search_md.do");
+				
+				// List<Map<String, String>> list2 = mdService.listAll(keyword, pageBar);
+				
+				model.addAttribute("list", list);
+				model.addAttribute("totalContents", totalContents);
+				model.addAttribute("numPerPage", numPerPage);
+				model.addAttribute("pageBar", pageBar);
+				model.addAttribute("keyword", keyword);
+		
+		
 		return "MD_main";
 	}
 	

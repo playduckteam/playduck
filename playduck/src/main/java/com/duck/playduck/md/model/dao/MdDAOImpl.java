@@ -95,14 +95,6 @@ public class MdDAOImpl implements MdDAO {
 		return sqlSession.selectOne("md2-mapper.selectTotalContents");
 	}
 
-	@Override
-	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
-		
-		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		
-		return sqlSession.selectList("md2-mapper.selectBoardList", null, rows);
-	}
-
 	// 장바구니 MD 선택하기 해제하기
 	public int update3Basket(int dno, int mno, int b_status) {
 	
@@ -121,6 +113,7 @@ public class MdDAOImpl implements MdDAO {
 
 	}
 
+
 	// basket 불러오기 (주문목록 저장용)
 	public List<Basket> getbasketList2(int m_no) {
 		
@@ -138,6 +131,31 @@ public class MdDAOImpl implements MdDAO {
 		
 		return sqlSession.delete("md2-mapper.deletebuyBasket", m_no);
 	}
+
+	@Override
+	public List<Map<String, String>> selectMDList(int cPage, int numPerPage) {
+		
+		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("md2-mapper.selectMDList", null, rows);
+	}
+
+	@Override
+	public List<Map<String, String>> selectSearchList(String keyword, int cPage, int numPerPage) {
+		
+		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("md2-mapper.selectSearchList", keyword, rows);
+	}
+
+	// 검색 결과 
+	@Override
+	public int selectTotalContents2() {
+		
+		return sqlSession.selectOne("md2-mapper.selectTotalContents2");
+	}
+
+
 	
 
 
