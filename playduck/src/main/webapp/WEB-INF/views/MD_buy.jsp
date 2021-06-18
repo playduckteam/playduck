@@ -26,12 +26,12 @@
 <%@ include file="common/header.jsp"%>
     <section>
         <!--물품 구매 리스트-->
-  
   <c:forEach items="${baskList}" var="baskList">
         <div class="Sale_list">
             <div class="S_list" id="Sale_check">
-                <input type="checkbox" name="list" id="${baskList.d_no}ch" value="${baskList.d_no }">
-                <label for="${baskList.d_no }ch"></label>
+                <input type="checkbox" class="checkli" name="list" id="${baskList.d_no}ch" value="${baskList.d_no }">
+                <label for="${baskList.d_no }ch"></label></br>
+                <input type="button" value="삭제" class="del">
             </div>
             <div class="S_list" id="Sale_img">
                 <img src="${baskList.d_pic}" width="200px" height="200px">
@@ -124,15 +124,15 @@
                 <tr>
                     <td class="Sale_deliver_td1" rowspan="3">배송지주소</td>
                     <td>
-                        <input type="text" class="Sale_deliver_text1"  id="postcode" placeholder="우편번호">
+                        <input type="text" class="Sale_deliver_text1"  onclick="execDaumPostcode()"   id="postcode" placeholder="우편번호">
                         <input type="button"  class="Sale_addres" onclick="execDaumPostcode()" value="우편번호찾기">
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="Sale_deliver_text" id="address" placeholder="주소"></td>
+                    <td><input type="text" class="Sale_deliver_text" id="address" placeholder="주소" onclick="execDaumPostcode()" ></td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="Sale_deliver_text"  id="detailAddress" placeholder="상세주소"></td>
+                    <td><input type="text" class="Sale_deliver_text"  id="detailAddress" placeholder="상세주소" onclick="execDaumPostcode()" ></td>
                 </tr>
                 <tr>
                     <td class="Sale_deliver_td1" >배송 메모</td>
@@ -151,7 +151,68 @@
        <script>
        var totalnum = 0; 
        var totalprice2 = 0;
-  	
+       
+       //삭제하기 버튼
+       $('.del').on('click',function(){
+    	   var m_no = ${member.m_no};
+    	   var d_no = $(this).siblings('.checkli').val();
+
+    		  var com = confirm("삭제하시겠습니까?")
+    		  
+    		  if(com==true){
+    			 
+    			  $.ajax({
+    	 			  url:"${pageContext.request.contextPath}/MD/MD_buy6.do",
+    	 			  type:"post",
+    	 			  data:{ m_no : m_no, d_no : d_no },
+    	 			  success:function(){
+    	 				  alert("삭제되었습니다.");
+    	 				  
+    	 				  location.href = "${pageContext.request.contextPath}/MD/MD_buy2?mno="+m_no
+    	 			  },  error:function(){
+    	 				  alert("에러");
+    	 			  }
+    	 		  }); 
+
+    			  
+    		  }else if(com==false){
+    			
+    			
+    		  }
+    	   
+    
+    	   
+       });
+       
+       // 내정보 불러오기 버튼
+       $('#info_load').on('change',function(){
+    	  var name = '${member.m_name}';
+    	  var phone ='${member.m_phone}';
+    	  var address = '${member.m_address}'
+    	  var splitadd = address.split('/');
+    	  var nameplace = $('#o_name');
+    	  var phoneplace = $('#o_phone'); 
+    	  var addresspl1 =$('#postcode');
+    	  var addresspl2 = $('#address');
+    	  var addresspl3 = $('#detailAddress');
+    	  
+    	   if($(this).prop('checked')){
+    		   nameplace.val(name);
+    		   phoneplace.val(phone);
+    		   addresspl1.val(splitadd[0]);
+    		   addresspl2.val(splitadd[1]);
+    		   addresspl3.val(splitadd[2]);
+    	   }else{
+    		   nameplace.val(null);
+    		   phoneplace.val(null);
+    		   addresspl1.val(null);
+    		   addresspl2.val(null);
+    		   addresspl3.val(null);
+    	   }
+    	   
+       });
+       
+       
       /* 전체 수량, 가격 변경함수 */
        function calcPrice( elem ){
      	  var $this = $(elem);
@@ -231,6 +292,8 @@
       	 $('input:checkbox[name=list]').each(function(){
       		 $(this).prop('checked', true);
       		calcPrice(this);
+      		
+
    
       	 }); 		
        });
@@ -337,13 +400,34 @@
 		    $('#rewardbtn').on('click',function(){
 		    	var allpriceplace = $('#Sale_AllPrice');
 		    	var userward = $('#reward').val();
-		    	var allprice = totalprice2 - userward;
-		        var reallprice = allprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		    	allpriceplace.html( "총 상품 합계   " + reallprice + "원");
-		    	
-		    	totalprice2 = allprice;
+		    	 var word = $(this).html();
 	
+		    	
+		    	if( word == '취소'){
+		    		$(this).html('사용')
+		    		
+		    		var allprice = totalprice2 + parseInt(userward);
+					var reallprice = allprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					
+					$('#reward').attr('disabled',false);
+			    	allpriceplace.html( "총 상품 합계   " + reallprice + "원"); 	
+			    	totalprice2 = allprice;
+			    	
+		    	}else if( word == '사용'){
+		    		$(this).html('취소');
+		    		
+			    	var allprice = totalprice2 - userward;
+			        var reallprice = allprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			       
+			        $('#reward').attr('disabled',true);
+			    	allpriceplace.html( "총 상품 합계   " + reallprice + "원"); 	
+			    	totalprice2 = allprice;
+		    	}
+		    
+				
 		    });
+		    
+	
 		  
 		    
 		    

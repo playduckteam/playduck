@@ -96,6 +96,7 @@ public class MdDAOImpl implements MdDAO {
 	}
 
 	// 장바구니 MD 선택하기 해제하기
+	@Override
 	public int update3Basket(int dno, int mno, int b_status) {
 	
 		Basket basket = new Basket(mno,dno, 0,b_status);
@@ -105,6 +106,7 @@ public class MdDAOImpl implements MdDAO {
 	}
 
 	// 사용할 리워드 값 저장하기
+	@Override
 	public int updateReward(int m_no, int w_down) {
 	
 		mReward mreward = new mReward( m_no, w_down);
@@ -115,18 +117,21 @@ public class MdDAOImpl implements MdDAO {
 
 
 	// basket 불러오기 (주문목록 저장용)
+	@Override
 	public List<Basket> getbasketList2(int m_no) {
 		
 		return sqlSession.selectList("md2-mapper.getbasketList2", m_no);
 	}
 
 	// Order 주문목록 저장하기
+	@Override
 	public int insertOrderList(mOrder mOrder) {
 		
 		return sqlSession.insert("md2-mapper.insertOrderList", mOrder);
 	}
 
 	// 구매한 장바구니 삭제하기
+	@Override
 	public int deletebuyBasket(int m_no) {
 		
 		return sqlSession.delete("md2-mapper.deletebuyBasket", m_no);
@@ -153,6 +158,15 @@ public class MdDAOImpl implements MdDAO {
 	public int selectTotalContents2() {
 		
 		return sqlSession.selectOne("md2-mapper.selectTotalContents2");
+	}
+	
+	// 장바구니 삭제하기
+	@Override
+	public int delBasket(int d_no, int m_no) {
+		
+		Basket basket = new Basket(m_no,d_no,1);
+		
+		return sqlSession.delete("md2-mapper.delBasket",basket);
 	}
 
 

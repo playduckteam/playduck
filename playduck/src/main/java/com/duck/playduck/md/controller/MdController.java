@@ -118,6 +118,27 @@ private static String getTagValue (String tag, Element eElement) {
 	return "redirect:/MD/MD_buy2?mno="+mno;
 	}
 	
+	@RequestMapping("/MD/MD_buyre")
+	public String Md_buyre(
+			@RequestParam int d_no,
+			@RequestParam int mno,
+			@RequestParam int num,
+			@RequestParam int sum,
+			Model model
+			) {
+	// 장바구니에 MD 추가하기
+	
+		Md md = mdService.selectOneBasket(d_no,mno,num);
+		
+		if( md == null) {
+			int result = mdService.addBasket(d_no, mno, num);
+		}else {
+			int result = mdService.updateBasket(d_no,mno,num);
+		}
+	
+	return "redirect:/MD/MD_order.do?d_no="+d_no;
+	}
+	
 	
 	@RequestMapping("/MD/MD_buy2")
 	public String Md_buy2(Model model, @RequestParam int mno) {
@@ -216,7 +237,19 @@ private static String getTagValue (String tag, Element eElement) {
 		return "MD_order";
 	}
 	
-	
+	// 장바구니 삭제하기
+	@RequestMapping("/MD/MD_buy6")
+	public String Md_buy6(Model model, 
+									@RequestParam int d_no,
+									@RequestParam int m_no
+									) {
+			
+		int result = mdService.delBasket(d_no,m_no);
+		
+		
+		
+	return "redirect:/MD/MD_buy2?mno="+m_no;
+}
 	
 	
 	

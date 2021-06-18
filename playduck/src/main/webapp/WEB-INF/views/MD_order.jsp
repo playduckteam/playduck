@@ -66,7 +66,7 @@
                     </tr>
                     <tr class="MD_order_btn MD_order_orderbtn">
                         <td colspan="2">
-                            <div>
+                        <div id="gobuy">
                                 <img src="../resources/images/md_card.png">
                                 <p>결제하기</p>
                             </div>
@@ -137,13 +137,29 @@
 
 		  
 	  }else if(com==false){
-		 
+		
+		  location.href = "${pageContext.request.contextPath}/MD/MD_buyre.do?d_no="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
 	  }
 	   
 	  
   });
   	
-
+		  //구매하기 버튼
+		 $('#gobuy').on('click',function(){
+			  var mno = ${member.m_no};
+			  var dno = ${md.d_no};
+			  var num = $('#num').val();
+			  var sum1 = num*${md.d_price} + 2500;
+			  
+			  var com = confirm("구매하시겠습니까?")
+			  
+			  if(com == true){
+				  location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?d_no="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
+			  }else if (com == false){
+				  
+			  }
+			
+		 });
  
   
    </script>

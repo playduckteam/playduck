@@ -134,6 +134,12 @@ public class MdServiceImpl implements MdService {
 		return mdDAO.selectTotalContents2();
 	}
 
+	// 장바구니 삭제하기
+	public int delBasket(int d_no, int m_no) {
+		
+		return mdDAO.delBasket(d_no,m_no);
+	}
+
 
 
 	
