@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../resources/css/login.css">
 	<link rel="stylesheet" href="../resources/css/findIdPw.css">
     <link rel="stylesheet" href="../resources/css/MD.css">
+    <link rel="stylesheet" href="../resources/css/pagination.css">
     <script src="../resources/js/jquery-3.6.0.min.js"></script>
     <script src="../resources/js/MD.js"></script>
     <script src="../resources/js/modal.js"></script>

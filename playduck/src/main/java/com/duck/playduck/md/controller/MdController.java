@@ -261,15 +261,15 @@ private static String getTagValue (String tag, Element eElement) {
 				
 				System.out.println("출력 결과 : " + list);
 				// 전체 개시글 수
-				int totalContents = mdService.selectTotalContents2();
+				int totalContents2 = mdService.selectTotalContents2(keyword);
 				
 				// 페이지 처리 HTML 생성하기
-				String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/md/search_md.do");
+				String pageBar = Utils_search.getPageBar(totalContents2, cPage, numPerPage, "/playduck/md/search_md.do", keyword);
 				
 				// List<Map<String, String>> list2 = mdService.listAll(keyword, pageBar);
 				
 				model.addAttribute("list", list);
-				model.addAttribute("totalContents", totalContents);
+				model.addAttribute("totalContents", totalContents2);
 				model.addAttribute("numPerPage", numPerPage);
 				model.addAttribute("pageBar", pageBar);
 				model.addAttribute("keyword", keyword);

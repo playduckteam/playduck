@@ -129,10 +129,12 @@ public class MdServiceImpl implements MdService {
 	}
 
 	@Override
-	public int selectTotalContents2() {
+	public int selectTotalContents2(String keyword) {
 		
-		return mdDAO.selectTotalContents2();
+		return mdDAO.selectTotalContents2(keyword);
 	}
+
+
 
 
 
