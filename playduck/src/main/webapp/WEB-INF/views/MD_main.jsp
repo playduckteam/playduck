@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../resources/css/login.css">
 	<link rel="stylesheet" href="../resources/css/findIdPw.css">
     <link rel="stylesheet" href="../resources/css/MD.css">
+    <link rel="stylesheet" href="../resources/css/pagination.css">
     <script src="../resources/js/jquery-3.6.0.min.js"></script>
     <script src="../resources/js/MD.js"></script>
     <script src="../resources/js/modal.js"></script>
@@ -16,17 +17,7 @@
     <title>playduck - MD 메인 페이지</title>
 </head>
 <style>
-.pageBar{
-display:inline;
-float:left;
-	padding:4px;
-	margin-right:3px;
-	width:15px;
-	color:#000;
-	font:bold 12px tahoma;
-	text-align:center;
-	text-decoration:none;
-}
+
 .md_searchArea {
 	margin-top : 50px;
 }
@@ -61,9 +52,9 @@ float:left;
                 <div class="MD_play_mdprice" name="d_price">${md.d_price}원</div>
             </div>
         </c:forEach>
-        <div class="pageBar"><c:out value="${pageBar}" escapeXml="false"/></div>
-        </div>
         
+        </div>
+        <div class="pageBar"><c:out value="${pageBar}" escapeXml="false"/></div>
     </section>
     <br /><br /><br /><br /><br />
 	<%@ include file="common/footer.jsp"%>

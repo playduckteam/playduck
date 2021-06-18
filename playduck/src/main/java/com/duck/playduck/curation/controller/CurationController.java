@@ -3,7 +3,6 @@ package com.duck.playduck.curation.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,14 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.duck.playduck.curation.model.service.CurationService;
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.md.controller.Utils;
+import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Bookmark;
-import com.kh.spring.board.model.vo.Attachment;
 
 @Controller
 public class CurationController {
@@ -99,8 +97,7 @@ public class CurationController {
 		}
 
 	@RequestMapping("/curation/culist.do")
-	public String selectPlayList(Model model,
-			@RequestParam(required=false, defaultValue="0") int m_no, 
+	public String selectPlayList(Model model, HttpServletRequest req,
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage){
 		
 		// 한 페이지당 페이지 수
@@ -115,11 +112,20 @@ public class CurationController {
 				// 페이지 처리 HTML 생성하기
 				String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/curation/culist.do");
 				
+		Member m = (Member)req.getSession().getAttribute("member");
+
+		int m_no = 0;
+		if (m != null) {
+		m_no = m.getM_no();
+		}
 		
+		System.out.println(m_no);
 		
 		List<Bookmark> blist = curationService.selectBookList(m_no);
 		
 		List<Curation> culist = curationService.selectCurationList(cPage, numPerPage);
+		
+		System.out.println("blist : " + blist);
 		
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
@@ -130,8 +136,7 @@ public class CurationController {
 	}
 	
 	@RequestMapping("/curation/culistsort1.do")
-	public String culistsort1(Model model,
-			@RequestParam(required=false, defaultValue="0") int m_no, 
+	public String culistsort1(Model model,HttpServletRequest req,
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage){
 		
 		// 한 페이지당 페이지 수
@@ -145,6 +150,13 @@ public class CurationController {
 		
 		// 페이지 처리 HTML 생성하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/curation/culistsort1.do");
+		Member m = (Member)req.getSession().getAttribute("member");
+
+		int m_no = 0;
+		if (m != null) {
+		m_no = m.getM_no();
+		}
+		
 		
 		List<Bookmark> blist = curationService.selectBookList(m_no);
 		
@@ -161,8 +173,7 @@ public class CurationController {
 	}
 	
 	@RequestMapping("/curation/culistsort2.do")
-	public String culistsort2(Model model,
-			@RequestParam(required=false, defaultValue="0") int m_no, 
+	public String culistsort2(Model model,HttpServletRequest req,
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage){
 		
 		// 한 페이지당 페이지 수
@@ -176,6 +187,12 @@ public class CurationController {
 		
 		// 페이지 처리 HTML 생성하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/playduck/curation/culistsort2.do");
+		Member m = (Member)req.getSession().getAttribute("member");
+
+		int m_no = 0;
+		if (m != null) {
+		m_no = m.getM_no();
+		}
 		
 		List<Bookmark> blist = curationService.selectBookList(m_no);
 		

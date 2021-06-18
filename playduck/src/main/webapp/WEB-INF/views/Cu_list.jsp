@@ -49,25 +49,28 @@ body, html, section{
 	<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 	
 	<div class="list_container">
-	
 		<c:forEach items="${culist}" var="cu" begin="0" varStatus="status">
-		<div class="listArea"  onclick="location.href='${pageContext.request.contextPath}/curation/curationSelectOne.do?c_no=' + '${ cu.c_no }'">
+		<div class="listArea" >
 			<input type="text" class="hidden" value = "${cu.c_no}"/>
-			<img src="/playduck/resources/curation/${cu.c_picrenamed}">
+			<img src="/playduck/resources/curation/${cu.c_picrenamed}" onclick="location.href='${pageContext.request.contextPath}/curation/curationSelectOne.do?c_no=' + '${ cu.c_no }'">
 			<div class="list_content">
-				 <h3 style="color: #fff;">${cu.c_title}</h3>
+				 <h3 style="color: #fff;" onclick="location.href='${pageContext.request.contextPath}/curation/curationSelectOne.do?c_no=' + '${ cu.c_no }'">${cu.c_title}</h3>
 				<div class="list_icon">
-				<c:if test="${ empty blist }">
-				<i class="far fa-star a${cu.c_no}" id="star" name="a${cu.c_no}" style="color: yellow;"></i>
+				
+				<c:set var="doneLoop" value="false"/>
+				<c:if test = "${!empty blist }">
+					<c:forEach items="${blist}" var="bl" begin="0" varStatus="status">
+					<c:if test = "${cu.c_no eq bl.c_list and doneLoop ne true}">
+						<c:set var="doneLoop" value="true" />
+					</c:if>
+					</c:forEach>
 				</c:if>
-				<c:forEach items="${blist}" var="bl" begin="0" varStatus="status">
-				<c:if test = "${cu.c_no eq bl.c_list }}">
-				<i class="fas fa-star a${cu.c_no}" id="star" name="a${cu.c_no}" style="color: yellow;"></i>
+				
+				<c:if test="${ empty blist or doneLoop ne true }">
+					<i class="far fa-star c${cu.c_no}" id="star" name="c${cu.c_no}" style="color: yellow;"></i>
+				</c:if><c:if test="${ !empty blist and doneLoop eq true }">
+					<i class="fas fa-star c${cu.c_no}" id="star" name="c${cu.c_no}" style="color: yellow;"></i>
 				</c:if>
-				<c:if test = "${cu.c_no ne bl.c_list }}">
-				<i class="far fa-star a${cu.c_no}" id="star" name="a${cu.c_no}" style="color: yellow;"></i>	
-				</c:if>
-				</c:forEach>
 				</div>
 				
 			</div>

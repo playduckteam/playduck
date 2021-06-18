@@ -26,15 +26,16 @@
 <%@ include file="common/header.jsp"%>
     <section>
         <!--물품 구매 리스트-->
-  
+        <h3 class="buylist_title">장바구니</h3>
+  <hr style="border: solid 1px;">
   <c:forEach items="${baskList}" var="baskList">
-        <div class="Sale_list">
+        <div class="Sale_list2">
             <div class="S_list" id="Sale_check">
                 <input type="checkbox" name="list" id="${baskList.d_no}ch" value="${baskList.d_no }">
                 <label for="${baskList.d_no }ch"></label>
             </div>
             <div class="S_list" id="Sale_img">
-                <img src="${baskList.d_pic}" width="200px" height="200px">
+                <img class="Sale_baskimg" src="${baskList.d_pic}" width="200px" height="200px">
             </div>
             <div class="S_list" id="Sale_title">
                 <table>

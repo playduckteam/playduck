@@ -138,8 +138,8 @@ input:focus {outline:none;}
 
 /* 흰색 안쪽 배경 */
 .modal_searchDiv {
-    width: 200px;
-    height: 200px;
+    width: 1000px;
+    height: 220px;
     background: white;
     margin-top: 100px;
     padding: 10px 20px 20px 20px;
@@ -150,12 +150,14 @@ input:focus {outline:none;}
     border-radius: 30px;
 }
 
-
+.searchArea{
+	text-align: center;
+}
 .main_searchInput{
 	border: 1px solid var(--black-color);
 	width: 500px;
 	height: 45px;
-	margin-left: 75px;
+	margin: auto;
 		color : var(--black-color);
 }
 

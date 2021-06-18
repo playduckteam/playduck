@@ -35,7 +35,7 @@
          <c:forEach items="${blist}" var="bl" begin="0">
          <c:if test="${bl.o_status eq 1 }">
             <div class="S_list" id="Sale_img">
-                <img src="${bl.d_pic}" width="200px" height="200px">
+                <img class="Sale_buyimg22" src="${bl.d_pic}" width="200px" height="200px">
             </div>
             
             <div class="S_list" id="Sale_title">

@@ -15,11 +15,10 @@
 
     .main_ribbon {
       position: absolute;
-      left: 500px;
+      left: 25%;
       z-index: 5;
       top:-6px;
      width: 80px;
-     left:540px;
     }
 
     article {
@@ -63,7 +62,7 @@
     .main_topcontainer {
       position: absolute;
       height: 220px;
-      width: 3500px;
+      width: 2000px;
       margin-left: 0;
       padding-left: 0;
       background: var(--black-color);
@@ -243,7 +242,14 @@
       height: 120px;
       width: 120px;
       border-radius: 15px;
+
+    }
+      .main_hotreviewprofile>img {
+      height: 120px;
+      width: 120px;
+      border-radius: 15px;
       background-color: #fff;
+
     }
 
     .main_hotreviewcontent {
@@ -262,7 +268,13 @@
     .main_hotreviewimg {
       height: 120px;
       width: 280px;
+    }
+    
+    .main_hotreviewimg>img {
+      height: 120px;
+      width: 280px;
       background-color: #fff;
+      object-fit: cover;
     }
 
     /*recommend reivew css*/
