@@ -11,7 +11,7 @@ import com.duck.playduck.play.model.vo.Play;
 public interface MdDAO {
 
 	//연극별 MD 리스트
-	List<Md> mdPlayList();
+	List<Md> mdPlayList(String p_no);
 
 	Md selectOneMd(int d_no);
 
