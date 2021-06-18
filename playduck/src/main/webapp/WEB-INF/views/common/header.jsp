@@ -515,12 +515,6 @@ function enterkey() {
 
                         <button type="submit" class="login_box login orange">로그인</button>
                         <button type="button" class="login_box join orange" id="login_joinBtn">회원가입</button>
-                        <div class="iconArea">
-                            <img class="icon" src="${pageContext.request.contextPath}/resources/images/instar.png" alt="인스타 아이콘">
-                            <img class="icon" src="${pageContext.request.contextPath}/resources/images/facefook.png" alt="페이스북 아이콘">
-                            <img class="icon" src="${pageContext.request.contextPath}/resources/images/twitter.png" alt="트위터 아이콘">
-                        </div>
-                        <div class="icon_content">SNS 계정으로 로그인하기</div>
                     </form>
                 </div>
             </div>
