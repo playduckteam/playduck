@@ -100,6 +100,7 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 30px;
+
 }
 
 .modal_content {
@@ -177,5 +178,5 @@
 }
 .joinArea input:invalid{
 	
-    border : 3px solid red;
+    border : 1px solid red;
 }

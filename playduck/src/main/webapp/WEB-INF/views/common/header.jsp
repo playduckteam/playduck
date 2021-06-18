@@ -140,7 +140,7 @@
         		$(".id_error").hide();
         		$(".id_4").show();
         		$(".id_error2").hide();
-        		$(this).css("border", "3px solid red");
+        		$(this).css("border", "1px solid red");
         		idcheck = 0;
         		
         	} else if(!idReg.test( userId )){
@@ -148,7 +148,7 @@
         		$(".id_error").hide();
         		$(".id_4").hide();
         		$(".id_error2").show();
-        		$(this).css("border", "3px solid red");
+        		$(this).css("border", "1px solid red");
         		idcheck = 0;
         		
         	} else {
@@ -172,7 +172,7 @@
 		                    $(".id_4").hide();
 		                    $(".id_ok").hide();
 		                    $(".id_error2").hide();
-		                    $("input[name=m_id]").css("border", "3px solid red");
+		                    $("input[name=m_id]").css("border", "1px solid red");
 		                    idcheck = 0;
 		                }
 		            }, error : function(jqxhr, textStatus, errorThrown){
@@ -201,8 +201,8 @@
 	                 $(".pwd_ok").show();
 	                 pwcheck = 1;
 		    	 } else {
-		    		 $(this).css("border", "3px solid red");
-		    		 $("#join_pwd2").css("border", "3px solid red");
+		    		 $(this).css("border", "1px solid red");
+		    		 $("#join_pwd2").css("border", "1px solid red");
 		    		 $(".pwd_error").show();
 	                 $(".pwd_ok").hide();
 	                 pwcheck = 0;
@@ -222,8 +222,8 @@
 	                 $(".pwd_ok").show();
 	                 pwcheck = 1;
 		    	 } else {
-		    		 $(this).css("border", "3px solid red");
-		    		 $("#join_pwd1").css("border", "3px solid red");
+		    		 $(this).css("border", "1px solid red");
+		    		 $("#join_pwd1").css("border", "1px solid red");
 		    		 $(".pwd_error").show();
 	                 $(".pwd_ok").hide();
 	                 pwcheck = 0;
