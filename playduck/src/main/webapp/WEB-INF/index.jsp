@@ -105,7 +105,7 @@
 		<article class="main_top10">
 			<div>
 				<span class="main_fontw">TOP 10</span> <span class="main_fonto">작품
-					리뷰</span>
+					</span>
 			</div>
 			<div class="main_topwindow">
 				<div class="button-container">
@@ -217,7 +217,7 @@
 					innerHtml +='<img src='+data.poster[i] +'>'
 					innerHtml +='<div class="main_topinfo" style="display:none;">'
 					innerHtml +=  "<button class='main_toprevieww' onclick=\"location.href='detail/detail.do?p_no="+data.pnum[i]+"'\""
-					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
+					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">작품보기</button>'
 					innerHtml +=  '<hr>'
 					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[i]+"'\""
 					innerHtml +=   ' style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'
@@ -254,8 +254,8 @@
 
 				        function translateContainer(direction) {
 				          const selectedBtn = (direction === 1) ? 'prev' : 'next';
-				          container.style.transitionDuration = '500ms';
-				          container.style.transform = `translateX(${direction * ( 4.7 )}%)`;
+				          container.style.transitionDuration = '1000ms';
+				          container.style.transform = `translateX(${direction * ( 20 )}%)`;
 				          container.ontransitionend = () => reorganizeEl(selectedBtn);
 				        }
 
@@ -547,10 +547,10 @@
 					 innerHtml = '<table class="main_hotreviewTable">'
 					 innerHtml +=  '<tr>'
 					 innerHtml += ' <td class="main_hotreviewprofile">'
-					 innerHtml +=	 '<img src="resources/profileImg/'+data.pic[i]+'" width="120" height="120"  >'
+					 innerHtml +=	 '<img src="resources/profileImg/'+data.pic[i]+'"  >'
 					 innerHtml += '</td>'
 					 innerHtml +='<td class="main_hotreviewcontent">'+data.content[i]+'</td>'
-					 innerHtml +=  ' <td class="main_hotreviewimg imgRe" name='+data.pnum[i]+'><img src='+data.poster[i] +' width="280" height="120" style="cursor:pointer; "  ></td>'
+					 innerHtml +=  ' <td class="main_hotreviewimg imgRe" name='+data.pnum[i]+'><img src='+data.poster[i] +' style="cursor:pointer; "  ></td>'
 					 innerHtml += '</tr>'
 					 innerHtml += ' </table>'
 				 
@@ -619,7 +619,7 @@
  					innerHtml += '<img src="'+data.poster[arr[i]]+'">'
  					innerHtml += '<div class="main_recinfo" style="display:none;">'
  					innerHtml += "<button class='main_toprevieww' onclick=\"location.href='detail/detail.do?p_no="+data.pnum[arr[i]]+"'\""
- 					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
+ 					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">작품보기</button>'
  					innerHtml += '<hr>'
  					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[arr[i]]+"'\""
  					innerHtml +=    'style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'

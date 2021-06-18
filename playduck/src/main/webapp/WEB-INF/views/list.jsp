@@ -58,14 +58,20 @@ body, html, section{
 			<img src="${pi.poster}">
 			<div class="main_topinfo" style="display:none;">
 					<button class="main_toprevieww" onclick="goReviewS('${pi.p_no}');"
-					style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
+					style="border: none; background-color: var(--black-color);color: #fff;">작품보기</button>
 				 <hr>
 				 <button class='main_topreviewr' onclick="goReviewR('${pi.p_no}');"
 					 style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
 				</div>
 			<div class="list_content">
 			
-				 <h3 style="color: #fff;">${pi.prfnm}</h3>
+				 <h3 style="color: #fff;" class="titleremove">${pi.prfnm}</h3>
+				 <script>
+				 $(document).ready(function(){ 
+                 	$('.titleremove').each(function(){ 
+                 		if ($(this).text().length > 15) $(this).html($(this).text().substr(0,15)+"..."); }); });
+
+				 </script>
               <span class="main_toprate">95%</span>
 				<div class="list_icon">
 				<c:if test="${empty llist}">

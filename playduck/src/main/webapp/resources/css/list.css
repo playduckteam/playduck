@@ -182,6 +182,11 @@
     .main_topinfo {
       position: absolute;
       top: 100px;
-      left: 100px;
+      left: 90px;
+      cursor: pointer;
     }
 
+ hr{
+ 	margin-top: 20px;
+ 	margin-bottom: 20px;
+ }
