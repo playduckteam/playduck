@@ -42,7 +42,7 @@ public interface MdDAO {
 
 	List<Map<String, String>> selectSearchList(String keyword, int cPage, int numPerPage);
 
-	int selectTotalContents2();
+	int selectTotalContents2(String keyword);
 
 	int delBasket(int d_no, int m_no);
 

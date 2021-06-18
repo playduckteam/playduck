@@ -129,9 +129,9 @@ public class MdServiceImpl implements MdService {
 	}
 
 	@Override
-	public int selectTotalContents2() {
+	public int selectTotalContents2(String keyword) {
 		
-		return mdDAO.selectTotalContents2();
+		return mdDAO.selectTotalContents2(keyword);
 	}
 
 	// 장바구니 삭제하기
@@ -139,6 +139,8 @@ public class MdServiceImpl implements MdService {
 		
 		return mdDAO.delBasket(d_no,m_no);
 	}
+
+
 
 
 

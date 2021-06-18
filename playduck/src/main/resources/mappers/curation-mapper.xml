@@ -44,5 +44,18 @@ WHERE C_NO = #{c_no}
 		<delete id="curationDelete" parameterType="_int">
 		DELETE FROM CURATION WHERE C_NO = #{ c_no }
 	</delete>
+	
+	<select id="selectSearchList" resultType="curation">
+	SELECT *   
+	FROM CURATION
+	WHERE C_TITLE LIKE '%' || #{ keyword } || '%'
+	ORDER BY  C_NO
+	</select>
 
+	<!-- MD MAIN 검색 부분 -->
+	<select id="selectTotalContents2" resultType="_int" parameterType="string">
+	SELECT COUNT(*) FROM CURATION
+	WHERE C_TITLE LIKE '%' || #{ keyword } || '%'
+	</select>
+	
 </mapper>

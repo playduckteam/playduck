@@ -155,9 +155,9 @@ public class MdDAOImpl implements MdDAO {
 
 	// 검색 결과 
 	@Override
-	public int selectTotalContents2() {
+	public int selectTotalContents2(String keyword) {
 		
-		return sqlSession.selectOne("md2-mapper.selectTotalContents2");
+		return sqlSession.selectOne("md2-mapper.selectTotalContents2", keyword);
 	}
 	
 	// 장바구니 삭제하기

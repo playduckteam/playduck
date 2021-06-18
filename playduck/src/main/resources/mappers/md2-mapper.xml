@@ -125,7 +125,7 @@
 	</select>
 	
 	<!-- MD MAIN 검색 부분 -->
-	<select id="selectTotalContents2" resultType="_int">
+	<select id="selectTotalContents2" resultType="_int" parameterType="string">
 	SELECT COUNT(*) FROM MD
 	WHERE D_TITLE LIKE '%' || #{ keyword } || '%'
 	</select>

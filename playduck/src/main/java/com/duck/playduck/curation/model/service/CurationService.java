@@ -27,6 +27,10 @@ public interface CurationService {
 
 	int curationDelete(int c_no);
 
+	List<Map<String, String>> selectSearchList(String keyword, int cPage, int numPerPage);
+
+	int selectTotalContents2(String keyword);
+
 
 
 }
