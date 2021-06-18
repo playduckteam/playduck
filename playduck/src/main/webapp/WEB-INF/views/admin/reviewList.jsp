@@ -29,8 +29,8 @@
 
 			<div class="AD_reviewList_search_img">
 
-				<input type="text" class="searchbox"  onkeyup="enterkey();"> <img
-					src="../resources/images/search.png" class="searchGo">
+				<input type="text" class="searchbox" onkeyup="enterkey();">
+				<img src="../resources/images/search.png" class="searchGo">
 			</div>
 
 

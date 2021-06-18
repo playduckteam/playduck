@@ -3,7 +3,7 @@
    <div class="AD_sidevar_container">
 
         <div class="AD_sidevar_title">
-            <img src="../resources/images/logo.png">
+           <a href="${pageContext.request.contextPath}/"> <img src="../resources/images/logo.png"></a>
         </div>
 
         <div>
@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td onClick="">목록 조회</td>
+                        <td onClick="mdListPage();">목록 조회</td>
                     </tr>
                     <tr>
                         <td onClick="mdEnroll();">상품 등록</td>
@@ -60,5 +60,9 @@
 	
 	function mdEnroll() {
 		location.href = "${pageContext.request.contextPath}/admin2/mdEnroll.do"
+	}
+	
+	function mdListPage() {
+		location.href = "${pageContext.request.contextPath}/admin2/mdListPage.do"
 	}
 </script>    
