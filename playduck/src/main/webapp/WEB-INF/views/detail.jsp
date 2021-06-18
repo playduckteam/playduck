@@ -28,7 +28,7 @@
 	<%@ include file="common/header.jsp"%>
 	<section>
 
-		<a href="MD_play.jsp"><img class="detail_mdLink" src="/MD/MD_play.do?p_no=" + ${play.p_no}></a>
+		<a href="${pageContext.request.contextPath}/MD/MD_play.do?p_no=${param.p_no}"><img class="detail_mdLink" src="${pageContext.request.contextPath}/resources/images/md_link.png"></a>
 		<div class="detail_main">
 			<div class="detail_poster">
 				<img class="detail_poster" src="${dlist[1]}"

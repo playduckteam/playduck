@@ -22,7 +22,7 @@ public class MdDAOImpl implements MdDAO {
 
 	//연극별 MD 리스트
 	@Override
-	public List<Md> mdPlayList() {
+	public List<Md> mdPlayList(String p_no) {
 	
 		return sqlSession.selectList("md2-mapper.mdPlayList");
 	}

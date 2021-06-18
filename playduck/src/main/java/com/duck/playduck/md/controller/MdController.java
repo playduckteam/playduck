@@ -36,13 +36,14 @@ public class MdController {
 	
 // 연극별 MD 리스트 페이지 
 	@RequestMapping("/MD/MD_play")
-	public String Md_play( Model model){
+	public String Md_play( Model model,
+									@RequestParam String p_no){
 		
 		Map<String, Object> play = new HashMap<String, Object>();
 		
 		try {
 
-			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/PF174958?service=c5a9a3d1b844452d8cf8c29380c45eeb";
+			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+p_no+"?service=c5a9a3d1b844452d8cf8c29380c45eeb";
 			
 			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder =dbFactoty.newDocumentBuilder();
@@ -72,7 +73,7 @@ public class MdController {
 				System.out.println(play.get("title"));
 				
 				//연극별 MD 리스트
-				List<Md> mdPlayList = mdService.mdPlayList();
+				List<Md> mdPlayList = mdService.mdPlayList(p_no);
 				
 				System.out.println(mdPlayList);
 				
