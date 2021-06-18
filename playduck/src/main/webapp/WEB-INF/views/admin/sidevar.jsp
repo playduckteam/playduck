@@ -3,7 +3,8 @@
    <div class="AD_sidevar_container">
 
         <div class="AD_sidevar_title">
-           <a href="${pageContext.request.contextPath}/"> <img src="../resources/images/logo.png"></a>
+
+            <a href="${pageContext.request.contextPath}/"><img class="header_logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" ></a>
         </div>
 
         <div>

@@ -27,7 +27,7 @@
 </style>
 
 
-
+<script src="../resources/js/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     $(function(){
@@ -274,14 +274,40 @@
             <div class="modal_searchDiv" title="검색">
                 <span class="modal_content_close">X</span>
                 <div class="modal_content searchArea">
-                    <form action="" method="post">
-                        <input class="main_searchInput" type="text" placeholder="보고싶은 공연을 검색하세요!"/>
+                   
+                        <input class="main_searchInput" type="text" onkeyup="enterkey();" placeholder="보고싶은 공연을 검색하세요!"/>
                         <button class="main_search">검색</button>
-                    </form>
+                   
                 </div>
             </div>
     </div>
+<script>
+function enterkey() {
+    if (window.event.keyCode == 13) {
 
+    	if ($('.main_searchInput').val() == "") {
+			alert("입력 해주세요");
+		} else {
+			
+			var a = $('.main_searchInput').val();
+				
+			location.href = "${pageContext.request.contextPath}/list/playsr.do?text="+a;
+		}
+    }
+}
+	$(function() {
+		$('.main_search').on("click", function() {
+			if ($('.main_searchInput').val() == "") {
+				alert("입력 해주세요");
+			} else {
+				
+				var a = $('.main_searchInput').val();
+					
+				location.href = "${pageContext.request.contextPath}/list/playsr.do?text="+a;
+			}
+		})
+	})
+</script>
 		
 		<div class="modal_join">
         <div class="modal_joinDiv" title="회원가입">

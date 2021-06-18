@@ -31,8 +31,8 @@
 
             <div class="AD_cancelList_search_img">
 
-                <input type="text" class="searchbox">
-                <img src="../resources/images/search.png">
+                <input type="text" class="searchbox" onkeyup="enterkey();">
+                <img src="../resources/images/search.png" class="searchGo">
             </div>
 
 
@@ -66,5 +66,34 @@
     </div>
 </body>
 <%@ include file="../common/footer.jsp"%>
+<script>
+function enterkey() {
+    if (window.event.keyCode == 13) {
 
+    	if ($('.searchbox').val() == "") {
+			alert("입력 해주세요");
+		} else {
+			
+			var a = $('.searchbox').val();
+				
+			location.href = "${pageContext.request.contextPath}/adminpage/admincancelsr.do?text="+a;
+		}
+    }
+}
+
+
+
+	$(function() {
+		$('.searchGo').on("click", function() {
+			if ($('.searchbox').val() == "") {
+				alert("입력 해주세요");
+			} else {
+				
+				var a = $('.searchbox').val();
+					
+				location.href = "${pageContext.request.contextPath}/adminpage/admincancelsr.do?text="+a;
+			}
+		})
+	})
+</script>
 </html>

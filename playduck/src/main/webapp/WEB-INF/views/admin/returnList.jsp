@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../resources/css/headerfooter.css">
     <link rel="stylesheet" href="../resources/css/sidevar.css">
     <link rel="stylesheet" href="../resources/css/admin.css">
-    <script src="../resources/asset/js/jquery-3.6.0.min.js"></script>
+    <script src="../resources/js/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -30,8 +30,8 @@
 
 			<div class="AD_returnList_search_img">
 
-				<input type="text" class="searchbox"> <img
-					src="../resources/images/search.png">
+				<input type="text" class="searchbox" onkeyup="enterkey();">
+                <img src="../resources/images/search.png" class="searchGo">
 			</div>
 
 
@@ -56,8 +56,8 @@
 						<td>${ri.d_title}</td>
 						<td>${ri.d_price}</td>
 						<td>${ri.o_quan}</td>
-						<td><button class="salesList_button">반품 완료</button></td>
-					</tr>
+						<td><button class="salesList_button" onclick="goreturn(${ri.d_no})">반품 완료</button></td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -69,4 +69,39 @@
 
 </body>
 <%@ include file="../common/footer.jsp"%>
+<script>
+function enterkey() {
+    if (window.event.keyCode == 13) {
+
+    	if ($('.searchbox').val() == "") {
+			alert("입력 해주세요");
+		} else {
+			
+			var a = $('.searchbox').val();
+				
+			location.href = "${pageContext.request.contextPath}/adminpage/adminreturnsr.do?text="+a;
+		}
+    }
+}
+
+	$(function() {
+		$('.searchGo').on("click", function() {
+			if ($('.searchbox').val() == "") {
+				alert("입력 해주세요");
+			} else {
+				
+				var a = $('.searchbox').val();
+					
+				location.href = "${pageContext.request.contextPath}/adminpage/adminreturnsr.do?text="+a;
+			}
+		})
+	})
+	
+	function goreturn(d_no) {
+	location.href = "${pageContext.request.contextPath}/adminpage/adminretruncom.do?d_no="+d_no;
+}
+	
+	
+	
+</script>
 </html>

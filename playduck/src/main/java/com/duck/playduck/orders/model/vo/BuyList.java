@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class BuyList implements Serializable {
 	private String m_name;
 	private String d_title;
+	private int d_no;
 	private int d_price;
 	private String d_pic;
 	private int o_quan;

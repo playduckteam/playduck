@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duck.playduck.admin.model.dao.AdminDAO;
+
 import com.duck.playduck.admin.model.vo.Reward;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.orders.model.vo.BuyList;
@@ -46,6 +47,30 @@ public class AdminServiceImpl implements AdminService {
 	public List<BuyList> admincancel() {
 		// TODO Auto-generated method stub
 		return adminDAO.admincancel();
+	}
+
+	@Override
+	public List<Member> memberadminsr(String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.memberadminsr(text);
+	}
+
+	@Override
+	public List<BuyList> admincancelsr(String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.admincancelsr(text);
+	}
+
+	@Override
+	public List<BuyList> adminreturnsr(String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.adminreturnsr(text);
+	}
+
+	@Override
+	public int updatereturn(int d_no) {
+		// TODO Auto-generated method stub
+		return adminDAO.updatereturn(d_no);
 	}
 
 }
