@@ -2,6 +2,7 @@ package com.duck.playduck.admin.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,9 +19,9 @@ public class AdminDAOImpl implements AdminDAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List<Member> Memberadmin() {
-		
-		return sqlSession.selectList("admin-mapper.Memberadmin");
+	public List<Member> Memberadmin(int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin-mapper.Memberadmin",null,rows);
 	}
 
 	@Override
@@ -36,32 +37,32 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<BuyList> adminreturn() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("admin-mapper.adminreturn");
+	public List<BuyList> adminreturn(int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin-mapper.adminreturn",null,rows);
 	}
 
 	@Override
-	public List<BuyList> admincancel() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("admin-mapper.admincancel");
+	public List<BuyList> admincancel(int cPage, int numPerPage) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin-mapper.admincancel",null,rows);
 	}
 
 	@Override
-	public List<Member> memberadminsr(String text) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("admin-mapper.membersr",text);
+	public List<Member> memberadminsr(int cPage, int numPerPage, String text) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin-mapper.membersr",text,rows);
 	}
 
 	@Override
-	public List<BuyList> admincancelsr(String text) {
-		// TODO Auto-generated method stub
+	public List<BuyList> admincancelsr(int cPage, int numPerPage,String text) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
 		return sqlSession.selectList("admin-mapper.admincancelsr",text);
 	}
 
 	@Override
-	public List<BuyList> adminreturnsr(String text) {
-		// TODO Auto-generated method stub
+	public List<BuyList> adminreturnsr(int cPage, int numPerPage,String text) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
 		return sqlSession.selectList("admin-mapper.adminreturnsr",text);
 	}
 
@@ -69,6 +70,42 @@ public class AdminDAOImpl implements AdminDAO {
 	public int updatereturn(int d_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("admin-mapper.updatereturn",d_no);
+	}
+
+	@Override
+	public int selectmemberTotal() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin-mapper.selectmemberTotal");
+	}
+
+	@Override
+	public int selectmemberSrTotalContents(String text) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin-mapper.selectmemberSrTotalContents",text);
+	}
+
+	@Override
+	public int selectcancelTotal() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin-mapper.selectcancelTotal");
+	}
+
+	@Override
+	public int selectcancelsrTotal(String text) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin-mapper.selectcancelsrTotal",text);
+	}
+
+	@Override
+	public int selectreturnTotal() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin-mapper.selectreturnTotal");
+	}
+
+	@Override
+	public int selectreturnsrTotal(String text) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin-mapper.selectreturnsrTotal",text);
 	}
 	
 	

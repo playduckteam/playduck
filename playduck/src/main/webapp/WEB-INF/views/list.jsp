@@ -58,7 +58,7 @@ body, html, section{
 			<img src="${pi.poster}">
 			<div class="main_topinfo" style="display:none;">
 					<button class="main_toprevieww" onclick="goReviewS('${pi.p_no}');"
-					style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>
+					style="border: none; background-color: var(--black-color);color: #fff;">작품보기</button>
 				 <hr>
 				 <button class='main_topreviewr' onclick="goReviewR('${pi.p_no}');"
 					 style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
@@ -66,19 +66,23 @@ body, html, section{
 			<div class="list_content">
 			
 				 <h3 style="color: #fff;">${pi.prfnm}</h3>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-				<c:if test="${empty llist}">
-					<i class="far fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
+              <span class="main_toprate">${pi.p_rating}%</span>
+				<div class="list_icon">	
+				<c:set var="doneLoop" value="false"/>
+				<c:if test="${ !empty llist}">
+					<c:forEach items="${llist}" var="li" >
+					<c:if test="${li eq pi.p_no and doneLoop ne true}">
+					<c:set var="doneLoop" value="true"/>
+					</c:if>
+					</c:forEach>
 				</c:if>
-				<c:forEach items="${llist }" var="li" > 
-				<c:if test="${li.p_list eq pi.p_no}">
-					<i class="fas fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
-				</c:if>
-				<c:if test="${li.p_list ne pi.p_no}">
-					<i class="far fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
-				</c:if>
-				</c:forEach>
+						<c:if test="${li eq pi.p_no or doneLoop ne true}">
+							<i class="far fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
+						</c:if>
+						<c:if test="${li ne pi.p_no and doneLoop eq true}">
+							<i class="fas fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
+						</c:if>
+						
 				</div>
 			</div>
 		</div>

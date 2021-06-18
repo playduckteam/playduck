@@ -19,10 +19,11 @@ public class AdminServiceImpl implements AdminService {
 	AdminDAO adminDAO;
 
 	@Override
-	public List<Member> memberadmin() {
+	public List<Member> memberadmin(int cPage, int numPerPage) {
 		
-		return adminDAO.Memberadmin();
+		return adminDAO.Memberadmin(cPage,numPerPage);
 	}
+	
 
 	@Override
 	public Reward memberadminReward(int result) {
@@ -38,33 +39,33 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<BuyList> adminreturn() {
+	public List<BuyList> adminreturn(int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
-		return adminDAO.adminreturn();
+		return adminDAO.adminreturn(cPage,numPerPage);
 	}
 
 	@Override
-	public List<BuyList> admincancel() {
+	public List<BuyList> admincancel(int cPage, int numPerPage) {
 		// TODO Auto-generated method stub
-		return adminDAO.admincancel();
+		return adminDAO.admincancel(cPage,numPerPage);
 	}
 
 	@Override
-	public List<Member> memberadminsr(String text) {
+	public List<Member> memberadminsr(int cPage, int numPerPage,String text) {
 		// TODO Auto-generated method stub
-		return adminDAO.memberadminsr(text);
+		return adminDAO.memberadminsr(cPage,numPerPage,text);
 	}
 
 	@Override
-	public List<BuyList> admincancelsr(String text) {
+	public List<BuyList> admincancelsr(int cPage, int numPerPage,String text) {
 		// TODO Auto-generated method stub
-		return adminDAO.admincancelsr(text);
+		return adminDAO.admincancelsr(cPage,numPerPage,text);
 	}
 
 	@Override
-	public List<BuyList> adminreturnsr(String text) {
+	public List<BuyList> adminreturnsr(int cPage, int numPerPage,String text) {
 		// TODO Auto-generated method stub
-		return adminDAO.adminreturnsr(text);
+		return adminDAO.adminreturnsr(cPage,numPerPage,text);
 	}
 
 	@Override
@@ -72,5 +73,49 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return adminDAO.updatereturn(d_no);
 	}
+
+
+	@Override
+	public int selectmemberTotal() {
+		// TODO Auto-generated method stub
+		return adminDAO.selectmemberTotal();
+	}
+
+
+	@Override
+	public int selectmemberSrTotalContents(String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.selectmemberSrTotalContents(text);
+	}
+
+
+	@Override
+	public int selectcancelTotal() {
+		// TODO Auto-generated method stub
+		return adminDAO.selectcancelTotal();
+	}
+
+
+	@Override
+	public int selectcancelsrTotal(String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.selectcancelsrTotal(text);
+	}
+
+
+	@Override
+	public int selectreturnTotal() {
+		// TODO Auto-generated method stub
+		return adminDAO.selectreturnTotal();
+	}
+
+
+	@Override
+	public int selectreturnsrTotal(String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.selectreturnsrTotal(text);
+	}
+
+
 
 }
