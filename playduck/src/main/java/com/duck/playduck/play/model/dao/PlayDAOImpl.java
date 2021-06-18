@@ -32,15 +32,21 @@ public class PlayDAOImpl implements PlayDAO {
 	}
 
 	@Override
-	public List<PlayAll> playsr(String text) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("play-mapper.playsr",text);
+	public List<PlayAll> playsr(int cPage, int numPerPage,String text) {
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("play-mapper.playsr",text,rows);
 	}
 
 	@Override
 	public List<Bookmark> selectBlist(int m_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("play-mapper.selectBlist",m_no);
+	}
+
+	@Override
+	public int playsrtotal(String text) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("play-mapper.playsrtotal",text);
 	}
 
 

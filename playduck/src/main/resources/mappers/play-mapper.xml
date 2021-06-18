@@ -39,7 +39,9 @@ SELECT P_NO,PRFNM, POSTER
 		where m_no = #{m_no}
 </select>
 
-
+<select id="playsrtotal" parameterType="String" resultType="_int">
+SELECT COUNT(*) FROM PLAYALL WHERE PRFNM LIKE '%' || #{text} || '%'
+</select>
 
 
 </mapper>

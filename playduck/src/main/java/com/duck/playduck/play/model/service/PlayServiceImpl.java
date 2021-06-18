@@ -39,9 +39,9 @@ public class PlayServiceImpl implements PlayService {
 
 
 	@Override
-	public List<PlayAll> playsr(String text) {
+	public List<PlayAll> playsr(int cPage, int numPerPage,String text) {
 		// TODO Auto-generated method stub
-		return playDAO.playsr(text);
+		return playDAO.playsr(cPage,numPerPage,text);
 	}
 
 
@@ -51,6 +51,15 @@ public class PlayServiceImpl implements PlayService {
 	public List<Bookmark> selectBlist(int m_no) {
 		// TODO Auto-generated method stub
 		return playDAO.selectBlist(m_no);
+	}
+
+
+
+
+	@Override
+	public int playsrtotal(String text) {
+		// TODO Auto-generated method stub
+		return playDAO.playsrtotal(text);
 	}
 
 

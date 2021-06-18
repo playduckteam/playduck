@@ -1,3 +1,4 @@
+
 package com.duck.playduck.play.controller;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.duck.playduck.admin.model.vo.UtilsAdmin;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.compare.AscCount;
 import com.duck.playduck.play.model.compare.AscRating;
@@ -39,7 +41,7 @@ public class PlayController {
 		int totalContents = playService.selectTotalContents();
 		
 		//페이지 처리 html 생성하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/list/playlist.do");
+		String pageBar = UtilsPlay.getPageBar(totalContents, cPage, numPerPage,sortType,"playlist.do");
 		
 		List<PlayAll> plist = playService.selectPlayList(cPage,numPerPage);
 		
@@ -76,17 +78,22 @@ public class PlayController {
 		
 		model.addAttribute("llist", list);
 		model.addAttribute("plist", plist);
+		model.addAttribute("numPerPage",numPerPage);
 		model.addAttribute("totalContents", totalContents);
-
+		model.addAttribute("pageBar",pageBar);
 		return"list";
 	}
 	@RequestMapping("/list/playsr.do")
-	public String playsr(Model model, @RequestParam(required = false) String text) {
+	public String playsr(Model model, @RequestParam(required = false) String text,@RequestParam(value="cPage",required=false,defaultValue="1")int cPage) {
 		
-		
-		List<PlayAll>plist= playService.playsr(text);
-		
+		int numPerPage =8;
+		List<PlayAll>plist= playService.playsr(cPage,numPerPage,text);
+		int totalContents = playService.playsrtotal(text);
+		String pageBar = UtilsAdmin.getPageBar(totalContents, cPage, numPerPage, "playsr.do",text);
 		model.addAttribute("plist",plist);
+		model.addAttribute("numPerPage",numPerPage);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("pageBar",pageBar);
 		return"list";
 	}
 	
