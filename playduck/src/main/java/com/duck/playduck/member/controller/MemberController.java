@@ -418,4 +418,17 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	@RequestMapping("/member/memberLogout.do")
+	public String memberLogout(SessionStatus status, Model model) {
+		String msg= "로그아웃 되었습니다.";
+		String loc= "/";
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		status.setComplete();
+		
+		
+		return "common/msg";
+	}
+	
 }

@@ -15,6 +15,15 @@
 	margin-bottom: 10px;
 	margin-left : 37.3%;
 	}
+	
+	.header_login a:hover {
+		color: var(--main-color);
+	}
+	
+	.header_searchArea a:hover {
+		color: var(--main-color);
+	}
+	
 </style>
 
 
@@ -133,7 +142,6 @@
         		$(".id_error2").hide();
         		$(this).css("border", "3px solid red");
         		idcheck = 0;
-        		return;
         		
         	} else if(!idReg.test( userId )){
         		$(".id_ok").hide();
@@ -142,7 +150,6 @@
         		$(".id_error2").show();
         		$(this).css("border", "3px solid red");
         		idcheck = 0;
-        		return;
         		
         	} else {
         		var a = $("input[name=m_id]").val()
@@ -253,12 +260,14 @@
 		<c:if test="${!empty member and fn:trim(member.m_status) eq '1'}">
 			<a href="${pageContext.request.contextPath}/mypage/mypage.do">${member.m_name }</a> |
 			<a href="${pageContext.request.contextPath}/buy/buylist.do">구매목록</a> |
-			<a href="${pageContext.request.contextPath}/mypage/mypage.do">장바구니</a>
+			<a href="${pageContext.request.contextPath}/mypage/mypage.do">장바구니</a> |
+			<a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a>
 		</c:if>
 		
 		<c:if test="${!empty member and fn:trim(member.m_status) eq '3'}">
 			<a href="${pageContext.request.contextPath}/mypage/mypage.do">${member.m_name }</a> |
-			<a href="${pageContext.request.contextPath}/adminpage/admin.do">관리자 페이지</a>
+			<a href="${pageContext.request.contextPath}/adminpage/admin.do">관리자 페이지</a> |
+			<a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a>
 		</c:if>
 		
 		<div class="modal_search">
@@ -289,7 +298,7 @@
                                     <h4 class="join_subTitle">아이디</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_id" id="join_id" placeholder="영문, 숫자 허용" required>
+                                    <input type="text" name="m_id" id="join_id" placeholder="영문, 숫자 허용" required autocomplete='off'>
                                     <div class="validate valigreen id_ok">사용 가능한 아이디입니다.</div>
                                     <div class="validate valired id_4">4자리 이하는 사용하실수 없습니다.</div>
                                     <div class="validate valired id_error">중복된 아이디입니다.</div>
@@ -324,7 +333,7 @@
                                     <h4 class="join_subTitle">이름</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_name" id="m_name" required>
+                                    <input type="text" name="m_name" id="m_name" required autocomplete='off'>
                                 </td>
                             </tr>
                             <!-- GENDER -->
@@ -346,13 +355,13 @@
                                 </td>
                                 <td class="join_birth">
                                 	<input type="hidden" name="m_pic" value="nopic.jpg"/>
-                                	<input type="date" name="m_date" value="2021-06-23" style="display:none;"/>
+                                	<input type="date" name="m_date" value="2021-06-23" style="display:none;" autocomplete='off'/>
                                     <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="4"
-                                        placeholder="2021" required pattern="19[0-9][0-9]|20\d{2}">
+                                        placeholder="2021" required pattern="19[0-9][0-9]|20\d{2}" autocomplete='off'>
                                     <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
-                                        placeholder="월" required pattern="0[0-9]|1[0-2]" title="생년월일을 확인해주세요">
+                                        placeholder="월" required pattern="0[0-9]|1[0-2]" title="생년월일을 확인해주세요" autocomplete='off'>
                                     <input type="text" class="j_birth" name="m_date1" id="join_birth" maxlength="2"
-                                        placeholder="일" required pattern="0[1-9]|[1-2][0-9]|3[0-1]" title="생년월일을 확인해주세요">
+                                        placeholder="일" required pattern="0[1-9]|[1-2][0-9]|3[0-1]" title="생년월일을 확인해주세요" autocomplete='off'>
                                 </td>
                             </tr>
                             <!-- PHONE -->
@@ -383,10 +392,10 @@
                                     </select>
                                     <span style="color:black">-</span>
                                     <input type="text" name="m_phone" id="m_phone" maxlength="10"
-                                        style="width: 100px;" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!">
+                                        style="width: 100px;" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!" autocomplete='off'>
                                     <span style="color:black">-</span>
                                     <input type="text" name="m_phone" id="m_phone" maxlength="10"
-                                        style="width: 100px;" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!">    
+                                        style="width: 100px;" required pattern="[0-9]{3,4}" title="연락처를 확인해주세요!" autocomplete='off'>    
 
                                 </td>
                             </tr>
@@ -396,8 +405,8 @@
                                     <h4 class="join_subTitle">이메일</h4>
                                 </td>
                                 <td class="join_email">
-                                    <input type="text" name="m_email" id="join_email1" placeholder="example" pattern="[a-z0-9._%+-]{4,20}" required> @
-                                    <input type="text" name="m_email" id="join_email2" placeholder="example.com" pattern="[a-z0-9.-]+\.[a-z]{2,3}" required >
+                                    <input type="text" name="m_email" id="join_email1" placeholder="example" pattern="[a-z0-9._%+-]{4,20}" required autocomplete='off'> @
+                                    <input type="text" name="m_email" id="join_email2" placeholder="example.com" pattern="[a-z0-9.-]+\.[a-z]{2,3}" required autocomplete='off'>
                                 </td>
                             </tr>
                             
@@ -425,7 +434,7 @@
                                     <h4 class="join_subTitle">상세주소</h4>
                                 </td>
                                 <td>
-                                    <input type="text" name="m_address" id="m_address2" size="40" maxlength="40" required>
+                                    <input type="text" name="m_address" id="m_address2" size="40" maxlength="40" required autocomplete='off'>
                                 </td>
                             </tr>
                         </table>

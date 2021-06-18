@@ -76,12 +76,12 @@
 		    	var join_pwd1 = $(this).val().trim();
 		    	var join_pwd2 = $("#m_changePwd2").val().trim();
 		    	if(join_pwd1==join_pwd2){
-		    		$(".pwdCheck_error").hide();
-	                $(".pwdCheck_ok").show();
+	                $(".notAllowBtn").show();
+	                $(".allowBtn").hide();
 	                
 		    	} else {
-		    		$(".pwdCheck_error").show();
-	                $(".pwdCheck_ok").hide();
+	                $(".notAllowBtn").hide();
+	                $(".allowBtn").show();
 		    	}
 		    }); 
 		     
@@ -89,12 +89,12 @@
 			   	 var join_pwd2 = $(this).val().trim();
 			   	 var join_pwd1 = $("#m_changePwd").val().trim();
 			   	 if(join_pwd1==join_pwd2){
-			   		 $(".pwdCheck_error").hide();
-		             $(".pwdCheck_ok").show();
+		             $(".notAllowBtn").hide();
+		             $(".allowBtn").show();
 		                
 			   	 } else {
-			   		 $(".pwdCheck_error").show();
-		             $(".pwdCheck_ok").hide();
+		             $(".notAllowBtn").show();
+		             $(".allowBtn").hide();
 			   	 }
 		   	 
 		    }); 
@@ -415,7 +415,7 @@
 			    </table>
 			</div>
 		</div>
-		<button class="pm_submitBtn1" type="button" onclick="checkP()">회원정보 수정</button>
+		<button class="pm_submitBtn1 AllowBtn" type="button" onclick="checkP()">회원정보 수정</button>
 	</div>
 </div>
 
@@ -456,8 +456,6 @@
 					            </td>
 					            <td>
 					                <input type="password" id="m_changePwd2" name="m_changePwd2">
-					                <div class="validate valired pwdCheck_error">비밀번호가 다릅니다.</div>
-                            		<div class="validate valigreen pwdCheck_ok">사용 가능한 비밀번호 입니다.</div>
 					            </td>
 					        </tr>
 					        <tr>
@@ -467,7 +465,8 @@
 				    </table>
 				</div>
 			</div>
-		<button class="pm_submitBtn4" type="submit" >회원정보 수정</button>
+		<button class="pm_submitBtn4 allowBtn" type="submit" >회원정보 수정</button>
+		<button class="pm_submitBtn4 notAllowBtn" type="button" style="display:none; background:gray;">비밀번호 불일치</button>
 		</form>
 	</div>
 </div>
