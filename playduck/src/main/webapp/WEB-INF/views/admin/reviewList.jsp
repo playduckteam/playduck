@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="../resources/css/headerfooter.css">
 <link rel="stylesheet" href="../resources/css/sidevar.css">
 <link rel="stylesheet" href="../resources/css/admin.css">
+<link rel="stylesheet" href="../resources/css/pagination.css">
+
 <script src="../resources/js/jquery-3.6.0.min.js"></script>
 
 </head>

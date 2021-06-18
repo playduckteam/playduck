@@ -152,12 +152,12 @@ public class mainController {
 		List<String> list0 = new ArrayList<String>();
 
 		for (String mp : listmp) {
-			if (mp == null) {
+			if(mp == null) {
 				list0.add("nopic.jpg");
-			} else {
+			}else if (mp != null){
 				list0.add(mp);
 			}
-
+			
 		}
 
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
@@ -196,6 +196,7 @@ public class mainController {
 			}
 		}
 
+	
 		map.put("pic", list0);
 		map.put("content", list1);
 		map.put("poster", list2);
