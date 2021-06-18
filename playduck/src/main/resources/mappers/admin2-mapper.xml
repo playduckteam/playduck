@@ -23,18 +23,23 @@
 		R.R_CONTENT
 		FROM REVIEW R
 		JOIN MEMBER M ON (R.M_NO =M.M_NO)
-		WHERE R.R_CONTENT LIKE '%'|| #{text} ||'%' OR
-		M.M_NAME LIKE '%' || #{text} || '%'
+		WHERE
+		R.R_CONTENT LIKE '%'|| #{text} ||'%' OR
+		M.M_NAME LIKE '%' || #{text} ||
+		'%'
 		ORDER BY R.R_NO
 
 	</select>
 
 	<select id="selectreviewSrTotalContents" resultType="_int">
-		SELECT COUNT(*)
+		SELECT
+		COUNT(*)
 		FROM REVIEW R
 		JOIN MEMBER M ON (R.M_NO =M.M_NO)
-		WHERE R.R_CONTENT LIKE '%'|| #{text} ||'%' OR
-		M.M_NAME LIKE '%' || #{text} || '%'
+		WHERE
+		R.R_CONTENT LIKE '%'|| #{text} ||'%' OR
+		M.M_NAME LIKE '%' || #{text} ||
+		'%'
 		ORDER BY R.R_NO
 
 	</select>
@@ -44,9 +49,92 @@
 		WHERE
 		R_NO = #{ r_no }
 	</select>
-	
+
 	<insert id="insertMd" parameterType="md">
 		INSERT INTO MD VALUES(
-		SEQ_D_NO.NEXTVAL, 'PF172959', #{ d_title}, #{ d_price }, #{d_pic}, #{d_detail}  )
+		SEQ_D_NO.NEXTVAL, 'PF172959', #{ d_title}, #{ d_price }, #{d_pic},
+		#{d_detail} )
 	</insert>
+
+	<select id="mdListPage" resultType="md">
+		SELECT *
+		FROM MD
+		ORDER BY D_NO
+	</select>
+
+	<select id="selectMdListPage" resultType="_int">
+		SELECT COUNT(*)
+		FROM MD
+	</select>
+
+	<insert id="insertStock" parameterType="_int">
+		INSERT INTO STOCK VALUES(
+		SEQ_D_NO.CURRVAL, #{quan} )
+	</insert>
+
+	<select id="MDSr" resultType="md">
+		SELECT *
+		FROM MD
+		WHERE D_TITLE LIKE
+		'%' || #{title} || '%' OR
+		D_NO LIKE '%' ||
+		#{title} || '%'
+		ORDER BY D_NO
+	</select>
+
+	<select id="selectMdSrTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM MD
+		WHERE D_TITLE LIKE '%' || #{text} || '%' OR
+		D_NO LIKE '%' ||
+		#{text} || '%'
+		ORDER BY D_NO
+	</select>
+
+	<select id="selectUpdateMD" resultType="md" parameterType="_int">
+		SELECT *
+		FROM MD
+		WHERE D_NO = #{ d_no }
+	</select>
+
+	<select id="stockM" resultType="stock">
+		SELECT *
+		FROM STOCK
+		ORDER BY D_NO
+	</select>
+
+	<select id="StockMdSer" resultType="Stock">
+		SELECT S.D_NO, M.D_TITLE,
+		S.D_QUAN
+		FROM STOCK S
+		JOIN MD M ON (M.D_NO = S.D_NO)
+		WHERE S.D_NO LIKE
+		'%' || #{text} || '%' OR
+		M.D_TITLE LIKE '%' || #{text} || '%'
+		ORDER BY
+		S.D_NO
+	</select>
+
+	<select id="selectUpateSt" resultType="stock">
+		SELECT *
+		FROM STOCK
+		WHERE
+		D_NO = #{d_no}
+	</select>
+
+	<select id="upDateMd" parameterType="md">
+		UPDATE MD
+		SET D_TITLE =
+		#{d_title}, D_PRICE = #{d_price}, D_DETAIL= #{d_detail},
+		D_PIC =
+		#{d_pic}
+		WHERE D_NO = #{d_no}
+	</select>
+
+	<select id="upDateStock" parameterType="stock">
+		UPDATE STOCK SET
+		D_QUAN =
+		#{d_quan}
+		WHERE D_NO = #{d_no}
+	</select>
 </mapper>

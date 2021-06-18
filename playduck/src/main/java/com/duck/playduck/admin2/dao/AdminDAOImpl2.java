@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.duck.playduck.md.model.vo.Md;
+import com.duck.playduck.md.model.vo.Stock;
 
 @Repository
 public class AdminDAOImpl2 implements AdminDAO2 {
@@ -18,9 +19,9 @@ public class AdminDAOImpl2 implements AdminDAO2 {
 
 	@Override
 	public List<Map<String, String>> selectReviewList(int cPage, int numPerPage) {
-		
-		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		
+
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+
 		return sqlSession.selectList("admin2-mapper.selectReviewList", null, rows);
 	}
 
@@ -33,22 +34,21 @@ public class AdminDAOImpl2 implements AdminDAO2 {
 	@Override
 	public int deleteReview(int r_no) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("admin2-mapper.deleteReview",r_no);
+		return sqlSession.delete("admin2-mapper.deleteReview", r_no);
 	}
 
-	
 	@Override
 	public List<Map<String, String>> reviewSr(int cPage, int numPerPage, String text) {
 
-		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+
 		return sqlSession.selectList("admin2-mapper.reviewSr", text, rows);
 	}
 
 	@Override
-	public int selectreviewSrTotalContents() {
+	public int selectreviewSrTotalContents(String text) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("admin2-mapper.selectreviewSrTotalContents");
+		return sqlSession.selectOne("admin2-mapper.selectreviewSrTotalContents", text);
 	}
 
 	@Override
@@ -56,6 +56,73 @@ public class AdminDAOImpl2 implements AdminDAO2 {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("admin2-mapper.insertMd", m);
 	}
-	
+
+	@Override
+	public List<Map<String, String>> mdListPage(int cPage, int numPerPage) {
+
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("admin2-mapper.mdListPage", null, rows);
+	}
+
+	@Override
+	public int selectMdListPage() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin2-mapper.selectMdListPage");
+	}
+
+	@Override
+	public int insertStock(int quan) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("admin2-mapper.insertStock", quan);
+	}
+
+	@Override
+	public List<Map<String, String>> MDSr(int cPage, int numPerPage, String text) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin2-mapper.MDSr", text,rows);
+	}
+
+	@Override
+	public int selectMdSrTotalContents(String text) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin2-mapper.selectMdSrTotalContents",text);
+	}
+
+	@Override
+	public Md selectUpdateMD(int d_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin2-mapper.selectUpdateMD", d_no);
+	}
+
+	@Override
+	public List<Stock> stockM() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("admin2-mapper.stockM");
+	}
+
+	@Override
+	public List<Stock> StockMdSer(String text) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("admin2-mapper.StockMdSer", text);
+	}
+
+	@Override
+	public Stock selectUpateSt(int d_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin2-mapper.selectUpateSt", d_no);
+	}
+
+	@Override
+	public int upDateMd(Md m) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("admin2-mapper.upDateMd", m);
+	}
+
+	@Override
+	public int upDateStock(Stock s) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("admin2-mapper.upDateStock", s);
+	}
 
 }
