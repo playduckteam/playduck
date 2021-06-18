@@ -28,7 +28,7 @@
         <div class="AD_main_cancelList">
 
             <div class="AD_cancelList_title">취소 관리</div>
-
+			<p>총 ${totalContents}개의 상품이 있습니다.</p>
             <div class="AD_cancelList_search_img">
 
                 <input type="text" class="searchbox" onkeyup="enterkey();">
@@ -60,7 +60,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-
+			<c:out value="${pageBar}" escapeXml="false"/>
         </div>
 
     </div>
