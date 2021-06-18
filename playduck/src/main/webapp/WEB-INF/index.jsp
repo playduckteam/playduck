@@ -389,7 +389,7 @@
 				for(var i in data.title) {
 					
 					innerHtml = '<li class="cell2">'
-					innerHtml += '<img src="resources/images/'+data.pic[i]+'">'
+					innerHtml += '<img src="resources/curation/'+data.pic[i]+'" class="imgGoCuD" name='+data.Cnum[i]+' style="cursor:pointer; ">'
 					innerHtml += '<div class="main_curcontent">'
 					innerHtml += ' <h3 style="color: #fff;">'+data.title[i]+'</h3>'
 					innerHtml += ' <div class="main_curicon">'
@@ -423,6 +423,12 @@
 		          (selectedBtn2 === 'prev2') ? container2.insertBefore(container2.lastElementChild, container2
 		            .firstElementChild): container2.appendChild(container2.firstElementChild);
 		        }
+		        
+		        $('.imgGoCuD').on('click',function(){
+		        	 var getName=$(this).attr("name");
+					 location.href = "${pageContext.request.contextPath}/curation/curationSelectOne.do?c_no="+getName;
+		        	
+		        })
 				
 				// 만약 회원이 로그인이 안 돼 있다면
 				<c:if test="${ member == null}">	
@@ -541,7 +547,7 @@
 			 success : function(data){ // 공연사진, 리뷰 내용, 공연 포스터
 				console.log(data);
 				 for(var i in data.poster){
-				 
+				
 					 var innerHtml = "";
 					 
 					 innerHtml = '<table class="main_hotreviewTable">'

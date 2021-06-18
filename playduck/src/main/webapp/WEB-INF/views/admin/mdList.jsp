@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -13,6 +14,7 @@
 <link rel="stylesheet" href="../resources/css/headerfooter.css">
 <link rel="stylesheet" href="../resources/css/sidevar.css">
 <link rel="stylesheet" href="../resources/css/admin.css">
+<link rel="stylesheet" href="../resources/css/pagination.css">
 <script src="../resources/js/jquery-3.6.0.min.js"></script>
 </head>
 
