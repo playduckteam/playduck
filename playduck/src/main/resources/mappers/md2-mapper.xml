@@ -102,6 +102,13 @@
 			WHERE M_NO = #{m_no}
 				 AND B_STATUS=1
 			</delete>
+			
+			<!--  장바구니에서 삭제하기 --> 
+			<delete id="delBasket" parameterType="basket">
+				DELETE FROM BASKET
+				WHERE M_NO = #{m_no}
+					AND D_NO = ${d_no}
+			</delete>
 	
 
 	

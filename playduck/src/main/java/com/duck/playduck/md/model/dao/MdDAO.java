@@ -44,4 +44,6 @@ public interface MdDAO {
 
 	int selectTotalContents2();
 
+	int delBasket(int d_no, int m_no);
+
 }

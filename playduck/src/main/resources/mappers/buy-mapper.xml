@@ -6,7 +6,7 @@
 
 
 <select id="selectBuyList" resultType="buy" parameterType="Member" >
-select O.O_NO,O.O_QUAN,O.O_DATE,O.O_STATUS, MD.D_TITLE, MD.D_PRICE,MD.D_PIC, (D_PRICE - W_DOWN+2500)TOTAL ,R.W_DOWN from orders O
+select O.O_NO,O.O_QUAN,O.O_DATE,O.O_STATUS, MD.D_TITLE, MD.D_PRICE,MD.D_PIC, ((D_PRICE - W_DOWN)*O.O_QUAN+2500)TOTAL ,R.W_DOWN from orders O
 join reward R ON(O.W_NO = R.W_NO)
 JOIN MD ON(MD.D_NO = O.D_NO)
 WHERE O.M_NO = #{m_no}

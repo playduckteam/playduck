@@ -260,7 +260,7 @@
 		<c:if test="${!empty member and fn:trim(member.m_status) eq '1'}">
 			<a href="${pageContext.request.contextPath}/mypage/mypage.do">${member.m_name }</a> |
 			<a href="${pageContext.request.contextPath}/buy/buylist.do">구매목록</a> |
-			<a href="${pageContext.request.contextPath}/mypage/mypage.do">장바구니</a> |
+			<a href="${pageContext.request.contextPath}/MD/MD_buy2?mno=${member.m_no}">장바구니</a> |
 			<a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a>
 		</c:if>
 		
