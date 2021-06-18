@@ -9,7 +9,7 @@ section{
 	text-align: center
 }
 
-.curation_container>img{
+.curation_container>img, .cuwrtie_img{
 	width: 1000px;
 	height: 560px;
 	margin-top:50px;
@@ -46,9 +46,9 @@ section{
     font-size: 17px;
     font-weight: 700;
     text-align: center;
-    line-height: 65px;
     color: white;
-    cursor: pointer;
+    margin-left: 230px;
+    
 }
 
 .curation_title{
@@ -69,4 +69,15 @@ section{
 	margin-top: 50px;
 	text-align: right;
 	width: 800px;
+}
+
+.cu_modifyBtn, .cu_deleteBtn{
+	width: 150px;
+	height: 40px;
+	font-size:18px;
+	font-weight: 400;
+	background-color: var(--main-color);
+	border-radius: 5px;
+	text-align: center;
+	margin-top: 50px
 }

@@ -6,6 +6,8 @@
     }
     div, td, hr, a{
     color: var(--black-color)}
+    
+
 
     /* 제목 */
     .buylist_title{
@@ -25,13 +27,15 @@
     .Sale_list{
         margin-top: 50px ;
         margin-bottom:60px ;
-        position: relative;
 
     }
-
-    #Sale_img{
+.S_list{
+	position: relative;
+}
+    #Sale_img>img{
         margin-left: 30px;
-        position:absolute;
+      position:absolute;
+      top:30px;
     }
 
     #Sale_title{
@@ -70,7 +74,7 @@
     }
 
     .Sale_price_td2{
-        color: #ff6801;
+        color: var(--main-color);
         font-size:27px;
         font-weight: 700;
         text-align: right;
@@ -78,8 +82,8 @@
     }
 
     .Sale_price_td3{
-        position:absolute;
-        color: #ff6801;
+
+        color: var(--main-color);
         font-size: 27px;
         font-weight: 700;
         padding-left: 90px;
@@ -227,9 +231,9 @@
 	border-radius: 5px;
 	font-family: 'NanumBarunGothic';
 	cursor: pointer;
-	float: right;
+	float: left;
 	margin-top: 20px;
-	margin-left: 10px;
+	margin-right:10px;
 }
 
 #info_load{
@@ -293,4 +297,15 @@
 	    border-radius: 5px;
 		font-size: 20px;
 		margin-left:10px;
+}
+
+.sale_trackingArea{
+	float: right;
+}
+
+.trackingBtn{
+	background-color: gray;
+	width: 30px;
+	color: white;
+	font-size: 14px;
 }

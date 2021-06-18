@@ -26,5 +26,23 @@ SELECT * FROM BOOKMARK
 WHERE M_NO = #{m_no}
 </select>
 
+<select id="curationSelectOne" resultType="curation" parameterType="curation">
+SELECT * FROM CURATION
+JOIN MEMBER USING(M_NO)
+WHERE C_NO = #{c_no}
+</select>
+
+
+<update id="curationUpdate" parameterType="curation">
+		UPDATE CURATION
+		SET C_TITLE = #{ c_title },
+		    C_CONTENT = #{ c_content },
+		    C_PICRENAMED = #{c_picrenamed}
+		WHERE C_NO = #{ c_no }
+	</update>
+	
+		<delete id="curationDelete" parameterType="_int">
+		DELETE FROM CURATION WHERE C_NO = #{ c_no }
+	</delete>
 
 </mapper>

@@ -21,5 +21,12 @@ public interface CurationService {
 
 	List<Bookmark> selectBookList(int m_no);
 
+	Curation curationSelectOne(int c_no);
+
+	int curationUpdate(Curation curation);
+
+	int curationDelete(int c_no);
+
+
 
 }

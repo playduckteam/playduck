@@ -22,16 +22,16 @@ public class Utils {
 		System.out.println("totalPage : "+totalPage);
 		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
 		
-		pageBar += "<ul class='pagination justify-content-center pagination-sm>";
+		pageBar += "<ul class='pagination'>";
 		//[이전]section
 		if(pageNo == 1 ){
 			pageBar += "<li class='page-item disabled'>";
-			pageBar += "<a class='page-link' href='#' tabindex='-1'>이전</a>";
+			pageBar += "<a class='page-link' href='#' tabindex='-1'>&laquo; 이전</a>";
 			pageBar += "</li>";
 		}
 		else {
 			pageBar += "<li class='page-item'>";
-			pageBar += "<a class='page-link' href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
+			pageBar += "<a class='page-link' href='javascript:fn_paging("+(pageNo-1)+")'>&laquo; 이전</a>";
 			pageBar += "</li>";
 		}
 		
@@ -53,12 +53,12 @@ public class Utils {
 		//[다음] section
 		if(pageNo > totalPage){
 			pageBar += "<li class='page-item disabled'>";
-			pageBar += "<a class='page-link' href='#'>다음</a>";
+			pageBar += "<a class='page-link' href='#'>다음 &raquo;</a>";
 			pageBar += "</li>";
 			
 		} else {
 			pageBar += "<li class='page-item'>";
-			pageBar += "<a class='page-link' href='javascript:fn_paging("+pageNo+")'>다음</a> ";
+			pageBar += "<a class='page-link' href='javascript:fn_paging("+pageNo+")'>다음 &raquo;</a> ";
 			pageBar += "</li>";
 		}
 		

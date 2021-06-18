@@ -52,11 +52,22 @@ public class CurationDAOImpl implements CurationDAO{
 		return sqlSession.selectList("curation-mapper.selectBookList", m_no);
 	}
 
-//	@Override
-//	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
-//		RowBounds rows = new RowBounds((cPage-1) * numPerPage, numPerPage);
-//		System.out.println(rows);
-//		return sqlSession.selectList("curation-mapper.selectBoardList", null, rows);
-//	}
+	@Override
+	public Curation curationSelectOne(int c_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("curation-mapper.curationSelectOne", c_no);
+	}
+
+	@Override
+	public int curationUpdate(Curation curation) {
+		return sqlSession.update("curation-mapper.curationUpdate", curation);
+	}
+
+	@Override
+	public int curationDelete(int c_no) {
+		return sqlSession.delete("curation-mapper.curationDelete", c_no);
+	}
+
+
 
 }

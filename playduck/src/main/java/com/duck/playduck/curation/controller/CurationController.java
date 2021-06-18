@@ -3,9 +3,9 @@ package com.duck.playduck.curation.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,13 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.duck.playduck.curation.model.service.CurationService;
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.md.controller.Utils;
 import com.duck.playduck.play.model.vo.Bookmark;
-import com.duck.playduck.play.model.vo.Play;
+import com.kh.spring.board.model.vo.Attachment;
 
 @Controller
 public class CurationController {
@@ -82,8 +83,8 @@ public class CurationController {
 			/******************************************/
 			System.out.println(curation);
 			
-			
-				return "Curation_detail";
+
+			return "curation/curationSelectOne.do?c_no=" + curation.getC_no();
 				
 	}
 
@@ -193,10 +194,103 @@ public class CurationController {
 	@RequestMapping("curation/curationSelectOne.do")
 	public String curationSelectOne(Model model,
 			@RequestParam int c_no){
+
+		
+		Curation culist = curationService.curationSelectOne(c_no);
+		model.addAttribute("culist", culist);
 		
 		
+		return "Curation_detail";
+	}
+	
+	@RequestMapping("/curation/curationUpdateView.do")
+	public String curationUpdateView(@RequestParam int c_no, Model model) {
 		
-		return"Curation_detail";
+		Curation culist = curationService.curationSelectOne(c_no);
+		model.addAttribute("culist", culist);
+		
+		return "Curation_modify";
+		
+	}
+	
+	@RequestMapping("/curation/curationUpdate.do")
+	public String curationUpdate(@RequestParam int c_no, Curation curation, Model model, HttpServletRequest req,
+			@RequestParam(value="c_pic_file",  required=false) MultipartFile upFiles,
+			@RequestParam String c_title,
+			@RequestParam String c_content) {
+		
+		Curation culist = curationService.curationSelectOne(c_no);
+
+		// 1. 원본 게시글 불러와 수정하기
+
+				String savePath = req.getServletContext().getRealPath("/resources/curation");
+				
+				// 2. 첨부파일 변경하기
+				if(upFiles.isEmpty() == false) {
+					
+					String originName = upFiles.getOriginalFilename(); // 파일 원래 이름
+					String changeName = fileNameChanger(originName);
+					
+					try {
+						upFiles.transferTo(new File(savePath + "/" + changeName));
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+					}
+					
+
+					curation.setC_picrenamed(changeName);
+				}else {
+					curation.setC_picrenamed(culist.getC_picrenamed());
+				}
+				
+			
+			// 5. DB에 저장
+			int result = curationService.curationUpdate(curation);	// int로 결과 출력
+			
+			curation.setC_title(c_title);
+			curation.setC_content(c_content);
+			
+
+			
+			/******************************************/
+			System.out.println(curation);
+
+			model.addAttribute("msg", "수정 완료");
+			model.addAttribute("loc", "/curation/curationSelectOne.do?c_no=" + c_no);
+			
+		
+		return "common/msg";
+		
+	}
+	
+	@RequestMapping("/curation/curationDelete.do")
+	public String curationDelete(@RequestParam int c_no, 
+			                  HttpServletRequest req, Model model, Curation curation) {
+		
+		String savePath = req.getServletContext().getRealPath("/resources/curation");
+		
+		// 첨부파일 삭제 명단
+		
+		int result = curationService.curationDelete(c_no);
+		
+		String loc = "/curation/culist.do";
+		String msg = "";
+		
+		if( result > 0) {
+			msg = "삭제 완료!";
+			
+			
+				new File(savePath + "/" + curation.getC_picrenamed()).delete();
+			
+			
+		} else {
+			msg = "삭제 실패!";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
 	}
 	
 }

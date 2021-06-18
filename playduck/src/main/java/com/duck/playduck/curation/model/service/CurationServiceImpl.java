@@ -57,10 +57,23 @@ public class CurationServiceImpl implements CurationService{
 	}
 
 
-//	@Override
-//	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
-//		// TODO Auto-generated method stub
-//		return curationDAO.selectBoardList(cPage, numPerPage);
-//	}
+	@Override
+	public Curation curationSelectOne(int c_no) {
+		return curationDAO.curationSelectOne(c_no);
+	}
+
+
+	@Override
+	public int curationUpdate(Curation curation) {
+		return curationDAO.curationUpdate(curation);
+	}
+
+
+	@Override
+	public int curationDelete(int c_no) {
+		return curationDAO.curationDelete(c_no);
+		
+	}
+
 
 }
