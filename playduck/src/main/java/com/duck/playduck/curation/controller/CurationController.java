@@ -323,14 +323,13 @@ public class CurationController {
 		// 현재 페이지의 게시글 수
 		List<Map<String, String>> list = curationService.selectSearchList(keyword, cPage, numPerPage);
 		
-		System.out.println("출력 결과 : " + list);
+		System.out.println("큐레이션 검색 결과 : " + list);
 		// 전체 개시글 수
 		int totalContents2 = curationService.selectTotalContents2(keyword);
 		
 		// 페이지 처리 HTML 생성하기
-		String pageBar = Utils_search.getPageBar(totalContents2, cPage, numPerPage, "/playduck/md/search_md.do", keyword);
+		String pageBar = Utils_search.getPageBar(totalContents2, cPage, numPerPage, "/curation/search_cu.do", keyword);
 		
-		// List<Map<String, String>> list2 = mdService.listAll(keyword, pageBar);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalContents", totalContents2);

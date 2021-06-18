@@ -292,7 +292,6 @@ private static String getTagValue (String tag, Element eElement) {
 				// 현재 페이지의 게시글 수
 				List<Map<String, String>> list = mdService.selectSearchList(keyword, cPage, numPerPage);
 				
-				System.out.println("출력 결과 : " + list);
 				// 전체 개시글 수
 				int totalContents2 = mdService.selectTotalContents2(keyword);
 				
