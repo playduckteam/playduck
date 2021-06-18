@@ -79,11 +79,35 @@
 				SEQ_R_NO.NEXTVAL, #{m_no}, null , #{w_down}, DEFAULT
 				)
 		</insert>
+		
+		<!--basket 불러오기 (주문목록 저장용) -->
+		<select id="getbasketList2" parameterType="_int" resultType="basket">
+		 SELECT D_NO, B_QUAN
+		 FROM BASKET
+		 WHERE M_NO = #{m_no}
+	 		    AND B_STATUS = 1
+		</select>
+			
+		 <!-- Order 주문목록 저장하기	-->
+			<insert id="insertOrderList" parameterType="mOrder" >
+						INSERT INTO ORDERS VALUES(
+						SEQ_O_NO.NEXTVAL, #{m_no}, #{d_no}, #{o_quan}, SYSDATE, 1,
+						SEQ_R_NO.CURRVAL, #{o_name}, #{o_phone}, #{o_address}, #{o_memo}
+						)
+			</insert>
+			
+			<!-- 구매한 장바구니 삭제하기  -->
+			<delete id="deletebuyBasket" parameterType="_int">
+			DELETE FROM BASKET 
+			WHERE M_NO = #{m_no}
+				 AND B_STATUS=1
+			</delete>
 	
-	<select id="selectBoardList" resultType="md">
-	SELECT *   
-	FROM MD 
-	ORDER BY  D_NO
-	</select>
+	
+		<select id="selectBoardList" resultType="md">
+		SELECT *   
+		FROM MD 
+		ORDER BY  D_NO
+		</select>
 	
 </mapper>

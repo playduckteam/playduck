@@ -3,7 +3,9 @@ package com.duck.playduck.md.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.duck.playduck.md.model.vo.Basket;
 import com.duck.playduck.md.model.vo.Md;
+import com.duck.playduck.md.model.vo.mOrder;
 import com.duck.playduck.play.model.vo.Play;
 
 public interface MdService {
@@ -32,6 +34,12 @@ public interface MdService {
 	int update3Basket(int dno, int mno, int b_status);
 
 	int updateReward(int m_no, int w_down);
+
+	List<Basket> getbasketList2(int m_no);
+
+	int insertOrderList(mOrder mOrder);
+
+	int deletebuyBasket(int m_no);
 
 
 }

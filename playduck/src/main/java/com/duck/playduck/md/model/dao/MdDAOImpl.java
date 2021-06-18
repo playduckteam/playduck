@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.duck.playduck.md.model.vo.Basket;
 import com.duck.playduck.md.model.vo.Md;
+import com.duck.playduck.md.model.vo.mOrder;
 import com.duck.playduck.md.model.vo.mReward;
 
 
@@ -118,6 +119,24 @@ public class MdDAOImpl implements MdDAO {
 		
 		return sqlSession.insert("md2-mapper.updateReward", mreward );
 
+	}
+
+	// basket 불러오기 (주문목록 저장용)
+	public List<Basket> getbasketList2(int m_no) {
+		
+		return sqlSession.selectList("md2-mapper.getbasketList2", m_no);
+	}
+
+	// Order 주문목록 저장하기
+	public int insertOrderList(mOrder mOrder) {
+		
+		return sqlSession.insert("md2-mapper.insertOrderList", mOrder);
+	}
+
+	// 구매한 장바구니 삭제하기
+	public int deletebuyBasket(int m_no) {
+		
+		return sqlSession.delete("md2-mapper.deletebuyBasket", m_no);
 	}
 	
 
