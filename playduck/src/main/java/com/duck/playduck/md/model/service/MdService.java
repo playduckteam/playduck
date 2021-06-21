@@ -50,6 +50,8 @@ public interface MdService {
 
 	int delBasket(int d_no, int m_no);
 
+	int downQuan(mOrder mOrder);
+
 
 
 }

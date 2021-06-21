@@ -75,7 +75,8 @@ public class MdController {
 				//연극별 MD 리스트
 				List<Md> mdPlayList = mdService.mdPlayList(p_no);
 				
-				System.out.println(mdPlayList);
+				System.out.println("MD리스트: " + mdPlayList);
+				System.out.println("p_no " + p_no);
 				
 			
 				model.addAttribute("mdPlayList", mdPlayList);
@@ -216,10 +217,15 @@ private static String getTagValue (String tag, Element eElement) {
 				
 				// Order 주문목록 저장하기
 			  int result1 = mdService.insertOrderList(mOrder);
+			  
+			// 수량 다운하기 
+			  int result3 =mdService.downQuan(mOrder);
 			}
 		
 			// 구매한 장바구니 삭제하기
 			int result2 = mdService.deletebuyBasket(m_no);
+			
+			
 			
 		return null;
 	}
