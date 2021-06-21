@@ -20,9 +20,9 @@ public class MdServiceImpl implements MdService {
 
 	//연극별 MD 리스트
 	@Override
-	public List<Md> mdPlayList() {
+	public List<Md> mdPlayList(String p_no) {
 		
-		return mdDAO.mdPlayList();
+		return mdDAO.mdPlayList(p_no);
 	}
 
 	// Md 한개 정보 가져오기

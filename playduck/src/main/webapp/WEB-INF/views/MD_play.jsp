@@ -25,6 +25,8 @@
         <div class="MD_play_playimage"><img src="${play.get("poster")}" alt="포스터 사진"></div>
         <div class="MD_play_playcontainer">
            
+           
+           <if test="${mdPlayList != null }">
            <c:forEach items="${mdPlayList}"  var="List">
             <div class="MD_play_item">
                 <div class="MD_play_mdimage" id="${List.d_no }"><img src="${List.d_pic }" alt=""></div>
@@ -32,6 +34,10 @@
                 <div class="MD_play_mdprice">${List.d_price }원</div>
             </div>
             </c:forEach>
+            </if> <if test ="${ mdPlayList == null}">
+             		<hr class="hr1">
+             	<div class="notplay"> 해당 공연의 MD 상품이 존재하지 않습니다.</div>
+            </if>
             
         </div>
     </section>

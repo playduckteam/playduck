@@ -87,6 +87,18 @@
     
     
    <script>
+   <c:if test="${ member == null}">
+
+   $(function() {	
+
+   	$(".fa-star").on("click",function () {	
+   		
+   		alert("로그인을 해주세요!")
+   		$('.modal_loginBtn').click();
+   						
+    	 })
+   });	
+   </c:if>
 
   
   /* 수량변화에 따른 합계금액변화  */

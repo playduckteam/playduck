@@ -331,7 +331,7 @@ public class CurationController {
 		String pageBar = Utils_search.getPageBar(totalContents2, cPage, numPerPage, "/curation/search_cu.do", keyword);
 		
 		
-		model.addAttribute("list", list);
+		model.addAttribute("culist", list);
 		model.addAttribute("totalContents", totalContents2);
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);

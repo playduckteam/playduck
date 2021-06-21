@@ -10,7 +10,7 @@ import com.duck.playduck.play.model.vo.Play;
 
 public interface MdService {
 
-	List<Md> mdPlayList();
+	List<Md> mdPlayList(String p_no);
 
 	Md selectOneMd(int d_no);
 

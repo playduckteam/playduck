@@ -7,6 +7,9 @@
 		SELECT M_NO FROM MEMBER
 	</select>
 
+	<select id="selectmemberTotal" resultType="_int">
+	SELECT COUNT(*) FROM MEMBER
+	</select>
 	<select id="memberadminReward" parameterType="_int"
 		resultType="reward">
 		SELECT M.M_NO, M.M_NAME,M.m_status,(SELECT SUM(W_UP -W_DOWN) FROM REWARD
@@ -28,7 +31,14 @@
 		JOIN MEMBER M ON(M.M_NO=O.M_NO)
 		WHERE O.O_STATUS =2
 	</select>
-
+	
+	<select id="selectcancelTotal" resultType="_int">
+		select count(*)
+		from orders
+		WHERE O_STATUS =2
+	</select>
+	
+	
 	<select id="adminreturn" resultType="buy">
 
 		select M.M_NAME,O.O_NO,O.D_NO, O.O_QUAN,O.O_STATUS, MD.D_TITLE,
@@ -39,6 +49,16 @@
 		WHERE O.O_STATUS =3
 
 	</select>
+	
+	<select id="selectreturnTotal" resultType="_int">
+	select count(*)
+		from orders
+		WHERE O_STATUS =3
+	</select>
+	
+	
+	
+	
 	<select id="membersr" resultType="member">
 		SELECT M_NAME, M_NO
 		FROM MEMBER
@@ -46,8 +66,18 @@
 		ORDER
 		BY M_NO
 	</select>
-
-	<select id="admincancelsr" resultType="buy">
+	
+	<select id="selectmemberSrTotalContents" resultType="_int">
+	SELECT COUNT(*)
+		FROM MEMBER
+		WHERE M_NAME LIKE '%' || #{text} || '%'
+		ORDER
+		BY M_NO
+	</select>
+	
+	
+	
+	<select id="admincancelsr"  resultType="buy">
 		select M.M_NAME,O.O_NO, O.O_QUAN,O.O_STATUS, MD.D_TITLE, MD.D_PRICE,MD.D_PIC
 		from orders O
 		JOIN MD ON(MD.D_NO = O.D_NO)
@@ -56,7 +86,18 @@
 		LIKE '%' || #{text} || '%')
 	</select>
 
-	<select id="adminreturnsr" resultType="buy">
+	<select id="selectcancelsrTotal" resultType="_int">
+	select count(*)
+		from orders O
+		JOIN MD ON(MD.D_NO = O.D_NO)
+		JOIN MEMBER M ON(M.M_NO=O.M_NO)
+		WHERE O_STATUS =2 AND (M.M_NAME LIKE '%' || #{text} || '%' OR MD.D_TITLE
+		LIKE '%' || #{text} || '%')
+	</select>
+
+
+
+	<select id="adminreturnsr"  resultType="buy">
 		select M.M_NAME,O.O_NO,O.D_NO, O.O_QUAN,O.O_STATUS, MD.D_TITLE,
 		MD.D_PRICE,MD.D_PIC
 		from orders O
@@ -65,6 +106,15 @@
 		WHERE O.O_STATUS =3 AND (M.M_NAME LIKE '%' || #{text} || '%' OR MD.D_TITLE
 		LIKE '%' || #{text} || '%')
 	</select>
+
+<select id="selectreturnsrTotal" resultType="_int">
+select count(*)
+		from orders O
+		JOIN MD ON(MD.D_NO = O.D_NO)
+		JOIN MEMBER M ON(M.M_NO=O.M_NO)
+		WHERE O_STATUS =3 AND (M.M_NAME LIKE '%' || #{text} || '%' OR MD.D_TITLE
+		LIKE '%' || #{text} || '%')
+</select>
 
 	<update id="updatereturn" parameterType="_int">
 	UPDATE ORDERS SET O_STATUS =4

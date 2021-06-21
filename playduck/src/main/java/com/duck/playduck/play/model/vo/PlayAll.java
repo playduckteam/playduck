@@ -12,6 +12,7 @@ public class PlayAll {
 	private String prfnm;
 	private String poster;
 	private String prfpdfrom;
-	
+	private int p_rating;
+	private int p_count;
 	
 }

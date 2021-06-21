@@ -27,14 +27,14 @@
         <div class="AD_main_memberlist">
 
             <div class="AD_memberlist_title">회원 목록</div>
-
+			
             <div class="AD_memberlist_search_img">
 
                 <input type="text" class="searchbox" onkeyup="enterkey();">
                 <img src="../resources/images/search.png" class="searchGo">
             </div>
 
-
+			<p>총 ${totalContents}명의 회원이 있습니다.</p>
             <table class="AD_memberlist_table">
                 <thead>
                     <tr>
@@ -65,9 +65,9 @@
                 </c:forEach>
                 </tbody>
             </table>
-
+			
         </div>
-
+		<c:out value="${pageBar}" escapeXml="false"/>
     </div>
 
 <script>

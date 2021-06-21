@@ -65,26 +65,29 @@ body, html, section{
 				</div>
 			<div class="list_content">
 			
-				 <h3 style="color: #fff;" class="titleremove">${pi.prfnm}</h3>
-				 <script>
+				<script>
 				 $(document).ready(function(){ 
                  	$('.titleremove').each(function(){ 
                  		if ($(this).text().length > 15) $(this).html($(this).text().substr(0,15)+"..."); }); });
-
 				 </script>
-              <span class="main_toprate">95%</span>
-				<div class="list_icon">
-				<c:if test="${empty llist}">
-					<i class="far fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
+				 <h3 style="color: #fff;">${pi.prfnm}</h3>
+              <span class="main_toprate">${pi.p_rating}%</span>
+				<div class="list_icon">	
+				<c:set var="doneLoop" value="false"/>
+				<c:if test="${ !empty llist}">
+					<c:forEach items="${llist}" var="li" >
+					<c:if test="${li eq pi.p_no and doneLoop ne true}">
+					<c:set var="doneLoop" value="true"/>
+					</c:if>
+					</c:forEach>
 				</c:if>
-				<c:forEach items="${llist }" var="li" > 
-				<c:if test="${li.p_list eq pi.p_no}">
-					<i class="fas fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
-				</c:if>
-				<c:if test="${li.p_list ne pi.p_no}">
-					<i class="far fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
-				</c:if>
-				</c:forEach>
+						<c:if test="${li eq pi.p_no or doneLoop ne true}">
+							<i class="far fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
+						</c:if>
+						<c:if test="${li ne pi.p_no and doneLoop eq true}">
+							<i class="fas fa-star" id="star" name="${pi.p_no}" style="color: yellow;"></i>
+						</c:if>
+						
 				</div>
 			</div>
 		</div>

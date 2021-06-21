@@ -11,22 +11,36 @@ public interface AdminDAO {
 
 	
 
-	List<Member> Memberadmin();
+	
 
 	Reward memberadminReward(int result);
 
 	int memberadminDelete(int m_no);
 
-	List<BuyList> adminreturn();
+	List<BuyList> adminreturn(int cPage, int numPerPage);
 
-	List<BuyList> admincancel();
+	List<BuyList> admincancel(int cPage, int numPerPage);
 
-	List<Member> memberadminsr(String text);
+	List<Member> memberadminsr(int cPage, int numPerPage, String text);
 
-	List<BuyList> admincancelsr(String text);
+	List<BuyList> admincancelsr(int cPage, int numPerPage, String text);
 
-	List<BuyList> adminreturnsr(String text);
+	List<BuyList> adminreturnsr(int cPage, int numPerPage, String text);
 
 	int updatereturn(int d_no);
+
+	List<Member> Memberadmin(int cPage, int numPerPage);
+
+	int selectmemberTotal();
+
+	int selectmemberSrTotalContents(String text);
+
+	int selectcancelTotal();
+
+	int selectcancelsrTotal(String text);
+
+	int selectreturnTotal();
+
+	int selectreturnsrTotal(String text);
 
 }

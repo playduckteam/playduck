@@ -27,7 +27,7 @@
 		<div class="AD_main_returnList">
 
 			<div class="AD_returnList_title">반품 관리</div>
-
+			<p>총 ${totalContents}개의 상품이 있습니다.</p>
 			<div class="AD_returnList_search_img">
 
 				<input type="text" class="searchbox" onkeyup="enterkey();">
@@ -61,7 +61,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
+				<c:out value="${pageBar}" escapeXml="false"/>	
 		</div>
 
 	</div>

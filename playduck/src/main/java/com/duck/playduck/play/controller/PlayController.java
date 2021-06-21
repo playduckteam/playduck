@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.duck.playduck.member.model.vo.Member;
+import com.duck.playduck.play.model.compare.AscCount;
+import com.duck.playduck.play.model.compare.AscRating;
 import com.duck.playduck.play.model.compare.AscTitle;
 import com.duck.playduck.play.model.compare.AscYear;
 import com.duck.playduck.play.model.service.PlayService;
@@ -40,12 +42,20 @@ public class PlayController {
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "/list/playlist.do");
 		
 		List<PlayAll> plist = playService.selectPlayList(cPage,numPerPage);
-		List<Bookmark> blist= playService.selectBlist(m.getM_no());
+		
+		int m1 = 0;
+		if(m !=null) {
+			 m1 = m.getM_no();
+		}
+		
+		
+		List<Bookmark> blist= playService.selectBlist(m1);
+		
 		System.out.println(plist);
 		if(sortType==1) {
-			
+			plist.sort(new AscRating());
 		}else if(sortType==2) {
-			
+			plist.sort(new AscCount());
 		}
 		else if(sortType==3) {
 			plist.sort(new AscTitle());
@@ -57,11 +67,12 @@ public class PlayController {
 		
 		for (PlayAll p : plist) {
 			for(Bookmark b : blist) {
-				if(p.getP_no() != b.getP_list() && b.getC_list() ==null) {
+				if(p.getP_no().equals(b.getP_list()) && b.getC_list() ==null) {
 					list.add(p.getP_no());
-				}
+									}
 			}
 		}
+		System.out.println("찜:"+list);
 		
 		model.addAttribute("llist", list);
 		model.addAttribute("plist", plist);
