@@ -638,10 +638,10 @@
         <div class="profile">
         	<form id="FILE_FORM" name="mypageImg" action="${pageContext.request.contextPath}/mypage/profileImg.do" method="post" enctype="multipart/form-data">
 	            <div>
-	            <c:if test="${empty member.m_pic}" >
-	                <img class="Mypage_img" id="profileImg" src="/playduck/resources/profileImg/nopic.jsp" alt="프로필 사진">
+	            <c:if test="${empty member.m_picRenamed}" >
+	                <img class="Mypage_img" id="profileImg" src="/playduck/resources/profileImg/nopic.jpg" alt="프로필 사진">
 	            </c:if>
-	            <c:if test="${!empty member.m_pic}">
+	            <c:if test="${!empty member.m_picRenamed}">
 	                <img class="Mypage_img" id="profileImg" name="profileImg" src="/playduck/resources/profileImg/${member.m_picRenamed}" alt="프로필 사진">
 	            </c:if>
 

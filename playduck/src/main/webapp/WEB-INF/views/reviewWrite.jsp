@@ -53,7 +53,9 @@
                     $(".good_gray").show();
                     $(".bad").show();
                     $("#rw_good").remove();
+                    $('#r_status').remove();
                     $(".rw_reviewTab").append('<input type="text" class="hidden" id="r_status" name="r_status" value="2" />')
+               
                 });
 
                 /*good_gray를 클릭했을 때 good을 보여줌*/
@@ -63,7 +65,8 @@
                     $(".good_gray").hide();
                     $(".bad").hide();
                     $("#rw_bad").remove();
-                    $(".rw_reviewTab").append('<input type="text" class="hidden" id="rw_good" name="rw_good" value="1" />')
+                    $('#r_status').remove();
+                    $(".rw_reviewTab").append('<input type="text" class="hidden" id="r_status" name="r_status" value="1" />')
                 });
 
             });

@@ -20,7 +20,7 @@
 
 
 	<update id="memberadminDelete" parameterType="_int">
-		UPDATE MEMBER SET M_STATUS = 3
+		UPDATE MEMBER SET M_STATUS = 2
 		WHERE M_NO = #{m_no}
 	</update>
 
