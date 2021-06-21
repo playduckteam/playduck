@@ -19,11 +19,15 @@ public interface PlayService {
 
 
 
-	List<PlayAll> playsr(String text);
+	List<PlayAll> playsr(int cPage, int numPerPage, String text);
 
 
 
 	List<Bookmark> selectBlist(int m_no);
+
+
+
+	int playsrtotal(String text);
 
 
 

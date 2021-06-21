@@ -11,8 +11,9 @@ public interface PlayDAO {
 
 	int selectTotalContents();
 	List<PlayAll> selectPlayList(int cPage, int numPerPage);
-	List<PlayAll> playsr(String text);
+	List<PlayAll> playsr(int cPage, int numPerPage, String text);
 	List<Bookmark> selectBlist(int m_no);
+	int playsrtotal(String text);
 	
 
 
