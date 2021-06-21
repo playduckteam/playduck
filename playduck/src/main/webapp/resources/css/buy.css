@@ -25,6 +25,8 @@
         margin-bottom: 10px;
         margin-top:10px;
         vertical-align: middle;
+        position: relative;
+
     }
 
     .Sale_list{
@@ -311,4 +313,12 @@
 	width: 30px;
 	color: white;
 	font-size: 14px;
+}
+
+.del{
+	width: 28px;
+	height: 20px;
+	position:absolute;
+	left:-5px;
+	top:30px;
 }

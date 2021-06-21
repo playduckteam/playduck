@@ -29,24 +29,7 @@ body, html, section{
 	min-height: 100%
 }
 
-}
-.cu_searchArea {
-	margin-top : 60px;
-}
-.cu_searchBtn {
-	cursor:pointer;
-	background-color: var(--main-color);
-    font-size: 17px;
-    font-weight: 400;
-    text-align: center;
-    border-radius: .2em;
-	width : 120px;
-	height : 30px;
-}
-.cu_searchInput {
-	height : 28px;
-	width : 170px;
-}
+
 </style>
 
 </head>
@@ -69,13 +52,13 @@ body, html, section{
     	<form action="${pageContext.request.contextPath}/curation/search_cu.do" name="form2" method="post">
 	    
 		    <input class="cu_searchInput" type="text" name="keyword" value="${keyword}"/>
-		    <input type="submit" class="cu_searchBtn" value="큐레이션 검색"/>
+		    <input type="submit" class="cu_searchBtn" value="검색"/>
 	    
     	</form>
     </div>
 	
 	<div class="list_sort">분류 ▼</div>
-	<p>총 ${totalContents}건의 게시물이 있습니다.</p>
+	<p class="lsit_total">총 ${totalContents}건의 게시물이 있습니다.</p>
 	
 	<div class="list_container">
 		<c:forEach items="${culist}" var="cu" begin="0" varStatus="status">

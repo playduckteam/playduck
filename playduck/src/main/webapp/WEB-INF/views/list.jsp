@@ -47,7 +47,7 @@ body, html, section{
     
 	<section>
 	<div class="list_sort">분류 ▼</div>
-	<p>총 ${totalContents}건의 게시물이 있습니다.</p>
+	<p class="list_total">총 ${totalContents}건의 게시물이 있습니다.</p>
 	
 	<div class="listArea">
 		

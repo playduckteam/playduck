@@ -14,6 +14,11 @@
 <link rel="stylesheet" href="../resources/css/sidevar.css">
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link rel="stylesheet" href="../resources/css/pagination.css">
+    <style>
+    .page-link{
+    color:var(--black-color);
+    }
+    </style>
 
 <script src="../resources/js/jquery-3.6.0.min.js"></script>
 
