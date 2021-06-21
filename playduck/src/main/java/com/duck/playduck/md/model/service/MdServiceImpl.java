@@ -140,6 +140,12 @@ public class MdServiceImpl implements MdService {
 		return mdDAO.delBasket(d_no,m_no);
 	}
 
+	// 수량 다운하기 
+	public int downQuan(mOrder mOrder) {
+		
+		return mdDAO.downQuna(mOrder);
+	}
+
 
 
 

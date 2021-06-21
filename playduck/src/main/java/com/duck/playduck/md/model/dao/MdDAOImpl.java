@@ -24,7 +24,7 @@ public class MdDAOImpl implements MdDAO {
 	@Override
 	public List<Md> mdPlayList(String p_no) {
 	
-		return sqlSession.selectList("md2-mapper.mdPlayList");
+		return sqlSession.selectList("md2-mapper.mdPlayList",p_no);
 	}
 
 	// Md 한개 정보 가져오기
@@ -167,6 +167,12 @@ public class MdDAOImpl implements MdDAO {
 		Basket basket = new Basket(m_no,d_no,1);
 		
 		return sqlSession.delete("md2-mapper.delBasket",basket);
+	}
+
+	// 수량 다운하기 
+	public int downQuna(mOrder mOrder) {
+	
+		return sqlSession.update("md2-mapper.downQuan", mOrder);
 	}
 
 

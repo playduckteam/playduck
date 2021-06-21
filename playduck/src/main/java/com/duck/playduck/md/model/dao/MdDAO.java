@@ -46,4 +46,6 @@ public interface MdDAO {
 
 	int delBasket(int d_no, int m_no);
 
+	int downQuna(mOrder mOrder);
+
 }

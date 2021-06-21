@@ -109,6 +109,12 @@
 				WHERE M_NO = #{m_no}
 					AND D_NO = ${d_no}
 			</delete>
+			
+			<!-- 재고 수량 다운하기   -->
+		<update id="downQuan" parameterType="mOrder">
+			UPDATE STOCK SET D_QUAN = D_QUAN - #{o_quan}
+			WHERE D_NO = #{ d_no}
+		</update>
 	
 
 	
