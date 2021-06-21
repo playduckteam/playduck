@@ -21,10 +21,12 @@
 <style>
 	.goBackBtn{
 		cursor : pointer;
-		background-color: var(--main-color);
+		color: var(--main-color);
 	font-size: 17px;
 	font-weight: 400;
 	text-align: center;
+	margin-top: 30px;
+	display: block;
 	}
 	
 
@@ -77,12 +79,12 @@
             <div class="MD_order_imgarea">
                 <img src="${md.d_detail}" alt="">
             </div>
+    <a class="goBackBtn" href="${pageContext.request.contextPath}/md/md_main.do">목록으로 가기</a>
             
         </section>
     </form>
  
-    <a class="goBackBtn" href="${pageContext.request.contextPath}/md/md_main.do">목록으로 가기</a>
-    </div>
+        </div>
     <br /><br /><br /><br /><br />
     
     

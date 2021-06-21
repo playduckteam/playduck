@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>playduck - 상세보기</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/headerfooter.css">
 <link rel="stylesheet" href="../resources/css/join.css">
@@ -18,31 +17,38 @@
 <link rel="stylesheet" href="../resources/css/curation.css">
 
 
-<script src="../resources/js/jquery-3.6.0.min.js"></script>
-<script src="../resources/js/modal.js"></script>
-<script src="../resources/js/topBtn.js"></script>
-<script src="https://kit.fontawesome.com/2004329f9f.js" crossorigin="anonymous"></script>
+<!-- <script src="../resources/js/jquery-3.6.0.min.js"></script> -->
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
 <style>
 body, html, section{
-	min-height: 100%
+	min-height: 100%;
+	background-color:var(--black-color);
 }
 
 .note-editable, .panel-heading, .note-btn{
 	background-color: var(--black-color)
 }
-
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary{
+display:flex;
+}
 </style>
 
 </head>
 <body>
 	<h1 class="hidden">playduck</h1>
 	<%@ include file="common/header.jsp"%>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+		<script src="../resources/js/modal.js"></script>
+		<script src="../resources/js/topBtn.js"></script>
+		<script src="https://kit.fontawesome.com/2004329f9f.js" crossorigin="anonymous"></script>
 	<section>
 		<div class="curation_container">
 		<form name="curationFrm" action="${pageContext.request.contextPath}/curation/curationUpdate.do?c_no=${culist.c_no}" method="post" enctype="multipart/form-data">
@@ -77,7 +83,7 @@ body, html, section{
 		   </div>
 		<textarea id="summernote" name="c_content">${culist.c_content }</textarea>
 		
-
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
         $('#summernote').summernote();
     </script>

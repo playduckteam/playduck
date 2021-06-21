@@ -118,7 +118,7 @@ public class ReviewController {
 		reviewService.insertReview2(map);
 		
 		
-		return "detail";
+		return "detail/detail.do?p_no=" + p_no;
 	}
 
 }

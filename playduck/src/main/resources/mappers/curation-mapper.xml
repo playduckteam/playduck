@@ -14,7 +14,7 @@ SELECT COUNT(*) FROM CURATION ORDER BY C_NO
 </select>
 	<select id="selectCurationList1" resultType="curation">
 SELECT * FROM CURATION
-ORDER BY C_TITLE DESC
+ORDER BY C_TITLE
 </select>
 <select id="selectCurationList2" resultType="curation">
 SELECT * FROM CURATION

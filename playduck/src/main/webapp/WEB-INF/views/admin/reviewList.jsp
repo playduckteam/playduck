@@ -66,11 +66,11 @@
 				</tbody>
 
 			</table>
-			<c:out value="${pageBar}" escapeXml="false" />
+			
 		</div>
 
 	</div>
-
+<c:out value="${pageBar}" escapeXml="false" />
 </body>
 <%@ include file="../common/footer.jsp"%>
 

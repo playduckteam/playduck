@@ -74,9 +74,9 @@
             </table>
 			
         </div>
-		<c:out value="${pageBar}" escapeXml="false"/>
+		
     </div>
-
+<c:out value="${pageBar}" escapeXml="false"/>
 <script>
 function goDelete(m_no) {
 	location.href = "${pageContext.request.contextPath}/adminpage/adminmember.do?m_no="+m_no

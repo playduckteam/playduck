@@ -34,6 +34,8 @@
 <link rel="stylesheet" href="resources/css/join.css">
 <link rel="stylesheet" href="resources/css/login.css">
 <link rel="stylesheet" href="resources/css/findIdPw.css">
+<link rel="shortcut icon" href="resources/images/favicon.ico">
+<link rel="icon" href="resources/images/favicon.ico">
 <script src="resources/js/jquery-3.6.0.min.js"></script>
 <script src="resources/js/modal.js"></script>
 <script src="resources/js/topBtn.js"></script>
