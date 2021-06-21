@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -90,7 +91,7 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/review/reviewWrite.do")
-	public String insertReview(Model model,
+	public String insertReview(HttpServletRequest req,Model model,
 				@RequestParam String p_no,
 				@RequestParam String r_status,
 				@RequestParam int pd_theater,
@@ -103,8 +104,10 @@ public class ReviewController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Member m = (Member)model.getAttribute("member");
+		Member m = (Member)req.getSession().getAttribute("member");
 		
+		System.out.println("멤버:"+ m);
+		System.out.println("r_status"+r_status);
 		map.put("p_no", p_no);
 		map.put("m_no", m.getM_no());
 		map.put("r_status", r_status);

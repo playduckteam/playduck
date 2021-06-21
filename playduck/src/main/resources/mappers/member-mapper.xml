@@ -50,14 +50,14 @@
 	
 	<select id="selectReward" resultType="_int" parameterType="Member">
 
-		SELECT SUM(W_UP)-SUM(NVL(W_DOWN, 0))
+		SELECT SUM(NVL(W_UP,0))-SUM(NVL(W_DOWN, 0))
 		FROM REWARD
 		WHERE M_NO = #{m_no}
 
 	</select>
 
 	<select id="selectRank" resultType="_int" parameterType="Member">
-		SELECT SUM(W_UP)
+		SELECT SUM(NVL(W_UP,0))
 		FROM REWARD
 		WHERE M_NO = #{m_no}
 	</select>
