@@ -70,7 +70,7 @@ body, html, section{
                  	$('.titleremove').each(function(){ 
                  		if ($(this).text().length > 15) $(this).html($(this).text().substr(0,15)+"..."); }); });
 				 </script>
-				 <h3 style="color: #fff;">${pi.prfnm}</h3>
+				 <h3 class="titleremove" style="color: #fff;">${pi.prfnm}</h3>
               <span class="main_toprate">${pi.p_rating}%</span>
 				<div class="list_icon">	
 				<c:set var="doneLoop" value="false"/>
