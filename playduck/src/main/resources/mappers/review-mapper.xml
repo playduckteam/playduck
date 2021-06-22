@@ -40,6 +40,9 @@ WHERE P_NO = #{p_no} AND R_STATUS = '2' and R.m_no != #{m_no}
 	<delete id="deleteReview">
   		delete from review where r_no = #{r_no}
  	</delete>
+ 	<delete id="deletePlayDetail">
+  		delete from playdetail where r_no = #{r_no}
+ 	</delete>
 	<select id="myReview" resultType="Review" parameterType="_int">
 		SELECT *
 		FROM (SELECT P_NO
