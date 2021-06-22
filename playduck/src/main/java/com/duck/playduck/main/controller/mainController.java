@@ -129,6 +129,7 @@ public class mainController {
 			listP.add(c.getC_picrenamed());
 		}
 
+		System.out.println("사진 : " + listP);
 		map.put("Cnum", listC);
 		map.put("title", listT);
 		map.put("pic", listP);
