@@ -19,12 +19,18 @@
 	border: 1px solid;
 	cursor: pointer;
 }
-
+.login_findArea{
+	text-align: center;
+	display: block;
+}
 .login_find {
 	color: gray;
 	font-weight: 400;
 	cursor: pointer;
-	text-align: center;
+	display: inline-block;
+	
+	
+
 }
 
 /* 검정색 전체 배경 */
