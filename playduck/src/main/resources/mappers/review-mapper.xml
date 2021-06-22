@@ -4,7 +4,7 @@
 <mapper namespace="review-mapper">
 
 	<insert id="insertReview" parameterType="map">
-		insert into review values(seq_r_no.nextval, #{p_no}, #{m_no}, #{r_content}, default, default, #{r_status})
+		insert into review values(seq_r_no.nextval, #{p_no}, #{m_no}, #{r_content}, 0, 0, #{r_status})
 	</insert>
 
 	<insert id="insertReview2" parameterType="map">
