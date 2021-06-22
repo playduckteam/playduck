@@ -18,7 +18,7 @@
 <script src="../resources/js/jquery-3.6.0.min.js"></script>
 <style>
 .page-link {
-	color: var(- -black-color);
+	color: var(--black-color);
 }
 </style>
 
