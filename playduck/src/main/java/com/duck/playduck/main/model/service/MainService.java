@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.vo.Main;
+import com.duck.playduck.md.model.vo.mReward;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.play.model.vo.Play;
@@ -40,6 +41,10 @@ public interface MainService {
 	int CBookMarkDe(Bookmark b);
 
 	String curationforDuck(int parseInt);
+
+	List<mReward> mainCuButton(int m_no);
+
+	int reviewCheck(Review r);
 
 	
 

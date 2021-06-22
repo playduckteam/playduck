@@ -61,7 +61,7 @@ public class AdminDAOImpl2 implements AdminDAO2 {
 	public List<Map<String, String>> mdListPage(int cPage, int numPerPage) {
 
 		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
-		
+
 		return sqlSession.selectList("admin2-mapper.mdListPage", null, rows);
 	}
 
@@ -80,13 +80,13 @@ public class AdminDAOImpl2 implements AdminDAO2 {
 	@Override
 	public List<Map<String, String>> MDSr(int cPage, int numPerPage, String text) {
 		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
-		return sqlSession.selectList("admin2-mapper.MDSr", text,rows);
+		return sqlSession.selectList("admin2-mapper.MDSr", text, rows);
 	}
 
 	@Override
 	public int selectMdSrTotalContents(String text) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("admin2-mapper.selectMdSrTotalContents",text);
+		return sqlSession.selectOne("admin2-mapper.selectMdSrTotalContents", text);
 	}
 
 	@Override
@@ -123,6 +123,32 @@ public class AdminDAOImpl2 implements AdminDAO2 {
 	public int upDateStock(Stock s) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("admin2-mapper.upDateStock", s);
+	}
+
+	@Override
+	public List<Map<String, String>> saleList(int cPage, int numPerPage) {
+		
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("admin2-mapper.saleList", null, rows);
+	}
+
+	@Override
+	public int selectSaleList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin2-mapper.selectSaleList");
+	}
+
+	@Override
+	public List<Map<String, String>> saleSeList(int cPage, int numPerPage, String text) {
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin2-mapper.saleSeList", text, rows);
+	}
+
+	@Override
+	public int selectSaleListCount(String text) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin2-mapper.selectSaleListCount", text);
 	}
 
 }

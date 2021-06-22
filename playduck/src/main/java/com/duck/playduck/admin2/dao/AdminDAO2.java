@@ -43,6 +43,14 @@ public interface AdminDAO2 {
 
 	int upDateStock(Stock s);
 
+	List<Map<String, String>> saleList(int cPage, int numPerPage);
+
+	int selectSaleList();
+
+	List<Map<String, String>> saleSeList(int cPage, int numPerPage, String text);
+
+	int selectSaleListCount(String text);
+
 	
 
 }

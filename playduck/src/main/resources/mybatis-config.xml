@@ -24,6 +24,7 @@
 		<typeAlias type="com.duck.playduck.md.model.vo.mReward" alias="mreward" />
 		<typeAlias type="com.duck.playduck.md.model.vo.Stock" alias="stock" />
 		<typeAlias type="com.duck.playduck.md.model.vo.mOrder" alias="morder" />
+		<typeAlias type="com.duck.playduck.admin2.vo.OMD" alias="omd" />
 	</typeAliases>
 	
 

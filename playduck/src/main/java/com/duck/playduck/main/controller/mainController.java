@@ -10,7 +10,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +20,7 @@ import org.w3c.dom.NodeList;
 
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.service.MainService;
-import com.duck.playduck.main.model.vo.Main;
+import com.duck.playduck.md.model.vo.mReward;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.play.model.vo.Play;
@@ -453,5 +452,41 @@ public class mainController {
 		String title = mainservice.curationforDuck(Integer.parseInt(c_no));
 
 		return title;
+	}
+	
+	@RequestMapping("/main/mainCuButton.do")
+	@ResponseBody
+	public int mainCuButton(@RequestParam int m_no) {
+		
+		List<mReward> re = new ArrayList<mReward>();
+		
+		re = mainservice.mainCuButton(m_no);
+		
+		
+		int renum = 0;
+		for (mReward r : re) {
+			if(r.getW_up() != 0) {
+				renum += r.getW_up();
+			}
+			
+		}
+		
+		
+		return renum;
+	}
+	
+	@RequestMapping("/main/reviewCheck.do")
+	@ResponseBody
+	public int reviewCheck(@RequestParam int m_no, @RequestParam String p_num) {
+		
+		Review r = new Review();
+		
+		r.setM_no(m_no);
+		r.setP_no(p_num);
+		
+		int result = mainservice.reviewCheck(r);
+		
+		System.out.println("카운트 : " + result);
+		return result;
 	}
 }

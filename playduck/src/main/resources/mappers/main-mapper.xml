@@ -135,5 +135,20 @@
 		WHERE C_NO = #{ parseInt }
 	</select>
 
+	<select id="mainCuButton" parameterType="_int"
+		resultType="mreward">
+		SELECT *
+		FROM REWARD
+		WHERE M_NO = #{m_no}
+
+	</select>
+
+	<select id="reviewCheck" parameterType="review"
+		resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE M_NO = #{m_no} AND
+		P_NO = #{p_no}
+	</select>
 
 </mapper>

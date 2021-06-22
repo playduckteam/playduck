@@ -137,4 +137,56 @@
 		#{d_quan}
 		WHERE D_NO = #{d_no}
 	</select>
+
+	<select id="saleList" resultType="omd">
+		SELECT O.O_NO, M.M_NAME,
+		D.D_PIC, D.D_TITLE, D.D_PRICE, O.O_QUAN,O.O_STATUS
+		FROM ORDERS O
+		JOIN MD
+		D ON (O.D_NO = D.D_NO)
+		JOIN MEMBER M ON (O.M_NO = M.M_NO)
+		ORDER BY O_NO
+	</select>
+
+	<select id="selectSaleList" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		ORDERS
+	</select>
+
+	<select id="saleSeList" resultType="omd">
+		SELECT O.O_NO, M.M_NAME,
+		D.D_PIC, D.D_TITLE, D.D_PRICE, O.O_QUAN,O.O_STATUS
+		FROM ORDERS O
+		JOIN MD
+		D ON (O.D_NO = D.D_NO)
+		JOIN MEMBER M ON (O.M_NO =
+		M.M_NO)
+		WHERE O.O_NO
+		LIKE
+		'%' || #{text} || '%' OR
+		D.D_TITLE LIKE
+		'%' || #{text} || '%' OR
+		M.M_NAME LIKE
+		'%' || #{text} || '%'
+		ORDER BY O_NO
+	</select>
+
+	<select id="selectSaleListCount" parameterType="String"
+		resultType="_int">
+		SELECT count(*)
+		FROM ORDERS O
+		JOIN MD D ON (O.D_NO = D.D_NO)
+		JOIN MEMBER M ON (O.M_NO =
+		M.M_NO)
+		WHERE O.O_NO LIKE
+		'%' || #{text} ||
+		'%' OR
+		D.D_TITLE LIKE
+		'%' || #{text} || '%' OR
+		M.M_NAME LIKE
+		'%' ||
+		#{text} || '%'
+		ORDER BY O_NO
+	</select>
 </mapper>
