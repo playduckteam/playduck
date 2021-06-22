@@ -89,10 +89,14 @@ public class MypageController {
 		
 	// 회원 등급 받아오기
 		
-		if(rank >= 200) {
-			model.addAttribute("rank", "파트너 큐레이터");
-		} else {
-			model.addAttribute("rank", "일반회원");
+		if(m.getM_status().equals("3")) {
+			model.addAttribute("rank","관리자");
+		}else {				
+			if(rank >= 200) {
+				model.addAttribute("rank", "파트너 큐레이터");
+			} else{
+				model.addAttribute("rank", "일반회원");
+			}
 		}
 		
 		// 생년월일 받아오기
@@ -159,11 +163,16 @@ public class MypageController {
 			
 			model.addAttribute("reward", reward);
 			
-
-			if(rank >= 200) {
-				model.addAttribute("rank", "파트너 큐레이터");
-			} else {
-				model.addAttribute("rank", "일반회원");
+			System.out.println(m.getM_status());
+			
+			if(m.getM_status().equals("3")) {
+				model.addAttribute("rank","관리자");
+			}else {				
+				if(rank >= 200) {
+					model.addAttribute("rank", "파트너 큐레이터");
+				} else{
+					model.addAttribute("rank", "일반회원");
+				}
 			}
 			
 		// 2. 파일 업로드
