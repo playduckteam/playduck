@@ -12,7 +12,7 @@
 	</select>
 	<select id="memberadminReward" parameterType="_int"
 		resultType="reward">
-		SELECT M.M_NO, M.M_NAME,M.m_status,(SELECT SUM(W_UP -W_DOWN) FROM REWARD
+		SELECT M.M_NO, M.M_NAME,M.m_status,(SELECT SUM(W_UP -NVL(W_DOWN, 0)) FROM REWARD
 		WHERE M_NO = #{m_no})POINT
 		FROM MEMBER M
 		WHERE M_NO = #{m_no}
