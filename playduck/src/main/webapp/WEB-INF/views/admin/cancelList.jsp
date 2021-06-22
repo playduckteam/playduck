@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="../resources/css/admin.css">
     <link rel="stylesheet" href="../resources/css/pagination.css">
 	<script src="../resources/js/jquery-3.6.0.min.js"></script>
-	    <style>
-    .page-link{
+    <style>
+.page-link{
     color:var(--black-color);
     }
     </style>
@@ -35,7 +35,7 @@
         <div class="AD_main_cancelList">
 
             <div class="AD_cancelList_title">취소 관리</div>
-			<p>총 ${totalContents}개의 상품이 있습니다.</p>
+<%-- 			<p>총 ${totalContents}개의 상품이 있습니다.</p> --%>
             <div class="AD_cancelList_search_img">
 
                 <input type="text" class="searchbox" onkeyup="enterkey();">

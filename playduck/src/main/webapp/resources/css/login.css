@@ -54,10 +54,10 @@ div.modal {
 	padding: 10px 20px 20px 20px;
 	overflow-y: initial !important;
 	overflow-y: auto;
-	margin-left: 13%;
-	margin-right: auto;
+	transform: translateX( -50% );
 	border-radius: 30px;
-	        position: fixed;
+	left:50%;
+	position: fixed;
 
 }
 
