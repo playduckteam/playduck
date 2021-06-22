@@ -39,6 +39,8 @@
 	
 	<update id="insertPfImg" parameterType="Member">
 		UPDATE MEMBER SET M_PIC = #{ m_pic }, M_PICRENAMED = #{ m_picRenamed }
+		WHERE M_NO = #{ m_no }
+		
 	</update>
 	
 	<select id="countReward" resultType="_int" parameterType="Member">
