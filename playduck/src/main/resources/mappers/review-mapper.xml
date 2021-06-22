@@ -113,7 +113,7 @@ WHERE M_NO = #{m_no} AND R_NO = #{r_no} AND RL_STATUS = 2
 	</select>
 	
 		<insert id="insertReward" parameterType="_int">
-		insert into reward values(seq_r_no.nextval, #{m_no}, 5, null, sysdate)
+		insert into reward values(seq_w_no.nextval, #{m_no}, 5, null, sysdate)
 	</insert>
 	
 		<update id="insertPGood">
