@@ -89,7 +89,7 @@ public class MypageController {
 		
 	// 회원 등급 받아오기
 		
-		if(rank >5000) {
+		if(rank >= 200) {
 			model.addAttribute("rank", "파트너 큐레이터");
 		} else {
 			model.addAttribute("rank", "일반회원");

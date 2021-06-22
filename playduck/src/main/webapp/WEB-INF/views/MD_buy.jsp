@@ -40,9 +40,9 @@
                 <img class="Sale_baskimg" src="${baskList.d_pic}" width="200px" height="200px">
             </div>
             <div class="S_list" id="Sale_title">
-                <table>
+                <table class="buy1_total">
                     <tr> 
-                        <td class="Sale_title_th1"colspan="2">${baskList.d_title }</td>
+                        <td class="Sale_title_th1" colspan="2">${baskList.d_title }</td>
                     </tr>
                     <tr>
                         <td class="Sale_title_td1">배송비</td>
@@ -62,11 +62,15 @@
                 </table>
             </div>
             <div class="S_list" id="Sale_price">
-                <table>
-                    <tr class="Sale_price_tr1">    ${ formatter.format(baskList.d_price )} 원   </tr>
+                <table class="buy_total">
+                    <tr  >
+                    <td class="Sale_price_tr1" style="text-align: right;" colspan="2">
+                    	${ formatter.format(baskList.d_price )} 원
+                    	</td>
+                    </tr>
                     <tr>
                            <td><p class="Sale_price_tr2" >합계</p></td>
-                           <td></td>
+                          
                            <td ><p class="Sale_price_tr3">${ formatter.format( baskList.d_price* baskList.b_quan + 2500 ) } 원 </p></td>
                     </tr>
                 </table>

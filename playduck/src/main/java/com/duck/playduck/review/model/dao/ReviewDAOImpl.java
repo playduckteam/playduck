@@ -23,4 +23,19 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sqlSession.insert("review-mapper.insertReview2", map);
 	}
 
+	@Override
+	public int insertReward(int m_no) {
+		return sqlSession.insert("review-mapper.insertReward", m_no);
+	}
+
+	@Override
+	public int insertPGood(String p_no) {
+		return sqlSession.update("review-mapper.insertPGood", p_no);
+	}
+
+	@Override
+	public int insertPBad(String p_no) {
+		return sqlSession.update("review-mapper.insertPBad", p_no);
+	}
+
 }

@@ -19,6 +19,7 @@ public class DetailDAOImpl implements DetailDAO {
 
 	@Override
 	public PlayDetail selectPDOne(String p_no) {
+
 		return sqlSession.selectOne("play-mapper.selectPD", p_no);
 	}
 

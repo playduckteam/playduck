@@ -47,7 +47,7 @@ public class DetailController {
 			@RequestParam String p_no
 			) {
 		
-			 System.out.println(p_no);
+			 System.out.println("p_no = " + p_no);
 
 		
 		 ArrayList dlist = new ArrayList();
@@ -56,7 +56,7 @@ public class DetailController {
 		
 		 PlayDetail playDetail = detailservice.selectPDOne(p_no);
 		 Play play = detailservice.selectPlayOne(p_no);
-			
+			System.out.println("플레이디테일 : " + playDetail);
 		
 			try {
 

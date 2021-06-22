@@ -60,9 +60,11 @@ body, html, section{
 					<button class="main_toprevieww" onclick="goReviewS('${pi.p_no}');"
 					style="border: none; background-color: var(--black-color);color: #fff;">작품보기</button>
 				 <hr>
-				 <button class='main_topreviewr' onclick="goReviewR('${pi.p_no}');"
+				 <button class='main_topreviewr' name="${pi.p_no}" onclick="goReviewR('${pi.p_no}');"
 					 style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>
 				</div>
+				
+				
 			<div class="list_content">
 			
 				<script>
@@ -92,6 +94,43 @@ body, html, section{
 			</div>
 		</div>
 		</c:forEach>	
+		
+		<script>
+				
+				/* 아이디 중복검사 이벤트 추가 */
+				function goReviewR(no){
+        			var m_no = '${ member.m_no }';
+        			
+        			if( m_no != '' ){
+        				$.ajax({
+				            url  : "${pageContext.request.contextPath}/review/reviewDuplicate.do",
+				            data : {p_no : no,
+      	                	    m_no : '${ member.m_no }'},
+				            dataType: "json",
+				            success : function(data){
+				                console.log('버튼통신성공');
+				                console.log(data);
+				                if(data == 0){ 
+				                	location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no=" + no
+				                } else {
+				                    alert('리뷰를 작성한 공연입니다');
+				                    
+				                   
+				                }
+				            }, error : function(jqxhr, textStatus, errorThrown){
+				                console.log("ajax 처리 실패");
+
+				            }
+			        	});
+        			} else {
+        				alert("로그인 후 이용 가능한 기능입니다.");
+        				$('a.modal_loginBtn').click();
+        			}
+				        
+	     	};
+				
+				
+				</script>
 		</div>
 	<c:out value="${pageBar}" escapeXml="false"/>
 	</section>
@@ -182,9 +221,9 @@ function goReviewS(p_no){
 	location.href = "${pageContext.request.contextPath}/detail/detail.do?p_no="+p_no;
 }
 
-function goReviewR(p_no){
-	location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no="+p_no;
-}
+// function goReviewR(p_no){
+// 	location.href = "${pageContext.request.contextPath}/review/reviewForm.do?p_no="+p_no;
+// }
 
 </script>
 <br /><br /><br /><br /><br /><br /><br /><br />

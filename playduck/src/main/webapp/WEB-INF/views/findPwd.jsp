@@ -18,6 +18,7 @@ height: 100%}
 <body>
 	<%@ include file="common/header.jsp"%>
             <div class="modal_findPwdDiv" title="아이디 비밀번호 찾기">
+            <p class="modal_content_close"><a style="color:var(--black-color)" href="${pageContext.request.contextPath}/">X</a></p>
                 <div class="modal_content findArea">
                     <div class="find_id">
                         <h2 class=find_title>비밀번호 변경</h2>
