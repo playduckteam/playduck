@@ -45,7 +45,7 @@ public interface DetailDAO {
 
 	int detailBookmarkCheck(Map<String, Object> rmap);
 
-	int deletePlayDetail(int r_no);
+
 
 	
 

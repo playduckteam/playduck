@@ -151,7 +151,7 @@ public class DetailController {
 				@RequestParam int r_no){
 	    
 		detailservice.deleteReview(r_no);
-		detailservice.deletePlayDetail(r_no);
+		
 		
 		
 		  String loc = "/";

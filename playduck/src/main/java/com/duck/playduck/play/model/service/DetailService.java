@@ -47,7 +47,6 @@ public interface DetailService {
 
 	int detailBookmarkCheck(Map<String, Object> rmap);
 
-	int deletePlayDetail(int r_no);
 
 
 }

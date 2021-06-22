@@ -110,9 +110,6 @@ public class DetailServiceImpl implements DetailService {
 		return detailDAO.detailBookmarkCheck(rmap);
 	}
 
-	@Override
-	public int deletePlayDetail(int r_no) {
-		return detailDAO.deletePlayDetail(r_no);
-	}
+
 
 }

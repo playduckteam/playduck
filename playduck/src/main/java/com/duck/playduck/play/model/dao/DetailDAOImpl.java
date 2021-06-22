@@ -116,9 +116,6 @@ public class DetailDAOImpl implements DetailDAO {
 		return sqlSession.selectOne("review-mapper.detailBookmarkCheck", rmap);
 	}
 
-	@Override
-	public int deletePlayDetail(int r_no) {
-		return sqlSession.delete("review-mapper.deletePlayDetail", r_no);
-	}
+
 
 }
