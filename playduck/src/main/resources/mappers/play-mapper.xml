@@ -28,8 +28,9 @@ WHERE P_NO = #{p_no}
 
 <select id="playsr" parameterType="String" resultType="playall">
 
-SELECT P_NO,PRFNM, POSTER
-		FROM PLAYALL
+SELECT PA.P_NO,PA.PRFNM,PA.POSTER,PA.PRFPDFROM,floor(P_GOOD/DECODE((P_GOOD + P_BAD),0,1,(P_GOOD + P_BAD))*100) p_rating, NVL((SELECT COUNT(R.P_NO) FROM REVIEW R WHERE R.P_NO = PA.P_NO GROUP BY P_NO), 0) P_COUNT
+FROM PLAYALL PA
+JOIN PLAY P ON(P.P_NO =PA.P_NO)
 		WHERE PRFNM LIKE '%' || #{text} || '%'
 </select>
 
