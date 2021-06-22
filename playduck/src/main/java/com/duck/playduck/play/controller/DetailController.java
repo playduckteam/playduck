@@ -151,8 +151,16 @@ public class DetailController {
 				@RequestParam int r_no){
 	    
 		detailservice.deleteReview(r_no);
-			
-			return "detail";
+		
+		
+		  String loc = "/";
+		  String msg = "리뷰가 삭제되었습니다.";
+		  
+		  model.addAttribute("loc",loc);
+		  model.addAttribute("msg",msg);
+		 
+		
+		  return "common/msg";
 		}
 	
 	  @RequestMapping("/review/reviewDuplicate.do")
