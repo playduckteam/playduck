@@ -351,7 +351,7 @@
             position: absolute;
             top: 60px;
             left: 50px;
-            text-align : center;
+            
         }
 
 		.main_cuinfo {
