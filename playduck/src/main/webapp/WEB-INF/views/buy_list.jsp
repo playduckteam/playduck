@@ -58,7 +58,7 @@
                     </tr>
                     <tr>
                         <td class="Sale_title_td1" style="padding-bottom: 0px;">송장번호</td>
-                        <td class="Sale_title_td2" style="padding-bottom: 0px;">380848576315</td>
+                        <td class="Sale_title_td2" style="padding-bottom: 0px;">551547288621</td>
                         <td class="Sale_title_td1" style="padding-bottom: 0px;">주문번호 </td>
                     <td class="Sale_title_td2" style="padding-bottom: 0px;">${bl.o_no}</td>
                         
