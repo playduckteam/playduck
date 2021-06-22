@@ -296,6 +296,7 @@
 			     
 				</c:if>
 				
+				// 로그인 후 리뷰작성 클릭 시 만약 공연에 이미 작성 한 리뷰가 있을 시 경고창 
 				<c:if test="${ member != null}">
 				$(".main_topreviewr").on("click",function(){
 					
@@ -734,6 +735,7 @@
  				 }
  				 
  				 
+ 				// 로그인 X 시 리뷰작성 버튼 누르면 경고창
  				<c:if test="${ member == null}">
 				  $(".main_topreviewr").click(function() {
 					  $('.modal_loginBtn').click();

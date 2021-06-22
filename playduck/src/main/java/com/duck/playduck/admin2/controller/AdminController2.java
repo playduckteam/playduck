@@ -30,6 +30,7 @@ public class AdminController2 {
 	@Autowired
 	AdminService2 adminService;
 
+	// 리뷰 리스트 가져오기
 	@RequestMapping("/admin2/reviewList.do")
 	public String salesList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
 			Model model) {
@@ -50,6 +51,7 @@ public class AdminController2 {
 		return "admin/reviewList";
 	}
 
+	// 검색 한 리뷰 리스트 가져오기
 	@RequestMapping("/admin2/reviewSr.do")
 	public String reviewSr(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			@RequestParam(required = false) String text) {
@@ -70,6 +72,7 @@ public class AdminController2 {
 		return "admin/reviewList";
 	}
 
+	// 리뷰 삭제하기
 	@RequestMapping("/admin2/reviewDe.do")
 	public String deleteReview(@RequestParam int r_no) {
 
@@ -84,6 +87,7 @@ public class AdminController2 {
 		return "admin/productEnList";
 	}
 
+	// 상품 인서트 하기
 	@RequestMapping(value = "/admin2/mdEnIn.do", method = RequestMethod.POST)
 	public String mdEnIn(@RequestParam String name, @RequestParam int price, @RequestParam int quan,
 			@RequestParam("mainP") MultipartFile mainP, @RequestParam("detailP") MultipartFile detailP,
@@ -134,6 +138,7 @@ public class AdminController2 {
 		return "redirect:/admin2/mdListPage.do";
 	}
 
+	// 상품 이름 바꾸기
 	public String fileNameChanger(String oldFileName) {
 
 		String ext = oldFileName.substring(oldFileName.lastIndexOf(".") + 1);
@@ -144,6 +149,7 @@ public class AdminController2 {
 
 	}
 
+	// MD 리스트 가져오기
 	@RequestMapping(value = "/admin2/mdListPage.do")
 	public String mdListPage(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
 			Model model) {
@@ -167,6 +173,7 @@ public class AdminController2 {
 		return "admin/mdList";
 	}
 
+	// 검색 한 MD 리스트 가져오기
 	@RequestMapping("/admin2/MdSr.do")
 	public String MDSr(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			@RequestParam(required = false) String text) {
@@ -192,6 +199,7 @@ public class AdminController2 {
 		return "admin/mdList";
 	}
 
+	// MD 상품 정보 가져오기
 	@RequestMapping("/admin2/updateMD")
 	public String updateMD(@RequestParam int d_no, Model model) {
 
@@ -208,6 +216,7 @@ public class AdminController2 {
 		return "admin/productEnList";
 	}
 
+	// 수정 한 상품 정보 업데이트
 	@RequestMapping("/admin2/mdEnUpIn.do")
 	public String mdEnUpIn(@RequestParam String name, @RequestParam int price, @RequestParam int quan,
 			@RequestParam("mainP") MultipartFile mainP, @RequestParam("detailP") MultipartFile detailP,
@@ -263,6 +272,7 @@ public class AdminController2 {
 		return "redirect:/admin2/mdListPage.do";
 	}
 
+	// 판매 리스트 가져오기
 	@RequestMapping("/admin2/saleList.do")
 	public String saleList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
 			Model model) {
@@ -283,6 +293,7 @@ public class AdminController2 {
 		return "admin/salesList";
 	}
 
+	// 검색 한 상품리스트 가져오기
 	@RequestMapping("/admin2/OrSe.do")
 	public String OrSe(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			@RequestParam(required = false) String text) {
