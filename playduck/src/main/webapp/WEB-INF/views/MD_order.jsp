@@ -89,7 +89,7 @@
     
     
    <script>
-/*    <c:if test="${ member == null}">
+   <c:if test="${ member == null}">
 
    $(function() {	
 
@@ -100,7 +100,7 @@
    						
     	 })
    });	
-   </c:if> */
+   </c:if> 
 
   
   /* 수량변화에 따른 합계금액변화  */
@@ -132,7 +132,6 @@
 
   /* 장바구니로 담기 */
   $('#goCart').on('click',function(){
-	  var mno = ${member.m_no};
 	  var dno = ${md.d_no};
 	  var num = $('#num').val();
 	  var sum1 = num*${md.d_price} + 2500;
@@ -143,45 +142,51 @@
 	  console.log(reward);
 	  console.log(sum1);
 	   */
-	  if(num != 0){ 
-	   
-		  
-	   alert('장바구니에 상품이 담겼습니다.')
-	  var com = confirm("장바구니로 이동하시겠습니까?")
-	  
-		  if(com==true){
-				location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?d_no="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
-	
+	   <c:if test="${ member != null}">
+		  if(num != 0){ 
+		   
 			  
-		  }else if(com==false){
-			
-			  location.href = "${pageContext.request.contextPath}/MD/MD_buyre.do?d_no="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
-		  }
-	  } else if( num == 0) {
-		  alert('상품 수량이 0 입니다.')
-	  };
-	  
+		   alert('장바구니에 상품이 담겼습니다.')
+		  var com = confirm("장바구니로 이동하시겠습니까?")
+		  
+			  if(com==true){
+					location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?d_no="+dno+"&num="+num+"&sum="+sum1;
+		
+				  
+			  }else if(com==false){
+				
+				  location.href = "${pageContext.request.contextPath}/MD/MD_buyre.do?d_no="+dno+"&num="+num+"&sum="+sum1;
+			  }
+		  } else if( num == 0) {
+			  alert('상품 수량이 0 입니다.')
+		  };
+		  </c:if> <c:if test="${ member == null}">
+		  alert('로그인 해주세요')
+		  </c:if>
+		 
   });
   	
 		  //구매하기 버튼
 		 $('#gobuy').on('click',function(){
-			  var mno = ${member.m_no};
 			  var dno = ${md.d_no};
 			  var num = $('#num').val();
 			  var sum1 = num*${md.d_price} + 2500;
 			  
 			  
-			  
+	 <c:if test="${ member != null}"> 
 		  if(num != 0){ 	  
 			 	 var com = confirm("구매하시겠습니까?")
 				  if(com == true){
-					  location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?d_no="+dno+"&mno="+mno+"&num="+num+"&sum="+sum1;
+					  location.href = "${pageContext.request.contextPath}/MD/MD_buy.do?d_no="+dno+"&num="+num+"&sum="+sum1;
 				  }else if (com == false){
 					  
 				  }
 		  } else if( num == 0) {
 			  alert('상품 수량이 0 입니다.')
 		  };
+		  </c:if> <c:if test="${ member == null}">
+		  alert('로그인 해주세요')
+		  </c:if>
 			
 		 });
  

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -102,13 +103,14 @@ private static String getTagValue (String tag, Element eElement) {
 	@RequestMapping("/MD/MD_buy")
 	public String Md_buy(
 			@RequestParam int d_no,
-			@RequestParam int mno,
 			@RequestParam int num,
 			@RequestParam int sum,
-			Model model
+			Model model,
+			HttpServletRequest req
 			) {
 	// 장바구니에 MD 추가하기
-	
+		Member m = (Member)req.getSession().getAttribute("member");
+		int mno = m.getM_no();
 		Md md = mdService.selectOneBasket(d_no,mno,num);
 		
 		if( md == null) {
@@ -123,15 +125,16 @@ private static String getTagValue (String tag, Element eElement) {
 	@RequestMapping("/MD/MD_buyre")
 	public String Md_buyre(
 			@RequestParam int d_no,
-			@RequestParam int mno,
 			@RequestParam int num,
 			@RequestParam int sum,
-			Model model
+			Model model,
+			HttpServletRequest req
 			) {
 	// 장바구니에 MD 추가하기
-	
+		Member m = (Member)req.getSession().getAttribute("member");
+		int mno = m.getM_no();
 		Md md = mdService.selectOneBasket(d_no,mno,num);
-		
+	
 		if( md == null) {
 			int result = mdService.addBasket(d_no, mno, num);
 		}else {
