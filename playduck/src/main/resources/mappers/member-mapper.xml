@@ -71,7 +71,7 @@
 	</select>
 	
 	<select id="bookmarkCuration" resultType="curation" parameterType="_int">
-		SELECT C_TITLE, C_PIC, C_NO
+		SELECT C_TITLE, C_PIC, C_NO, C_PICRENAMED
 		FROM BOOKMARK
 		JOIN CURATION ON CURATION.C_NO = BOOKMARK.C_LIST
 		WHERE BOOKMARK.M_NO = #{m_no}

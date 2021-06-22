@@ -135,6 +135,37 @@ public class MypageController {
 			String originName = null;
 			String changeName = null;
 			
+			
+			
+
+			int review = mypageService.selectCount(m);
+			
+			System.out.println(m);
+				
+		
+			model.addAttribute("review", review);
+			
+			int result2 = mypageService.countReward(m);
+			int reward = 0;
+			int rank = 0;
+			
+			if(result2 > 0) {
+				reward = mypageService.selectReward(m);
+				rank = mypageService.selectRank(m);
+			}
+			
+			System.out.println("result 결과 : " + result2);
+			System.out.println("reward 결과 : " + reward);
+			
+			model.addAttribute("reward", reward);
+			
+
+			if(rank >= 200) {
+				model.addAttribute("rank", "파트너 큐레이터");
+			} else {
+				model.addAttribute("rank", "일반회원");
+			}
+			
 		// 2. 파일 업로드
 			for(MultipartFile f : upFiles) {
 				
@@ -205,7 +236,7 @@ public class MypageController {
 		
 		List<String> list1 = new ArrayList<String>();
 		List<String> list2 = new ArrayList<String>();
-		//List<String> list3 = new ArrayList<String>();
+		List<String> list3 = new ArrayList<String>();
 		
 		Map<String, List> map = new HashMap<String, List>();
 		
@@ -233,7 +264,7 @@ public class MypageController {
 						
 						list1.add(getTagValue("prfnm", eElement) );
 						list2.add(getTagValue("poster", eElement) );	
-						//list3.add(i.getP_no());
+						list3.add(i.getP_no());
 					}	
 				}
 			
@@ -246,7 +277,7 @@ public class MypageController {
 		
 		map.put("title", list1);
 		map.put("poster", list2);
-		//map.put("pnum", list3);
+		map.put("pnum", list3);
 		
 		
 		return map;
@@ -327,12 +358,13 @@ public class MypageController {
 			
 			if(c != null) {
 				list1.add(c.getC_title());
-				list2.add(c.getC_pic());
+				list2.add(c.getC_picrenamed());
 				list3.add(c.getC_no());
 			}
 			
 		}
 		
+		System.out.println("list2확인 : "+list2);
 		map.put("title", list1);
 		map.put("poster", list2);
 		map.put("cu", list3);

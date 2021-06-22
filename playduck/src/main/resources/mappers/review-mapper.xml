@@ -41,9 +41,14 @@ WHERE P_NO = #{p_no} AND R_STATUS = '2' and R.m_no != #{m_no}
   		delete from review where r_no = #{r_no}
  	</delete>
 	<select id="myReview" resultType="Review" parameterType="_int">
-		SELECT P_NO
-		FROM REVIEW
-		WHERE M_NO = #{ m_no }
+		SELECT *
+		FROM (SELECT P_NO
+                    FROM
+                    REVIEW
+                    WHERE M_NO = #{m_no}
+                    ORDER BY R_NO DESC
+                    )
+		WHERE ROWNUM &lt;=20
 	</select>
 	
 	<select id="reviewDupl" resultType="_int" parameterType="hashmap">

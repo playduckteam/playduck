@@ -304,6 +304,23 @@
             height: 220px;
             margin-bottom: 5px;
         }
+        
+               .cellcu {
+            width: 400px;
+            height: 220px;
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 5px;
+            position: relative;
+        }
+
+        .cellcu>img {
+            width: 400px;
+            height: 220px;
+            margin-bottom: 5px;
+            object-fit: cover;
+        }
+        
 
         .main_topcontainer li,
         .mypage_bookmarkContainer, .mypage_bookmarkContainer2 {
@@ -334,7 +351,15 @@
             position: absolute;
             top: 60px;
             left: 50px;
+            text-align : center;
         }
+
+		.main_cuinfo {
+			position: absolute;
+            top: 60px;
+            left: 180px;
+            text-align : center;
+		}
 
         .main_contentTitle {
             font-size: 14px;
@@ -723,7 +748,7 @@
         <hr class="Mypage_line1">
         <!--작성한 리뷰-->
         <article class="mypage_myReview">
-            <div> <span class="main_fonto">${member.m_name}</span> <span class="main_fontw">님이 작성한 리뷰 보러가기</span></div>
+            <div> <span class="main_fonto">${member.m_name}</span> <span class="main_fontw">님이 최근 작성한 리뷰</span></div>
             <div class="main_topwindow">
                 <div class="button-container">
                     <button class="prev"><i class="arrow left"></i></button>
@@ -789,7 +814,7 @@
 					innerHtml =	  '<li class="cell">'
 					innerHtml +='<img src='+data.poster[i] +'>'
 					innerHtml +='<div class="main_topinfo" style="display:none;">'
-					innerHtml +=  '<button class="main_toprevieww"'
+					innerHtml +=  "<button class='main_toprevieww' onclick=\"location.href='${pageContext.request.contextPath}/detail/detail.do?p_no="+data.pnum[i]+"'\""
 					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">리뷰보기</button>'
 					innerHtml +=  '<hr>'
 					
@@ -943,7 +968,7 @@
 					innerHtml =	  '<li class="cell">'
 					innerHtml +='<img src='+data.poster[i] +'>'
 					innerHtml +='<div class="main_topinfo" style="display:none;">'
-					innerHtml +=  '<button class="main_toprevieww"'
+					innerHtml +=  "<button class='main_toprevieww' onclick=\"location.href='${pageContext.request.contextPath}/detail/detail.do?p_no="+data.pnum[i]+"'\""
 					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">상세보기</button>'
 					innerHtml +=  '<hr>'
 					innerHtml +=  '<br>'
@@ -1018,7 +1043,7 @@
 <br /><br /><br /><br /><br />
     <!-- 세번째 슬라이드 -->
     <article class="mypage_bookmark2">
-        <div> <span class="main_fonto">찜한 </span> <span class="main_fontw">콘텐츠 목록</span></div>
+        <div> <span class="main_fonto">찜한 </span> <span class="main_fontw">큐레이션 목록</span></div>
         <div class="main_topwindow">
             <div class="button-container">
                 <button class="prev3"><i class="arrow left"></i></button>
@@ -1095,10 +1120,10 @@
 							
 					var innerHtml = ""
 					
-					innerHtml =	  '<li class="cell">'
-					innerHtml +='<img src='+data.poster[i] +'>'
-					innerHtml +='<div class="main_topinfo" style="display:none;">'
-					innerHtml +=  '<button class="main_toprevieww"'
+					innerHtml =	  '<li class="cellcu">'
+					innerHtml +='<img  src="../resources/curation/'+data.poster[i]+'">'
+					innerHtml +='<div class="main_cuinfo" style="display:none;">'
+					innerHtml +=  "<button class='main_toprevieww' onclick=\"location.href='${pageContext.request.contextPath}/curation/curationSelectOne.do?c_no="+data.cu[i]+"'\""
 					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">상세보기</button>'
 					innerHtml +=  '<hr>'
 					innerHtml +=  '<br>'
@@ -1117,7 +1142,7 @@
 					$("#bookmarList2").append(innerHtml);
 				
 					// 글자 수 제한
-					var length = 8;
+					var length = 35;
 					
 					
 					$('.bookmarkCuration'+i).each(function(){
@@ -1165,10 +1190,10 @@
 					
 					
 					// 포스터에 hover 시 리뷰보기 / 작성하기
-				    $('.cell').on('mouseenter', function () {
-				         	 $(this).children('.main_topinfo').show();
+				    $('.cellcu').on('mouseenter', function () {
+				         	 $(this).children('.main_cuinfo').show();
 				    }).on('mouseleave', function () {
-				        	 $(this).children('.main_topinfo').hide();
+				        	 $(this).children('.main_cuinfo').hide();
 				    });
 				
 				

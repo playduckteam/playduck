@@ -161,6 +161,20 @@ section {
             height: 220px;
             margin-bottom: 5px;
         }
+        .cellcu {
+            width: 400px;
+            height: 220px;
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 5px;
+            position: relative;
+        }
+
+        .cellcu>img {
+            width: 400px;
+            height: 220px;
+            margin-bottom: 5px;
+        }
 
         .main_topcontainer li,
         .mypage_bookmarkContainer, .mypage_bookmarkContainer2 {
