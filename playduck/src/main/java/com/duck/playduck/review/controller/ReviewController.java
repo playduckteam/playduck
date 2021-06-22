@@ -13,13 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Document;
-
 
 import com.duck.playduck.member.model.vo.Member;
+import com.duck.playduck.play.model.vo.Play;
 import com.duck.playduck.review.model.service.ReviewService;
 
 @Controller
@@ -83,7 +83,7 @@ public class ReviewController {
 	}
 		
 	
-		
+		model.addAttribute("p_no", p_no);
 		model.addAttribute("rwlist", rwlist);
 
 		
@@ -91,7 +91,7 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/review/reviewWrite.do")
-	public String insertReview(HttpServletRequest req,Model model,
+	public String insertReview(HttpServletRequest req,Model model, Play play,
 				@RequestParam String p_no,
 				@RequestParam String r_status,
 				@RequestParam int pd_theater,
@@ -103,6 +103,8 @@ public class ReviewController {
 		System.out.println("리뷰 저장");
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
 		
 		Member m = (Member)req.getSession().getAttribute("member");
 		
@@ -117,11 +119,28 @@ public class ReviewController {
 		map.put("pd_casting", pd_casting);
 		map.put("r_content", r_content);
 		
+		if(r_status.equals("1")) {
+			
+			reviewService.insertPGood(p_no);
+			
+		}else {
+			
+			reviewService.insertPBad(p_no);
+			
+		}
+		
+		
 		reviewService.insertReview(map);
 		reviewService.insertReview2(map);
+		reviewService.insertReward(m.getM_no());
 		
+		String loc = "/detail/detail.do?p_no=" + p_no;
+		String msg = "리뷰 작성 완료";
 		
-		return "detail/detail.do?p_no=" + p_no;
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
 	}
 
 }

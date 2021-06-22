@@ -70,6 +70,22 @@
                 });
 
             });
+            
+            $(function(){
+	            $(".rw_review").on("keyup",function(){
+	            	var textthing = $(".rw_review").val();
+	            	console.log(textthing);
+	            	if(textthing==""){
+	            		console.log(true);
+	            		$(".abledWriteBtn").hide();
+	            		$(".disabledWriteBtn").show();
+	            	} else {
+	            		console.log(false);
+	            		$(".disabledWriteBtn").hide();
+	            		$(".abledWriteBtn").show();
+	            	}
+	            });
+            });
         </script>
         <h4 class="rw_contentTitle">평점</h4>
         <table class="rw_ratingArea">
@@ -93,9 +109,10 @@
         <h4 class="rw_contentTitle">한줄평</h4>
         <div class="rw_reviewArea">
         <textarea class="rw_review" name="r_content" cols="70" rows="2"
-              style="resize:none;"></textarea></div>
+              style="resize:none;" value="내용을 입력하세요"></textarea></div>
               
-              <input type="submit" class="rw_writeBtn" value="리뷰 작성하기" >
+               <input type="submit" class="rw_writeBtn abledWriteBtn" value="리뷰 작성하기" style="display:none;">
+            <button type="button" class="rw_writeBtn disabledWriteBtn" style="background:gray;">한줄평을 채워주세요</button>
               <!-- <button class="rw_writeBtn" onclick = "fn_goReviewWrite()">리뷰 작성하기</button>  -->
 				
 				</form>

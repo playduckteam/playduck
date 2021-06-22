@@ -49,8 +49,8 @@
                         <td class="Sale_title_td2">${bl.o_date}</td>
                         <td class="Sale_title_td1">배송비</td>
                         <td class="Sale_title_td2">2,500원</td>
-                        </tr>
-                        <tr>
+                     </tr>
+                     <tr>
                         <td class="Sale_title_td1">수량</td>
                         <td class="Sale_title_td2">${bl.o_quan}</td>
                         <td class="Sale_title_td1">리워드 사용</td>

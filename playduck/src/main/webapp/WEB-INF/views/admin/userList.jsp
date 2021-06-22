@@ -58,11 +58,11 @@
                     <tr>
                         <td>${ri.m_no}</td>
                         <td>${ri.m_name}</td>
-                        <c:if test="${ri.point gt 100}">
+                        <c:if test="${ri.point ge 200}">
                         <td>${ri.point}</td>
                         <td>파트너 큐레이터</td>
                         </c:if>
-                        <c:if test="${ri.point lt 100}">
+                        <c:if test="${ri.point lt 200}">
                         <td>${ri.point}</td>
                         <td>일반회원</td>
                         </c:if>

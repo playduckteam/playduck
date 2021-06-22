@@ -75,6 +75,7 @@
         font-size: 27px;
         font-weight: 700;
         text-align: right;  
+        float: right;
        
     }
 
@@ -99,11 +100,13 @@
         #Sale_price{
             position:absolute;
             padding-top: 40px;
-            padding-left: 250px;
+			float:right;
             color: #ff6801;
 			 font-size: 27px;
             font-weight: 700;
             text-align: right;
+            display:inline-block;
+            right:0;
         }
 
        .Sale_price_tr1{
@@ -112,6 +115,7 @@
             font-size: 27px;
             font-weight: 700;
             text-align: right;
+			
         }
 
  		.Sale_price_tr2{
@@ -321,4 +325,12 @@
 	position:absolute;
 	left:-5px;
 	top:30px;
+}
+
+.buy_total{
+	float: right;
+}
+
+.buy1_total{
+	width: 450px;
 }

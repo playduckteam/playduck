@@ -25,6 +25,21 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDAO.insertReview2(map);
 		
 	}
+
+	@Override
+	public int insertReward(int m_no) {
+		return reviewDAO.insertReward(m_no);
+	}
+
+	@Override
+	public int insertPGood(String p_no) {
+		return reviewDAO.insertPGood(p_no);
+	}
+
+	@Override
+	public int insertPBad(String p_no) {
+		return reviewDAO.insertPBad(p_no);
+	}
 	
 	
 	

@@ -8,7 +8,12 @@
 					<!-- 리뷰 1 -->
 					<div id="detail_goodContent" style="position: relative;">
 						<div class="detail_reviewProfile">
+						<c:if test="${empty r.M_PICRENAMED}" >
+						<img src="${pageContext.request.contextPath}/resources/profileImg/${r.M_PIC}" alt="" />
+						</c:if>
+						<c:if test="${!empty r.M_PICRENAMED}" >
 						<img src="${pageContext.request.contextPath}/resources/profileImg/${r.M_PICRENAMED}" alt="" />
+						</c:if>
 						</div>
 						<div class="detail_reviewOne">
 							<table>

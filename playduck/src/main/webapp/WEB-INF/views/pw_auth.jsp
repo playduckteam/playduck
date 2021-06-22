@@ -41,6 +41,7 @@ height: 100%}
 <body>
 	<%@ include file="common/header.jsp"%>
             <div class="modal_findPwdDiv" title="이메일 인증번호 확인">
+            <p class="modal_content_close" ><a style="color:var(--black-color)" href="${pageContext.request.contextPath}/">X</a></p>
                 <div class="modal_content findArea">
                     <div class="find_id">
                         <h2 class=find_title>이메일 인증번호 확인</h2>

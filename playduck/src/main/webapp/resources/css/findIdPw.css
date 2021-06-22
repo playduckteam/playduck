@@ -64,7 +64,7 @@ div.modal {
 	font-weight: bolder;
 }
 
-#m_id, #email, #find_m_email, #findPwd1, #findPwd2 {
+#m_id, #email, #find_m_email, #findPwd1, #findPwd2, #mm_pwd, #mm_pwd2{
 	width: 298px;
 	height: 38px;
 	display: block;
