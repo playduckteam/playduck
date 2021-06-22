@@ -510,9 +510,9 @@ function enterkey() {
                     <form action="" method="post">
                         <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디"/>
                         <input type="password" name="m_pwd" id="m_pwd" placeholder="비밀번호"/>
-
+						<dic class="login_findArea">
                         <div class="login_find" id="modal_findBtn">아이디/비밀번호 찾기</div>
-
+</dic>
                         <button type="submit" class="login_box login orange">로그인</button>
                         <button type="button" class="login_box join orange" id="login_joinBtn">회원가입</button>
                     </form>
