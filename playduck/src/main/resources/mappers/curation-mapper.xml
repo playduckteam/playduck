@@ -7,7 +7,7 @@
 		insert into curation values(seq_c_no.nextval, #{ m_no }, #{ c_title }, #{ c_content }, sysdate, #{ c_pic }, #{ c_picrenamed })
 	</insert>
 <select id="selectCurationList" resultType="curation">
-SELECT * FROM CURATION
+SELECT * FROM CURATION ORDER BY C_NO DESC
 </select>
 <select id="selectTotalCuration" resultType="_int">
 SELECT COUNT(*) FROM CURATION ORDER BY C_NO
@@ -56,6 +56,15 @@ WHERE C_NO = #{c_no}
 	<select id="selectTotalContents2" resultType="_int" parameterType="string">
 	SELECT COUNT(*) FROM CURATION
 	WHERE C_TITLE LIKE '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="selectC" resultType="_int">
+	SELECT 
+	        LAST_NUMBER 
+	FROM 
+	        USER_SEQUENCES 
+	WHERE 
+	        SEQUENCE_NAME = 'SEQ_C_NO'
 	</select>
 	
 </mapper>

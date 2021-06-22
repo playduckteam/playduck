@@ -83,8 +83,17 @@ public class CurationController {
 			/******************************************/
 			System.out.println(curation);
 			
+			// c_no 불러오기
+			
+			int C = curationService.getC()-1;
 
-			return "curation/curationSelectOne.do?c_no=" + curation.getC_no();
+			String loc = "/curation/curationSelectOne.do?c_no=" + C ;
+			String msg = "리뷰작성 완료";
+			
+			model.addAttribute("loc", loc);
+			model.addAttribute("msg" ,msg);
+			
+			return "common/msg";
 				
 	}
 

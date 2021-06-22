@@ -31,6 +31,8 @@ public interface CurationService {
 
 	int selectTotalContents2(String keyword);
 
+	int getC();
+
 
 
 }

@@ -81,6 +81,12 @@ public class CurationDAOImpl implements CurationDAO{
 		return sqlSession.selectOne("curation-mapper.selectTotalContents2", keyword);
 	}
 
+	@Override
+	public int selectC() {
+		
+		return sqlSession.selectOne("curation-mapper.selectC");
+	}
+
 
 
 }

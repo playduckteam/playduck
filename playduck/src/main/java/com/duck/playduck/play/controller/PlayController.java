@@ -36,7 +36,7 @@ public class PlayController {
 		
 		//한 페이지당 페이지수
 		
-		int numPerPage =8;
+		int numPerPage =24;
 		
 		int totalContents = playService.selectTotalContents();
 		

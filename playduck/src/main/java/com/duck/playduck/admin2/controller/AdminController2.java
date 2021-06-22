@@ -154,7 +154,7 @@ public class AdminController2 {
 	public String mdListPage(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
 			Model model) {
 
-		int numPerPage = 4;
+		int numPerPage = 3;
 
 		List<Map<String, String>> list = adminService.mdListPage(cPage, numPerPage);
 		List<Stock> list1 = new ArrayList<Stock>();
@@ -178,7 +178,7 @@ public class AdminController2 {
 	public String MDSr(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model,
 			@RequestParam(required = false) String text) {
 
-		int numPerPage = 4;
+		int numPerPage = 3;
 
 		List<Map<String, String>> list = adminService.MDSr(cPage, numPerPage, text);
 

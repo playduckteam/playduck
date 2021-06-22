@@ -90,4 +90,11 @@ public class CurationServiceImpl implements CurationService{
 	}
 
 
+	@Override
+	public int getC() {
+		
+		return curationDAO.selectC();
+	}
+
+
 }

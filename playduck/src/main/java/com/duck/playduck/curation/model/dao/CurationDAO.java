@@ -31,6 +31,8 @@ public interface CurationDAO {
 
 	int selectTotalContents2(String keyword);
 
+	int selectC();
+
 
 
 //	List<Map<String, String>> selectBoardList(int cPage, int numPerPage);
