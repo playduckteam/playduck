@@ -119,4 +119,28 @@ public class AdminServiceImpl2 implements AdminService2 {
 
 	}
 
+	@Override
+	public List<Map<String, String>> saleList(int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		return adminDAO.saleList(cPage, numPerPage);
+	}
+
+	@Override
+	public int selectSaleList() {
+		// TODO Auto-generated method stub
+		return adminDAO.selectSaleList();
+	}
+
+	@Override
+	public List<Map<String, String>> saleSeList(int cPage, int numPerPage, String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.saleSeList(cPage,numPerPage,text);
+	}
+
+	@Override
+	public int selectSaleListCount(String text) {
+		// TODO Auto-generated method stub
+		return adminDAO.selectSaleListCount(text);
+	}
+
 }

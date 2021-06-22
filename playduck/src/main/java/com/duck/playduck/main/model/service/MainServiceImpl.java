@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.dao.MainDAO;
 import com.duck.playduck.main.model.vo.Main;
+import com.duck.playduck.md.model.vo.mReward;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.play.model.vo.Play;
@@ -107,6 +108,18 @@ public class MainServiceImpl implements MainService {
 	public String curationforDuck(int parseInt) {
 		// TODO Auto-generated method stub
 		return mainDAO.curationforDuck(parseInt);
+	}
+
+	@Override
+	public List<mReward> mainCuButton(int m_no) {
+		// TODO Auto-generated method stub
+		return mainDAO.mainCuButton(m_no);
+	}
+
+	@Override
+	public int reviewCheck(Review r) {
+		// TODO Auto-generated method stub
+		return mainDAO.reviewCheck(r);
 	}
 
 

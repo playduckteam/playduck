@@ -44,10 +44,6 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	
-	<!--메인 슬라이드-->
-
-
 
 	<article class="main_slide">
 		<img class="main_ribbon" src="resources/images/top10_ribbon.png">
@@ -103,7 +99,7 @@
 		<article class="main_top10">
 			<div>
 				<span class="main_fontw">TOP 10</span> <span class="main_fonto">작품
-					</span>
+				</span>
 			</div>
 			<div class="main_topwindow">
 				<div class="button-container">
@@ -125,13 +121,37 @@
 
 		<!--큐레이션 슬라이드-->
 		<article class="main_curation">
-			<div>
+			<div id="letgo">
 				<span class="main_fontw">큐레이션</span> <span class="main_fonto">for
 					DUCKs</span>
-				<button class="curation_write" onclick="fn_goCurationForm()">큐레이션
-					작성하기</button>
+
 			</div>
 			<script>
+			<c:if test="${member != null}">
+			$(function(){ // 파트너 큐레이션이면 큐레이션 작성하기 버튼 생성
+				var a = ${member.m_no};
+				
+				$.ajax({
+					url : "${pageContext.request.contextPath}/main/mainCuButton.do",
+					type : 'get',
+					data : { m_no : a },
+					success : function(data) {
+						console.log(data)
+						if(data >= 200) {
+							var innerHtml = "";
+							
+							innerHtml = '<button class="curation_write" id="curationButt" onclick="fn_goCurationForm()">큐레이션'
+							innerHtml += '작성하기</button>'
+							
+							$("#letgo").append(innerHtml);
+						}
+					}
+				
+				
+				})
+			})
+				</c:if>
+			
 				function fn_goCurationForm(){
 					location.href = "${pageContext.request.contextPath}/curation/curationForm.do"
 				}
@@ -200,6 +220,7 @@
 
 <script>
 
+
 	// Top 10 작품리뷰
 	 $(function(){
 		 $.ajax({
@@ -217,7 +238,7 @@
 					innerHtml +=  "<button class='main_toprevieww' onclick=\"location.href='detail/detail.do?p_no="+data.pnum[i]+"'\""
 					innerHtml +=   'style="border: none; background-color: var(--black-color);color: #fff;">작품보기</button>'
 					innerHtml +=  '<hr>'
-					innerHtml +=  "<button class='main_topreviewr' onclick=\"location.href='review/reviewForm.do?p_no="+data.pnum[i]+"'\""
+					innerHtml +=  "<button class='main_topreviewr' name="+data.pnum[i];
 					innerHtml +=   ' style="border: none; background-color: var(--black-color);color: #fff;">리뷰작성</button>'
 					innerHtml +='</div>'
 					innerHtml += '<div class="main_topcontent">'
@@ -263,6 +284,48 @@
 				            container.appendChild(container.firstElementChild);
 				        }
 				};
+				
+				// 만약 로그인이 안된 상태에서 리뷰작성 클릭 시 경고창
+				<c:if test="${ member == null}">
+				  $(".main_topreviewr").click(function() {
+					  $('.modal_loginBtn').click();
+					  alert("로그인을 해주세요")
+					  return false;
+					  
+				  }).prop('onclick', null);
+			     
+				</c:if>
+				
+				// 로그인 후 리뷰작성 클릭 시 만약 공연에 이미 작성 한 리뷰가 있을 시 경고창 
+				<c:if test="${ member != null}">
+				$(".main_topreviewr").on("click",function(){
+					
+					var getName=$(this).attr("name");
+					
+					var data1 = {
+		    				"m_no" : ${member.m_no},
+		    				"p_num" : getName
+		    		}
+					
+					$.ajax({
+						 url : "${pageContext.request.contextPath}/main/reviewCheck.do",
+						 type : 'get',
+						 data : data1,
+						 success : function(data) {
+
+							 
+							if(data != 0) {
+								alert("이미 리뷰를 작성 하셨습니다.");
+							} else {
+								location.href='review/reviewForm.do?p_no='+getName;
+							}
+							 
+						 }
+					})
+				})
+				</c:if>
+				
+				
 			
 			// 회원이 로그인이 x 라면 찜 목록 클릭 시 "로그인 필요"
 			<c:if test="${ member == null}">
@@ -672,7 +735,16 @@
  				 }
  				 
  				 
- 			        
+ 				// 로그인 X 시 리뷰작성 버튼 누르면 경고창
+ 				<c:if test="${ member == null}">
+				  $(".main_topreviewr").click(function() {
+					  $('.modal_loginBtn').click();
+					  alert("로그인을 해주세요")
+					  return false;
+					  
+				  }).prop('onclick', null);
+			     
+				</c:if> 
  			      
  			      
  			        // hover시 리뷰 작성, 리뷰 보기 

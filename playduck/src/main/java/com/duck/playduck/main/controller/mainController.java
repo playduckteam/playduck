@@ -10,7 +10,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +20,7 @@ import org.w3c.dom.NodeList;
 
 import com.duck.playduck.curation.model.vo.Curation;
 import com.duck.playduck.main.model.service.MainService;
-import com.duck.playduck.main.model.vo.Main;
+import com.duck.playduck.md.model.vo.mReward;
 import com.duck.playduck.member.model.vo.Member;
 import com.duck.playduck.play.model.vo.Bookmark;
 import com.duck.playduck.play.model.vo.Play;
@@ -44,6 +43,7 @@ public class mainController {
 		return nValue.getNodeValue();
 	}
 
+	// 메인페이지 리뷰가 많은 순으로 10개 뽑기
 	@RequestMapping("/main/mainReviewTop10.do")
 	@ResponseBody
 	public Map<String, List> ReviewTop10() {
@@ -110,6 +110,7 @@ public class mainController {
 		return map;
 	}
 
+	// 큐레이션 최신순으로 6개 뽑기
 	@RequestMapping("/main/curationforDuck.do")
 	@ResponseBody
 	public Map<String, List> curationforDuck() {
@@ -130,6 +131,7 @@ public class mainController {
 			listP.add(c.getC_picrenamed());
 		}
 
+	
 		map.put("Cnum", listC);
 		map.put("title", listT);
 		map.put("pic", listP);
@@ -137,6 +139,7 @@ public class mainController {
 		return map;
 	}
 
+	// 리뷰에 좋아요 + 싫어요 순으로 3개 뽑기
 	@RequestMapping("/main/mainHotReview.do")
 	@ResponseBody
 	public Map<String, List<String>> mainHotReview() {
@@ -281,6 +284,7 @@ public class mainController {
 		return map;
 	}
 
+	// BOOKMARK에 P_NO 있는 지 확인
 	@RequestMapping("/main/bookmarkcheck.do")
 	@ResponseBody
 	public List<String> BookMarkC(@RequestParam(value = "p_num[]") List<String> p_no,
@@ -304,6 +308,7 @@ public class mainController {
 		return listp;
 	}
 
+	// BOOKMARK에 P_NO 인서트
 	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
 	@RequestMapping(value = "/main/MBookMarkIn.do", produces = "application/text; charset=UTF-8")
 	@ResponseBody
@@ -348,6 +353,7 @@ public class mainController {
 		return title;
 	}
 
+	// BOOKMARK 에 P_NO 삭제
 	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
 	@RequestMapping(value = "/main/MBookMarkDe.do", produces = "application/text; charset=UTF-8")
 	@ResponseBody
@@ -392,6 +398,7 @@ public class mainController {
 		return title;
 	}
 
+	// BOOKMARK에 C_NUM 확인
 	@RequestMapping("/main/bookmarkcheckC.do")
 	@ResponseBody
 	public List<String> bookmarkcheckC(@RequestParam(value = "c_num[]") List<Integer> c_no,
@@ -417,6 +424,7 @@ public class mainController {
 
 	}
 
+	// BOOKMARK에 C_NUM 인서트
 	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
 	@RequestMapping(value = "/main/CBookMarkIn.do", produces = "application/text; charset=UTF-8")
 	@ResponseBody
@@ -436,6 +444,7 @@ public class mainController {
 		return title;
 	}
 
+	// BOOKMARK에 C_NUM 딜리트
 	// return 값이 String 이면 텍스트가 깨질 수 있기 때문에 produces를 선언해야 함
 	@RequestMapping(value = "/main/CBookMarkDe.do", produces = "application/text; charset=UTF-8")
 	@ResponseBody
@@ -453,5 +462,43 @@ public class mainController {
 		String title = mainservice.curationforDuck(Integer.parseInt(c_no));
 
 		return title;
+	}
+	
+	// 메인페이지에 회원 로그인 시 리워드 점수 가져오기
+	@RequestMapping("/main/mainCuButton.do")
+	@ResponseBody
+	public int mainCuButton(@RequestParam int m_no) {
+		
+		List<mReward> re = new ArrayList<mReward>();
+		
+		re = mainservice.mainCuButton(m_no);
+		
+		
+		int renum = 0;
+		for (mReward r : re) {
+			if(r.getW_up() != 0) {
+				renum += r.getW_up();
+			}
+			
+		}
+		
+		
+		return renum;
+	}
+	
+	// 작성한 리뷰가 있는 지 확인 
+	@RequestMapping("/main/reviewCheck.do")
+	@ResponseBody
+	public int reviewCheck(@RequestParam int m_no, @RequestParam String p_num) {
+		
+		Review r = new Review();
+		
+		r.setM_no(m_no);
+		r.setP_no(p_num);
+		
+		int result = mainservice.reviewCheck(r);
+		
+		System.out.println("카운트 : " + result);
+		return result;
 	}
 }

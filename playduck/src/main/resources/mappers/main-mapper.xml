@@ -33,17 +33,16 @@
 		GROUP BY P_NO
 		ORDER BY COUNT(P_NO)
 		DESC, P_NO DESC) Q
-		JOIN (SELECT P.P_NO,
-		FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) /
-		DECODE(MAX(P_GOOD), 0, NULL,
-		MAX(P_GOOD)), 0)*100)"p_good"
+		JOIN (SELECT P.P_NO,FLOOR(P_GOOD/DECODE((P_GOOD +
+		P_BAD),0,1,(P_GOOD + P_BAD))*100) "p_good"
 		FROM PLAY P
 		JOIN REVIEW R ON (P.P_NO =
 		R.P_NO)
 		GROUP BY P.P_NO,P_GOOD,P_BAD
 		ORDER BY COUNT(P.P_NO) DESC, P.P_NO
 		DESC) S ON(S.P_NO =Q.P_NO )
-		WHERE ROWNUM &lt; =10
+		WHERE
+		ROWNUM &lt;=10
 
 	</select>
 
@@ -58,11 +57,8 @@
 
 	<select id="allPlaySelect" resultType="play"
 		resultMap="resultPlay">
-		SELECT P_NO,FLOOR(NVL((MAX(P_GOOD)-MAX(P_BAD)) /
-		DECODE(MAX(P_GOOD), 0,
-		NULL, MAX(P_GOOD)), 0)*100)"p_good"
+		SELECT P_NO,FLOOR(P_GOOD/DECODE((P_GOOD + P_BAD),0,1,(P_GOOD + P_BAD))*100) "p_good"
 		FROM PLAY
-		GROUP BY P_NO
 	</select>
 
 	<select id="memberGenrenmG" parameterType="_int"
@@ -135,5 +131,21 @@
 		WHERE C_NO = #{ parseInt }
 	</select>
 
+	<select id="mainCuButton" parameterType="_int"
+		resultType="mreward">
+		SELECT *
+		FROM REWARD
+		WHERE M_NO = #{m_no}
+
+	</select>
+
+	<select id="reviewCheck" parameterType="review"
+		resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE M_NO = #{m_no} AND
+		P_NO =
+		#{p_no}
+	</select>
 
 </mapper>
