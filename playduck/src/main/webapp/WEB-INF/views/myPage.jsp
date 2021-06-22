@@ -131,7 +131,7 @@
 	    }; // 버튼이벤트 끝
 	    
 	    // 엔터키 이벤트 추가
-	    function enterkey() { 
+	    function enterkey1() { 
 	    	if (window.event.keyCode == 13) {
 	    		
 	    		checkP();
@@ -422,7 +422,7 @@
 			                <h4 class="pm_subTitle">비밀번호</h4>
 			            </td>
 			            <td>
-			                <input type="password" id="m_checkPwd" name="m_checkPwd" placeholder="6자리 이상, 영문 숫자 포함" onkeyup="enterkey();">
+			                <input type="password" id="m_checkPwd" name="m_checkPwd" placeholder="6자리 이상, 영문 숫자 포함" onkeyup="enterkey1();">
 			            </td>
 			        </tr>
 			        <tr>
@@ -430,7 +430,7 @@
 			                <h4 class="pm_subTitle">비밀번호 확인</h4>
 			            </td>
 			            <td>
-			                <input type="password" id="m_checkPwd2" name="m_checkPwd2" onkeyup="enterkey();">
+			                <input type="password" id="m_checkPwd2" name="m_checkPwd2" onkeyup="enterkey1();">
 			            </td>
 			        </tr>
 			        <tr>
