@@ -49,9 +49,8 @@
   	$(function(){
   		$("div[id]").on("click",function(){
   			var dno = $(this).attr("id");
-  			var mno =${member.m_no};
-  			console.log("dno="+mno);
-  			location.href = "${pageContext.request.contextPath}/MD/MD_order.do?d_no="+dno+"&mno="+mno;
+  			
+  			location.href = "${pageContext.request.contextPath}/MD/MD_order.do?d_no=" + dno;
   		});
   	});
   </script>
