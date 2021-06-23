@@ -533,7 +533,7 @@ function enterkey() {
                     </div>
 
                     <div class="find_pwd">
-                        <h2 class=find_title>비밀번호 변경</h2>
+                        <h2 class=find_title>비밀번호 찾기/변경</h2>
                         <form action="${pageContext.request.contextPath}/member/findPwd.do" method="POST">
                             <div class="textbox">
 	                            <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디"/>

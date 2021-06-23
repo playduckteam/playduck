@@ -225,9 +225,10 @@
             cursor: pointer;
         }
         
-                #Sale_check{
+        #Sale_check{
             position:absolute;
             margin-top:90px;
+            z-index : 10;
         }
         
 .Sale_returnBtn, .Sale_canclenBtn {
@@ -325,6 +326,7 @@
 	position:absolute;
 	left:-5px;
 	top:30px;
+	z-index : 10;
 }
 
 .buy_total{
