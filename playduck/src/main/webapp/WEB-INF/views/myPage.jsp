@@ -84,7 +84,7 @@
 	                $(".allowBtn").show();
 		    	}
 		    }); 
-		     
+		    
 		    $("#m_changePwd2").on("keyup",function(){
 			   	 var join_pwd2 = $(this).val().trim();
 			   	 var join_pwd1 = $("#m_changePwd").val().trim();
